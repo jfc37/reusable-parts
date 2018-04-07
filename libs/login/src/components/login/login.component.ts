@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
-
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Component({
   selector: 'jfc-login',
@@ -9,41 +9,36 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
   styleUrls: ['./login.component.scss'],
   animations: fuseAnimations
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loginFormErrors: any;
+export class LoginComponent implements OnInit, OnDestroy {
+  /**
+   * Name of the website
+   * Included in the welcome message
+   */
+  @Input() public name: string;
+
+  /**
+   * Description of the website
+   * Displayed to the user if provided
+   */
+  @Input() public description: string;
+
+  public loginForm: FormGroup;
+
+  private onDestroy = new ReplaySubject();
 
   ngOnInit() {
-    this.loginFormErrors = {
-      email: {},
-      password: {}
-    };
-
     this.loginForm = new FormBuilder().group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
-    this.loginForm.valueChanges.subscribe(() => {
-      this.onLoginFormValuesChanged();
-    });
+  }
+  ngOnDestroy(): void {
+    this.onDestroy.next(null);
+    this.onDestroy.complete();
   }
 
-  onLoginFormValuesChanged() {
-    for (const field in this.loginFormErrors) {
-      if (!this.loginFormErrors.hasOwnProperty(field)) {
-        continue;
-      }
-
-      // Clear previous errors
-      this.loginFormErrors[field] = {};
-
-      // Get the control
-      const control = this.loginForm.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        this.loginFormErrors[field] = control.errors;
-      }
-    }
+  displayError(field: string): boolean {
+    const control = this.loginForm.get(field);
+    return control && control.invalid && control.touched;
   }
 }

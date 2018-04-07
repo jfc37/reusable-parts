@@ -14,17 +14,20 @@
     </div>
 
     <div class="title"
+      data-test-id="title"
       *fuseIfOnDom
       [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
-      Welcome to the FUSE!
+      Welcome to {{name}}
     </div>
 
-    <div class="description"
-      *fuseIfOnDom
-      [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque.
-      Sed mollis velit facilisis facilisis viverra.
-    </div>
+    <ng-container *ngIf="description">
+      <div class="description"
+        data-test-id="description"
+        *fuseIfOnDom
+        [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+        {{description}}
+      </div>
+    </ng-container>
 
   </div>
 
@@ -50,10 +53,8 @@
           <input matInput
             placeholder="Email"
             formControlName="email">
-          <mat-error *ngIf="loginFormErrors.email.required">
-            Email is required
-          </mat-error>
-          <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
+          <mat-error *ngIf="displayError('email')"
+            data-test-id="email-validation">
             Please enter a valid email address
           </mat-error>
         </mat-form-field>
@@ -63,7 +64,8 @@
             type="password"
             placeholder="Password"
             formControlName="password">
-          <mat-error *ngIf="loginFormErrors.password.required">
+          <mat-error *ngIf="displayError('password')"
+            data-test-id="password-validation">
             Password is required
           </mat-error>
         </mat-form-field>
