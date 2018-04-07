@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
-// import { FuseModule } from '@reusable-parts/@fuse';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-// import { FuseSharedModule } from '@reusable-parts/@fuse/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
 
 @NgModule({
   imports: [
@@ -23,8 +22,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatInputModule,
 
     // UI toolkit
-    // FuseModule,
-    // FuseSharedModule,
+    FuseModule,
+    FuseSharedModule,
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],

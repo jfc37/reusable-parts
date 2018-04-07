@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule } from '@reusable-parts/@fuse';
 import { LoginModule } from '@reusable-parts/login';
+import { RouterModule } from '@angular/router';
+import { fuseConfig } from './fuse-config';
 
 @NgModule({
   imports: [
@@ -11,10 +13,12 @@ import { LoginModule } from '@reusable-parts/login';
     NxModule.forRoot(),
 
     // UI toolkit
-    FuseModule,
+    FuseModule.forRoot(fuseConfig),
 
     // Login component
-    LoginModule
+    LoginModule,
+
+    RouterModule.forRoot([])
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

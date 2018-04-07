@@ -6,12 +6,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FuseDirectivesModule } from '@reusable-parts/@fuse/directives/directives';
 import { FusePipesModule } from '@reusable-parts/@fuse/pipes/pipes.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports  : [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        RouterModule,
 
         FlexLayoutModule,
 
@@ -22,6 +24,7 @@ import { FusePipesModule } from '@reusable-parts/@fuse/pipes/pipes.module';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        RouterModule,
 
         FlexLayoutModule,
 
