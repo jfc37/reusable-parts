@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.component.model';
 
 @Component({
   selector: 'jfc-login',
@@ -22,23 +23,35 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   @Input() public description: string;
 
+  /**
+   * Emitted when user attempts to login with email and password
+   */
+  @Output() public loginAttempt = new EventEmitter<LoginAttempt>();
+
   public loginForm: FormGroup;
 
   private onDestroy = new ReplaySubject();
 
-  ngOnInit() {
+  public ngOnInit() {
     this.loginForm = new FormBuilder().group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.onDestroy.next(null);
     this.onDestroy.complete();
   }
 
-  displayError(field: string): boolean {
+  public displayError(field: string): boolean {
     const control = this.loginForm.get(field);
     return control && control.invalid && control.touched;
+  }
+
+  public login(): void {
+    this.loginAttempt.emit({
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    });
   }
 }
