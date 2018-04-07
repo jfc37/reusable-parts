@@ -26,7 +26,7 @@ import { FusePipesModule } from '@reusable-parts/@fuse/pipes/pipes.module';
         FlexLayoutModule,
 
         FuseDirectivesModule,
-        FusePipesModule
+        FusePipesModule,
     ]
 })
 export class FuseSharedModule
