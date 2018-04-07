@@ -4,7 +4,7 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 
 
 @Component({
-  selector: 'login',
+  selector: 'jfc-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   animations: fuseAnimations

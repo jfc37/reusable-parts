@@ -44,7 +44,7 @@
       "test": "../../../test.js",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "jfc",
       "styles": [
         "styles.scss"
       ],
