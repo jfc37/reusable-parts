@@ -13,5 +13,6 @@ Run ```npm install```
 
 ### 3. Fix reference errors
 Replace ```'@fuse``` with ```'@reusable-parts/@fuse```
+Replace ```src/@fuse/scss``` with ```libs/@fuse/scss```
 
 ### Done!
