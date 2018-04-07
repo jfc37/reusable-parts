@@ -18,7 +18,7 @@ import { fuseConfig } from './fuse-config';
     // Login component
     LoginModule,
 
-    RouterModule.forRoot([])
+    RouterModule.forRoot([{path: 'login-page', loadChildren: '@reusable-parts/login-page#LoginPageModule'}])
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
