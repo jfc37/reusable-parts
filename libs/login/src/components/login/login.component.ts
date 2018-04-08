@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -10,7 +10,7 @@ import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.c
   styleUrls: ['./login.component.scss'],
   animations: fuseAnimations
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   /**
    * Name of the website
    * Included in the welcome message
@@ -30,17 +30,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm: FormGroup;
 
-  private onDestroy = new ReplaySubject();
-
   public ngOnInit() {
     this.loginForm = new FormBuilder().group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-  }
-  public ngOnDestroy(): void {
-    this.onDestroy.next(null);
-    this.onDestroy.complete();
   }
 
   public displayError(field: string): boolean {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { LOGIN_PAGE_CONFIG } from '@reusable-parts/login-page/src/login-page.config';
+import { LOGIN_PAGE_CONFIG, LoginPageConfig } from '@reusable-parts/login-page/src/login-page.config';
 
 @Component({
   selector: 'jfc-login-page',
@@ -7,8 +7,6 @@ import { LOGIN_PAGE_CONFIG } from '@reusable-parts/login-page/src/login-page.con
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-  constructor(@Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig) {
-    console.error('xxx CONFIG', config);
-   }
+  constructor(@Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig) { }
 
 }
