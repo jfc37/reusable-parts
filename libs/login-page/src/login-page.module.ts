@@ -11,6 +11,6 @@ import { LoginPageComponent } from './components/login-page/login-page.component
       {path: '', pathMatch: 'full', component: LoginPageComponent}
     ])
   ],
-  declarations: [LoginPageComponent]
+  declarations: [LoginPageComponent],
 })
 export class LoginPageModule {}
