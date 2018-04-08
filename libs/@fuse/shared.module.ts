@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports  : [
-        CommonModule,
+        // CommonModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
         FusePipesModule
     ],
     exports  : [
-        CommonModule,
+        // CommonModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
