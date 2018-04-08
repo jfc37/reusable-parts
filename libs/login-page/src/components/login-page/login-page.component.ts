@@ -1,27 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { LOGIN_PAGE_CONFIG } from '@reusable-parts/login-page/src/login-page.config';
 
 @Component({
-  selector: 'login-page',
+  selector: 'jfc-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
+  constructor(@Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig) {
+    console.error('xxx CONFIG', config);
+   }
 
-  config: LoginPageConfig;
-
-  constructor() {
-    this.config = {
-      name: `Bob Barber's Building Supplies`,
-      description: `For all the supplies you need to get resource consent`,
-    }
-  }
-
-  ngOnInit() {
-  }
-
-}
-
-export interface LoginPageConfig {
-  name: string;
-  description: string;
 }
