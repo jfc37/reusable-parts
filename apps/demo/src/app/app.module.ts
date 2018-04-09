@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
+import { AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
     BrowserModule,
     CommonModule,
     NxModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
 
     // angular material components
     MatButtonModule,
@@ -38,15 +42,9 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' }
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
-    // storeFreeze and StoreRouterConnectingModule don't play nice right now
-    // https://github.com/ngrx/platform/issues/183
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
-    // StoreModule.forRoot({}),
-
     EffectsModule.forRoot([]),
-
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-
     StoreRouterConnectingModule
   ],
   providers: [

@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { loginReducer, initialState as loginInitialState } from './+state/login.reducer';
 import { LoginEffects } from './+state/login.effects';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '@reusable-parts/login-page/src/services/auth.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,10 @@ import { CommonModule } from '@angular/common';
     EffectsModule.forFeature([LoginEffects])
   ],
   declarations: [LoginPageComponent],
-  providers: [LoginEffects],
+  providers: [
+    AuthService,
+    LoginEffects
+  ],
 })
 export class LoginPageModule {
   constructor(@Optional() @SkipSelf() parentModule: LoginPageModule)

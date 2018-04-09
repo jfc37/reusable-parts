@@ -5,5 +5,10 @@ const loginFeatureSelector = createFeatureSelector<LoginData>('login');
 
 export const isLoggingInSelector = createSelector(
   loginFeatureSelector,
-  login => login.isLoggingIn
+  state => state.isLoggingIn
+);
+
+export const emailAndPasswordSelector = createSelector(
+  loginFeatureSelector,
+  state => ({ email: state.email, password: state.password})
 );

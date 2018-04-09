@@ -41,20 +41,40 @@ export function loginReducer(
       return initialState;
     }
 
-    case LoginActionTypes.AttemptLogin:
+    case LoginActionTypes.AttemptLogin: {
       return {
         ...state,
         email: action.email,
         password: action.password,
       };
+    }
 
-    case LoginActionTypes.LoginRequest:
+    case LoginActionTypes.LoginRequest: {
       return {
         ...state,
         isLoggingIn: true,
         hasLoggedIn: false,
         loginFailed: false,
       };
+    }
+
+    case LoginActionTypes.LoginSuccess: {
+      return {
+        ...state,
+        isLoggingIn: false,
+        hasLoggedIn: true,
+        loginFailed: false,
+      };
+    }
+
+    case LoginActionTypes.LoginFailure: {
+      return {
+        ...state,
+        isLoggingIn: false,
+        hasLoggedIn: false,
+        loginFailed: true,
+      };
+    }
 
     default:
       return state;
