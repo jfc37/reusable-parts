@@ -2,7 +2,7 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core
 import { RouterModule } from '@angular/router';
 import { LoginModule } from '@reusable-parts/login';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { LoginPageConfig, LOGIN_PAGE_CONFIG } from '@reusable-parts/login-page/src/login-page.config';
+import { LoginPageConfig, LOGIN_PAGE_CONFIG } from '../../../lib-config/login-page.config';
 
 @NgModule({
   imports: [

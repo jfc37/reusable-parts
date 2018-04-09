@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { LOGIN_PAGE_CONFIG } from '@reusable-parts/login-page/src/login-page.config';
+import { LoginPageConfig, LOGIN_PAGE_CONFIG } from '../../../../../lib-config/login-page.config';
 
 @Component({
   selector: 'jfc-login-page',

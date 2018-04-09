@@ -1,4 +1,4 @@
-import { LOGIN_PAGE_CONFIG, LoginPageConfig } from "@reusable-parts/login-page";
+import { LOGIN_PAGE_CONFIG, LoginPageConfig } from "../../../../lib-config/login-page.config";
 
 /**
  * Default Fuse Configuration
