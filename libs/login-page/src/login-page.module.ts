@@ -7,9 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { loginReducer, initialState as loginInitialState } from './+state/login.reducer';
 import { LoginEffects } from './+state/login.effects';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
+
     LoginModule,
 
     RouterModule.forChild([

@@ -24,6 +24,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   @Input() public description: string;
 
   /**
+   * Is logging in currently occuring?
+   */
+  @Input() public loggingIn: boolean;
+
+  /**
    * Emitted when user attempts to login with email and password
    */
   @Output() public loginAttempt = new EventEmitter<LoginAttempt>();

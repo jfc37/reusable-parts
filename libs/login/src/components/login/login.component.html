@@ -89,7 +89,7 @@
           color="accent"
           class="submit-button"
           aria-label="LOGIN"
-          [disabled]="loginForm.invalid"
+          [disabled]="loginForm.invalid || loggingIn"
           (click)="login()">
           LOGIN
         </button>
