@@ -12,8 +12,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
+import { CustomRouterStateSerializer, logger } from './custom-route.state';
 
 @NgModule({
   imports: [
@@ -37,16 +38,20 @@ import { storeFreeze } from 'ngrx-store-freeze';
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' }
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
-    // StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze] : [] }),
+    // storeFreeze and StoreRouterConnectingModule don't play nice right now
+    // https://github.com/ngrx/platform/issues/183
+    StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
+    // StoreModule.forRoot({}),
 
-    // EffectsModule.forRoot([]),
+    EffectsModule.forRoot([]),
 
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
 
-    // StoreRouterConnectingModule
+    StoreRouterConnectingModule
   ],
   providers: [
     loginPageConfig,
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

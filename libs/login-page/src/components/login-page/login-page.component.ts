@@ -7,8 +7,6 @@ import { LoginPageConfig, LOGIN_PAGE_CONFIG } from '../../../../../lib-config/lo
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-  constructor(@Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig) {
-    console.error('xxx CONFIG', config);
-   }
+  constructor(@Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig) { }
 
 }
