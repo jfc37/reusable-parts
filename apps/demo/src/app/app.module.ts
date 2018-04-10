@@ -17,6 +17,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
-      { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' }
+      { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
+      { path: 'dashboard', component: DashboardComponent },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
@@ -51,7 +53,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     loginPageConfig,
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, DashboardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

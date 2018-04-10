@@ -28,6 +28,7 @@ export const loginPageConfig = {
   provide: LOGIN_PAGE_CONFIG,
   useValue: {
     name: `Bob Barber's Resource Consent Shop`,
-    description: `One place shop for resource consents`
+    description: `One place shop for resource consents`,
+    redirectAfterLogin: 'dashboard',
   } as LoginPageConfig
 }
