@@ -78,6 +78,13 @@
       "tags": []
     },
     {
+      "name": "register-page",
+      "root": "libs/register-page/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "$workspaceRoot",
       "root": ".",
       "appRoot": ""

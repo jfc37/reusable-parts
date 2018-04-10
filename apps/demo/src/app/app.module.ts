@@ -41,7 +41,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
+      { path: 'dashboard', component: DashboardComponent },{path: 'register-page', loadChildren: '@reusable-parts/register-page#RegisterPageModule'}
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
