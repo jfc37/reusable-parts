@@ -1,4 +1,5 @@
 import { LOGIN_PAGE_CONFIG, LoginPageConfig } from "../../../../lib-config/login-page.config";
+import { REGISTER_PAGE_CONFIG, RegisterPageConfig } from "../../../../lib-config/register-page.config";
 
 /**
  * Default Fuse Configuration
@@ -32,4 +33,13 @@ export const loginPageConfig = {
     afterLoginRoute: 'dashboard',
     registerRoute: 'register',
   } as LoginPageConfig
+}
+
+export const registerPageConfig = {
+  provide: REGISTER_PAGE_CONFIG,
+  useValue: {
+    name: `Bob Barber's Resource Consent Shop`,
+    description: `One place shop for resource consents`,
+    loginRoute: 'login',
+  } as RegisterPageConfig
 }

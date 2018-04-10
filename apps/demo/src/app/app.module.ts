@@ -7,7 +7,7 @@ import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
 import { AppComponent } from './app.component';
 import { MatCheckboxModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { fuseConfig, loginPageConfig } from './app.config';
+import { fuseConfig, loginPageConfig, registerPageConfig } from './app.config';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -52,6 +52,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   ],
   providers: [
     loginPageConfig,
+    registerPageConfig,
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent, DashboardComponent],
