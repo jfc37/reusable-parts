@@ -20,9 +20,12 @@ export class LoginEffects {
   @Effect() loginRequest$ = this.actions$.pipe(
     ofType(LoginActionTypes.LoginRequest),
     withLatestFrom(this.store.select(emailAndPasswordSelector)),
-    switchMap(([action, {email, password}]) => this.auth.login(email, password)),
-    mapTo(new LoginSuccess()),
-    catchError(error => Observable.of(new LoginFailure(error))),
+    switchMap(
+      ([action, {email, password}]) => this.auth.login(email, password).pipe(
+        mapTo(new LoginSuccess()),
+        catchError(error => Observable.of(new LoginFailure(error.message))),
+      )
+    ),
   );
 
   constructor(

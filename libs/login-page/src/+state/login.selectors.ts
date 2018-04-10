@@ -12,3 +12,8 @@ export const emailAndPasswordSelector = createSelector(
   loginFeatureSelector,
   state => ({ email: state.email, password: state.password})
 );
+
+export const loginErrorMessageSelector = createSelector(
+  loginFeatureSelector,
+  state => state.loginErrorMessage
+);

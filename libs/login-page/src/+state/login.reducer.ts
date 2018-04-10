@@ -13,6 +13,8 @@ export interface LoginData {
   isLoggingIn: boolean;
   hasLoggedIn: boolean;
   loginFailed: boolean;
+
+  loginErrorMessage: string;
 }
 
 /**
@@ -30,6 +32,8 @@ export const initialState: LoginData = {
   isLoggingIn: false,
   hasLoggedIn: false,
   loginFailed: false,
+
+  loginErrorMessage: null,
 };
 
 export function loginReducer(
@@ -55,6 +59,8 @@ export function loginReducer(
         isLoggingIn: true,
         hasLoggedIn: false,
         loginFailed: false,
+
+        loginErrorMessage: null,
       };
     }
 
@@ -64,6 +70,8 @@ export function loginReducer(
         isLoggingIn: false,
         hasLoggedIn: true,
         loginFailed: false,
+
+        loginErrorMessage: null,
       };
     }
 
@@ -73,6 +81,8 @@ export function loginReducer(
         isLoggingIn: false,
         hasLoggedIn: false,
         loginFailed: true,
+
+        loginErrorMessage: action.error,
       };
     }
 

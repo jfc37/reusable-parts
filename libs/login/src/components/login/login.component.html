@@ -85,6 +85,13 @@
           </a>
         </div>
 
+        <div *ngIf="loginError"
+        fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutAlign="space-between center">
+        <span class="text">{{loginError}}</span>
+        </div>
+
         <button mat-raised-button
           color="accent"
           class="submit-button"

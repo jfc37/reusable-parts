@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { LoginState } from '@reusable-parts/login-page/src/+state/login.reducer';
 import { ResetLoginPage, AttemptLogin } from '@reusable-parts/login-page/src/+state/login.actions';
 import { Observable } from 'rxjs/Observable';
-import { isLoggingInSelector } from '@reusable-parts/login-page/src/+state/login.selectors';
+import { isLoggingInSelector, loginErrorMessageSelector } from '@reusable-parts/login-page/src/+state/login.selectors';
 
 @Component({
   selector: 'jfc-login-page',
@@ -13,6 +13,7 @@ import { isLoggingInSelector } from '@reusable-parts/login-page/src/+state/login
 })
 export class LoginPageComponent implements OnInit {
   public isLoggingIn$: Observable<boolean>;
+  public loginError$: Observable<string>;
 
   constructor(
     @Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig,
@@ -23,9 +24,10 @@ export class LoginPageComponent implements OnInit {
     this.store.dispatch(new ResetLoginPage());
 
     this.isLoggingIn$ = this.store.select(isLoggingInSelector);
+    this.loginError$ = this.store.select(loginErrorMessageSelector);
   }
 
-  public loginAttempt({email, password}): void {
+  public loginAttempt({ email, password }): void {
     this.store.dispatch(new AttemptLogin(email, password))
   }
 }
