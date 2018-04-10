@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { REGISTER_PAGE_CONFIG, RegisterPageConfig } from '../../../../../lib-config/register-page.config';
+import { RegisterPageConfig } from '../../../../../lib-config/register-page.config';
 
 @Component({
   selector: 'jfc-register-page',
@@ -9,7 +9,7 @@ import { REGISTER_PAGE_CONFIG, RegisterPageConfig } from '../../../../../lib-con
 export class RegisterPageComponent implements OnInit {
 
   constructor(
-    @Inject(REGISTER_PAGE_CONFIG) public config: RegisterPageConfig,
+    @Inject('registerPageConfig') public config: RegisterPageConfig,
   ) { }
 
   ngOnInit() {

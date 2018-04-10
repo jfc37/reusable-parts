@@ -51,8 +51,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     StoreRouterConnectingModule
   ],
   providers: [
-    loginPageConfig,
-    registerPageConfig,
+    { provide: 'loginPageConfig', useValue: loginPageConfig},
+    { provide: 'registerPageConfig', useValue: registerPageConfig},
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent, DashboardComponent],

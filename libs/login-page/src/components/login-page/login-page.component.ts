@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { LoginPageConfig, LOGIN_PAGE_CONFIG } from '../../../../../lib-config/login-page.config';
-import { Store } from '@ngrx/store';
-import { LoginState } from '@reusable-parts/login-page/src/+state/login.reducer';
-import { ResetLoginPage, AttemptLogin } from '@reusable-parts/login-page/src/+state/login.actions';
-import { Observable } from 'rxjs/Observable';
-import { isLoggingInSelector, loginErrorMessageSelector, hasLoggedInSelector } from '@reusable-parts/login-page/src/+state/login.selectors';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AttemptLogin, ResetLoginPage } from '@reusable-parts/login-page/src/+state/login.actions';
+import { LoginState } from '@reusable-parts/login-page/src/+state/login.reducer';
+import { hasLoggedInSelector, isLoggingInSelector, loginErrorMessageSelector } from '@reusable-parts/login-page/src/+state/login.selectors';
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { takeUntil, filter, distinctUntilChanged, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, takeUntil, tap } from 'rxjs/operators';
+import { LoginPageConfig } from '../../../../../lib-config/login-page.config';
 
 @Component({
   selector: 'jfc-login-page',
@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   private onDestroy$ = new ReplaySubject();
 
   constructor(
-    @Inject(LOGIN_PAGE_CONFIG) public config: LoginPageConfig,
+    @Inject('loginPageConfig') public config: LoginPageConfig,
     public store: Store<LoginState>,
     public router: Router,
   ) { }
