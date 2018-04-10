@@ -86,10 +86,17 @@
         </div>
 
         <div *ngIf="loginError"
-        fxLayout="row"
+          fxLayout="row"
           fxLayout.xs="column"
           fxLayoutAlign="space-between center">
-        <span class="text">{{loginError}}</span>
+          <span class="text">{{loginError}}</span>
+        </div>
+
+        <div *ngIf="loginSucceeded"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutAlign="space-between center">
+          <span class="text">Login succeeded</span>
         </div>
 
         <button mat-raised-button

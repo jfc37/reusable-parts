@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   @Input() public loggingIn: boolean;
 
   /**
+   * Did login succeed?
+   */
+  @Input() public loginSucceeded: boolean;
+
+  /**
    * Error message to display as a result of login failure
    */
   @Input() public loginError: string;

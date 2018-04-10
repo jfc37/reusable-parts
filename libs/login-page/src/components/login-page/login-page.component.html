@@ -2,4 +2,5 @@
   [description]="config.description"
   [loggingIn]="isLoggingIn$ | async"
   [loginError]="loginError$ | async"
+  [loginSucceeded]="loginSucceeded$ | async"
   (loginAttempt)="loginAttempt($event)"></jfc-login>

@@ -8,6 +8,11 @@ export const isLoggingInSelector = createSelector(
   state => state.isLoggingIn
 );
 
+export const hasLoggedInSelector = createSelector(
+  loginFeatureSelector,
+  state => state.hasLoggedIn
+);
+
 export const emailAndPasswordSelector = createSelector(
   loginFeatureSelector,
   state => ({ email: state.email, password: state.password})
