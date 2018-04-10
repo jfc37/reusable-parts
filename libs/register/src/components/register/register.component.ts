@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 
@@ -9,7 +9,19 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
   animations: fuseAnimations
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  /**
+   * Name of the website
+   * Included in the welcome message
+   */
+  @Input() public name: string;
+
+  /**
+   * Description of the website
+   * Displayed to the user if provided
+   */
+  @Input() public description: string;
+
+  public registerForm: FormGroup;
 
   public ngOnInit() {
     this.registerForm = new FormBuilder().group({

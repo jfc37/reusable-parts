@@ -5,6 +5,7 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule 
 import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { LoginComponent } from './components/login/login.component';
+import { WelcomeModule } from '@reusable-parts/welcome';
 
 @NgModule({
   imports: [
@@ -12,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+
+    WelcomeModule,
 
     // angular material components
     MatButtonModule,

@@ -8,7 +8,7 @@ import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.c
   selector: 'jfc-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: fuseAnimations
+  animations: fuseAnimations,
 })
 export class LoginComponent implements OnInit, OnDestroy {
   /**
