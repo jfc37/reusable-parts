@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   @Input() public loginError: string;
 
   /**
+   * Route for account registration
+   */
+  @Input() public registerRoute: string;
+
+  /**
    * Emitted when user attempts to login with email and password
    */
   @Output() public loginAttempt = new EventEmitter<LoginAttempt>();

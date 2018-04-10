@@ -29,6 +29,7 @@ export const loginPageConfig = {
   useValue: {
     name: `Bob Barber's Resource Consent Shop`,
     description: `One place shop for resource consents`,
-    redirectAfterLogin: 'dashboard',
+    afterLoginRoute: 'dashboard',
+    registerRoute: 'register',
   } as LoginPageConfig
 }

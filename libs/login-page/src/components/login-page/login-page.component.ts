@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$),
       filter(Boolean),
       distinctUntilChanged(),
-      tap(() => this.router.navigate([this.config.redirectAfterLogin]))
+      tap(() => this.router.navigate([this.config.afterLoginRoute]))
     ).subscribe();
   }
 

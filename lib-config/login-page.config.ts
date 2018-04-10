@@ -6,5 +6,6 @@ export const LOGIN_PAGE_CONFIG = new InjectionToken('loginPageConfig');
 export interface LoginPageConfig {
   name: string;
   description: string;
-  redirectAfterLogin: string;
+  afterLoginRoute: string;
+  registerRoute: string;
 }

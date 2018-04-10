@@ -3,4 +3,5 @@
   [loggingIn]="isLoggingIn$ | async"
   [loginError]="loginError$ | async"
   [loginSucceeded]="loginSucceeded$ | async"
+  [registerRoute]="config.registerRoute"
   (loginAttempt)="loginAttempt($event)"></jfc-login>
