@@ -92,6 +92,13 @@
       "tags": []
     },
     {
+      "name": "top-nav",
+      "root": "libs/top-nav/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "welcome",
       "root": "libs/welcome/src",
       "test": "../../../test.js",

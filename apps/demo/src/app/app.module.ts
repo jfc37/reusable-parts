@@ -18,6 +18,7 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TopNavModule } from '@reusable-parts/top-nav';
 
 @NgModule({
   imports: [
@@ -37,6 +38,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     // UI toolkit
     FuseModule.forRoot(fuseConfig),
     FuseSharedModule,
+
+    TopNavModule,
 
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
