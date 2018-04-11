@@ -72,11 +72,25 @@
           <a href="#">terms and conditions</a>
         </div>
 
+        <div *ngIf="registrationError"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutAlign="space-between center">
+          <span class="text">{{registrationError}}</span>
+        </div>
+
+        <div *ngIf="registrationSucceeded"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutAlign="space-between center">
+          <span class="text">Registration succeeded</span>
+        </div>
+
         <button mat-raised-button
           color="accent"
           class="submit-button"
           aria-label="CREATE AN ACCOUNT"
-          [disabled]="registerForm.invalid"
+          [disabled]="canRegister()"
           (click)="register()">
           CREATE AN ACCOUNT
         </button>
@@ -88,7 +102,7 @@
         fxLayoutAlign="center center">
         <span class="text">Already have an account?</span>
         <a class="link"
-          [routerLink]="'/login'">Login</a>
+          [routerLink]="'/' + loginRoute">Login</a>
       </div>
     </div>
   </div>

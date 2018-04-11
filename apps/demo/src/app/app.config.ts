@@ -36,4 +36,5 @@ export const registerPageConfig = {
   name: `Bob Barber's Resource Consent Shop`,
   description: `One place shop for resource consents`,
   loginRoute: 'login',
+  afterRegistrationRoute: 'dashboard',
 } as RegisterPageConfig;

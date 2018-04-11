@@ -23,6 +23,26 @@ export class RegisterComponent implements OnInit {
   @Input() public description: string;
 
   /**
+   * Is currently registering?
+   */
+  @Input() public registering: boolean;
+
+  /**
+   * Did registration succeed?
+   */
+  @Input() public registrationSucceeded: boolean;
+
+  /**
+   * Error message to display as a result of registration failure
+   */
+  @Input() public registrationError: string;
+
+  /**
+   * Route for logging in
+   */
+  @Input() public loginRoute: string;
+
+  /**
    * Emitted when user attempts to register with email and password
    */
   @Output() public registrationAttempt = new EventEmitter<RegistrationAttempt>();
@@ -45,9 +65,14 @@ export class RegisterComponent implements OnInit {
 
   public register(): void {
     this.registrationAttempt.emit({
+      name: this.registerForm.get('name').value,
       email: this.registerForm.get('email').value,
-      password: this.registerForm.get('password').value
+      password: this.registerForm.get('password').value,
     });
+  }
+
+  public canRegister() {
+    return this.registerForm.invalid || this.registering || this.registrationSucceeded;
   }
 }
 

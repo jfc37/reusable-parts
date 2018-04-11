@@ -1,3 +1,7 @@
 <jfc-register [name]="config.name"
   [description]="config.description"
+  [registering]="registering$ | async"
+  [registrationSucceeded]="registrationSucceeded$ | async"
+  [registrationError]="registrationError$ | async"
+  [loginRoute]="config.loginRoute"
   (registrationAttempt)="registrationAttempt($event)"></jfc-register>

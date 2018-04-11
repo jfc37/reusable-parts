@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { accountSelector, isRegisteringSelector } from '@reusable-parts/register-page/src/+state/register.selectors';
+import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/service/firebase-registration.service';
 import { Observable } from 'rxjs/Observable';
-import { catchError, filter, mapTo, switchMap, withLatestFrom, tap } from 'rxjs/operators';
+import { catchError, filter, mapTo, switchMap, withLatestFrom } from 'rxjs/operators';
 import { RegisterActionTypes, RegisterFailure, RegisterRequest, RegisterSuccess } from './register.actions';
 import { RegisterState } from './register.reducer';
-import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/service/firebase-registration.service';
 
 @Injectable()
 export class RegisterEffects {
@@ -21,7 +21,7 @@ export class RegisterEffects {
     ofType(RegisterActionTypes.RegisterRequest),
     withLatestFrom(this.store.select(accountSelector)),
     switchMap(
-      ([action, {email, password}]) => this.registrationService.register(email, password).pipe(
+      ([action, {name, email, password}]) => this.registrationService.register(name, email, password).pipe(
         mapTo(new RegisterSuccess()),
         catchError(error => Observable.of(new RegisterFailure(error))),
       )
