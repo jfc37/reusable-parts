@@ -76,7 +76,8 @@
           color="accent"
           class="submit-button"
           aria-label="CREATE AN ACCOUNT"
-          [disabled]="registerForm.invalid">
+          [disabled]="registerForm.invalid"
+          (click)="register()">
           CREATE AN ACCOUNT
         </button>
 

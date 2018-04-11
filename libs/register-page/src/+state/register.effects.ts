@@ -13,7 +13,7 @@ export class RegisterEffects {
   @Effect() registerAttempt$ = this.actions$.pipe(
     ofType(RegisterActionTypes.AttemptRegister),
     withLatestFrom(this.store.select(isRegisteringSelector)),
-    filter(([action, isLoggingIn]) => !isLoggingIn),
+    filter(([action, isRegistering]) => !isRegistering),
     mapTo(new RegisterRequest())
   );
 
@@ -22,9 +22,8 @@ export class RegisterEffects {
     withLatestFrom(this.store.select(accountSelector)),
     switchMap(
       ([action, {email, password}]) => this.registrationService.register(email, password).pipe(
-        tap(console.error.bind(null, 'xxx')),
         mapTo(new RegisterSuccess()),
-        catchError(error => Observable.of(new RegisterFailure(error.message))),
+        catchError(error => Observable.of(new RegisterFailure(error))),
       )
     ),
   );

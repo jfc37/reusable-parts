@@ -48,6 +48,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   public loginAttempt({ email, password }): void {
-    this.store.dispatch(new AttemptLogin(email, password))
+    this.store.dispatch(new AttemptLogin(email, password));
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
+import { RegistrationAttempt } from '@reusable-parts/register/src/components/register/register.component.model';
 
 @Component({
   selector: 'jfc-register',
@@ -21,6 +22,11 @@ export class RegisterComponent implements OnInit {
    */
   @Input() public description: string;
 
+  /**
+   * Emitted when user attempts to register with email and password
+   */
+  @Output() public registrationAttempt = new EventEmitter<RegistrationAttempt>();
+
   public registerForm: FormGroup;
 
   public ngOnInit() {
@@ -35,6 +41,13 @@ export class RegisterComponent implements OnInit {
   public displayError(field: string): boolean {
     const control = this.registerForm.get(field);
     return control && control.invalid && control.touched;
+  }
+
+  public register(): void {
+    this.registrationAttempt.emit({
+      email: this.registerForm.get('email').value,
+      password: this.registerForm.get('password').value
+    });
   }
 }
 

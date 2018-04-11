@@ -1,1 +1,3 @@
-<jfc-register [name]="config.name" [description]="config.description"></jfc-register>
+<jfc-register [name]="config.name"
+  [description]="config.description"
+  (registrationAttempt)="registrationAttempt($event)"></jfc-register>
