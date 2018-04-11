@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { emailAndPasswordSelector, isLoggingInSelector } from '@reusable-parts/login-page/src/+state/login.selectors';
-import { AuthService } from '@reusable-parts/login-page/src/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { catchError, filter, mapTo, switchMap, withLatestFrom } from 'rxjs/operators';
 import { LoginActionTypes, LoginFailure, LoginRequest, LoginSuccess } from './login.actions';
 import { LoginState } from './login.reducer';
+import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/firebase-login.service';
 
 @Injectable()
 export class LoginEffects {
@@ -21,9 +21,9 @@ export class LoginEffects {
     ofType(LoginActionTypes.LoginRequest),
     withLatestFrom(this.store.select(emailAndPasswordSelector)),
     switchMap(
-      ([action, {email, password}]) => this.auth.login(email, password).pipe(
+      ([action, {email, password}]) => this.loginService.login(email, password).pipe(
         mapTo(new LoginSuccess()),
-        catchError(error => Observable.of(new LoginFailure(error.message))),
+        catchError(error => Observable.of(new LoginFailure(error))),
       )
     ),
   );
@@ -31,6 +31,6 @@ export class LoginEffects {
   constructor(
     private actions$: Actions,
     private store: Store<LoginState>,
-    private auth: AuthService,
+    private loginService: FirebaseLoginService,
   ) {}
 }

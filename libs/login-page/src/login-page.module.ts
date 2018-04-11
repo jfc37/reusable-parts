@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { loginReducer, initialState as loginInitialState } from './+state/login.reducer';
 import { LoginEffects } from './+state/login.effects';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '@reusable-parts/login-page/src/services/auth.service';
+import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/firebase-login.service';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { AuthService } from '@reusable-parts/login-page/src/services/auth.servic
   ],
   declarations: [LoginPageComponent],
   providers: [
-    AuthService,
+    FirebaseLoginService,
     LoginEffects
   ],
 })

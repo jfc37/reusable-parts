@@ -30,7 +30,7 @@ export class LoginSuccess implements Action {
 export class LoginFailure implements Action {
   readonly type = LoginActionTypes.LoginFailure;
 
-  constructor(public error: any) { }
+  constructor(public error: string) { }
 }
 
 export type LoginActions
