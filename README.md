@@ -10,3 +10,6 @@ A workspace containing reusable parts of applications leveraging nrwl/nx
 
 ## Creating ngrx feature state
 ```ng generate ngrx myFeature --module=libs/my-module/src/my-module.module.ts```
+
+## Creating service
+```ng generate service services/my-service --app=my-app```
