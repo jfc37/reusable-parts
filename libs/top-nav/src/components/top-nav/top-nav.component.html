@@ -10,11 +10,29 @@
     fxLayout="row"
     fxLayoutAlign="start center">
 
+    <div fxFlex="1 0 auto"
+      fxLayout="row"
+      fxLayoutAlign="start center">
+
+      <button mat-button
+        class="toggle-button-navbar mat-icon-button"
+        *ngIf="hasNavigation"
+        (click)="openSideNavClicked()"
+        fxHide.gt-md>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="toolbar-separator"
+        fxHide.gt-md></div>
+    </div>
+
     <div class=""
       fxFlex="0 1 auto"
       fxLayout="row"
       fxLayoutAlign="start center">
 
+      <div class="toolbar-separator"
+        fxHide.gt-md></div>
       <button mat-button
         [matMenuTriggerFor]="userMenu"
         class="user-button">

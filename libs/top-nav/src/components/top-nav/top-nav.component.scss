@@ -24,19 +24,7 @@
         }
     }
 
-    .logo {
-        display: flex;
-        align-items: center;
-
-        .logo-icon {
-            width: 38px;
-        }
-    }
-
-    .user-button,
-    fuse-search-bar,
-    .language-button,
-    .quick-panel-toggle-button {
+    .user-button, {
         min-width: 64px;
         height: 64px;
 
