@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import {
-  TopNavActions,
-  TopNavActionTypes,
-  LoadTopNav,
-  TopNavLoaded
-} from './top-nav.actions';
-import { TopNavState } from './top-nav.reducer';
-import { DataPersistence } from '@nrwl/nx';
+import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
+import { Observable } from 'rxjs/Observable';
+import { mergeMap, switchMapTo, flatMap } from 'rxjs/operators';
+import { SetLogInStatus, SetAvatarUrl, SetDisplayName, TopNavActionTypes } from './top-nav.actions';
 
 @Injectable()
 export class TopNavEffects {
-  @Effect() effect$ = this.actions$.ofType(TopNavActionTypes.TopNavAction);
+  @Effect() effect$: Observable<any> = this.actions$.ofType(TopNavActionTypes.Initialise)
+    .pipe(
+      switchMapTo(this.firebaseUser.userStatusChanges()),
+      flatMap(() => {
+        const isLoggedIn = this.firebaseUser.isLoggedIn();
+        const actions: any[] = [new SetLogInStatus(isLoggedIn)]
 
-  @Effect()
-  loadTopNav$ = this.dataPersistence.fetch(TopNavActionTypes.LoadTopNav, {
-    run: (action: LoadTopNav, state: TopNavState) => {
-      return new TopNavLoaded(state);
-    },
-
-    onError: (action: LoadTopNav, error) => {
-      console.error('Error', error);
-    }
-  });
+        if (isLoggedIn) {
+          actions.push(new SetDisplayName(this.firebaseUser.getDisplayName()));
+          if (this.firebaseUser.getAvatarUrl()) {
+            actions.push(new SetAvatarUrl(this.firebaseUser.getAvatarUrl()));
+          }
+        }
+        return actions;
+      }),
+  );
 
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<TopNavState>
-  ) {}
+    private firebaseUser: FirebaseUserService,
+  ) { }
 }

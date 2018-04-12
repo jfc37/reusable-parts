@@ -6,7 +6,11 @@ import { TopNavActions, TopNavActionTypes } from './top-nav.actions';
  *  - TopNavState, and
  *  - topNavReducer
  */
-export interface TopNavData {}
+export interface TopNavData {
+  loggedIn: boolean;
+  displayName: string;
+  avatarUrl: string;
+}
 
 /**
  * Interface to the part of the Store containing TopNavState
@@ -16,18 +20,40 @@ export interface TopNavState {
   readonly topNav: TopNavData;
 }
 
-export const initialState: TopNavData = {};
+export const initialState: TopNavData = {
+  loggedIn: false,
+  displayName: null,
+  avatarUrl: 'assets/images/avatars/profile.jpg',
+};
 
 export function topNavReducer(
   state = initialState,
   action: TopNavActions
 ): TopNavData {
   switch (action.type) {
-    case TopNavActionTypes.TopNavAction:
-      return state;
+    case TopNavActionTypes.Initialise: {
+      return initialState;
+    }
 
-    case TopNavActionTypes.TopNavLoaded: {
-      return { ...state, ...action.payload };
+    case TopNavActionTypes.SetLoginStatus: {
+      return {
+        ...state,
+        loggedIn: action.isLoggedIn
+      };
+    }
+
+    case TopNavActionTypes.SetDisplayName: {
+      return {
+        ...state,
+        displayName: action.displayName
+      };
+    }
+
+    case TopNavActionTypes.SetAvatarUrl: {
+      return {
+        ...state,
+        avatarUrl: action.avatarUrl
+      };
     }
 
     default:

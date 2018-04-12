@@ -1,22 +1,39 @@
 import { Action } from '@ngrx/store';
 
 export enum TopNavActionTypes {
-  TopNavAction = '[TopNav] Action',
-  LoadTopNav = '[TopNav] Load Data',
-  TopNavLoaded = '[TopNav] Data Loaded'
+  Initialise = '[Top Nav] Initialise',
+
+  SetLoginStatus = '[Top Nav] Set Login Status',
+
+  SetDisplayName = '[Top Nav] Set Display Name',
+  SetAvatarUrl = '[Top Nav] Set Avatar Url',
+
 }
 
-export class TopNav implements Action {
-  readonly type = TopNavActionTypes.TopNavAction;
-}
-export class LoadTopNav implements Action {
-  readonly type = TopNavActionTypes.LoadTopNav;
-  constructor(public payload: any) {}
+export class InitialiseTopNav implements Action {
+  readonly type = TopNavActionTypes.Initialise;
 }
 
-export class TopNavLoaded implements Action {
-  readonly type = TopNavActionTypes.TopNavLoaded;
-  constructor(public payload: any) {}
+export class SetLogInStatus implements Action {
+  readonly type = TopNavActionTypes.SetLoginStatus;
+
+  constructor(public isLoggedIn: boolean) { }
 }
 
-export type TopNavActions = TopNav | LoadTopNav | TopNavLoaded;
+export class SetDisplayName implements Action {
+  readonly type = TopNavActionTypes.SetDisplayName;
+
+  constructor(public displayName: string) { }
+}
+
+export class SetAvatarUrl implements Action {
+  readonly type = TopNavActionTypes.SetAvatarUrl;
+
+  constructor(public avatarUrl: string) { }
+}
+
+export type TopNavActions
+  = InitialiseTopNav
+  | SetLogInStatus
+  | SetDisplayName
+  | SetAvatarUrl;

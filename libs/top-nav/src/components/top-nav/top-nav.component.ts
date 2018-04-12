@@ -1,8 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { takeUntil, map, filter } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { InitialiseTopNav } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
+import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
+import { avatarUrlSelector, displayNameSelector, isLoggedInSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { filter, map, tap } from 'rxjs/operators';
+import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'jfc-top-nav',
@@ -11,18 +17,26 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TopNavComponent implements OnInit, OnDestroy {
   public showLoadingBar$: Observable<boolean>;
-  public hasNavigation$ = Observable.of(true);
-  public isLoggedIn$ = Observable.of(true);
-  public displayName$ = Observable.of('Joe Chappy');
-  public avatarUrl$ = Observable.of('assets/images/avatars/profile.jpg');
+  public hasNavigation$: Observable<boolean>;
+  public isLoggedIn$: Observable<boolean>;
+  public displayName$: Observable<string>;
+  public avatarUrl$: Observable<string>;
 
   private onDestroy$ = new ReplaySubject();
 
   constructor(
     private router: Router,
+    private store: Store<TopNavState>,
+    private af: AngularFireAuth,
   ) { }
 
   public ngOnInit(): void {
+    this.store.dispatch(new InitialiseTopNav());
+
+    this.isLoggedIn$ = this.store.select(isLoggedInSelector);
+    this.displayName$ = this.store.select(displayNameSelector);
+    this.avatarUrl$ = this.store.select(avatarUrlSelector);
+
     this.showLoadingBar$ = this.router.events.pipe(
       map(event => {
         if (event instanceof NavigationStart) {

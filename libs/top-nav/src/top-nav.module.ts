@@ -8,7 +8,8 @@ import { DumbTopNavComponent } from './components/dumb-top-nav/dumb-top-nav.comp
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { topNavReducer, initialState as topNavInitialState } from './+state/top-nav.reducer';
-import { TopNavEffects } from './+state/top-nav.effects';
+import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
+import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effects';
 
 @NgModule({
   imports: [
@@ -25,10 +26,13 @@ import { TopNavEffects } from './+state/top-nav.effects';
 
     StoreModule.forFeature('topNav', topNavReducer, { initialState: topNavInitialState }),
 
-    EffectsModule.forFeature([TopNavEffects]),
+    EffectsModule.forFeature([TopNavEffects])
   ],
   declarations: [TopNavComponent, DumbTopNavComponent],
   exports: [TopNavComponent],
-  providers: [TopNavEffects],
+  providers: [
+    FirebaseUserService,
+    TopNavEffects,
+  ],
 })
 export class TopNavModule { }
