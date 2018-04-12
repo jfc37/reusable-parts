@@ -4,6 +4,7 @@ import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, Ma
 import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { DumbTopNavComponent } from './components/dumb-top-nav/dumb-top-nav.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
 
     FuseSharedModule,
   ],
-  declarations: [TopNavComponent],
+  declarations: [TopNavComponent, DumbTopNavComponent],
   exports: [TopNavComponent],
 })
 export class TopNavModule { }

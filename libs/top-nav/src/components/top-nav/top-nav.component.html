@@ -1,63 +1,7 @@
-<mat-toolbar class="p-0 mat-elevation-z1">
-
-  <mat-progress-bar *ngIf="showLoadingBar"
-    class="loading-bar"
-    color="accent"
-    mode="indeterminate"></mat-progress-bar>
-
-  <div fxFlex
-    fxFill
-    fxLayout="row"
-    fxLayoutAlign="start center">
-
-    <div fxFlex="1 0 auto"
-      fxLayout="row"
-      fxLayoutAlign="start center">
-
-      <button mat-button
-        class="toggle-button-navbar mat-icon-button"
-        *ngIf="hasNavigation"
-        (click)="openSideNavClicked()"
-        fxHide.gt-md>
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      <div class="toolbar-separator"
-        fxHide.gt-md></div>
-    </div>
-
-    <div class=""
-      fxFlex="0 1 auto"
-      fxLayout="row"
-      fxLayoutAlign="start center">
-
-      <div class="toolbar-separator"
-        fxHide.gt-md></div>
-      <button mat-button
-        [matMenuTriggerFor]="userMenu"
-        class="user-button">
-        <div fxLayout="row"
-          fxLayoutAlign="center center">
-          <img class="avatar"
-            src="assets/images/avatars/profile.jpg">
-          <span class="username mr-12"
-            fxHide
-            fxShow.gt-sm>John Doe</span>
-          <mat-icon class="s-16"
-            fxHide.xs>keyboard_arrow_down</mat-icon>
-        </div>
-      </button>
-
-      <mat-menu #userMenu="matMenu"
-        [overlapTrigger]="false">
-
-        <button mat-menu-item
-          class="">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Logout</span>
-        </button>
-
-      </mat-menu>
-    </div>
-  </div>
-</mat-toolbar>
+<jfc-dumb-top-nav [showLoadingBar]="showLoadingBar$ | async"
+  [showHamburger]="hasNavigation$ | async"
+  [showProfile]="isLoggedIn$ | async"
+  [avatarUrl]="avatarUrl$ | async"
+  [displayName]="displayName$ | async"
+  (hamburgerClicked)="openSideNav()"
+  (logoutClicked)="logout()"></jfc-dumb-top-nav>
