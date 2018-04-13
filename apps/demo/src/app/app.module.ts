@@ -19,6 +19,8 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { GuardsModule } from '@reusable-parts/guards';
+import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 
 @NgModule({
   imports: [
@@ -41,11 +43,17 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
     TopNavModule,
 
+    GuardsModule,
+
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
-      { path: 'dashboard', component: DashboardComponent },{path: 'register-page', loadChildren: '@reusable-parts/register-page#RegisterPageModule'}
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthenticatedGuard],
+      },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),

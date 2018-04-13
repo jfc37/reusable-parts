@@ -64,6 +64,13 @@
       "tags": []
     },
     {
+      "name": "guards",
+      "root": "libs/guards/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "login",
       "root": "libs/login/src",
       "test": "../../../test.js",
