@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseAuthService } from '@reusable-parts/guards/src/services/firebase-auth.service';
@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {
   constructor(
+    @Inject('unauthenticatedRedirectRoute') private redirectRoute: string,
     private authService: FirebaseAuthService,
     private router: Router,
   ) { }
@@ -17,7 +18,7 @@ export class AuthenticatedGuard implements CanActivate {
     return this.authService.isAuthenticated().pipe(
       tap(isAuthenticated => {
         if (!isAuthenticated) {
-          this.router.navigate(['login']);
+          this.router.navigate([this.redirectRoute]);
         }
       })
     );

@@ -62,6 +62,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
     StoreRouterConnectingModule
   ],
   providers: [
+    { provide: 'unauthenticatedRedirectRoute', useValue: 'login'},
     { provide: 'loginPageConfig', useValue: loginPageConfig},
     { provide: 'registerPageConfig', useValue: registerPageConfig},
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
