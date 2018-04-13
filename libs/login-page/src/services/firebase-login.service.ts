@@ -16,6 +16,7 @@ export class FirebaseLoginService {
   constructor(private af: AngularFireAuth) { }
 
   public login(email: string, password: string): Observable<any> {
+    this.af.auth.setPersistence('session');
     return Observable.fromPromise(this.af.auth.signInWithEmailAndPassword(email, password))
       .pipe(
         catchError(error => {

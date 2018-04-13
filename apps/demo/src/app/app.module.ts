@@ -11,14 +11,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
 import { TopNavModule } from '@reusable-parts/top-nav';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { fuseConfig, loginPageConfig, registerPageConfig } from './app.config';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   imports: [
@@ -42,7 +42,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     TopNavModule,
 
     RouterModule.forRoot([
-      { path: '', pathMatch: 'full', redirectTo: 'login' },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
       { path: 'dashboard', component: DashboardComponent },{path: 'register-page', loadChildren: '@reusable-parts/register-page#RegisterPageModule'}

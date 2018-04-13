@@ -10,7 +10,7 @@ export const environment: Environment = {
 
   firebase: {
     apiKey: "AIzaSyDQk_EXyWb1GuL81tsykdm2gqUMXpl7R98",
-    authDomain: "seed-ui.firebaseapp.com",
+    authDomain: "localhost",
     databaseURL: "https://seed-ui.firebaseio.com",
     projectId: "seed-ui",
     storageBucket: "seed-ui.appspot.com",

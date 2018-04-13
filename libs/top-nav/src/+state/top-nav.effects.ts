@@ -11,11 +11,7 @@ import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer'
 export class TopNavEffects {
   @Effect() initialise$ = this.actions$.ofType(TopNavActionTypes.Initialise)
     .pipe(
-      startWith(null),
-      tap(console.error.bind(null, '111')),
-      switchMap(() => this.firebaseUser.getUser()),
-      // switchMapTo(this.firebaseUser.getUser()),
-      tap(console.error.bind(null, '222')),
+      switchMapTo(this.firebaseUser.getUser()),
       filter(Boolean),
       mergeMap(user => {
         const actions: any[] = [new SetLogInStatus(user.loggedIn)]
@@ -32,7 +28,7 @@ export class TopNavEffects {
 
   @Effect() logout$ = this.actions$.ofType(TopNavActionTypes.LogOut)
     .pipe(
-      switchMapTo(this.firebaseUser.logout()),
+      // switchMapTo(this.firebaseUser.logout()),
       mapTo(new InitialiseTopNav()),
   )
 

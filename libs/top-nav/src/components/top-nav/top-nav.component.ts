@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LogOut } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
+import { LogOut, InitialiseTopNav } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
 import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
 import { avatarUrlSelector, displayNameSelector, isLoggedInSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
 import { Observable } from 'rxjs/Observable';
@@ -28,6 +28,8 @@ export class TopNavComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
+  this.store.dispatch(new InitialiseTopNav());
+
     this.isLoggedIn$ = this.store.select(isLoggedInSelector);
     this.displayName$ = this.store.select(displayNameSelector);
     this.avatarUrl$ = this.store.select(avatarUrlSelector);

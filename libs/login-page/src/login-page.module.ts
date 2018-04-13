@@ -17,7 +17,7 @@ import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/fi
     LoginModule,
 
     RouterModule.forChild([
-      {path: '', pathMatch: 'full', component: LoginPageComponent}
+      { path: '', pathMatch: 'full', component: LoginPageComponent }
     ]),
 
     StoreModule.forFeature('login', loginReducer, { initialState: loginInitialState }),
@@ -31,11 +31,9 @@ import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/fi
   ],
 })
 export class LoginPageModule {
-  constructor(@Optional() @SkipSelf() parentModule: LoginPageModule)
-  {
-      if ( parentModule )
-      {
-          throw new Error('LoginPageModule is already loaded. Import it in the AppModule only!');
-      }
+  constructor(@Optional() @SkipSelf() parentModule: LoginPageModule) {
+    if (parentModule) {
+      throw new Error('LoginPageModule is already loaded. Import it in the AppModule only!');
+    }
   }
 }
