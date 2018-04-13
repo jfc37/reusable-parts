@@ -1,44 +1,27 @@
 import { Action } from '@ngrx/store';
 
 export enum TopNavActionTypes {
-  Initialise = '[Top Nav] Initialise',
+  GetUser = '[Top Nav] Get User',
 
-  SetLoginStatus = '[Top Nav] Set Login Status',
-  SetDisplayName = '[Top Nav] Set Display Name',
-  SetAvatarUrl = '[Top Nav] Set Avatar Url',
-
-  LogOut = '[Top Nav] Log Out',
-
+  Authenticated = '[Top Nav] Authenticated',
+  Unauthenticated = '[Top Nav] Unauthenticated',
 }
 
-export class InitialiseTopNav implements Action {
-  readonly type = TopNavActionTypes.Initialise;
+export class GetUser implements Action {
+  readonly type = TopNavActionTypes.GetUser;
 }
 
-export class SetLogInStatus implements Action {
-  readonly type = TopNavActionTypes.SetLoginStatus;
+export class Authenticated implements Action {
+  readonly type = TopNavActionTypes.Authenticated;
 
-  constructor(public isLoggedIn: boolean) { }
+  constructor(public displayName: string, public avatarUrl: string) { }
 }
 
-export class SetDisplayName implements Action {
-  readonly type = TopNavActionTypes.SetDisplayName;
-
-  constructor(public displayName: string) { }
-}
-
-export class SetAvatarUrl implements Action {
-  readonly type = TopNavActionTypes.SetAvatarUrl;
-
-  constructor(public avatarUrl: string) { }
-}
-
-export class LogOut implements Action {
-  readonly type = TopNavActionTypes.LogOut;
+export class UnAuthenticated implements Action {
+  readonly type = TopNavActionTypes.Unauthenticated;
 }
 
 export type TopNavActions
-  = InitialiseTopNav
-  | SetLogInStatus
-  | SetDisplayName
-  | SetAvatarUrl;
+  = GetUser
+  | Authenticated
+  | UnAuthenticated;

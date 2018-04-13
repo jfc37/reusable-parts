@@ -9,27 +9,14 @@ export class FirebaseUserService {
   constructor(private af: AngularFireAuth) {
   }
 
-  public getUser(): Observable<any> {
+  public getUser(): Observable<{displayName: string, avatarUrl: string}> {
     return this.af.authState.pipe(
       map(user => user ? {
-        loggedIn: true,
         displayName: user.displayName || user.email,
         avatarUrl: user.photoURL,
-      } : { loggedIn: false, displayName: null, avatarUrl: null }),
+      } : null),
     );
   }
-
-  // public isLoggedIn(): boolean {
-  //   return Boolean(this.af.auth.currentUser)
-  // }
-
-  // public getDisplayName(): string {
-  //   return this.af.auth.currentUser.displayName || this.af.auth.currentUser.email;
-  // }
-
-  // public getAvatarUrl(): string {
-  //   return this.af.auth.currentUser.photoURL;
-  // }
 
   // public logout(): Observable<void> {
   //   return Observable.fromPromise(this.af.auth.signOut());

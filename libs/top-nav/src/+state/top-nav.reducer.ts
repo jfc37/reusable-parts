@@ -7,6 +7,7 @@ import { TopNavActions, TopNavActionTypes } from './top-nav.actions';
  *  - topNavReducer
  */
 export interface TopNavData {
+  loading: boolean;
   loggedIn: boolean;
   displayName: string;
   avatarUrl: string;
@@ -21,9 +22,10 @@ export interface TopNavState {
 }
 
 export const initialState: TopNavData = {
+  loading: true,
   loggedIn: false,
   displayName: null,
-  avatarUrl: 'assets/images/avatars/profile.jpg',
+  avatarUrl: null,
 };
 
 export function topNavReducer(
@@ -31,28 +33,27 @@ export function topNavReducer(
   action: TopNavActions
 ): TopNavData {
   switch (action.type) {
-    case TopNavActionTypes.Initialise: {
+    case TopNavActionTypes.GetUser: {
       return initialState;
     }
 
-    case TopNavActionTypes.SetLoginStatus: {
+    case TopNavActionTypes.Authenticated: {
       return {
         ...state,
-        loggedIn: action.isLoggedIn
+        loading: false,
+        loggedIn: true,
+        displayName: action.displayName,
+        avatarUrl: action.avatarUrl || 'assets/images/avatars/profile.jpg',
       };
     }
 
-    case TopNavActionTypes.SetDisplayName: {
+    case TopNavActionTypes.Unauthenticated: {
       return {
         ...state,
-        displayName: action.displayName
-      };
-    }
-
-    case TopNavActionTypes.SetAvatarUrl: {
-      return {
-        ...state,
-        avatarUrl: action.avatarUrl
+        loading: false,
+        loggedIn: false,
+        displayName: null,
+        avatarUrl: null,
       };
     }
 
