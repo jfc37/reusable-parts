@@ -14,5 +14,4 @@ export class FirebaseAuthService {
       map(user => Boolean(user)),
     );
   }
-
 }
