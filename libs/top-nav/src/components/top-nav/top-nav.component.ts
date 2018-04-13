@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LogOut, GetUser } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
+import { GetUser, LoggingOut } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
 import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
-import { avatarUrlSelector, displayNameSelector, isLoggedInSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
+import { avatarUrlSelector, displayNameSelector, hasLoggedOutSelector, isAuthenticatedSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-top-nav',
@@ -14,6 +14,8 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent implements OnInit, OnDestroy {
+  @Input() redirectRouteAfterLogout: string
+
   public showLoadingBar$: Observable<boolean>;
   public hasNavigation$: Observable<boolean>;
   public isLoggedIn$: Observable<boolean>;
@@ -28,11 +30,17 @@ export class TopNavComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-  this.store.dispatch(new GetUser());
+    this.store.dispatch(new GetUser());
 
-    this.isLoggedIn$ = this.store.select(isLoggedInSelector);
+    this.isLoggedIn$ = this.store.select(isAuthenticatedSelector);
     this.displayName$ = this.store.select(displayNameSelector);
     this.avatarUrl$ = this.store.select(avatarUrlSelector);
+
+    this.store.select(hasLoggedOutSelector).pipe(
+      takeUntil(this.onDestroy$),
+      filter(Boolean),
+      tap(() => this.router.navigate([this.redirectRouteAfterLogout])),
+    ).subscribe();
 
     this.showLoadingBar$ = this.router.events.pipe(
       map(event => {
@@ -57,7 +65,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
-    this.store.dispatch(new LogOut());
+    this.store.dispatch(new LoggingOut());
   }
 
 }

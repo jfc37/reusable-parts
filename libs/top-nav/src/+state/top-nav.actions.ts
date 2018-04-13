@@ -5,6 +5,9 @@ export enum TopNavActionTypes {
 
   Authenticated = '[Top Nav] Authenticated',
   Unauthenticated = '[Top Nav] Unauthenticated',
+
+  LoggingOut = '[Top Nav] Logging Out',
+  LoggedOut = '[Top Nav] Logged Out',
 }
 
 export class GetUser implements Action {
@@ -21,7 +24,17 @@ export class UnAuthenticated implements Action {
   readonly type = TopNavActionTypes.Unauthenticated;
 }
 
+export class LoggingOut implements Action {
+  readonly type = TopNavActionTypes.LoggingOut;
+}
+
+export class LoggedOut implements Action {
+  readonly type = TopNavActionTypes.LoggedOut;
+}
+
 export type TopNavActions
   = GetUser
   | Authenticated
-  | UnAuthenticated;
+  | UnAuthenticated
+  | LoggingOut
+  | LoggedOut;
