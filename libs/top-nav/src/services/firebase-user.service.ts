@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operator/map';
-import { mapTo } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FirebaseUserService {
 
   constructor(private af: AngularFireAuth) { }
 
-  public userStatusChanges(): Observable<void> {
-    return this.af.authState.pipe(mapTo(null));
+
+  public getUser(): Observable<any> {
+    return this.af.authState.pipe(
+      map(user => user ? {
+        loggedIn: true,
+        displayName: user.displayName || user.email,
+        avatarUrl: user.photoURL,
+      } : { loggedIn: false, displayName: null, avatarUrl: null }),
+    );
   }
 
   public isLoggedIn(): boolean {
@@ -26,7 +32,7 @@ export class FirebaseUserService {
   }
 
   public logout(): Observable<void> {
-    return Observable.fromPromise(this.af.auth.signOut())
+    return Observable.fromPromise(this.af.auth.signOut());
   }
 
 }

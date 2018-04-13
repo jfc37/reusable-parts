@@ -4,9 +4,10 @@ export enum TopNavActionTypes {
   Initialise = '[Top Nav] Initialise',
 
   SetLoginStatus = '[Top Nav] Set Login Status',
-
   SetDisplayName = '[Top Nav] Set Display Name',
   SetAvatarUrl = '[Top Nav] Set Avatar Url',
+
+  LogOut = '[Top Nav] Log Out',
 
 }
 
@@ -30,6 +31,10 @@ export class SetAvatarUrl implements Action {
   readonly type = TopNavActionTypes.SetAvatarUrl;
 
   constructor(public avatarUrl: string) { }
+}
+
+export class LogOut implements Action {
+  readonly type = TopNavActionTypes.LogOut;
 }
 
 export type TopNavActions

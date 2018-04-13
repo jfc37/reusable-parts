@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
-import { Observable } from 'rxjs/Observable';
-import { mergeMap, switchMapTo, flatMap } from 'rxjs/operators';
-import { SetLogInStatus, SetAvatarUrl, SetDisplayName, TopNavActionTypes } from './top-nav.actions';
+import { mapTo, mergeMap, switchMapTo, tap, delay, switchMap, startWith, filter } from 'rxjs/operators';
+import { defer } from 'rxjs/observable/defer';
+import { InitialiseTopNav, SetAvatarUrl, SetDisplayName, SetLogInStatus, TopNavActionTypes } from './top-nav.actions';
+import { Store } from '@ngrx/store';
+import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
 
 @Injectable()
 export class TopNavEffects {
-  @Effect() effect$: Observable<any> = this.actions$.ofType(TopNavActionTypes.Initialise)
+  @Effect() initialise$ = this.actions$.ofType(TopNavActionTypes.Initialise)
     .pipe(
-      switchMapTo(this.firebaseUser.userStatusChanges()),
-      flatMap(() => {
-        const isLoggedIn = this.firebaseUser.isLoggedIn();
-        const actions: any[] = [new SetLogInStatus(isLoggedIn)]
+      startWith(null),
+      tap(console.error.bind(null, '111')),
+      switchMap(() => this.firebaseUser.getUser()),
+      // switchMapTo(this.firebaseUser.getUser()),
+      tap(console.error.bind(null, '222')),
+      filter(Boolean),
+      mergeMap(user => {
+        const actions: any[] = [new SetLogInStatus(user.loggedIn)]
 
-        if (isLoggedIn) {
-          actions.push(new SetDisplayName(this.firebaseUser.getDisplayName()));
-          if (this.firebaseUser.getAvatarUrl()) {
-            actions.push(new SetAvatarUrl(this.firebaseUser.getAvatarUrl()));
+        if (user.loggedIn) {
+          actions.push(new SetDisplayName(user.displayName));
+          if (user.avatarUrl) {
+            actions.push(new SetAvatarUrl(user.avatarUrl));
           }
         }
         return actions;
       }),
   );
 
+  @Effect() logout$ = this.actions$.ofType(TopNavActionTypes.LogOut)
+    .pipe(
+      switchMapTo(this.firebaseUser.logout()),
+      mapTo(new InitialiseTopNav()),
+  )
+
   constructor(
     private actions$: Actions,
     private firebaseUser: FirebaseUserService,
+    private store: Store<TopNavState>,
   ) { }
 }

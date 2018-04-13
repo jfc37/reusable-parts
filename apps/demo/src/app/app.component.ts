@@ -6,7 +6,4 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public loginAttempt(model) {
-    console.error('xxx', model);
-  }
 }

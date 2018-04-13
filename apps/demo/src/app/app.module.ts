@@ -1,24 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoPreloading, RouterModule, LoadChildrenCallback } from '@angular/router';
+import { NoPreloading, RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
-import { AppComponent } from './app.component';
-import { MatCheckboxModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { fuseConfig, loginPageConfig, registerPageConfig } from './app.config';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { storeFreeze } from 'ngrx-store-freeze';
-import { CustomRouterStateSerializer, logger } from './custom-route.state';
-import { AngularFireModule} from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TopNavModule } from '@reusable-parts/top-nav';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { fuseConfig, loginPageConfig, registerPageConfig } from './app.config';
+import { CustomRouterStateSerializer, logger } from './custom-route.state';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
