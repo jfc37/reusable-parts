@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
@@ -20,6 +20,7 @@ import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effect
     MatIconModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
 
     FuseSharedModule,

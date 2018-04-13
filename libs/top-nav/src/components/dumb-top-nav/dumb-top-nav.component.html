@@ -25,27 +25,32 @@
         fxHide.gt-md></div>
     </div>
 
-    <div *ngIf="showProfile"
-      fxFlex="0 1 auto"
+    <div fxFlex="0 1 auto"
       fxLayout="row"
       fxLayoutAlign="start center">
 
       <div class="toolbar-separator"
         fxHide.gt-md></div>
-      <button mat-button
-        [matMenuTriggerFor]="userMenu"
-        class="user-button">
-        <div fxLayout="row"
-          fxLayoutAlign="center center">
-          <img class="avatar"
-            [src]="avatarUrl">
-          <span class="username mr-12"
-            fxHide
-            fxShow.gt-sm>{{displayName}}</span>
-          <mat-icon class="s-16"
-            fxHide.xs>keyboard_arrow_down</mat-icon>
-        </div>
-      </button>
+      <mat-spinner *ngIf="loadingProfile; else profile"
+        class="loading-profile-spinner"
+        diameter="60"
+        color="accent"></mat-spinner>
+      <ng-template #profile>
+        <button mat-button
+          [matMenuTriggerFor]="userMenu"
+          class="user-button">
+          <div fxLayout="row"
+            fxLayoutAlign="center center">
+            <img class="avatar"
+              [src]="avatarUrl">
+            <span class="username mr-12"
+              fxHide
+              fxShow.gt-sm>{{displayName}}</span>
+            <mat-icon class="s-16"
+              fxHide.xs>keyboard_arrow_down</mat-icon>
+          </div>
+        </button>
+      </ng-template>
 
       <mat-menu #userMenu="matMenu"
         [overlapTrigger]="false">

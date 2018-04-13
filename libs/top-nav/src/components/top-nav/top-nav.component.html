@@ -1,6 +1,6 @@
 <jfc-dumb-top-nav [showLoadingBar]="showLoadingBar$ | async"
   [showHamburger]="hasNavigation$ | async"
-  [showProfile]="isLoggedIn$ | async"
+  [loadingProfile]="loadingUser$ | async"
   [avatarUrl]="avatarUrl$ | async"
   [displayName]="displayName$ | async"
   (hamburgerClicked)="openSideNav()"

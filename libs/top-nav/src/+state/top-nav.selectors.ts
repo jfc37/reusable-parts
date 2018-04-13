@@ -3,6 +3,11 @@ import { TopNavData } from "@reusable-parts/top-nav/src/+state/top-nav.reducer";
 
 const topNavSelector = createFeatureSelector<TopNavData>('topNav');
 
+export const isLoadingSelector = createSelector(
+  topNavSelector,
+  state => state.loading
+);
+
 export const isAuthenticatedSelector = createSelector(
   topNavSelector,
   state => state.authenticated

@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DumbTopNavComponent {
   @Input() public showHamburger: boolean;
   @Input() public showLoadingBar: boolean;
-  @Input() public showProfile: string;
+  @Input() public loadingProfile: boolean;
   @Input() public displayName: string;
   @Input() public avatarUrl: string;
 

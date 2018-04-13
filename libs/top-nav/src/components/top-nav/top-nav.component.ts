@@ -3,7 +3,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { GetUser, LoggingOut } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
 import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
-import { avatarUrlSelector, displayNameSelector, hasLoggedOutSelector, isAuthenticatedSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
+import { avatarUrlSelector, displayNameSelector, hasLoggedOutSelector, isLoadingSelector } from '@reusable-parts/top-nav/src/+state/top-nav.selectors';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
 
   public showLoadingBar$: Observable<boolean>;
   public hasNavigation$: Observable<boolean>;
-  public isLoggedIn$: Observable<boolean>;
+  public loadingUser$: Observable<boolean>;
   public displayName$: Observable<string>;
   public avatarUrl$: Observable<string>;
 
@@ -32,7 +32,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new GetUser());
 
-    this.isLoggedIn$ = this.store.select(isAuthenticatedSelector);
+    this.loadingUser$ = this.store.select(isLoadingSelector);
     this.displayName$ = this.store.select(displayNameSelector);
     this.avatarUrl$ = this.store.select(avatarUrlSelector);
 
