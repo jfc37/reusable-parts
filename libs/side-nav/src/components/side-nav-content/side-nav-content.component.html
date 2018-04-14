@@ -1,0 +1,34 @@
+<div class="navbar-vertical">
+
+  <div class="navbar-header">
+
+    <div class="logo">
+      <img class="logo-icon"
+        src="assets/images/logos/fuse.svg">
+      <span class="logo-text">FUSE</span>
+    </div>
+
+    <button mat-button
+      class="toggle-button-navbar mat-icon-button"
+      (click)="toggleSidebarFolded()"
+      fxHide.lt-lg>
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <button mat-button
+      class="toggle-button-navbar mat-icon-button"
+      (click)="toggleSidebarOpened()"
+      fxHide.gt-md>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+  </div>
+
+  <div class="navbar-content"
+    fusePerfectScrollbar>
+    <div>HELLO</div>
+    <!-- <fuse-navigation [navigation]="navigation"
+      layout="vertical"></fuse-navigation> -->
+  </div>
+
+</div>
