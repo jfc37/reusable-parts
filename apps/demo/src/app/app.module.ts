@@ -23,6 +23,7 @@ import { GuardsModule } from '@reusable-parts/guards';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 import { SideNavModule } from '@reusable-parts/side-nav';
 import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    TranslateModule.forRoot(),
 
     // angular material components
     MatButtonModule,
