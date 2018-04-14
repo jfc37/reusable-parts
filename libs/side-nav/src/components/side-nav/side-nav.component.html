@@ -2,9 +2,10 @@
   <div id="fuse-main-content">
     <div id="wrapper">
       <fuse-sidebar name="navbar"
+        class="left-navbar"
         lockedOpen="gt-md"
         [folded]="fuseSettings.layout.navigationFolded"
-        class="left-navbar">
+        [ngClass]="fuseSettings.colorClasses.navbar">
         <jfc-side-nav-content></jfc-side-nav-content>
       </fuse-sidebar>
 
