@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+
+  <div id="fuse-main-content">
+
+    <!-- / NAVBAR: Top -->
+
+    <div id="wrapper">
+
+      <fuse-sidebar [name]="'navbar'"
+        [folded]="folded"
+        lockedOpen="gt-md"
+        class="left-navbar">
+        <fuse-navbar layout="vertical"></fuse-navbar>
+      </fuse-sidebar>
+
+      <div class="content-wrapper">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</mat-sidenav-container>

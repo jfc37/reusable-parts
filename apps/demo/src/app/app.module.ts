@@ -21,6 +21,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { GuardsModule } from '@reusable-parts/guards';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
+import { SideNavModule } from '@reusable-parts/side-nav';
+import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
 
 @NgModule({
   imports: [
@@ -42,6 +44,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
     FuseSharedModule,
 
     TopNavModule,
+    SideNavModule,
 
     GuardsModule,
 

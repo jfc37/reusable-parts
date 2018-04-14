@@ -99,6 +99,13 @@
       "tags": []
     },
     {
+      "name": "side-nav",
+      "root": "libs/side-nav/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "top-nav",
       "root": "libs/top-nav/src",
       "test": "../../../test.js",
