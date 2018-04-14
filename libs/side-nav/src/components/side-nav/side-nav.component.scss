@@ -1,32 +1,26 @@
 @import "libs/@fuse/scss/fuse";
 
 jfc-side-nav {
-
-  &.folded:not(.unfolded) {
-
-      .navbar-vertical {
-
-          .navbar-header {
-              padding: 0 13px;
-
-              .logo {
-
-                  .logo-text {
-                      opacity: 0;
-                      transition: opacity 200ms ease;
-                  }
-              }
-          }
-      }
-  }
-}
-
-
-jfc-side-nav {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  &.folded:not(.unfolded) {
+    .navbar-vertical {
+        .navbar-header {
+            padding: 0 13px;
+
+            .logo {
+
+                .logo-text {
+                    opacity: 0;
+                    transition: opacity 200ms ease;
+                }
+            }
+        }
+    }
+}
 
   > .mat-sidenav-container {
       display: flex;
