@@ -19,7 +19,6 @@ export class SideNavComponent implements OnInit
     this.fuseConfig.onConfigChanged
         .subscribe(
             (newSettings) => {
-              console.error('xxx', newSettings);
                 this.fuseSettings = newSettings;
             }
         );

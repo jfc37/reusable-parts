@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatIconModule, MatSidenavModule } from '@angular/material';
-import { FuseSidebarModule } from '@reusable-parts/@fuse/components';
+import { FuseSidebarModule, FuseNavigationModule } from '@reusable-parts/@fuse/components';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavContentComponent } from './components/side-nav-content/side-nav-content.component';
+import { FuseSharedModule } from '@reusable-parts/@fuse';
 
 @NgModule({
   imports: [
@@ -13,7 +14,9 @@ import { SideNavContentComponent } from './components/side-nav-content/side-nav-
     MatIconModule,
     MatSidenavModule,
 
+    FuseSharedModule,
     FuseSidebarModule,
+    FuseNavigationModule,
   ],
   declarations: [SideNavComponent, SideNavContentComponent],
   exports: [SideNavComponent],

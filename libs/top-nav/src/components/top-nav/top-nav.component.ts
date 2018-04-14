@@ -63,8 +63,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
   }
 
   public openSideNav(): void {
-    console.error('xxx folding...')
-    this.sidebarService.getSidebar('navbar').toggleFold();
+    this.sidebarService.getSidebar('navbar').toggleOpen();
   }
 
   public logout(): void {
