@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { FuseNavigationService } from '@reusable-parts/@fuse/components/navigation/navigation.service';
+import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sidebar.service';
 import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { Subscription } from 'rxjs/Subscription';
-import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sidebar.service';
-import { FuseNavigationService } from '@reusable-parts/@fuse/components/navigation/navigation.service';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'jfc-side-nav-content',
   templateUrl: './side-nav-content.component.html',
   styleUrls: ['./side-nav-content.component.scss'],
-  // encapsulation: ViewEncapsulation.None
 })
 export class SideNavContentComponent implements OnInit, OnDestroy {
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;

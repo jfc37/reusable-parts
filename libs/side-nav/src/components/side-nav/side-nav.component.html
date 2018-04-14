@@ -1,13 +1,8 @@
 <mat-sidenav-container>
-
   <div id="fuse-main-content">
-
-    <!-- / NAVBAR: Top -->
-
     <div id="wrapper">
-
       <fuse-sidebar name="navbar"
-        [folded]="folded"
+        [folded]="fuseSettings.layout.navigationFolded"
         lockedOpen="gt-md"
         class="left-navbar">
         <jfc-side-nav-content></jfc-side-nav-content>

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
 
 @Component({
@@ -8,11 +8,20 @@ import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service
   encapsulation: ViewEncapsulation.None
 
 })
-export class SideNavComponent
+export class SideNavComponent implements OnInit
 {
-  @Input() public folded = false;
+  fuseSettings: any;
+  constructor(
+    private fuseConfig: FuseConfigService,
+  ) {}
 
-  constructor(private fuseConfigService: FuseConfigService) {
-    console.error('xxx', fuseConfigService);
+  public ngOnInit(): void {
+    this.fuseConfig.onConfigChanged
+        .subscribe(
+            (newSettings) => {
+              console.error('xxx', newSettings);
+                this.fuseSettings = newSettings;
+            }
+        );
   }
 }

@@ -7,6 +7,7 @@ import { avatarUrlSelector, displayNameSelector, hasLoggedOutSelector, isLoading
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sidebar.service';
 
 @Component({
   selector: 'jfc-top-nav',
@@ -27,6 +28,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private store: Store<TopNavState>,
+    private sidebarService: FuseSidebarService,
   ) { }
 
   public ngOnInit(): void {
@@ -61,7 +63,8 @@ export class TopNavComponent implements OnInit, OnDestroy {
   }
 
   public openSideNav(): void {
-    console.error('open side nav');
+    console.error('xxx folding...')
+    this.sidebarService.getSidebar('navbar').toggleFold();
   }
 
   public logout(): void {
