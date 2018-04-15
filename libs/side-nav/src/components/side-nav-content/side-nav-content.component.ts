@@ -4,6 +4,8 @@ import { FuseNavigationService } from '@reusable-parts/@fuse/components/navigati
 import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sidebar.service';
 import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { Subscription } from 'rxjs/Subscription';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-side-nav-content',
@@ -14,6 +16,7 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
   @Input() menuItems: any[];
 
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;
+  private onDestroy$ = new ReplaySubject();
 
   @ViewChild(FusePerfectScrollbarDirective) set directive(theDirective: FusePerfectScrollbarDirective) {
     if (!theDirective) {
@@ -22,15 +25,15 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
 
     this.fusePerfectScrollbar = theDirective;
 
-    this.navigationServiceWatcher =
-      this.navigationService.onItemCollapseToggled.subscribe(() => {
+    this.navigationService.onItemCollapseToggled
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
         this.fusePerfectScrollbarUpdateTimeout = setTimeout(() => {
           this.fusePerfectScrollbar.update();
         }, 310);
       });
   }
-  navigationServiceWatcher: Subscription;
-  fusePerfectScrollbarUpdateTimeout;
+  private fusePerfectScrollbarUpdateTimeout;
 
   constructor(
     private sidebarService: FuseSidebarService,
@@ -56,9 +59,8 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
       clearTimeout(this.fusePerfectScrollbarUpdateTimeout);
     }
 
-    if (this.navigationServiceWatcher) {
-      this.navigationServiceWatcher.unsubscribe();
-    }
+    this.onDestroy$.next(null);
+    this.onDestroy$.complete();
   }
 
   toggleSidebarOpened() {
