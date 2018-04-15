@@ -1,6 +1,8 @@
-<jfc-side-nav [menuItems]="menuItems">
-    <jfc-top-nav [redirectRouteAfterLogout]="'login'"></jfc-top-nav>
-    <p>
-      dashboard works!
-    </p>
+<jfc-side-nav [menuItems]="menuItems"
+  [name]="appName"
+  [logoUrl]="logoUrl">
+  <jfc-top-nav [redirectRouteAfterLogout]="'login'"></jfc-top-nav>
+  <p>
+    dashboard works!
+  </p>
 </jfc-side-nav>

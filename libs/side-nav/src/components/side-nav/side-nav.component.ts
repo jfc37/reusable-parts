@@ -12,6 +12,8 @@ import { MenuItem } from '@reusable-parts/side-nav/src/components/side-nav/side-
 })
 export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
   @Input() public menuItems: MenuItem[] = [];
+  @Input() public name: string;
+  @Input() public logoUrl: string;
 
   public folded: boolean;
   public sideBarClasses: any;

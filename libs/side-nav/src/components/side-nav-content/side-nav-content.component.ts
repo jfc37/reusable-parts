@@ -14,6 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SideNavContentComponent implements OnInit, OnDestroy {
   @Input() menuItems: any[];
+  @Input() name: string;
+  @Input() logoUrl: string;
 
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;
   private onDestroy$ = new ReplaySubject();

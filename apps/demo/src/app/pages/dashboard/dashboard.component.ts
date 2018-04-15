@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  public appName = `Barber's Shop`;
+  public logoUrl = 'assets/images/logos/fuse.svg';
   public menuItems = [
     {
         'id'       : 'applications',
