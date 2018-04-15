@@ -24,6 +24,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
 import { SideNavModule } from '@reusable-parts/side-nav';
 import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { MainContentModule } from '@reusable-parts/main-content';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
     TopNavModule,
     SideNavModule,
+    MainContentModule,
 
     GuardsModule,
 

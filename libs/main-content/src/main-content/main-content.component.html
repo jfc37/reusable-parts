@@ -1,0 +1,46 @@
+<div id="order"
+  class="page-layout carded fullwidth"
+  fusePerfectScrollbar>
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg mat-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header white-fg"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row"
+        fxLayoutAlign="start center">
+        <div fxLayout="column"
+          fxLayoutAlign="start start"
+          *fuseIfOnDom
+          [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <ng-content select=".main-content-header"></ng-content>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card mat-white-bg">
+
+      <!-- CONTENT -->
+      <div class="content">
+        <ng-content select=".main-content-body"></ng-content>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+</div>

@@ -85,6 +85,13 @@
       "tags": []
     },
     {
+      "name": "main-content",
+      "root": "libs/main-content/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "register",
       "root": "libs/register/src",
       "test": "../../../test.js",
