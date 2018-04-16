@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   @Input() public description: string;
 
   /**
+   * Logo url
+   */
+  @Input() public logoUrl: string;
+
+  /**
    * Is logging in currently occuring?
    */
   @Input() public loggingIn: boolean;

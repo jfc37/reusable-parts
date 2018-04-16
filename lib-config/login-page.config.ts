@@ -3,4 +3,5 @@ export interface LoginPageConfig {
   description: string;
   afterLoginRoute: string;
   registerRoute: string;
+  logoUrl: string;
 }

@@ -15,6 +15,7 @@ export interface Environment {
     description: string,
     afterLoginRoute: string,
     registerRoute: string,
+    logoUrl: string,
   },
 
   registerPageConfig: {
@@ -22,6 +23,7 @@ export interface Environment {
     description: string,
     loginRoute: string,
     afterRegistrationRoute: string,
+    logoUrl: string,
   },
 
   fuseConfig: {

@@ -23,6 +23,11 @@ export class RegisterComponent implements OnInit {
   @Input() public description: string;
 
   /**
+   * Logo url
+   */
+  @Input() public logoUrl: string;
+
+  /**
    * Is currently registering?
    */
   @Input() public registering: boolean;

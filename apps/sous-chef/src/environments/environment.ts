@@ -39,6 +39,7 @@ export const environment: Environment = {
     description: `Your dinner helper`,
     afterLoginRoute: 'dashboard',
     registerRoute: 'register',
+    logoUrl: 'assets/chef.png',
   },
 
   registerPageConfig:{
@@ -46,6 +47,7 @@ export const environment: Environment = {
     description: `Your dinner helper`,
     loginRoute: 'login',
     afterRegistrationRoute: 'dashboard',
+    logoUrl: 'assets/chef.png',
   }
 
 };

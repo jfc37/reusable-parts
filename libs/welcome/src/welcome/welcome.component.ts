@@ -17,4 +17,9 @@ export class WelcomeComponent {
    * Description of the application
    */
   @Input() public description: string;
+
+  /**
+   * Logo url
+   */
+  @Input() public logoUrl: string;
 }
