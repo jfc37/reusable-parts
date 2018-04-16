@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FuseTranslationLoaderService } from '@reusable-parts/@fuse/services/translation-loader.service';
 import { locale as navigationEnglish } from './navigation/i18n/en';
+import { MenuItem, MenuItemType } from '@reusable-parts/side-nav';
 
 @Component({
   selector: 'jfc-root',
@@ -12,12 +13,28 @@ export class AppComponent {
 
   public appName = `Barber's Shop`;
   public logoUrl = 'assets/images/logos/fuse.svg';
-  public menuItems = [
+  public menuItems: MenuItem[] = [
     {
-      'id': 'meals',
-      'title': 'Meals',
-      'type': 'group',
-      'icon': 'apps',
+      id: 'meals',
+      title: 'Meals',
+      type: MenuItemType.Group,
+      icon: 'apps',
+      children: [
+        {
+          id: 'dashboard',
+          title: 'Dashboard',
+          type: MenuItemType.Item,
+          icon: 'apps',
+          url: 'dashboard',
+        },
+        {
+          id: 'profile',
+          title: 'Profile',
+          type: MenuItemType.Item,
+          icon: 'apps',
+          url: 'profile',
+        },
+      ]
     },
   ];
 

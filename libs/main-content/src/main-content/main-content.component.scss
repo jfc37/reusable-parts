@@ -6,6 +6,14 @@ jfc-main-content {
     width: 100%;
     height: 100%;
 
+    > .page-layout.simple.fullwidth {
+      height: 100%;
+
+      > .content {
+        height: 100%;
+      }
+    }
+
     > .mat-sidenav-container {
         display: flex;
         flex: 1;

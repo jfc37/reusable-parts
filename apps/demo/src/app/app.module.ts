@@ -61,6 +61,11 @@ import { MainContentModule } from '@reusable-parts/main-content';
         component: DashboardComponent,
         canActivate: [AuthenticatedGuard],
       },
+      {
+        path: 'profile',
+        component: DashboardComponent,
+        canActivate: [AuthenticatedGuard],
+      },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),

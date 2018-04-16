@@ -5,7 +5,7 @@ export interface MenuItem {
   /**
    * Key to look up in translation config
    */
-  translateKey: string;
+  translateKey?: string;
   type: MenuItemType;
 
   /**

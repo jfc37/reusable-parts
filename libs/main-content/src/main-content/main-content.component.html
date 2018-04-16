@@ -1,46 +1,25 @@
-<div id="order"
-  class="page-layout carded fullwidth"
+<div class="page-layout simple fullwidth"
   fusePerfectScrollbar>
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
-
-  <!-- CENTER -->
-  <div class="center">
-
-    <!-- HEADER -->
-    <div class="header white-fg"
-      fxLayout="row"
-      fxLayoutAlign="space-between center">
-
-      <!-- APP TITLE -->
-      <div fxLayout="row"
-        fxLayoutAlign="start center">
-        <div fxLayout="column"
-          fxLayoutAlign="start start"
-          *fuseIfOnDom
-          [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-          <ng-content select=".main-content-header"></ng-content>
-        </div>
-      </div>
-      <!-- / APP TITLE -->
-
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-24"
+    fxLayout="row"
+    fxLayoutAlign="start center">
+    <div *fuseIfOnDom
+      [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+      <ng-content select=".main-content-header"></ng-content>
     </div>
-    <!-- / HEADER -->
+  </div>
+  <!-- / HEADER -->
 
-    <!-- CONTENT CARD -->
-    <div class="content-card mat-white-bg">
-
-      <!-- CONTENT -->
-      <div class="content">
-        <ng-content select=".main-content-body"></ng-content>
-      </div>
-      <!-- / CONTENT -->
-
+  <!-- CONTENT -->
+  <div class="content p-24 mat-white-bg">
+    <div *fuseIfOnDom
+      [@animate]="{value:'*',params:{delay:'200ms',x:'-25px'}}">
+      <ng-content select=".main-content-body"></ng-content>
     </div>
-    <!-- / CONTENT CARD -->
 
   </div>
-  <!-- / CENTER -->
+  <!-- / CONTENT -->
+
 </div>
