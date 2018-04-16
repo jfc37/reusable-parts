@@ -7,12 +7,18 @@
         overflow: hidden;
         background: url('/assets/images/backgrounds/dark-material-bg.jpg') no-repeat;
         background-size: cover;
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
 
         #login-form-wrapper {
             overflow: auto;
             width: 400px;
             min-width: 400px;
             max-width: 400px;
+            height: 100%;
+            min-height: 100%;
+            max-height: 100%;
             background: #FFFFFF;
             @include mat-elevation(16);
 
