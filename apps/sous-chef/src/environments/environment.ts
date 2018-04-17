@@ -37,7 +37,7 @@ export const environment: Environment = {
   loginPageConfig: {
     name: `Sous Chef`,
     description: `Your dinner helper`,
-    afterLoginRoute: 'dashboard',
+    afterLoginRoute: 'app',
     registerRoute: 'register',
     logoUrl: 'assets/chef.png',
   },
@@ -46,7 +46,7 @@ export const environment: Environment = {
     name: `Sous Chef`,
     description: `Your dinner helper`,
     loginRoute: 'login',
-    afterRegistrationRoute: 'dashboard',
+    afterRegistrationRoute: 'app',
     logoUrl: 'assets/chef.png',
   }
 

@@ -22,6 +22,9 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { MealsComponent } from './component/meals/meals.component';
+import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 
 @NgModule({
   imports: [
@@ -50,24 +53,39 @@ import { ShellComponent } from './component/shell/shell.component';
     GuardsModule,
 
     RouterModule.forRoot([
-      { path: '', pathMatch: 'full', redirectTo: 'login' },
+      { path: '', pathMatch: 'full', redirectTo: 'app' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
-      { path: 'app', component: ShellComponent },
+      {
+        path: 'app',
+        component: ShellComponent,
+        canActivate: [AuthenticatedGuard],
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+          {
+            path: 'dashboard',
+            component: DashboardComponent
+          },
+          {
+            path: 'meals',
+            component: MealsComponent
+          },
+        ]
+      },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
-    StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
+    StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze, logger] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule
   ],
   providers: [
-    { provide: 'unauthenticatedRedirectRoute', useValue: 'login'},
-    { provide: 'loginPageConfig', useValue: environment.loginPageConfig},
-    { provide: 'registerPageConfig', useValue: environment.registerPageConfig},
+    { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
+    { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
+    { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent, ShellComponent],
+  declarations: [AppComponent, ShellComponent, DashboardComponent, MealsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

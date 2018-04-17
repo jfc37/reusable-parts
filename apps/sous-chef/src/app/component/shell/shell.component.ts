@@ -12,26 +12,18 @@ export class ShellComponent {
   public logoUrl = 'assets/chef.png';
   public menuItems: MenuItem[] = [
     {
+      id: 'dashboard',
+      title: 'Dashboard',
+      type: MenuItemType.Item,
+      icon: 'apps',
+      url: 'dashboard',
+    },
+    {
       id: 'meals',
       title: 'Meals',
-      type: MenuItemType.Group,
-      icon: 'apps',
-      children: [
-        {
-          id: 'dashboard',
-          title: 'Dashboard',
-          type: MenuItemType.Item,
-          icon: 'apps',
-          url: 'dashboard',
-        },
-        {
-          id: 'profile',
-          title: 'Profile',
-          type: MenuItemType.Item,
-          icon: 'apps',
-          url: 'profile',
-        },
-      ]
+      type: MenuItemType.Item,
+      icon: 'local_dining',
+      url: 'meals',
     },
   ];
 }
