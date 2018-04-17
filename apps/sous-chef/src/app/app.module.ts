@@ -21,6 +21,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
+import { ShellComponent } from './component/shell/shell.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
+      { path: 'app', component: ShellComponent },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
     StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze, logger] : [] }),
@@ -65,7 +67,7 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig},
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, ShellComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
