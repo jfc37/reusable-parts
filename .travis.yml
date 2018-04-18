@@ -12,8 +12,11 @@ cache:
   directories:
     - node_modules
 
-addons:
-  chrome: stable
+before_script:
+  - npm install -g firebase-tools
 
 script:
   - ng build --app=sous-chef
+
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN

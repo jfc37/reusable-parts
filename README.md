@@ -29,11 +29,14 @@ cache:
   directories:
     - node_modules
 
-addons:
-  chrome: stable
+before_script:
+  - npm install -g firebase-tools
 
 script:
-  - ng build --app=sous-chef
+  - ng build --prod
+
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
 ```
 
 ### Configure Travis website
@@ -43,5 +46,16 @@ script:
 - Generate new token in github, selecting all checkboxes under "repo": https://github.com/settings/tokens
 - Back in Travis, add environment variable key/value: ```GIT HUB_TOKEN```/```<generated token>```
 
+### Configure Firebase
+- ```npm install -g firebase-tools```
+- ```firebase login```
+- ```firebase init```. public directory - dist
 
+#### Test deployment
+- ```ng build --prod```
+- ```firebase deploy```
 
+#### Link Firebase with TravisCI
+- ```firebase login:ci```
+- Copy token
+- Under travis repo, add environment variable key/value: ```FIREBASE_TOKEN```/```<generated token>```
