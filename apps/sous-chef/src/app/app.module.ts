@@ -62,7 +62,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
         canActivate: [AuthenticatedGuard],
         children: [
           { path: '', pathMatch: 'full', redirectTo: 'meals' },
-          { path: 'dashboard', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
+          { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
           {
             path: 'meals',
             component: MealsComponent
