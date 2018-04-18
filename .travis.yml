@@ -6,7 +6,7 @@ sudo: false
 
 branches:
   only:
-    - feature/travis-ci
+    - master
 
 cache:
   directories:
