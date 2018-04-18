@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
-import { MealsComponent } from './component/meals/meals.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 
 @NgModule({
@@ -55,18 +54,14 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
       { path: '', pathMatch: 'full', redirectTo: 'app' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
-      // { path: 'test', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
       {
         path: 'app',
         component: ShellComponent,
         canActivate: [AuthenticatedGuard],
         children: [
-          { path: '', pathMatch: 'full', redirectTo: 'meals' },
           { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-          {
-            path: 'meals',
-            component: MealsComponent
-          },
+          { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
+          { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
         ]
       },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
@@ -82,7 +77,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent, ShellComponent, MealsComponent],
+  declarations: [AppComponent, ShellComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
