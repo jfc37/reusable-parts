@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { MealsFeatureState } from '../+state/meals-feature.state';
+import { SetMeals } from '../+state/meals/meals.actions';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllMealsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<MealsFeatureState>,
+  ) { }
 
   ngOnInit() {
+    this.store.dispatch(new SetMeals({id: '123', name: 'Hello World'}));
   }
 
 }
