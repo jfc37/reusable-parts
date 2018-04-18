@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { MealsComponent } from './component/meals/meals.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 
@@ -56,16 +55,14 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
       { path: '', pathMatch: 'full', redirectTo: 'app' },
       { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
       { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
+      // { path: 'test', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
       {
         path: 'app',
         component: ShellComponent,
         canActivate: [AuthenticatedGuard],
         children: [
-          { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-          {
-            path: 'dashboard',
-            component: DashboardComponent
-          },
+          { path: '', pathMatch: 'full', redirectTo: 'meals' },
+          { path: 'dashboard', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
           {
             path: 'meals',
             component: MealsComponent
@@ -85,7 +82,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent, ShellComponent, DashboardComponent, MealsComponent],
+  declarations: [AppComponent, ShellComponent, MealsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
