@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Meal } from './meals.reducer';
+import { Meal } from './meals.state';
 
 export enum MealsActionTypes {
   Set = '[Meals] Set',

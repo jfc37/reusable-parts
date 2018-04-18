@@ -1,5 +1,8 @@
 import { Action } from '@ngrx/store';
-import { MealState, mealsReducer } from './meals/meals.reducer';
+import { mealsReducer } from './meals/meals.reducer';
+import { MealState } from './meals/meals.state';
+import { MealLoadingState } from './meal-loading/meal-loading.state';
+import { mealLoadingReducer } from './meal-loading/meal-loading.reducer';
 
 
 /**
@@ -8,8 +11,10 @@ import { MealState, mealsReducer } from './meals/meals.reducer';
  */
 export interface MealsFeatureState {
   readonly meals: MealState;
+  readonly mealLoading: MealLoadingState;
 }
 
 export const mealsFeatureReducer = {
   meals: mealsReducer,
+  mealLoading: mealLoadingReducer,
 }
