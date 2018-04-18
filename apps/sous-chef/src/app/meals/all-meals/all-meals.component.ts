@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-all-meals',
+  selector: 'jfc-all-meals',
   templateUrl: './all-meals.component.html',
   styleUrls: ['./all-meals.component.scss']
 })
