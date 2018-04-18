@@ -1,6 +1,17 @@
 <jfc-main-content>
   <h1 class="main-content-header">Meals</h1>
   <p class="main-content-body">
-    meals works!
+    <ng-container *ngIf="loading$ | async; else loaded">
+      loading...
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="error$ | async as error; else content">
+        {{error}}
+      </ng-container>
+      <ng-template #content>
+        meals works!
+      </ng-template>
+    </ng-template>
+
   </p>
 </jfc-main-content>
