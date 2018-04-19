@@ -13,6 +13,7 @@ import { MealRepository } from './services/meal.repository';
 import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effects';
 import { EditableMealCardComponent } from './components/editable-meal-card/editable-meal-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewMealEffects } from './+state/new-meal/new-meal.effects';
 
 @NgModule({
   imports: [
@@ -34,13 +35,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ]),
 
     StoreModule.forFeature('meals', mealsFeatureReducer),
-    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects])
+    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects])
 
   ],
   declarations: [AllMealsComponent, MealSummaryCardComponent, EditableMealCardComponent],
   providers: [
     MealLoadingEffects,
     MealDeletingEffects,
+    NewMealEffects,
     MealRepository,
   ]
 })

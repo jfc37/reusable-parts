@@ -11,7 +11,7 @@ export enum NewMealActionTypes {
 export class ResetMeal implements Action {
   readonly type = NewMealActionTypes.Reset;
 
-  constructor(public name: string) {}
+  constructor() {}
 }
 
 export class CreateMeal implements Action {

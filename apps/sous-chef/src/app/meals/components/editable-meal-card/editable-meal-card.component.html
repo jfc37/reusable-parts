@@ -9,6 +9,7 @@
         <mat-form-field>
           <input matInput
             placeholder="Meal name"
+            autocomplete="off"
             formControlName="name">
           <mat-error *ngIf="displayError('name')"
             data-test-id="name-validation">

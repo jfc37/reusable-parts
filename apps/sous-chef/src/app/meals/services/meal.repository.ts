@@ -21,4 +21,8 @@ export class MealRepository {
     return Observable.fromPromise(this.afs.doc<Meal>(`meals/${id}`).delete());
   }
 
+  public create(name: string): Observable<void> {
+    return Observable.of(null).pipe(delay(1000));
+  }
+
 }

@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class EditableMealCardComponent implements OnInit, OnChanges {
   @Input() public creating: boolean;
+  @Input() public reset: boolean;
+
   @Output() public create = new EventEmitter<string>();
 
   public form: FormGroup;
@@ -20,6 +22,11 @@ export class EditableMealCardComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    if (this.reset) {
+      this.form.get('name').reset();
+      this.form.get('name').markAsPristine();
+    }
+
     if (this.creating) {
       this.createButtonText = 'CREATING';
     } else {

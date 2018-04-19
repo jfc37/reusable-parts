@@ -10,3 +10,8 @@ export const isCreatingMealSelector = createSelector(
   selector,
   state => state.creating,
 );
+
+export const hasCreatedMealSelector = createSelector(
+  selector,
+  state => state.created,
+);

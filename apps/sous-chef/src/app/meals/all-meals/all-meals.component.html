@@ -16,6 +16,7 @@
           rowHeight="2:1">
           <mat-grid-tile>
             <jfc-editable-meal-card [creating]="creating$ | async"
+              [reset]="created$ | async"
               (create)="create($event)"></jfc-editable-meal-card>
           </mat-grid-tile>
           <mat-grid-tile *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn">
