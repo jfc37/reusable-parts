@@ -12,8 +12,9 @@
       color="accent"
       [routerLink]="model.linkUrl">DETAILS</a>
 
-    <a mat-button
+    <button mat-button
       color="warn"
-      (click)="delete()">DELETE</a>
+      [disabled]="model.deleting"
+      (click)="delete()">{{deleteButtonText}}</button>
   </div>
 </div>

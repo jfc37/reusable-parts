@@ -9,5 +9,6 @@ export const allMealSummaryCardModelsSelector = createSelector(
     title: meal.name,
     linkUrl: meal.id,
     imageUrl: '/assets/images/beach.jpg',
+    deleting: true,
   } as MealSummaryCardModel))
 )
