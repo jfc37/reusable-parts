@@ -10,6 +10,7 @@ import { allMealSummaryCardModelsSelector } from '../components/meal-summary-car
 import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
 import { CreateMeal } from '../+state/new-meal/new-meal.actions';
+import { isCreatingMealSelector } from '../+state/new-meal/new-meal.selectors';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -21,6 +22,7 @@ export class AllMealsComponent implements OnInit {
   public error$: Observable<string>;
   public allMeals$: Observable<MealSummaryCardModel[]>;
   public hasNoMeals$: Observable<boolean>;
+  public creating$: Observable<boolean>;
 
   constructor(
     private store: Store<MealsFeatureState>,
@@ -36,6 +38,7 @@ export class AllMealsComponent implements OnInit {
 
     this.hasNoMeals$ = this.store.select(hasNoMealsSelector);
     this.allMeals$ = this.store.select(allMealSummaryCardModelsSelector);
+    this.creating$ = this.store.select(isCreatingMealSelector);
   }
 
   public delete(meal: MealSummaryCardModel): void {
