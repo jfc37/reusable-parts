@@ -1,0 +1,15 @@
+<div class="fuse-card">
+  <div class="position-relative">
+    <img [src]="model.imageUrl">
+    <div class="position-absolute font-size-20 white-fg p-16 align-left align-bottom">
+      {{model.title}}
+    </div>
+  </div>
+  <div class="p-8"
+    fxLayout="row"
+    fxLayoutAlign="start center">
+    <a mat-button
+      color="accent"
+      [routerLink]="model.linkUrl">DETAILS</a>
+  </div>
+</div>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { GetAllMeals } from '../+state/meal-loading/meal-loading.actions';
-import { isLoadingAllMealsSelector, hasFailedLoadingAllMealsSelector } from '../+state/meal-loading/meal-loading.selectors';
-import { MealsFeatureState } from '../+state/meals-feature.state';
 import { map } from 'rxjs/operators';
-import { allMealsSelector, hasMealsSelector } from '../+state/meals/meals.selectors';
+import { GetAllMeals } from '../+state/meal-loading/meal-loading.actions';
+import { hasFailedLoadingAllMealsSelector, isLoadingAllMealsSelector } from '../+state/meal-loading/meal-loading.selectors';
+import { MealsFeatureState } from '../+state/meals-feature.state';
+import { hasMealsSelector } from '../+state/meals/meals.selectors';
+import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -31,7 +32,7 @@ export class AllMealsComponent implements OnInit {
     );
 
     this.hasMeals$ = this.store.select(hasMealsSelector);
-    this.allMeals$ = this.store.select(allMealsSelector);
+    this.allMeals$ = this.store.select(allMealSummaryCardModelsSelector);
   }
 
 }

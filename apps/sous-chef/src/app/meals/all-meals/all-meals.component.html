@@ -10,10 +10,11 @@
       </ng-container>
       <ng-template #content>
         <ng-container *ngIf="hasMeals$ | async; else noMeals">
-          <pre>{{allMeals$|async|json}}</pre>
+          <jfc-meal-summary-card *ngFor="let meal of allMeals$ | async"
+            [model]="meal"></jfc-meal-summary-card>
         </ng-container>
         <ng-template #noMeals>
-            You don't have any meals. Why don't you add one?
+          You don't have any meals. Why don't you add one?
         </ng-template>
       </ng-template>
     </ng-template>
