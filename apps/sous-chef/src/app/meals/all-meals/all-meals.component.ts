@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { GetAllMeals } from '../+state/meal-loading/meal-loading.actions';
 import { hasFailedLoadingAllMealsSelector, isLoadingAllMealsSelector } from '../+state/meal-loading/meal-loading.selectors';
 import { MealsFeatureState } from '../+state/meals-feature.state';
-import { hasMealsSelector } from '../+state/meals/meals.selectors';
+import { hasNoMealsSelector } from '../+state/meals/meals.selectors';
 import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
 import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
@@ -19,7 +19,7 @@ export class AllMealsComponent implements OnInit {
   public loading$: Observable<boolean>;
   public error$: Observable<string>;
   public allMeals$: Observable<MealSummaryCardModel[]>;
-  public hasMeals$: Observable<boolean>;
+  public hasNoMeals$: Observable<boolean>;
 
   constructor(
     private store: Store<MealsFeatureState>,
@@ -33,7 +33,7 @@ export class AllMealsComponent implements OnInit {
       map(hasFailed => hasFailed && `Problem getting meals. Please try again later`)
     );
 
-    this.hasMeals$ = this.store.select(hasMealsSelector);
+    this.hasNoMeals$ = this.store.select(hasNoMealsSelector);
     this.allMeals$ = this.store.select(allMealSummaryCardModelsSelector);
   }
 
@@ -43,6 +43,10 @@ export class AllMealsComponent implements OnInit {
 
   public mealTrackByFn(index: number, meal: MealSummaryCardModel) {
     return meal.id;
+  }
+
+  public create(name: string): void {
+    console.error('create meal...', name);
   }
 
 }

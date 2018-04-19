@@ -12,7 +12,7 @@ export const allMealsSelector = createSelector(
   mealAdapter.getSelectors().selectAll,
 );
 
-export const hasMealsSelector = createSelector(
+export const hasNoMealsSelector = createSelector(
   allMealsSelector,
-  meals => meals.length > 0
+  meals => meals.length === 0
 );

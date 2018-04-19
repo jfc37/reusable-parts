@@ -9,18 +9,19 @@
         {{error}}
       </ng-container>
       <ng-template #content>
-        <ng-container *ngIf="hasMeals$ | async; else noMeals">
-          <mat-grid-list cols="2"
-            rowHeight="2:1">
-            <mat-grid-tile *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn">
-              <jfc-meal-summary-card [model]="meal"
-                (deleteClicked)=delete(meal)></jfc-meal-summary-card>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </ng-container>
-        <ng-template #noMeals>
+        <ng-container *ngIf="hasNoMeals$ | async">
           You don't have any meals. Why don't you add one?
-        </ng-template>
+        </ng-container>
+        <mat-grid-list cols="2"
+          rowHeight="2:1">
+          <mat-grid-tile>
+            <jfc-editable-meal-card (create)="create($event)"></jfc-editable-meal-card>
+          </mat-grid-tile>
+          <mat-grid-tile *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn">
+            <jfc-meal-summary-card [model]="meal"
+              (deleteClicked)=delete(meal)></jfc-meal-summary-card>
+          </mat-grid-tile>
+        </mat-grid-list>
       </ng-template>
     </ng-template>
   </p>

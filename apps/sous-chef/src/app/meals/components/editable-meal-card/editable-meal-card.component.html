@@ -1,0 +1,27 @@
+<div class="fuse-card">
+  <div class="position-relative">
+    <img src="/assets/images/beach.jpg">
+    <div class="position-absolute font-size-20 white-fg p-16 align-left align-bottom">
+      <form name="form"
+        [formGroup]="form"
+        novalidate>
+        <mat-form-field>
+          <input matInput
+            placeholder="Meal name"
+            formControlName="name">
+          <mat-error *ngIf="displayError('name')"
+            data-test-id="name-validation">
+            Please enter a name
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+  <div class="p-8"
+    fxLayout="row"
+    fxLayoutAlign="start center">
+    <button mat-button
+      color="accent"
+      (click)="submit()">CREATE</button>
+  </div>
+</div>
