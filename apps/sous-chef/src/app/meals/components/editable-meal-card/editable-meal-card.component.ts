@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./editable-meal-card.component.scss']
 })
 export class EditableMealCardComponent implements OnInit {
+  @Input() public creating: boolean;
   @Output() public create = new EventEmitter<string>();
 
   public form: FormGroup;
@@ -23,6 +24,12 @@ export class EditableMealCardComponent implements OnInit {
   }
 
   public submit(): void {
-    this.create.emit(this.form.get('name').value)
+    if (!this.isSubmitDisabled()) {
+      this.create.emit(this.form.get('name').value)
+    }
+  }
+
+  public isSubmitDisabled(): boolean {
+    return this.form.invalid || this.creating;
   }
 }

@@ -5,6 +5,8 @@ import { MealLoadingState } from './meal-loading/meal-loading.state';
 import { mealLoadingReducer } from './meal-loading/meal-loading.reducer';
 import { DeleteState } from '@reusable-parts/common-ngrx-patterns/src/delete-state/delete.state';
 import { mealDeletingReducer } from './meal-deleting/meal-deleting.reducer';
+import { CreateStatus } from '@reusable-parts/common-ngrx-patterns/src/create-state/create.state';
+import { newMealReducer } from './new-meal/new-meal.reducer';
 
 
 /**
@@ -15,10 +17,12 @@ export interface MealsFeatureState {
   readonly meals: MealState;
   readonly mealLoading: MealLoadingState;
   readonly mealDeleting: DeleteState;
+  readonly newMeal: CreateStatus;
 }
 
 export const mealsFeatureReducer = {
   meals: mealsReducer,
   mealLoading: mealLoadingReducer,
   mealDeleting: mealDeletingReducer,
+  newMeal: newMealReducer,
 }

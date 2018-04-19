@@ -9,6 +9,7 @@ import { hasNoMealsSelector } from '../+state/meals/meals.selectors';
 import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
 import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
+import { CreateMeal } from '../+state/new-meal/new-meal.actions';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -46,7 +47,7 @@ export class AllMealsComponent implements OnInit {
   }
 
   public create(name: string): void {
-    console.error('create meal...', name);
+    this.store.dispatch(new CreateMeal(name));
   }
 
 }

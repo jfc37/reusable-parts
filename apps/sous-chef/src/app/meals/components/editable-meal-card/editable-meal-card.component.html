@@ -4,6 +4,7 @@
     <div class="position-absolute font-size-20 white-fg p-16 align-left align-bottom">
       <form name="form"
         [formGroup]="form"
+        (submit)="submit()"
         novalidate>
         <mat-form-field>
           <input matInput
@@ -22,6 +23,7 @@
     fxLayoutAlign="start center">
     <button mat-button
       color="accent"
+      [disabled]="isSubmitDisabled()"
       (click)="submit()">CREATE</button>
   </div>
 </div>
