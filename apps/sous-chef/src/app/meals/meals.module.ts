@@ -9,6 +9,7 @@ import { mealsFeatureReducer } from './+state/meals-feature.state';
 import { MealLoadingEffects } from './+state/meal-loading/meal-loading.effects';
 import { MealSummaryCardComponent } from './components/meal-summary-card/meal-summary-card.component';
 import { MatButtonModule } from '@angular/material';
+import { MealRepository } from './services/meal.repository';
 
 @NgModule({
   imports: [
@@ -27,6 +28,9 @@ import { MatButtonModule } from '@angular/material';
 
   ],
   declarations: [AllMealsComponent, MealSummaryCardComponent],
-  providers: [MealLoadingEffects]
+  providers: [
+    MealLoadingEffects,
+    MealRepository,
+  ]
 })
 export class MealsModule { }
