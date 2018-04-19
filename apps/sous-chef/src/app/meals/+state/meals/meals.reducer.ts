@@ -7,7 +7,7 @@ export function mealsReducer(
 ): MealState {
   switch (action.type) {
     case MealsActionTypes.Set:
-      return mealAdapter.addMany(action.meals, state);
+      return mealAdapter.addAll(action.meals, state);
 
     default:
       return state;

@@ -41,4 +41,8 @@ export class AllMealsComponent implements OnInit {
     this.store.dispatch(new DeleteMeal(meal.id));
   }
 
+  public mealTrackByFn(index: number, meal: MealSummaryCardModel) {
+    return meal.id;
+  }
+
 }

@@ -10,9 +10,13 @@
       </ng-container>
       <ng-template #content>
         <ng-container *ngIf="hasMeals$ | async; else noMeals">
-          <jfc-meal-summary-card *ngFor="let meal of allMeals$ | async"
-            [model]="meal"
-            (deleteClicked)=delete(meal)></jfc-meal-summary-card>
+          <mat-grid-list cols="2"
+            rowHeight="2:1">
+            <mat-grid-tile *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn">
+              <jfc-meal-summary-card [model]="meal"
+                (deleteClicked)=delete(meal)></jfc-meal-summary-card>
+            </mat-grid-tile>
+          </mat-grid-list>
         </ng-container>
         <ng-template #noMeals>
           You don't have any meals. Why don't you add one?
