@@ -10,6 +10,7 @@ import { MealLoadingEffects } from './+state/meal-loading/meal-loading.effects';
 import { MealSummaryCardComponent } from './components/meal-summary-card/meal-summary-card.component';
 import { MatButtonModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { MealRepository } from './services/meal.repository';
+import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effects';
 
 @NgModule({
   imports: [
@@ -26,12 +27,13 @@ import { MealRepository } from './services/meal.repository';
     ]),
 
     StoreModule.forFeature('meals', mealsFeatureReducer),
-    EffectsModule.forFeature([MealLoadingEffects])
+    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects])
 
   ],
   declarations: [AllMealsComponent, MealSummaryCardComponent],
   providers: [
     MealLoadingEffects,
+    MealDeletingEffects,
     MealRepository,
   ]
 })

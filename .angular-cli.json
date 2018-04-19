@@ -39,6 +39,32 @@
   },
   "apps": [
     {
+      "name": "demo",
+      "root": "apps/demo/src",
+      "outDir": "dist/apps/demo",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "jfc",
+      "styles": [
+        "styles.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "tags": []
+    },
+    {
       "name": "sous-chef",
       "root": "apps/sous-chef/src",
       "outDir": "dist/apps/sous-chef",
@@ -65,29 +91,10 @@
       "tags": []
     },
     {
-      "name": "demo",
-      "root": "apps/demo/src",
-      "outDir": "dist/apps/demo",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
+      "name": "common-ngrx-patterns",
+      "root": "libs/common-ngrx-patterns/src",
       "test": "../../../test.js",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "../../../tsconfig.spec.json",
-      "prefix": "jfc",
-      "styles": [
-        "styles.scss"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      },
+      "appRoot": "",
       "tags": []
     },
     {

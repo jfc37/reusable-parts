@@ -8,6 +8,7 @@ import { MealsFeatureState } from '../+state/meals-feature.state';
 import { hasMealsSelector } from '../+state/meals/meals.selectors';
 import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
 import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
+import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -37,7 +38,7 @@ export class AllMealsComponent implements OnInit {
   }
 
   public delete(meal: MealSummaryCardModel): void {
-    console.error('delete...', meal);
+    this.store.dispatch(new DeleteMeal(meal.id));
   }
 
 }
