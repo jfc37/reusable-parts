@@ -1,11 +1,5 @@
-import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { MealsActions, MealsActionTypes } from './meals.actions';
-import { Meal, MealState } from './meals.state';
-
-
-const mealAdapter = createEntityAdapter<Meal>({
-  selectId: meal => meal.id,
-});
+import { MealsActionTypes, MealsActions } from './meals.actions';
+import { MealState, mealAdapter } from './meals.state';
 
 export function mealsReducer(
   state = mealAdapter.getInitialState(),

@@ -9,9 +9,13 @@
         {{error}}
       </ng-container>
       <ng-template #content>
-        meals works!
+        <ng-container *ngIf="hasMeals$ | async; else noMeals">
+          <pre>{{allMeals$|async|json}}</pre>
+        </ng-container>
+        <ng-template #noMeals>
+            You don't have any meals. Why don't you add one?
+        </ng-template>
       </ng-template>
     </ng-template>
-
   </p>
 </jfc-main-content>

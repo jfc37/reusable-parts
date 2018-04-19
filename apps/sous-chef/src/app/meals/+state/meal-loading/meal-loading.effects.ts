@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, mapTo, withLatestFrom } from 'rxjs/operators';
+import { filter, mapTo, withLatestFrom, mergeMap } from 'rxjs/operators';
 import { MealsFeatureState } from '../meals-feature.state';
-import { LoadAllFailureMeals, LoadAllMeals, MealLoadingActionTypes } from './meal-loading.actions';
+import { LoadAllFailureMeals, LoadAllMeals, MealLoadingActionTypes, LoadAllSuccessMeals } from './meal-loading.actions';
 import { shouldLoadAllMealsSelector } from './meal-loading.selectors';
+import { SetMeals } from '../meals/meals.actions';
 
 @Injectable()
 export class MealLoadingEffects {
@@ -17,7 +18,10 @@ export class MealLoadingEffects {
 
   @Effect() loadAll$ = this.actions$.pipe(
     ofType(MealLoadingActionTypes.LoadAll),
-    mapTo(new LoadAllFailureMeals('ERROR'))
+    mergeMap(() => [
+      new SetMeals({id: 'abc', name: 'Thai Red Curry'}),
+      new LoadAllSuccessMeals(),
+    ])
   );
 
   constructor(

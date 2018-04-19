@@ -1,4 +1,4 @@
-import { EntityState } from "@ngrx/entity";
+import { EntityState, createEntityAdapter } from "@ngrx/entity";
 
 export interface Meal {
   id: string;
@@ -6,3 +6,7 @@ export interface Meal {
 }
 
 export interface MealState extends EntityState<Meal> {}
+
+export const mealAdapter = createEntityAdapter<Meal>({
+  selectId: meal => meal.id,
+});
