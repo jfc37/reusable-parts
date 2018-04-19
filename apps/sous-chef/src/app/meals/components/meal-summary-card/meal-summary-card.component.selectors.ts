@@ -5,6 +5,7 @@ import { MealSummaryCardModel } from "./meal-summary-card.component.model";
 export const allMealSummaryCardModelsSelector = createSelector(
   allMealsSelector,
   meals => meals.map(meal => ({
+    id: meal.id,
     title: meal.name,
     linkUrl: meal.id,
     imageUrl: '/assets/images/beach.jpg',

@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MealSummaryCardModel } from './meal-summary-card.component.model';
 import { Router } from '@angular/router';
 
@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class MealSummaryCardComponent {
   @Input() public model: MealSummaryCardModel;
 
-  // constructor(private router: Router) {}
+  @Output() public deleteClicked = new EventEmitter();
 
-  // public detailsClicked(): void {
-  //   this.router.navigateByUrl(this.model.linkUrl);
-  // }
+  public delete() {
+    this.deleteClicked.emit();
+  }
 }

@@ -11,7 +11,8 @@
       <ng-template #content>
         <ng-container *ngIf="hasMeals$ | async; else noMeals">
           <jfc-meal-summary-card *ngFor="let meal of allMeals$ | async"
-            [model]="meal"></jfc-meal-summary-card>
+            [model]="meal"
+            (deleteClicked)=delete(meal)></jfc-meal-summary-card>
         </ng-container>
         <ng-template #noMeals>
           You don't have any meals. Why don't you add one?

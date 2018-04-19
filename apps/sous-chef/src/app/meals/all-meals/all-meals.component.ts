@@ -7,6 +7,7 @@ import { hasFailedLoadingAllMealsSelector, isLoadingAllMealsSelector } from '../
 import { MealsFeatureState } from '../+state/meals-feature.state';
 import { hasMealsSelector } from '../+state/meals/meals.selectors';
 import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
+import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -16,14 +17,14 @@ import { allMealSummaryCardModelsSelector } from '../components/meal-summary-car
 export class AllMealsComponent implements OnInit {
   public loading$: Observable<boolean>;
   public error$: Observable<string>;
-  public allMeals$: Observable<any>;
+  public allMeals$: Observable<MealSummaryCardModel[]>;
   public hasMeals$: Observable<boolean>;
 
   constructor(
     private store: Store<MealsFeatureState>,
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.store.dispatch(new GetAllMeals());
 
     this.loading$ = this.store.select(isLoadingAllMealsSelector);
@@ -33,6 +34,10 @@ export class AllMealsComponent implements OnInit {
 
     this.hasMeals$ = this.store.select(hasMealsSelector);
     this.allMeals$ = this.store.select(allMealSummaryCardModelsSelector);
+  }
+
+  public delete(meal: MealSummaryCardModel): void {
+    console.error('delete...', meal);
   }
 
 }
