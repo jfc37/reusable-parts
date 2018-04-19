@@ -18,7 +18,7 @@ export class NewMealEffects {
 
   @Effect() createSuccess$ = this.actions$.pipe(
     ofType<CreateMealSuccess>(NewMealActionTypes.CreateSuccess),
-    delay(300),
+    delay(10),
     mapTo(new ResetMeal()),
   );
 

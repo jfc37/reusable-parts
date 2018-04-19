@@ -12,18 +12,17 @@
         <ng-container *ngIf="hasNoMeals$ | async">
           You don't have any meals. Why don't you add one?
         </ng-container>
-        <mat-grid-list cols="2"
-          rowHeight="2:1">
-          <mat-grid-tile>
-            <jfc-editable-meal-card [creating]="creating$ | async"
-              [reset]="created$ | async"
-              (create)="create($event)"></jfc-editable-meal-card>
-          </mat-grid-tile>
-          <mat-grid-tile *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn">
-            <jfc-meal-summary-card [model]="meal"
-              (deleteClicked)=delete(meal)></jfc-meal-summary-card>
-          </mat-grid-tile>
-        </mat-grid-list>
+        <div fxLayout="row wrap"
+          fxLayout.xs="column"
+          fxLayoutAlign="stretch"
+          fxLayoutGap="10px grid">
+          <jfc-editable-meal-card [creating]="creating$ | async"
+            [reset]="created$ | async"
+            (create)="create($event)"></jfc-editable-meal-card>
+          <jfc-meal-summary-card *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
+            [model]="meal"
+            (deleteClicked)=delete(meal)></jfc-meal-summary-card>
+        </div>
       </ng-template>
     </ng-template>
   </p>

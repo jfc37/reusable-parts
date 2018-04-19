@@ -14,12 +14,14 @@ import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effect
 import { EditableMealCardComponent } from './components/editable-meal-card/editable-meal-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewMealEffects } from './+state/new-meal/new-meal.effects';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
 
     MainContentModule,
 

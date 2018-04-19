@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Meal } from '../+state/meals/meals.state';
-import { delay } from 'rxjs/operators';
+import { delay, tap, mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class MealRepository {
@@ -22,7 +22,8 @@ export class MealRepository {
   }
 
   public create(name: string): Observable<void> {
-    return Observable.of(null).pipe(delay(1000));
+    return Observable.fromPromise(this.afs.collection<Partial<Meal>>('meals').add({name}))
+      .pipe(mapTo(null));
   }
 
 }
