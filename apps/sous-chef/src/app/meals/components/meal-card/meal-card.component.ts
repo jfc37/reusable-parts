@@ -16,9 +16,11 @@ export class MealCardComponent implements OnInit, OnChanges {
   @Output() public expandClicked = new EventEmitter();
   @Output() public updateLink = new EventEmitter<string>();
   @Output() public updateIngredients = new EventEmitter<IngredientModel[]>();
+  @Output() public updatePreparations = new EventEmitter<string[]>();
 
   public linkFormControl: FormControl;
   public ingredientsFormArray: FormArray;
+  public preparationsFormArray: FormArray;
 
   public deleteButtonText = 'Delete';
   public updateButtonText = 'Save';
@@ -37,7 +39,11 @@ export class MealCardComponent implements OnInit, OnChanges {
         quantity: new FormControl(i.quantity, [Validators.required]),
         food: new FormControl(i.food, [Validators.required]),
       }))
-    )
+    );
+
+    this.preparationsFormArray = new FormArray(
+      this.model.preparationSteps.map(i => new FormControl(i, [Validators.required]))
+    );
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -65,12 +71,22 @@ export class MealCardComponent implements OnInit, OnChanges {
     }
   }
 
+  public submitPreparationsForm() {
+    if (!this.isPreparationsSubmitDisabled()) {
+      this.updatePreparations.emit(this.preparationsFormArray.value)
+    }
+  }
+
   public isLinkSubmitDisabled(): boolean {
     return this.linkFormControl.invalid || this.model.updating;
   }
 
   public isIngredientsSubmitDisabled(): boolean {
     return this.ingredientsFormArray.invalid || this.model.updating;
+  }
+
+  public isPreparationsSubmitDisabled(): boolean {
+    return this.preparationsFormArray.invalid || this.model.updating;
   }
 
   public displayError(control: FormControl): boolean {
@@ -86,5 +102,13 @@ export class MealCardComponent implements OnInit, OnChanges {
 
   public removeIngredient(index: number): void {
     this.ingredientsFormArray.removeAt(index);
+  }
+
+  public addPreparation(): void {
+    this.preparationsFormArray.push(new FormControl('', [Validators.required]));
+  }
+
+  public removePreparation(index: number): void {
+    this.preparationsFormArray.removeAt(index);
   }
 }

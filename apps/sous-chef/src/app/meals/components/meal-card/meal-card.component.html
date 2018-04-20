@@ -114,20 +114,41 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Prep
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ 'No prep'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{model.preparationTitle}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput
-          placeholder="Prep work">
-      </mat-form-field>
-    </mat-expansion-panel>
+        <form name="preparationsForm"
+          (submit)="submitPreparationsForm()"
+          novalidate>
+          <div *ngFor="let row of preparationsFormArray.controls; let i = index;">
+            <mat-form-field>
+              <input matInput
+                placeholder="Step"
+                autocomplete="off"
+                [formControl]="row">
+              <mat-error *ngIf="displayError(row)">
+                Please enter a value
+              </mat-error>
+            </mat-form-field>
+            <button mat-button
+              color="warn"
+              (click)="removePreparation(i)">
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </div>
+          <button mat-button
+            color="accent"
+            (click)="addPreparation()">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <button mat-button
+            color="accent"
+            [disabled]="isPreparationsSubmitDisabled()">{{updateButtonText}}</button>
+        </form>
+      </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>

@@ -78,6 +78,10 @@ export class AllMealsComponent implements OnInit {
     this.store.dispatch(new UpdateMeal(meal.id, { ingredients }));
   }
 
+  public updatePreparations(preparationSteps: string[], meal: MealCardModel): void {
+    this.store.dispatch(new UpdateMeal(meal.id, { preparationSteps }));
+  }
+
   public expand(meal: MealCardModel): void {
     const dialogRef = this.dialog.open(MealCardComponent, {
       height: this.screenHeight + 'px',

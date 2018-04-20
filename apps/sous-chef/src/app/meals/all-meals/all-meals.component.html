@@ -27,6 +27,7 @@
             <jfc-meal-card [model]="meal"
               (updateLink)="updateLink($event, meal)"
               (updateIngredients)="updateIngredients($event, meal)"
+              (updatePreparations)="updatePreparations($event, meal)"
               (expandClicked)="expand(meal)"
               (deleteClicked)="delete(meal)"></jfc-meal-card>
           </div>

@@ -5,6 +5,7 @@ export interface Meal {
   name: string;
   link: string;
   ingredients: Ingredient[];
+  preparationSteps: string[];
 }
 
 export interface Ingredient {

@@ -3,8 +3,10 @@ export interface MealCardModel {
   title: string;
   link: string;
   ingredients: IngredientModel[];
+  preparationSteps: string[];
 
   ingredientsTitle: string;
+  preparationTitle: string;
   deleting: boolean;
   updating: boolean;
 }
