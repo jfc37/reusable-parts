@@ -12,13 +12,13 @@ export class MealSummaryCardComponent implements OnChanges {
 
   @Output() public deleteClicked = new EventEmitter();
 
-  public deleteButtonText = 'DELETE';
+  public deleteButtonText = 'Delete';
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.model.deleting) {
-      this.deleteButtonText = 'DELETING...'
+      this.deleteButtonText = 'Deleting...'
     } else {
-      this.deleteButtonText = 'DELETE';
+      this.deleteButtonText = 'Delete';
     }
   }
 

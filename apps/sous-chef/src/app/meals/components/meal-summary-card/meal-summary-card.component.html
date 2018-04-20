@@ -1,20 +1,49 @@
 <div class="fuse-card">
-  <div class="position-relative">
-    <img [src]="model.imageUrl">
-    <div class="position-absolute font-size-20 white-fg p-16 align-left align-bottom">
-      {{model.title}}
+
+  <div class="mat-light-blue-600-bg">
+
+    <div class="p-16"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <div class="pr-16">
+        <div class="h1 font-weight-300">{{model.title}}</div>
+      </div>
+
+      <div>
+        <button mat-icon-button
+          [matMenuTriggerFor]="card19Menu"
+          aria-label="more">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #card19Menu="matMenu">
+          <button mat-menu-item
+            color="warn"
+            [disabled]="model.deleting"
+            (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            <span>{{deleteButtonText}}</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </div>
-  <div class="p-8"
-    fxLayout="row"
-    fxLayoutAlign="start center">
-    <a mat-button
-      color="accent"
-      [routerLink]="model.linkUrl">DETAILS</a>
 
-    <button mat-button
-      color="warn"
-      [disabled]="model.deleting"
-      (click)="delete()">{{deleteButtonText}}</button>
-  </div>
+  <mat-tab-group backgroundColor="accent">
+    <mat-tab label="Picture">
+      <div class="h-200">
+        <img [src]="model.imageUrl">
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Info">
+      <div class="h-200">
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Edit">
+      <div class="h-200">
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

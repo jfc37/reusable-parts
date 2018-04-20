@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { mealsFeatureReducer } from './+state/meals-feature.state';
 import { MealLoadingEffects } from './+state/meal-loading/meal-loading.effects';
 import { MealSummaryCardComponent } from './components/meal-summary-card/meal-summary-card.component';
-import { MatButtonModule, MatMenuModule, MatIconModule, MatGridListModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatIconModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { MealRepository } from './services/meal.repository';
 import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effects';
 import { EditableMealCardComponent } from './components/editable-meal-card/editable-meal-card.component';
@@ -31,6 +31,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: AllMealsComponent }
