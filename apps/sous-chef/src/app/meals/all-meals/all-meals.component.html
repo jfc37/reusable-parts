@@ -25,6 +25,7 @@
           <div *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
             class="card-container">
             <jfc-meal-card [model]="meal"
+              (updateLink)="updateLink($event, meal)"
               (expandClicked)="expand(meal)"
               (deleteClicked)="delete(meal)"></jfc-meal-card>
           </div>

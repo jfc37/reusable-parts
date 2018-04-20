@@ -45,10 +45,23 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput
-          placeholder="Link">
-      </mat-form-field>
+      <form name="linkForm"
+        (submit)="submitLinkForm()"
+        novalidate>
+        <mat-form-field>
+          <input matInput
+            placeholder="Link"
+            autocomplete="off"
+            [formControl]="linkFormControl">
+          <mat-error *ngIf="displayError(linkFormControl)">
+            Please enter a link
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-button
+          color="accent"
+          [disabled]="isLinkSubmitDisabled()">{{updateLinkButtonText}}</button>
+      </form>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

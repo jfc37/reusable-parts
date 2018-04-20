@@ -69,9 +69,11 @@ export class AllMealsComponent implements OnInit {
     this.store.dispatch(new CreateMeal(name));
   }
 
-  public expand(meal: MealCardModel): void {
-    console.error('xxx expand', meal);
+  public updateLink(link: string, meal: MealCardModel): void {
+    console.error('xxx', link, meal);
+  }
 
+  public expand(meal: MealCardModel): void {
     const dialogRef = this.dialog.open(MealCardComponent, {
       height: this.screenHeight + 'px',
       width: this.screenWidth + 'px',
