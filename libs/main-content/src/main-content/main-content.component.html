@@ -1,5 +1,4 @@
-<div class="page-layout simple fullwidth"
-  fusePerfectScrollbar>
+<div class="page-layout simple fullwidth">
 
   <!-- HEADER -->
   <div class="header mat-accent-bg p-24"
@@ -13,7 +12,8 @@
   <!-- / HEADER -->
 
   <!-- CONTENT -->
-  <div class="content p-24 mat-white-bg">
+  <div class="content p-24 mat-white-bg"
+    fusePerfectScrollbar>
     <div *fuseIfOnDom
       [@animate]="{value:'*',params:{delay:'200ms',x:'-25px'}}">
       <ng-content select=".main-content-body"></ng-content>

@@ -50,33 +50,9 @@ jfc-side-nav {
                   overflow: hidden;
 
                   .content-wrapper {
-                      display: flex;
                       flex-direction: column;
                       flex: 1;
                       overflow: hidden;
-
-                      fuse-content {
-                          position: relative;
-                          display: flex;
-                          flex: 1;
-                          flex-direction: row;
-                          width: 100%;
-                          overflow: hidden;
-
-                          > *:not(router-outlet):not(.ps__scrollbar-x-rail):not(.ps__scrollbar-y-rail) {
-                              display: flex;
-                              flex: 1;
-                              width: 100%;
-                              min-width: 100%;
-                          }
-
-                          > *.ng-animating {
-
-                              .mat-tab-body {
-                                  height: 100vh;
-                              }
-                          }
-                      }
                   }
               }
           }
