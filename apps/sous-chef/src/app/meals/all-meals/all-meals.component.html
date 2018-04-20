@@ -17,12 +17,17 @@
           fxLayoutAlign="stretch"
           fxFlexAlign="stretch"
           fxLayoutGap="10px grid">
-          <jfc-new-meal-card [creating]="creating$ | async"
-            [reset]="created$ | async"
-            (create)="create($event)"></jfc-new-meal-card>
-          <jfc-meal-card *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
-            [model]="meal"
-            (deleteClicked)=delete(meal)></jfc-meal-card>
+          <div class="card-container">
+            <jfc-new-meal-card [creating]="creating$ | async"
+              [reset]="created$ | async"
+              (create)="create($event)"></jfc-new-meal-card>
+          </div>
+          <div *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
+            class="card-container">
+            <jfc-meal-card [model]="meal"
+              (expandClicked)="expand(meal)"
+              (deleteClicked)="delete(meal)"></jfc-meal-card>
+          </div>
         </div>
       </ng-template>
     </ng-template>

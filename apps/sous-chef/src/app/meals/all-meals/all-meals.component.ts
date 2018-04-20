@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import { MealCardModel } from '../components/meal-card/meal-card.component.model
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
 import { CreateMeal } from '../+state/new-meal/new-meal.actions';
 import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-meal/new-meal.selectors';
+import { MatDialog } from '@angular/material';
+import { MealCardComponent } from '../components/meal-card/meal-card.component';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -18,6 +20,15 @@ import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-me
   styleUrls: ['./all-meals.component.scss']
 })
 export class AllMealsComponent implements OnInit {
+
+  private screenWidth: number;
+  private screenHeight: number;
+  @HostListener('window:resize', ['$event'])
+    onResize(event?) {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+}
+
   public loading$: Observable<boolean>;
   public error$: Observable<string>;
   public allMeals$: Observable<MealCardModel[]>;
@@ -27,9 +38,12 @@ export class AllMealsComponent implements OnInit {
 
   constructor(
     private store: Store<MealsFeatureState>,
+    private dialog: MatDialog,
   ) { }
 
   public ngOnInit() {
+    this.onResize();
+
     this.store.dispatch(new GetAllMeals());
 
     this.loading$ = this.store.select(isLoadingAllMealsSelector);
@@ -53,6 +67,22 @@ export class AllMealsComponent implements OnInit {
 
   public create(name: string): void {
     this.store.dispatch(new CreateMeal(name));
+  }
+
+  public expand(meal: MealCardModel): void {
+    console.error('xxx expand', meal);
+
+    const dialogRef = this.dialog.open(MealCardComponent, {
+      height: this.screenHeight + 'px',
+      width: this.screenWidth + 'px',
+      data: {
+        model: meal
+      }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+  });
   }
 
 }

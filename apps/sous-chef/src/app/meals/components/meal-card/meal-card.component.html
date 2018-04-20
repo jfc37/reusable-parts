@@ -18,6 +18,12 @@
 
         <mat-menu #card19Menu="matMenu">
           <button mat-menu-item
+            color="accent"
+            (click)="expand()">
+            <mat-icon>fullscreen</mat-icon>
+            <span>Expand</span>
+          </button>
+          <button mat-menu-item
             color="warn"
             [disabled]="model.deleting"
             (click)="delete()">
@@ -30,20 +36,10 @@
   </div>
 
   <mat-tab-group backgroundColor="accent">
-    <mat-tab label="Picture">
-      <div class="h-200">
-        <img [src]="model.imageUrl">
-      </div>
-    </mat-tab>
-
     <mat-tab label="Info">
-      <div class="h-200">
-      </div>
     </mat-tab>
 
     <mat-tab label="Edit">
-      <div class="h-200">
-      </div>
     </mat-tab>
   </mat-tab-group>
 </div>

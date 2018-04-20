@@ -9,7 +9,6 @@ export const allMealCardModelsSelector = createSelector(
   (meals, deletingIds) => meals.map(meal => ({
     id: meal.id,
     title: meal.name,
-    imageUrl: '/assets/images/beach.jpg',
     deleting: deletingIds.includes(meal.id),
   } as MealCardModel))
 )
