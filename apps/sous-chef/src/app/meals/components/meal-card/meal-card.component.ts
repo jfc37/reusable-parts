@@ -11,7 +11,6 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class MealCardComponent implements OnInit, OnChanges {
   @Input() public model: MealCardModel;
-  @Input() public updatingLink: boolean;
 
   @Output() public deleteClicked = new EventEmitter();
   @Output() public expandClicked = new EventEmitter();
@@ -51,7 +50,7 @@ export class MealCardComponent implements OnInit, OnChanges {
   }
 
   public isLinkSubmitDisabled(): boolean {
-    return this.linkFormControl.invalid || this.updatingLink;
+    return this.linkFormControl.invalid || this.model.updatingLink;
   }
 
   public displayError(control: FormControl): boolean {

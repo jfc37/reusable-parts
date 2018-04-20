@@ -15,6 +15,7 @@ import { NewMealCardComponent } from './components/new-meal-card/new-meal-card.c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewMealEffects } from './+state/new-meal/new-meal.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MealUpdatingEffects } from './+state/meal-updating/meal-updating.effects';
 
 @NgModule({
   imports: [
@@ -40,7 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ]),
 
     StoreModule.forFeature('meals', mealsFeatureReducer),
-    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects])
+    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects, MealUpdatingEffects])
 
   ],
   declarations: [AllMealsComponent, MealCardComponent, NewMealCardComponent],
@@ -49,6 +50,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MealLoadingEffects,
     MealDeletingEffects,
     NewMealEffects,
+    MealUpdatingEffects,
     MealRepository,
   ]
 })

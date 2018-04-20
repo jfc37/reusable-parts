@@ -17,6 +17,10 @@ export class MealRepository {
       );
   }
 
+  public update(id: string, meal: Partial<Meal>): Observable<void> {
+    return Observable.fromPromise(this.afs.doc<Meal>(`meals/${id}`).update({...meal}));
+  }
+
   public delete(id: string): Observable<void> {
     return Observable.fromPromise(this.afs.doc<Meal>(`meals/${id}`).delete());
   }

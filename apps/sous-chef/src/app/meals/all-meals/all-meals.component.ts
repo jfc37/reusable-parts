@@ -13,6 +13,7 @@ import { CreateMeal } from '../+state/new-meal/new-meal.actions';
 import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-meal/new-meal.selectors';
 import { MatDialog } from '@angular/material';
 import { MealCardComponent } from '../components/meal-card/meal-card.component';
+import { UpdateMeal } from '../+state/meal-updating/meal-updating.actions';
 
 @Component({
   selector: 'jfc-all-meals',
@@ -20,21 +21,21 @@ import { MealCardComponent } from '../components/meal-card/meal-card.component';
   styleUrls: ['./all-meals.component.scss']
 })
 export class AllMealsComponent implements OnInit {
-
-  private screenWidth: number;
-  private screenHeight: number;
-  @HostListener('window:resize', ['$event'])
-    onResize(event?) {
-      this.screenHeight = window.innerHeight;
-      this.screenWidth = window.innerWidth;
-}
-
   public loading$: Observable<boolean>;
   public error$: Observable<string>;
   public allMeals$: Observable<MealCardModel[]>;
   public hasNoMeals$: Observable<boolean>;
   public creating$: Observable<boolean>;
   public created$: Observable<boolean>;
+
+  private screenWidth: number;
+  private screenHeight: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+  }
 
   constructor(
     private store: Store<MealsFeatureState>,
@@ -70,7 +71,7 @@ export class AllMealsComponent implements OnInit {
   }
 
   public updateLink(link: string, meal: MealCardModel): void {
-    console.error('xxx', link, meal);
+    this.store.dispatch(new UpdateMeal(meal.id, { link }));
   }
 
   public expand(meal: MealCardModel): void {
@@ -80,11 +81,11 @@ export class AllMealsComponent implements OnInit {
       data: {
         model: meal
       }
-  });
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-  });
+    });
   }
 
 }

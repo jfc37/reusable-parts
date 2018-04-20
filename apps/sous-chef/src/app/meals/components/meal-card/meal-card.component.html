@@ -38,11 +38,13 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Link
+          <ng-container *ngIf="model.link; else noLink">
+            <a target="_blank" [href]="model.link">Link</a>
+          </ng-container>
+          <ng-template #noLink>
+            No link
+          </ng-template>
         </mat-panel-title>
-        <mat-panel-description>
-          {{model.link || 'No link'}}
-        </mat-panel-description>
       </mat-expansion-panel-header>
 
       <form name="linkForm"
