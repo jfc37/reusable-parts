@@ -16,9 +16,11 @@ export const allMealCardModelsSelector = createSelector(
     link: meal.link,
     ingredients: meal.ingredients || [],
     preparationSteps: meal.preparationSteps || [],
+    cookingSteps: meal.cookingSteps || [],
 
     ingredientsTitle: getIngredientsTitle(meal),
     preparationTitle: getPreparationTitle(meal),
+    cookingStepsTitle: getCookingStepsTitle(meal),
 
     deleting: deletingIds.includes(meal.id),
     updating: updatingIds.includes(meal.id),
@@ -43,4 +45,14 @@ function getPreparationTitle(meal: Meal): string {
   return meal.preparationSteps.length === 1
     ? '1 preparation step'
     : `${meal.preparationSteps.length} preparation steps`;
+}
+
+function getCookingStepsTitle(meal: Meal): string {
+  if (!meal.cookingSteps || meal.cookingSteps.length === 0) {
+    return 'No cooking steps';
+  }
+
+  return meal.cookingSteps.length === 1
+    ? '1 cooking step'
+    : `${meal.cookingSteps.length} cooking steps`;
 }

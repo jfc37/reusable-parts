@@ -17,10 +17,12 @@ export class MealCardComponent implements OnInit, OnChanges {
   @Output() public updateLink = new EventEmitter<string>();
   @Output() public updateIngredients = new EventEmitter<IngredientModel[]>();
   @Output() public updatePreparations = new EventEmitter<string[]>();
+  @Output() public updateCookingSteps = new EventEmitter<string[]>();
 
   public linkFormControl: FormControl;
   public ingredientsFormArray: FormArray;
   public preparationsFormArray: FormArray;
+  public cookingStepsFormArray: FormArray;
 
   public deleteButtonText = 'Delete';
   public updateButtonText = 'Save';
@@ -43,6 +45,10 @@ export class MealCardComponent implements OnInit, OnChanges {
 
     this.preparationsFormArray = new FormArray(
       this.model.preparationSteps.map(i => new FormControl(i, [Validators.required]))
+    );
+
+    this.cookingStepsFormArray = new FormArray(
+      this.model.cookingSteps.map(i => new FormControl(i, [Validators.required]))
     );
   }
 
@@ -77,6 +83,12 @@ export class MealCardComponent implements OnInit, OnChanges {
     }
   }
 
+  public submitCookingStepsForm() {
+    if (!this.isCookingStepsSubmitDisabled()) {
+      this.updateCookingSteps.emit(this.cookingStepsFormArray.value)
+    }
+  }
+
   public isLinkSubmitDisabled(): boolean {
     return this.linkFormControl.invalid || this.model.updating;
   }
@@ -87,6 +99,10 @@ export class MealCardComponent implements OnInit, OnChanges {
 
   public isPreparationsSubmitDisabled(): boolean {
     return this.preparationsFormArray.invalid || this.model.updating;
+  }
+
+  public isCookingStepsSubmitDisabled(): boolean {
+    return this.cookingStepsFormArray.invalid || this.model.updating;
   }
 
   public displayError(control: FormControl): boolean {
@@ -110,5 +126,13 @@ export class MealCardComponent implements OnInit, OnChanges {
 
   public removePreparation(index: number): void {
     this.preparationsFormArray.removeAt(index);
+  }
+
+  public addCookingSteps(): void {
+    this.cookingStepsFormArray.push(new FormControl('', [Validators.required]));
+  }
+
+  public removeCookingSteps(index: number): void {
+    this.cookingStepsFormArray.removeAt(index);
   }
 }

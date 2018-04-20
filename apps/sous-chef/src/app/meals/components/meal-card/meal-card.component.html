@@ -150,20 +150,41 @@
         </form>
       </mat-expansion-panel>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Directions
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ 'No directions'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{model.cookingStepsTitle}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput
-          placeholder="Directions">
-      </mat-form-field>
-    </mat-expansion-panel>
+          <form name="cookingStepsForm"
+            (submit)="submitCookingStepsForm()"
+            novalidate>
+            <div *ngFor="let row of cookingStepsFormArray.controls; let i = index;">
+              <mat-form-field>
+                <input matInput
+                  placeholder="Step"
+                  autocomplete="off"
+                  [formControl]="row">
+                <mat-error *ngIf="displayError(row)">
+                  Please enter a value
+                </mat-error>
+              </mat-form-field>
+              <button mat-button
+                color="warn"
+                (click)="removeCookingSteps(i)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+            </div>
+            <button mat-button
+              color="accent"
+              (click)="addCookingSteps()">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+            <button mat-button
+              color="accent"
+              [disabled]="isCookingStepsSubmitDisabled()">{{updateButtonText}}</button>
+          </form>
+        </mat-expansion-panel>
   </mat-accordion>
 </div>

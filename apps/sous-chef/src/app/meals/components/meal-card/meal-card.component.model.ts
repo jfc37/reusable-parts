@@ -4,9 +4,11 @@ export interface MealCardModel {
   link: string;
   ingredients: IngredientModel[];
   preparationSteps: string[];
+  cookingSteps: string[];
 
   ingredientsTitle: string;
   preparationTitle: string;
+  cookingStepsTitle: string;
   deleting: boolean;
   updating: boolean;
 }
