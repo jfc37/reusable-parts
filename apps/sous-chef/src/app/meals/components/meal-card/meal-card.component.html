@@ -97,12 +97,16 @@
             </mat-error>
           </mat-form-field>
           <button mat-button
-          color="warn"
-          (click)="removeIngredient(i)">Remove</button>
+            color="warn"
+            (click)="removeIngredient(i)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
         </div>
         <button mat-button
           color="accent"
-          (click)="addIngredient()">Add</button>
+          (click)="addIngredient()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
         <button mat-button
           color="accent"
           [disabled]="isIngredientsSubmitDisabled()">{{updateButtonText}}</button>
