@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'jfc-editable-meal-card',
@@ -12,19 +12,18 @@ export class EditableMealCardComponent implements OnInit, OnChanges {
 
   @Output() public create = new EventEmitter<string>();
 
-  public form: FormGroup;
+  public nameFormControl: FormControl;
   public createButtonText = 'CREATE';
 
   public ngOnInit() {
-    this.form = new FormBuilder().group({
-      name: ['', [Validators.required]],
-    });
+    this.nameFormControl = new FormControl('', [Validators.required]);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.reset) {
-      this.form.get('name').reset();
-      this.form.get('name').markAsPristine();
+      this.nameFormControl.reset();
+      this.nameFormControl.markAsPristine();
+      this.nameFormControl.markAsUntouched();
     }
 
     if (this.creating) {
@@ -35,17 +34,16 @@ export class EditableMealCardComponent implements OnInit, OnChanges {
   }
 
   public displayError(field: string): boolean {
-    const control = this.form.get(field);
-    return control && control.invalid && control.touched;
+    return this.nameFormControl.invalid && this.nameFormControl.touched;
   }
 
   public submit(): void {
     if (!this.isSubmitDisabled()) {
-      this.create.emit(this.form.get('name').value)
+      this.create.emit(this.nameFormControl.value)
     }
   }
 
   public isSubmitDisabled(): boolean {
-    return this.form.invalid || this.creating;
+    return this.nameFormControl.invalid || this.creating;
   }
 }
