@@ -15,13 +15,14 @@
         <div fxLayout="row wrap"
           fxLayout.xs="column"
           fxLayoutAlign="stretch"
+          fxFlexAlign="stretch"
           fxLayoutGap="10px grid">
-          <jfc-editable-meal-card [creating]="creating$ | async"
+          <jfc-new-meal-card [creating]="creating$ | async"
             [reset]="created$ | async"
-            (create)="create($event)"></jfc-editable-meal-card>
-          <jfc-meal-summary-card *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
+            (create)="create($event)"></jfc-new-meal-card>
+          <jfc-meal-card *ngFor="let meal of allMeals$ | async; trackBy: mealTrackByFn"
             [model]="meal"
-            (deleteClicked)=delete(meal)></jfc-meal-summary-card>
+            (deleteClicked)=delete(meal)></jfc-meal-card>
         </div>
       </ng-template>
     </ng-template>

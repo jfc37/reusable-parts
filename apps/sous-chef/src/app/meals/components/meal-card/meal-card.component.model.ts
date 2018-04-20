@@ -1,7 +1,6 @@
-export interface MealSummaryCardModel {
+export interface MealCardModel {
   id: string;
   title: string;
   imageUrl: string;
-  linkUrl: string;
   deleting: boolean;
 }

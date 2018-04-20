@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'jfc-editable-meal-card',
-  templateUrl: './editable-meal-card.component.html',
-  styleUrls: ['./editable-meal-card.component.scss']
+  selector: 'jfc-new-meal-card',
+  templateUrl: './new-meal-card.component.html',
+  styleUrls: ['./new-meal-card.component.scss']
 })
-export class EditableMealCardComponent implements OnInit, OnChanges {
+export class NewMealCardComponent implements OnInit, OnChanges {
   @Input() public creating: boolean;
   @Input() public reset: boolean;
 

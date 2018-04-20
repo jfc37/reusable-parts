@@ -7,11 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { mealsFeatureReducer } from './+state/meals-feature.state';
 import { MealLoadingEffects } from './+state/meal-loading/meal-loading.effects';
-import { MealSummaryCardComponent } from './components/meal-summary-card/meal-summary-card.component';
+import { MealCardComponent } from './components/meal-card/meal-card.component';
 import { MatButtonModule, MatMenuModule, MatIconModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { MealRepository } from './services/meal.repository';
 import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effects';
-import { EditableMealCardComponent } from './components/editable-meal-card/editable-meal-card.component';
+import { NewMealCardComponent } from './components/new-meal-card/new-meal-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewMealEffects } from './+state/new-meal/new-meal.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -41,7 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects])
 
   ],
-  declarations: [AllMealsComponent, MealSummaryCardComponent, EditableMealCardComponent],
+  declarations: [AllMealsComponent, MealCardComponent, NewMealCardComponent],
   providers: [
     MealLoadingEffects,
     MealDeletingEffects,

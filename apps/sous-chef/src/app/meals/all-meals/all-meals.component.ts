@@ -6,8 +6,8 @@ import { GetAllMeals } from '../+state/meal-loading/meal-loading.actions';
 import { hasFailedLoadingAllMealsSelector, isLoadingAllMealsSelector } from '../+state/meal-loading/meal-loading.selectors';
 import { MealsFeatureState } from '../+state/meals-feature.state';
 import { hasNoMealsSelector } from '../+state/meals/meals.selectors';
-import { allMealSummaryCardModelsSelector } from '../components/meal-summary-card/meal-summary-card.component.selectors';
-import { MealSummaryCardModel } from '../components/meal-summary-card/meal-summary-card.component.model';
+import { allMealCardModelsSelector } from '../components/meal-card/meal-card.component.selectors';
+import { MealCardModel } from '../components/meal-card/meal-card.component.model';
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
 import { CreateMeal } from '../+state/new-meal/new-meal.actions';
 import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-meal/new-meal.selectors';
@@ -20,7 +20,7 @@ import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-me
 export class AllMealsComponent implements OnInit {
   public loading$: Observable<boolean>;
   public error$: Observable<string>;
-  public allMeals$: Observable<MealSummaryCardModel[]>;
+  public allMeals$: Observable<MealCardModel[]>;
   public hasNoMeals$: Observable<boolean>;
   public creating$: Observable<boolean>;
   public created$: Observable<boolean>;
@@ -38,16 +38,16 @@ export class AllMealsComponent implements OnInit {
     );
 
     this.hasNoMeals$ = this.store.select(hasNoMealsSelector);
-    this.allMeals$ = this.store.select(allMealSummaryCardModelsSelector);
+    this.allMeals$ = this.store.select(allMealCardModelsSelector);
     this.creating$ = this.store.select(isCreatingMealSelector);
     this.created$ = this.store.select(hasCreatedMealSelector);
   }
 
-  public delete(meal: MealSummaryCardModel): void {
+  public delete(meal: MealCardModel): void {
     this.store.dispatch(new DeleteMeal(meal.id));
   }
 
-  public mealTrackByFn(index: number, meal: MealSummaryCardModel) {
+  public mealTrackByFn(index: number, meal: MealCardModel) {
     return meal.id;
   }
 

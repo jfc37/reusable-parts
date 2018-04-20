@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { MealSummaryCardModel } from './meal-summary-card.component.model';
+import { MealCardModel } from './meal-card.component.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'jfc-meal-summary-card',
-  templateUrl: './meal-summary-card.component.html',
-  styleUrls: ['./meal-summary-card.component.scss']
+  selector: 'jfc-meal-card',
+  templateUrl: './meal-card.component.html',
+  styleUrls: ['./meal-card.component.scss']
 })
-export class MealSummaryCardComponent implements OnChanges {
-  @Input() public model: MealSummaryCardModel;
+export class MealCardComponent implements OnChanges {
+  @Input() public model: MealCardModel;
 
   @Output() public deleteClicked = new EventEmitter();
 
