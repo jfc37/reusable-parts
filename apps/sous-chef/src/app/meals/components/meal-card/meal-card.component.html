@@ -39,7 +39,8 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <ng-container *ngIf="model.link; else noLink">
-            <a target="_blank" [href]="model.link">Link</a>
+            <a target="_blank"
+              [href]="model.link">Link</a>
           </ng-container>
           <ng-template #noLink>
             No link
@@ -62,24 +63,50 @@
 
         <button mat-button
           color="accent"
-          [disabled]="isLinkSubmitDisabled()">{{updateLinkButtonText}}</button>
+          [disabled]="isLinkSubmitDisabled()">{{updateButtonText}}</button>
       </form>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Ingredients
+          {{model.ingredientsTitle}}
         </mat-panel-title>
-        <mat-panel-description>
-          {{ 'No ingredients'}}
-        </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput
-          placeholder="Ingredients">
-      </mat-form-field>
+      <form name="ingredientsForm"
+        (submit)="submitIngredientsForm()"
+        novalidate>
+        <div *ngFor="let row of ingredientsFormArray.controls; let i = index;">
+          <mat-form-field>
+            <input matInput
+              placeholder="Quantity"
+              autocomplete="off"
+              [formControl]="row.get('quantity')">
+            <mat-error *ngIf="displayError(row.get('quantity'))">
+              Please enter a value
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput
+              placeholder="Ingredient"
+              autocomplete="off"
+              [formControl]="row.get('food')">
+            <mat-error *ngIf="displayError(row.get('food'))">
+              Please enter a value
+            </mat-error>
+          </mat-form-field>
+          <button mat-button
+          color="warn"
+          (click)="removeIngredient(i)">Remove</button>
+        </div>
+        <button mat-button
+          color="accent"
+          (click)="addIngredient()">Add</button>
+        <button mat-button
+          color="accent"
+          [disabled]="isIngredientsSubmitDisabled()">{{updateButtonText}}</button>
+      </form>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

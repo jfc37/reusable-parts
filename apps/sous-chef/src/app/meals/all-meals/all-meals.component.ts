@@ -7,7 +7,7 @@ import { hasFailedLoadingAllMealsSelector, isLoadingAllMealsSelector } from '../
 import { MealsFeatureState } from '../+state/meals-feature.state';
 import { hasNoMealsSelector } from '../+state/meals/meals.selectors';
 import { allMealCardModelsSelector } from '../components/meal-card/meal-card.component.selectors';
-import { MealCardModel } from '../components/meal-card/meal-card.component.model';
+import { MealCardModel, IngredientModel } from '../components/meal-card/meal-card.component.model';
 import { DeleteMeal } from '../+state/meal-deleting/meal-deleting.actions';
 import { CreateMeal } from '../+state/new-meal/new-meal.actions';
 import { isCreatingMealSelector, hasCreatedMealSelector } from '../+state/new-meal/new-meal.selectors';
@@ -72,6 +72,10 @@ export class AllMealsComponent implements OnInit {
 
   public updateLink(link: string, meal: MealCardModel): void {
     this.store.dispatch(new UpdateMeal(meal.id, { link }));
+  }
+
+  public updateIngredients(ingredients: IngredientModel[], meal: MealCardModel): void {
+    this.store.dispatch(new UpdateMeal(meal.id, { ingredients }));
   }
 
   public expand(meal: MealCardModel): void {
