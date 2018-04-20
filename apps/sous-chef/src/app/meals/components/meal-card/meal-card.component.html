@@ -34,12 +34,69 @@
       </div>
     </div>
   </div>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Link
+        </mat-panel-title>
+        <mat-panel-description>
+          {{model.link || 'No link'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <mat-tab-group backgroundColor="accent">
-    <mat-tab label="Info">
-    </mat-tab>
+      <mat-form-field>
+        <input matInput
+          placeholder="Link">
+      </mat-form-field>
+    </mat-expansion-panel>
 
-    <mat-tab label="Edit">
-    </mat-tab>
-  </mat-tab-group>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ingredients
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ 'No ingredients'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput
+          placeholder="Ingredients">
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Prep
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ 'No prep'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput
+          placeholder="Prep work">
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Directions
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ 'No directions'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput
+          placeholder="Directions">
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

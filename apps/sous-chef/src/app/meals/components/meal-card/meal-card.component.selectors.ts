@@ -9,6 +9,7 @@ export const allMealCardModelsSelector = createSelector(
   (meals, deletingIds) => meals.map(meal => ({
     id: meal.id,
     title: meal.name,
+    link: meal.link,
     deleting: deletingIds.includes(meal.id),
   } as MealCardModel))
 )
