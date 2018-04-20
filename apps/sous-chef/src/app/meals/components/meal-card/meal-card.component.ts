@@ -1,15 +1,16 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Inject, Optional, OnInit } from '@angular/core';
-import { MealCardModel, IngredientModel } from './meal-card.component.model';
-import { Router } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Optional, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { takeUntil } from 'rxjs/operators';
+import { IngredientModel, MealCardModel } from './meal-card.component.model';
 
 @Component({
   selector: 'jfc-meal-card',
   templateUrl: './meal-card.component.html',
   styleUrls: ['./meal-card.component.scss']
 })
-export class MealCardComponent implements OnInit, OnChanges {
+export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() public model: MealCardModel;
 
   @Output() public deleteClicked = new EventEmitter();
@@ -19,6 +20,8 @@ export class MealCardComponent implements OnInit, OnChanges {
   @Output() public updatePreparations = new EventEmitter<string[]>();
   @Output() public updateCookingSteps = new EventEmitter<string[]>();
 
+  @ViewChildren('focus') rows: QueryList<any>;
+
   public linkFormControl: FormControl;
   public ingredientsFormArray: FormArray;
   public preparationsFormArray: FormArray;
@@ -27,7 +30,12 @@ export class MealCardComponent implements OnInit, OnChanges {
   public deleteButtonText = 'Delete';
   public updateButtonText = 'Save';
 
-  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+  private onDestory$ = new ReplaySubject();
+
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private cd: ChangeDetectorRef
+  ) {
     if (data && data.model) {
       this.model = data.model;
     }
@@ -52,9 +60,26 @@ export class MealCardComponent implements OnInit, OnChanges {
     );
   }
 
+  public ngAfterViewInit(): void {
+    this.rows.changes.pipe(takeUntil(this.onDestory$)).subscribe(resp => {
+      Array.from(resp)
+        .filter((el: any) => el.nativeElement.classList.contains('focus'))
+        .forEach((el: any) => {
+          el.nativeElement.classList.remove('focus');
+          el.nativeElement.focus();
+          this.cd.detectChanges();
+        });
+    });
+  }
+
   public ngOnChanges(changes: SimpleChanges): void {
     this.deleteButtonText = this.model.deleting ? 'Deleting...' : 'Delete';
     this.updateButtonText = this.model.updating ? 'Saving...' : 'Save';
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestory$.next(null);
+    this.onDestory$.complete();
   }
 
   public delete() {

@@ -80,6 +80,8 @@
         <div *ngFor="let row of ingredientsFormArray.controls; let i = index;">
           <mat-form-field>
             <input matInput
+              #focus
+              class="focus"
               placeholder="Quantity"
               autocomplete="off"
               [formControl]="row.get('quantity')">
@@ -114,77 +116,81 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{model.preparationTitle}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{model.preparationTitle}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-        <form name="preparationsForm"
-          (submit)="submitPreparationsForm()"
-          novalidate>
-          <div *ngFor="let row of preparationsFormArray.controls; let i = index;">
-            <mat-form-field>
-              <input matInput
-                placeholder="Step"
-                autocomplete="off"
-                [formControl]="row">
-              <mat-error *ngIf="displayError(row)">
-                Please enter a value
-              </mat-error>
-            </mat-form-field>
-            <button mat-button
-              color="warn"
-              (click)="removePreparation(i)">
-              <mat-icon>remove_circle_outline</mat-icon>
-            </button>
-          </div>
+      <form name="preparationsForm"
+        (submit)="submitPreparationsForm()"
+        novalidate>
+        <div *ngFor="let row of preparationsFormArray.controls; let i = index;">
+          <mat-form-field>
+            <input matInput
+              #focus
+              class="focus"
+              placeholder="Step"
+              autocomplete="off"
+              [formControl]="row">
+            <mat-error *ngIf="displayError(row)">
+              Please enter a value
+            </mat-error>
+          </mat-form-field>
           <button mat-button
-            color="accent"
-            (click)="addPreparation()">
-            <mat-icon>add_circle_outline</mat-icon>
+            color="warn"
+            (click)="removePreparation(i)">
+            <mat-icon>remove_circle_outline</mat-icon>
           </button>
+        </div>
+        <button mat-button
+          color="accent"
+          (click)="addPreparation()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+        <button mat-button
+          color="accent"
+          [disabled]="isPreparationsSubmitDisabled()">{{updateButtonText}}</button>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{model.cookingStepsTitle}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form name="cookingStepsForm"
+        (submit)="submitCookingStepsForm()"
+        novalidate>
+        <div *ngFor="let row of cookingStepsFormArray.controls; let i = index;">
+          <mat-form-field>
+            <input matInput
+              #focus
+              class="focus"
+              placeholder="Step"
+              autocomplete="off"
+              [formControl]="row">
+            <mat-error *ngIf="displayError(row)">
+              Please enter a value
+            </mat-error>
+          </mat-form-field>
           <button mat-button
-            color="accent"
-            [disabled]="isPreparationsSubmitDisabled()">{{updateButtonText}}</button>
-        </form>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{model.cookingStepsTitle}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <form name="cookingStepsForm"
-            (submit)="submitCookingStepsForm()"
-            novalidate>
-            <div *ngFor="let row of cookingStepsFormArray.controls; let i = index;">
-              <mat-form-field>
-                <input matInput
-                  placeholder="Step"
-                  autocomplete="off"
-                  [formControl]="row">
-                <mat-error *ngIf="displayError(row)">
-                  Please enter a value
-                </mat-error>
-              </mat-form-field>
-              <button mat-button
-                color="warn"
-                (click)="removeCookingSteps(i)">
-                <mat-icon>remove_circle_outline</mat-icon>
-              </button>
-            </div>
-            <button mat-button
-              color="accent"
-              (click)="addCookingSteps()">
-              <mat-icon>add_circle_outline</mat-icon>
-            </button>
-            <button mat-button
-              color="accent"
-              [disabled]="isCookingStepsSubmitDisabled()">{{updateButtonText}}</button>
-          </form>
-        </mat-expansion-panel>
+            color="warn"
+            (click)="removeCookingSteps(i)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+        </div>
+        <button mat-button
+          color="accent"
+          (click)="addCookingSteps()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+        <button mat-button
+          color="accent"
+          [disabled]="isCookingStepsSubmitDisabled()">{{updateButtonText}}</button>
+      </form>
+    </mat-expansion-panel>
   </mat-accordion>
 </div>
