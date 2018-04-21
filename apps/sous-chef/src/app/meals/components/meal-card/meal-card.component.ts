@@ -29,6 +29,7 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
   public deleteButtonText = 'Delete';
   public updateButtonText = 'Save';
+  public step = 0;
 
   private onDestory$ = new ReplaySubject();
 
@@ -92,25 +93,29 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
   public submitLinkForm() {
     if (!this.isLinkSubmitDisabled()) {
-      this.updateLink.emit(this.linkFormControl.value)
+      this.updateLink.emit(this.linkFormControl.value);
+      this.nextStep();
     }
   }
 
   public submitIngredientsForm() {
     if (!this.isIngredientsSubmitDisabled()) {
-      this.updateIngredients.emit(this.ingredientsFormArray.value)
+      this.updateIngredients.emit(this.ingredientsFormArray.value);
+      this.nextStep();
     }
   }
 
   public submitPreparationsForm() {
     if (!this.isPreparationsSubmitDisabled()) {
-      this.updatePreparations.emit(this.preparationsFormArray.value)
+      this.updatePreparations.emit(this.preparationsFormArray.value);
+      this.nextStep();
     }
   }
 
   public submitCookingStepsForm() {
     if (!this.isCookingStepsSubmitDisabled()) {
-      this.updateCookingSteps.emit(this.cookingStepsFormArray.value)
+      this.updateCookingSteps.emit(this.cookingStepsFormArray.value);
+      this.nextStep();
     }
   }
 
@@ -159,5 +164,13 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
   public removeCookingSteps(index: number): void {
     this.cookingStepsFormArray.removeAt(index);
+  }
+
+  public setStep(index: number) {
+    this.step = index;
+  }
+
+  public nextStep() {
+    this.step++;
   }
 }
