@@ -2,6 +2,7 @@ import { EntityState, createEntityAdapter } from "@ngrx/entity";
 
 export interface Meal {
   id: string;
+  slug: string;
   name: string;
   link: string;
   ingredients: Ingredient[];

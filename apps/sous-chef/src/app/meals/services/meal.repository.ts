@@ -25,8 +25,8 @@ export class MealRepository {
     return Observable.fromPromise(this.afs.doc<Meal>(`meals/${id}`).delete());
   }
 
-  public create(name: string): Observable<void> {
-    return Observable.fromPromise(this.afs.collection<Partial<Meal>>('meals').add({name}))
+  public create(meal: Partial<Meal>): Observable<void> {
+    return Observable.fromPromise(this.afs.collection<Partial<Meal>>('meals').add(meal))
       .pipe(mapTo(null));
   }
 

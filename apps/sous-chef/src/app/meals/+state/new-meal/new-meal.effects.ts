@@ -5,13 +5,14 @@ import { filter, mapTo, mergeMap, switchMap, withLatestFrom, exhaustMap, map, ca
 import { MealRepository } from '../../services/meal.repository';
 import { NewMealActionTypes, CreateMealSuccess, CreateMeal, CreateMealFailure, ResetMeal } from './new-meal.actions';
 import { Observable } from 'rxjs/Observable';
+import * as slug from 'slug';
 
 @Injectable()
 export class NewMealEffects {
   @Effect() create$ = this.actions$.pipe(
     ofType<CreateMeal>(NewMealActionTypes.Create),
     map(action => action.name),
-    exhaustMap(name => this.repository.create(name)),
+    exhaustMap(name => this.repository.create({name, slug: slug(name, {lower: true})})),
     mapTo(new CreateMealSuccess()),
     catchError(err => Observable.of(new CreateMealFailure(err || 'Problem creating new meal'))),
   );
