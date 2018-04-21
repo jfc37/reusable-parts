@@ -24,6 +24,8 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { appReducer, initialState as appInitialState } from './+state/app.reducer';
+import { AppEffects } from './+state/app.effects';
 
 @NgModule({
   imports: [
@@ -71,9 +73,12 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze, logger] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule
+    StoreRouterConnectingModule,
+    StoreModule.forFeature('app', appReducer, { initialState: appInitialState }),
+    EffectsModule.forFeature([AppEffects])
   ],
   providers: [
+    AppEffects,
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
