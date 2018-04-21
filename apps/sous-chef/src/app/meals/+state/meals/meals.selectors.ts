@@ -23,6 +23,18 @@ export const allFoodSelector = createSelector(
     .reduce((arr, curr) => arr.concat(curr), [])
 );
 
+export const allPreparationStepSelector = createSelector(
+  allMealsSelector,
+  meals => meals.map(meal => meal.preparationSteps || [])
+    .reduce((arr, curr) => arr.concat(curr), [])
+);
+
+export const allCookingStepSelector = createSelector(
+  allMealsSelector,
+  meals => meals.map(meal => meal.cookingSteps || [])
+    .reduce((arr, curr) => arr.concat(curr), [])
+);
+
 export const hasNoMealsSelector = createSelector(
   allMealsSelector,
   meals => meals.length === 0

@@ -7,6 +7,8 @@ export interface MealCardModel {
   cookingSteps: string[];
 
   foodOptions: string[];
+  prepOptions: string[];
+  cookingOptions: string[];
 
   ingredientsTitle: string;
   preparationTitle: string;

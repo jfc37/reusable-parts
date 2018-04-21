@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { allMealsSelector, allFoodSelector } from "../../+state/meals/meals.selectors";
+import { allMealsSelector, allFoodSelector, allPreparationStepSelector, allCookingStepSelector } from "../../+state/meals/meals.selectors";
 import { MealCardModel } from "./meal-card.component.model";
 import { allMealDeletingIdsSelector } from "../../+state/meal-deleting/meal-deleting.selectors";
 import { allMealUpdatingIdsSelector } from "../../+state/meal-updating/meail-updating.selectors";
@@ -10,7 +10,9 @@ export const allMealCardModelsSelector = createSelector(
   allMealDeletingIdsSelector,
   allMealUpdatingIdsSelector,
   allFoodSelector,
-  (meals, deletingIds, updatingIds, foodOptions) => meals.map(meal => ({
+  allPreparationStepSelector,
+  allCookingStepSelector,
+  (meals, deletingIds, updatingIds, foodOptions, prepOptions, cookingOptions) => meals.map(meal => ({
     id: meal.id,
 
     title: meal.name,
@@ -24,6 +26,8 @@ export const allMealCardModelsSelector = createSelector(
     cookingStepsTitle: getCookingStepsTitle(meal),
 
     foodOptions,
+    prepOptions,
+    cookingOptions,
 
     deleting: deletingIds.includes(meal.id),
     updating: updatingIds.includes(meal.id),

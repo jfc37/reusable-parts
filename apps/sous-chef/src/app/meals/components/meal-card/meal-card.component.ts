@@ -178,4 +178,12 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   public filteredFoodOptions(value: string): string[] {
     return this.model.foodOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
   }
+
+  public filteredPrepOptions(value: string): string[] {
+    return this.model.prepOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
+  }
+
+  public filteredCookingOptions(value: string): string[] {
+    return this.model.cookingOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
+  }
 }

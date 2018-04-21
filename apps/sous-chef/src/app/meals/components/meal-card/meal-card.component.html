@@ -111,7 +111,15 @@
               class="focus"
               placeholder="Step"
               autocomplete="off"
-              [formControl]="row">
+              [formControl]="row"
+              [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption
+                #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredPrepOptions(row.value)"
+                  [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
             <mat-error *ngIf="displayError(row)">
               Please enter a value
             </mat-error>
@@ -151,7 +159,15 @@
               class="focus"
               placeholder="Step"
               autocomplete="off"
-              [formControl]="row">
+              [formControl]="row"
+              [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption
+                #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredCookingOptions(row.value)"
+                  [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
             <mat-error *ngIf="displayError(row)">
               Please enter a value
             </mat-error>
