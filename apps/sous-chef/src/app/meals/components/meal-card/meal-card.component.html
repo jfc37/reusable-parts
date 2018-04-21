@@ -36,7 +36,8 @@
   </div>
   <mat-accordion>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+    <mat-expansion-panel [expanded]="step === 1"
+      (opened)="setStep(1)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{model.ingredientsTitle}}
@@ -62,7 +63,15 @@
             <input matInput
               placeholder="Ingredient"
               autocomplete="off"
-              [formControl]="row.get('food')">
+              [formControl]="row.get('food')"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption
+              #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredFoodOptions(row.get('food').value)"
+                [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error *ngIf="displayError(row.get('food'))">
               Please enter a value
             </mat-error>
@@ -84,7 +93,8 @@
       </form>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+    <mat-expansion-panel [expanded]="step === 2"
+      (opened)="setStep(2)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{model.preparationTitle}}
@@ -123,7 +133,8 @@
       </form>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+    <mat-expansion-panel [expanded]="step === 3"
+      (opened)="setStep(3)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{model.cookingStepsTitle}}
@@ -162,36 +173,37 @@
       </form>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <ng-container *ngIf="model.link; else noLink">
-              <a target="_blank"
-                [href]="model.link">Link</a>
-            </ng-container>
-            <ng-template #noLink>
-              No link
-            </ng-template>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+    <mat-expansion-panel [expanded]="step === 4"
+      (opened)="setStep(4)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <ng-container *ngIf="model.link; else noLink">
+            <a target="_blank"
+              [href]="model.link">Link</a>
+          </ng-container>
+          <ng-template #noLink>
+            No link
+          </ng-template>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-        <form name="linkForm"
-          (submit)="submitLinkForm()"
-          novalidate>
-          <mat-form-field>
-            <input matInput
-              placeholder="Link"
-              autocomplete="off"
-              [formControl]="linkFormControl">
-            <mat-error *ngIf="displayError(linkFormControl)">
-              Please enter a link
-            </mat-error>
-          </mat-form-field>
+      <form name="linkForm"
+        (submit)="submitLinkForm()"
+        novalidate>
+        <mat-form-field>
+          <input matInput
+            placeholder="Link"
+            autocomplete="off"
+            [formControl]="linkFormControl">
+          <mat-error *ngIf="displayError(linkFormControl)">
+            Please enter a link
+          </mat-error>
+        </mat-form-field>
 
-          <button mat-button
-            color="accent"
-            [disabled]="isLinkSubmitDisabled()">{{updateButtonText}}</button>
-        </form>
-      </mat-expansion-panel>
+        <button mat-button
+          color="accent"
+          [disabled]="isLinkSubmitDisabled()">{{updateButtonText}}</button>
+      </form>
+    </mat-expansion-panel>
   </mat-accordion>
 </div>

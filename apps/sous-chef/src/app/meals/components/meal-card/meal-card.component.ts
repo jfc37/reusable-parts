@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
 import { IngredientModel, MealCardModel } from './meal-card.component.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'jfc-meal-card',
@@ -172,5 +173,9 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
   public nextStep() {
     this.step++;
+  }
+
+  public filteredFoodOptions(value: string): string[] {
+    return this.model.foodOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
   }
 }
