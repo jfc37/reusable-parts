@@ -12,12 +12,11 @@ export const cookingInstructionsSelector = createSelector(
     id: 'cooking-instructions',
     title: 'Cooking instructions',
     type: MenuItemType.Collapse,
-    icon: 'restaurant_menu',
+    icon: 'whatshot',
     children: mealItems.map(item => ({
       id: 'instructions-' + item.slug,
       title: item.name,
       type: MenuItemType.Item,
-      icon: 'local_dining',
       url: 'meals/cooking/' + item.slug,
     }))
   })

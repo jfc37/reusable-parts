@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoPreloading, RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterStateSerializer, StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule } from '@ngx-translate/core';
@@ -71,10 +71,14 @@ import { AppRepository } from './+state/app.repository';
       },
     ], { useHash: false, preloadingStrategy: NoPreloading }),
 
-    StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze, logger] : [] }),
+    StoreModule.forRoot({
+      router: routerReducer
+    }, { metaReducers: !environment.production ? [storeFreeze, logger] : [] }),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router'
+    }),
     StoreModule.forFeature('app', appReducer, { initialState: appInitialState }),
     EffectsModule.forFeature([AppEffects])
   ],

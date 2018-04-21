@@ -12,6 +12,11 @@ export const allMealsSelector = createSelector(
   mealAdapter.getSelectors().selectAll,
 );
 
+export const currentSlugSelector = createSelector(
+  selector,
+  state => state.currentSlug,
+);
+
 export const allFoodSelector = createSelector(
   allMealsSelector,
   meals => meals.map(meal => (meal.ingredients || []).map(ingredient => ingredient.food))
@@ -21,4 +26,25 @@ export const allFoodSelector = createSelector(
 export const hasNoMealsSelector = createSelector(
   allMealsSelector,
   meals => meals.length === 0
+);
+
+export const currentMealSelector = createSelector(
+  currentSlugSelector,
+  allMealsSelector,
+  (slug, meals) => meals.find(meal => meal.slug === slug)
+);
+
+export const currentMealNameSelector = createSelector(
+  currentMealSelector,
+  currentMeal => currentMeal && currentMeal.name
+);
+
+export const currentMealPrepWorkSelector = createSelector(
+  currentMealSelector,
+  currentMeal => currentMeal && currentMeal.preparationSteps
+);
+
+export const currentMealCookingStepsSelector = createSelector(
+  currentMealSelector,
+  currentMeal => currentMeal && currentMeal.cookingSteps
 );

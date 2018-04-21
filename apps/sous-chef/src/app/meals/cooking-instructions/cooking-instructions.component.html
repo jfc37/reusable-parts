@@ -1,3 +1,36 @@
-<p>
-  cooking-instructions works!
-</p>
+<jfc-main-content>
+  <h1 class="main-content-header">{{title$ | async}}</h1>
+  <p class="main-content-body">
+    <ng-container *ngIf="loading$ | async; else loaded">
+      loading...
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="error$ | async as error; else content">
+        {{error}}
+      </ng-container>
+      <ng-template #content>
+        <div class="fuse-card mb-16">
+          <div class="p-16 pb-0">
+            <div class="h1 font-weight-300">Prep Work</div>
+          </div>
+          <div class="card-divider"></div>
+          <mat-selection-list class="pt-0 pb-16">
+            <mat-list-option *ngFor="let prep of prepWork$ | async"
+              checkboxPosition="before">{{prep}}</mat-list-option>
+          </mat-selection-list>
+        </div>
+
+        <div class="fuse-card">
+          <div class="p-16 pb-0">
+            <div class="h1 font-weight-300">Cooking Steps</div>
+          </div>
+          <div class="card-divider"></div>
+          <mat-selection-list class="pt-0 pb-16">
+            <mat-list-option *ngFor="let cookingStep of cookingSteps$ | async"
+              checkboxPosition="before">{{cookingStep}}</mat-list-option>
+          </mat-selection-list>
+        </div>
+      </ng-template>
+    </ng-template>
+  </p>
+</jfc-main-content>

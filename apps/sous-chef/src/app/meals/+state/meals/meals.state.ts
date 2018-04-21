@@ -15,8 +15,17 @@ export interface Ingredient {
   food: string;
 }
 
-export interface MealState extends EntityState<Meal> {}
+export interface MealState extends EntityState<Meal> {
+  currentSlug: string;
+}
 
 export const mealAdapter = createEntityAdapter<Meal>({
   selectId: meal => meal.id,
 });
+
+export function getInitialMealState(): MealState {
+  return {
+    currentSlug: null,
+    ...mealAdapter.getInitialState(),
+  }
+}
