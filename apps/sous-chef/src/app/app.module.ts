@@ -26,6 +26,7 @@ import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/aut
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { appReducer, initialState as appInitialState } from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
+import { AppRepository } from './+state/app.repository';
 
 @NgModule({
   imports: [
@@ -79,6 +80,7 @@ import { AppEffects } from './+state/app.effects';
   ],
   providers: [
     AppEffects,
+    AppRepository,
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },

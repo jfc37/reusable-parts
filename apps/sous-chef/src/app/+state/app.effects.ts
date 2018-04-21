@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { AppActions, AppActionTypes, SetMealItems } from './app.actions';
-import { DataPersistence } from '@nrwl/nx';
-import { startWith, mapTo } from 'rxjs/operators';
-import { map } from 'rxjs/operator/map';
+import { startWith, switchMap, map } from 'rxjs/operators';
+import { AppActionTypes, SetMealItems } from './app.actions';
+import { AppRepository } from './app.repository';
 
 @Injectable()
 export class AppEffects {
   @Effect() effect$ = this.actions$.ofType(AppActionTypes.Initialise)
     .pipe(
       startWith(null),
-      mapTo(new SetMealItems([{name: 'Chickpea Curry', slug: 'chickpea-curry'}])),
+      switchMap(() => this.repository.getAllMealItems()),
+      map(items => new SetMealItems(items)),
     );
 
   constructor(
     private actions$: Actions,
+    private repository: AppRepository,
   ) {}
 }
