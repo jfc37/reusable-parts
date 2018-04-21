@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewMealEffects } from './+state/new-meal/new-meal.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MealUpdatingEffects } from './+state/meal-updating/meal-updating.effects';
+import { CookingInstructionsComponent } from './cooking-instructions/cooking-instructions.component';
 
 @NgModule({
   imports: [
@@ -38,14 +39,16 @@ import { MealUpdatingEffects } from './+state/meal-updating/meal-updating.effect
     MatAutocompleteModule,
 
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: AllMealsComponent }
+      { path: '', pathMatch: 'full', redirectTo: 'all' },
+      { path: 'all', pathMatch: 'full', component: AllMealsComponent },
+      { path: 'cooking/:slug', component: CookingInstructionsComponent }
     ]),
 
     StoreModule.forFeature('meals', mealsFeatureReducer),
     EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects, MealUpdatingEffects])
 
   ],
-  declarations: [AllMealsComponent, MealCardComponent, NewMealCardComponent],
+  declarations: [AllMealsComponent, MealCardComponent, NewMealCardComponent, CookingInstructionsComponent],
   entryComponents: [MealCardComponent],
   providers: [
     MealLoadingEffects,

@@ -38,7 +38,7 @@ export const sideNavigationSelector = createSelector(
       title: 'Meals',
       type: MenuItemType.Item,
       icon: 'local_dining',
-      url: 'meals',
+      url: 'meals/all',
     },
     cookingInstruction
   ]
