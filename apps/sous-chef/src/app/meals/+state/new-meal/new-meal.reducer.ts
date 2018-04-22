@@ -4,7 +4,7 @@ import {
   getCreatingStatus,
   getCreatedStatus,
   getCreateErrorStatus,
-} from '@reusable-parts/common-ngrx-patterns/src/create-state/create.state';
+} from '@reusable-parts/common-ngrx-patterns';
 import { NewMealActions, NewMealActionTypes } from './new-meal.actions';
 
 export function newMealReducer(

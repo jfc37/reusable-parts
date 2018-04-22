@@ -3,11 +3,11 @@ import { mealsReducer } from './meals/meals.reducer';
 import { MealState } from './meals/meals.state';
 import { MealLoadingState } from './meal-loading/meal-loading.state';
 import { mealLoadingReducer } from './meal-loading/meal-loading.reducer';
-import { DeleteState } from '@reusable-parts/common-ngrx-patterns/src/delete-state/delete.state';
+import { DeleteState } from '@reusable-parts/common-ngrx-patterns';
 import { mealDeletingReducer } from './meal-deleting/meal-deleting.reducer';
-import { CreateStatus } from '@reusable-parts/common-ngrx-patterns/src/create-state/create.state';
+import { CreateStatus } from '@reusable-parts/common-ngrx-patterns';
 import { newMealReducer } from './new-meal/new-meal.reducer';
-import { UpdateState } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
+import { UpdateState } from '@reusable-parts/common-ngrx-patterns';
 import { mealUpdatingReducer } from './meal-updating/meal-updating.reducer';
 
 /**

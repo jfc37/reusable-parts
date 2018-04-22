@@ -4,7 +4,7 @@ import {
   getDeletingStatus,
   getDeleteErrorStatus,
   getDeletedStatus,
-} from '@reusable-parts/common-ngrx-patterns/src/delete-state/delete.state';
+} from '@reusable-parts/common-ngrx-patterns';
 import {
   MealDeletingActions,
   MealDeletingActionTypes,

@@ -1,7 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { mealsFeatureSelector } from '../meals-feature.selectors';
-import { updateAdapter } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
-import { getAllUpdateStatuses } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.selectors';
+import {
+  updateAdapter,
+  getAllUpdateStatuses,
+} from '@reusable-parts/common-ngrx-patterns';
 
 const selector = createSelector(
   mealsFeatureSelector,

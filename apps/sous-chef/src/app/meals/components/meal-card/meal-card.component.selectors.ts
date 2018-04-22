@@ -7,7 +7,7 @@ import {
 } from '../../+state/meals/meals.selectors';
 import { MealCardModel } from './meal-card.component.model';
 import { allMealDeletingIdsSelector } from '../../+state/meal-deleting/meal-deleting.selectors';
-import { allMealUpdatingIdsSelector } from '../../+state/meal-updating/meail-updating.selectors';
+import { allMealUpdatingIdsSelector } from '../../+state/meal-updating/meal-updating.selectors';
 import { Meal } from '../../+state/meals/meals.state';
 
 export const allMealCardModelsSelector = createSelector(

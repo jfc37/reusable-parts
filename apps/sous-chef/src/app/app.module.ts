@@ -32,7 +32,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
-import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
+import { AuthenticatedGuard } from '@reusable-parts/guards';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {
   appReducer,

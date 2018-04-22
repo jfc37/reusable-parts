@@ -8,7 +8,7 @@ import {
   getUpdatedStatus,
   getUpdateErrorStatus,
   getUpdatingStatus,
-} from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
+} from '@reusable-parts/common-ngrx-patterns';
 
 export function mealUpdatingReducer(
   state = updateAdapter.getInitialState(),
