@@ -20,7 +20,8 @@
     "update:skip": "./node_modules/.bin/nx update skip",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "postinstall": "./node_modules/.bin/nx postinstall",
-    "prettier": "prettier --write \"{apps,libs}/**/*.ts\""
+    "prettier": "prettier --write \"{apps,libs}/**/*.ts\"",
+    "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\""
   },
   "private": true,
   "dependencies": {

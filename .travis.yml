@@ -16,6 +16,8 @@ before_script:
   - npm install -g firebase-tools
 
 script:
+  - npm run prettier:warn
+  - ng lint
   - ng build --prod --app=sous-chef
 
 after_success:
