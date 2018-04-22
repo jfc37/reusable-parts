@@ -1,4 +1,19 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Optional, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChildren,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -9,9 +24,10 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'jfc-meal-card',
   templateUrl: './meal-card.component.html',
-  styleUrls: ['./meal-card.component.scss']
+  styleUrls: ['./meal-card.component.scss'],
 })
-export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class MealCardComponent
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() public model: MealCardModel;
 
   @Output() public deleteClicked = new EventEmitter();
@@ -35,7 +51,9 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   private onDestory$ = new ReplaySubject();
 
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional()
+    @Inject(MAT_DIALOG_DATA)
+    public data: any,
     private cd: ChangeDetectorRef
   ) {
     if (data && data.model) {
@@ -44,21 +62,30 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   public ngOnInit() {
-    this.linkFormControl = new FormControl(this.model.link, [Validators.required]);
+    this.linkFormControl = new FormControl(this.model.link, [
+      Validators.required,
+    ]);
 
     this.ingredientsFormArray = new FormArray(
-      this.model.ingredients.map(i => new FormGroup({
-        quantity: new FormControl(i.quantity, [Validators.required]),
-        food: new FormControl(i.food, [Validators.required]),
-      }))
+      this.model.ingredients.map(
+        i =>
+          new FormGroup({
+            quantity: new FormControl(i.quantity, [Validators.required]),
+            food: new FormControl(i.food, [Validators.required]),
+          })
+      )
     );
 
     this.preparationsFormArray = new FormArray(
-      this.model.preparationSteps.map(i => new FormControl(i, [Validators.required]))
+      this.model.preparationSteps.map(
+        i => new FormControl(i, [Validators.required])
+      )
     );
 
     this.cookingStepsFormArray = new FormArray(
-      this.model.cookingSteps.map(i => new FormControl(i, [Validators.required]))
+      this.model.cookingSteps.map(
+        i => new FormControl(i, [Validators.required])
+      )
     );
   }
 
@@ -141,10 +168,12 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   public addIngredient(): void {
-    this.ingredientsFormArray.push(new FormGroup({
-      quantity: new FormControl('', [Validators.required]),
-      food: new FormControl('', [Validators.required]),
-    }));
+    this.ingredientsFormArray.push(
+      new FormGroup({
+        quantity: new FormControl('', [Validators.required]),
+        food: new FormControl('', [Validators.required]),
+      })
+    );
   }
 
   public removeIngredient(index: number): void {
@@ -176,14 +205,20 @@ export class MealCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   public filteredFoodOptions(value: string): string[] {
-    return this.model.foodOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
+    return this.model.foodOptions.filter(option =>
+      option.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+    );
   }
 
   public filteredPrepOptions(value: string): string[] {
-    return this.model.prepOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
+    return this.model.prepOptions.filter(option =>
+      option.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+    );
   }
 
   public filteredCookingOptions(value: string): string[] {
-    return this.model.cookingOptions.filter(option => option.toLocaleLowerCase().includes(value.toLocaleLowerCase()))
+    return this.model.cookingOptions.filter(option =>
+      option.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+    );
   }
 }

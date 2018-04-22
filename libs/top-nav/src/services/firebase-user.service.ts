@@ -5,21 +5,23 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FirebaseUserService {
+  constructor(private af: AngularFireAuth) {}
 
-  constructor(private af: AngularFireAuth) {
-  }
-
-  public getUser(): Observable<{displayName: string, avatarUrl: string}> {
+  public getUser(): Observable<{ displayName: string; avatarUrl: string }> {
     return this.af.authState.pipe(
-      map(user => user ? {
-        displayName: user.displayName || user.email,
-        avatarUrl: user.photoURL,
-      } : null),
+      map(
+        user =>
+          user
+            ? {
+                displayName: user.displayName || user.email,
+                avatarUrl: user.photoURL,
+              }
+            : null
+      )
     );
   }
 
   public logout(): Observable<void> {
     return Observable.fromPromise(this.af.auth.signOut());
   }
-
 }

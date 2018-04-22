@@ -1,4 +1,12 @@
-import { Component, Input, ViewEncapsulation, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewEncapsulation,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
@@ -8,7 +16,7 @@ import { MenuItem } from '@reusable-parts/side-nav/src/components/side-nav/side-
   selector: 'jfc-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
   @Input() public menuItems: MenuItem[] = [];
@@ -21,7 +29,7 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
 
   private onDestroy$ = new ReplaySubject();
 
-  constructor(private fuseConfig: FuseConfigService) { }
+  constructor(private fuseConfig: FuseConfigService) {}
 
   public ngOnInit(): void {
     this.fuseConfig.onConfigChanged
@@ -39,7 +47,8 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['menuItems']) {
-      this.fuseMenuItems = this.menuItems && this.menuItems.map(menuItemToFuseMenuItem);
+      this.fuseMenuItems =
+        this.menuItems && this.menuItems.map(menuItemToFuseMenuItem);
     }
   }
 }
@@ -54,6 +63,6 @@ function menuItemToFuseMenuItem(item: MenuItem): any {
       bg: item.badge.backgroundColour,
       fg: item.badge.textColour,
     },
-    children: item.children && item.children.map(menuItemToFuseMenuItem)
-  }
+    children: item.children && item.children.map(menuItemToFuseMenuItem),
+  };
 }

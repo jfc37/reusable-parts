@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { RegisterData } from "@reusable-parts/register-page/src/+state/register.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { RegisterData } from '@reusable-parts/register-page/src/+state/register.reducer';
 
 const registerFeatureSelector = createFeatureSelector<RegisterData>('register');
 
@@ -15,7 +15,7 @@ export const hasRegisteredSelector = createSelector(
 
 export const accountSelector = createSelector(
   registerFeatureSelector,
-  state => ({ name: state.name, email: state.email, password: state.password})
+  state => ({ name: state.name, email: state.email, password: state.password })
 );
 
 export const registerErrorMessageSelector = createSelector(

@@ -1,4 +1,4 @@
-import { EntityState, createEntityAdapter } from "@ngrx/entity";
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export interface Meal {
   id: string;
@@ -27,5 +27,5 @@ export function getInitialMealState(): MealState {
   return {
     currentSlug: null,
     ...mealAdapter.getInitialState(),
-  }
+  };
 }

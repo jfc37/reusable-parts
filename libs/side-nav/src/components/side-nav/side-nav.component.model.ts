@@ -33,5 +33,5 @@ export interface MenuItemBadge {
   title: string;
   translateKey: string;
   backgroundColour: string;
-  textColour: string
+  textColour: string;
 }

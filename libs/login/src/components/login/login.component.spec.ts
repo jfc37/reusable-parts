@@ -1,10 +1,18 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  NoopAnimationsModule,
+  BrowserAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { FuseIfOnDomDirective } from '@reusable-parts/@fuse/directives/fuse-if-on-dom/fuse-if-on-dom.directive';
 import { getElement } from '../../../../../unit-test-utils/html-queries';
 import { LoginComponent } from './login.component';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -14,26 +22,24 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        NoopAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatInputModule,
-      ],
-      declarations: [
-        LoginComponent,
-        FuseIfOnDomDirective,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          BrowserModule,
+          NoopAnimationsModule,
+          FormsModule,
+          ReactiveFormsModule,
+          MatButtonModule,
+          MatCheckboxModule,
+          MatFormFieldModule,
+          MatInputModule,
+        ],
+        declarations: [LoginComponent, FuseIfOnDomDirective],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

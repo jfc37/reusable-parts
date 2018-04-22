@@ -1,10 +1,18 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'jfc-new-meal-card',
   templateUrl: './new-meal-card.component.html',
-  styleUrls: ['./new-meal-card.component.scss']
+  styleUrls: ['./new-meal-card.component.scss'],
 })
 export class NewMealCardComponent implements OnInit, OnChanges {
   @Input() public creating: boolean;
@@ -39,7 +47,7 @@ export class NewMealCardComponent implements OnInit, OnChanges {
 
   public submit(): void {
     if (!this.isSubmitDisabled()) {
-      this.create.emit(this.nameFormControl.value)
+      this.create.emit(this.nameFormControl.value);
     }
   }
 

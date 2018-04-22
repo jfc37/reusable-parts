@@ -19,8 +19,8 @@ describe('RegisterEffects', () => {
       providers: [
         RegisterEffects,
         DataPersistence,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects$ = TestBed.get(RegisterEffects);

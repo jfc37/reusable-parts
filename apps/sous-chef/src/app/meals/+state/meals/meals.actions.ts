@@ -10,7 +10,7 @@ export class SetMeals implements Action {
   public meals: Meal[];
   readonly type = MealsActionTypes.Set;
 
-  constructor(...meals: Meal[],) {
+  constructor(...meals: Meal[]) {
     this.meals = meals;
   }
 }
@@ -18,7 +18,7 @@ export class SetMeals implements Action {
 export class SetCurrentSlug implements Action {
   readonly type = MealsActionTypes.SetCurrentSlug;
 
-  constructor(public slug: string) { }
+  constructor(public slug: string) {}
 }
 
 export type MealsActions = SetMeals | SetCurrentSlug;

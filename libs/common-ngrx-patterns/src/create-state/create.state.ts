@@ -9,7 +9,7 @@ export function getDefaultCreateStatus(): CreateStatus {
     creating: false,
     created: false,
     error: null,
-  }
+  };
 }
 
 export function getCreatingStatus(): CreateStatus {
@@ -17,7 +17,7 @@ export function getCreatingStatus(): CreateStatus {
     creating: true,
     created: false,
     error: null,
-  }
+  };
 }
 
 export function getCreatedStatus(): CreateStatus {
@@ -25,7 +25,7 @@ export function getCreatedStatus(): CreateStatus {
     creating: false,
     created: true,
     error: null,
-  }
+  };
 }
 
 export function getCreateErrorStatus(error: string): CreateStatus {
@@ -33,5 +33,5 @@ export function getCreateErrorStatus(error: string): CreateStatus {
     creating: false,
     created: false,
     error: error || 'Issue creating',
-  }
+  };
 }

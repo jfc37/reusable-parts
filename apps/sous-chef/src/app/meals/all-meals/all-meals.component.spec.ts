@@ -6,12 +6,13 @@ describe('AllMealsComponent', () => {
   let component: AllMealsComponent;
   let fixture: ComponentFixture<AllMealsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AllMealsComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [AllMealsComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AllMealsComponent);

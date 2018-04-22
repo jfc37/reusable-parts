@@ -8,7 +8,19 @@ import { EffectsModule } from '@ngrx/effects';
 import { mealsFeatureReducer } from './+state/meals-feature.state';
 import { MealLoadingEffects } from './+state/meal-loading/meal-loading.effects';
 import { MealCardComponent } from './components/meal-card/meal-card.component';
-import { MatButtonModule, MatMenuModule, MatIconModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatListModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatMenuModule,
+  MatIconModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatAutocompleteModule,
+  MatListModule,
+} from '@angular/material';
 import { MealRepository } from './services/meal.repository';
 import { MealDeletingEffects } from './+state/meal-deleting/meal-deleting.effects';
 import { NewMealCardComponent } from './components/new-meal-card/new-meal-card.component';
@@ -42,14 +54,23 @@ import { CookingInstructionsComponent } from './cooking-instructions/cooking-ins
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'all' },
       { path: 'all', pathMatch: 'full', component: AllMealsComponent },
-      { path: 'cooking/:slug', component: CookingInstructionsComponent }
+      { path: 'cooking/:slug', component: CookingInstructionsComponent },
     ]),
 
     StoreModule.forFeature('meals', mealsFeatureReducer),
-    EffectsModule.forFeature([MealLoadingEffects, MealDeletingEffects, NewMealEffects, MealUpdatingEffects])
-
+    EffectsModule.forFeature([
+      MealLoadingEffects,
+      MealDeletingEffects,
+      NewMealEffects,
+      MealUpdatingEffects,
+    ]),
   ],
-  declarations: [AllMealsComponent, MealCardComponent, NewMealCardComponent, CookingInstructionsComponent],
+  declarations: [
+    AllMealsComponent,
+    MealCardComponent,
+    NewMealCardComponent,
+    CookingInstructionsComponent,
+  ],
   entryComponents: [MealCardComponent],
   providers: [
     MealLoadingEffects,
@@ -57,6 +78,6 @@ import { CookingInstructionsComponent } from './cooking-instructions/cooking-ins
     NewMealEffects,
     MealUpdatingEffects,
     MealRepository,
-  ]
+  ],
 })
-export class MealsModule { }
+export class MealsModule {}

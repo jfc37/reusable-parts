@@ -19,8 +19,8 @@ describe('LoginEffects', () => {
       providers: [
         LoginEffects,
         DataPersistence,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects$ = TestBed.get(LoginEffects);

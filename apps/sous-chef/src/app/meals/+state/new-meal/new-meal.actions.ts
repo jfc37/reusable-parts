@@ -29,11 +29,11 @@ export class CreateMealSuccess implements Action {
 export class CreateMealFailure implements Action {
   readonly type = NewMealActionTypes.CreateFailure;
 
-  constructor(public error: string) { }
+  constructor(public error: string) {}
 }
 
-export type NewMealActions
-  = ResetMeal
+export type NewMealActions =
+  | ResetMeal
   | CreateMeal
   | CreateMealSuccess
   | CreateMealFailure;

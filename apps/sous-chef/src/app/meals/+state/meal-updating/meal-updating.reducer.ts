@@ -1,5 +1,14 @@
-import { MealUpdatingActions, MealUpdatingActionTypes } from "./meal-updating.actions";
-import { updateAdapter, UpdateState, getUpdatedStatus, getUpdateErrorStatus, getUpdatingStatus } from "@reusable-parts/common-ngrx-patterns/src/update-state/update.state";
+import {
+  MealUpdatingActions,
+  MealUpdatingActionTypes,
+} from './meal-updating.actions';
+import {
+  updateAdapter,
+  UpdateState,
+  getUpdatedStatus,
+  getUpdateErrorStatus,
+  getUpdatingStatus,
+} from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
 
 export function mealUpdatingReducer(
   state = updateAdapter.getInitialState(),
@@ -10,10 +19,19 @@ export function mealUpdatingReducer(
       return updateAdapter.addOne(getUpdatingStatus(action.id), state);
 
     case MealUpdatingActionTypes.UpdateSuccess:
-      return updateAdapter.updateOne({id: action.id, changes: getUpdatedStatus(action.id)}, state);
+      return updateAdapter.updateOne(
+        { id: action.id, changes: getUpdatedStatus(action.id) },
+        state
+      );
 
     case MealUpdatingActionTypes.UpdateFailure:
-      return updateAdapter.updateOne({id: action.id, changes: getUpdateErrorStatus(action.id, action.error)}, state);
+      return updateAdapter.updateOne(
+        {
+          id: action.id,
+          changes: getUpdateErrorStatus(action.id, action.error),
+        },
+        state
+      );
 
     default:
       return state;

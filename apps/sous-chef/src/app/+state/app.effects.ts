@@ -6,15 +6,14 @@ import { AppRepository } from './app.repository';
 
 @Injectable()
 export class AppEffects {
-  @Effect() effect$ = this.actions$.ofType(AppActionTypes.Initialise)
+  @Effect()
+  effect$ = this.actions$
+    .ofType(AppActionTypes.Initialise)
     .pipe(
       startWith(null),
       switchMap(() => this.repository.getAllMealItems()),
-      map(items => new SetMealItems(items)),
+      map(items => new SetMealItems(items))
     );
 
-  constructor(
-    private actions$: Actions,
-    private repository: AppRepository,
-  ) {}
+  constructor(private actions$: Actions, private repository: AppRepository) {}
 }

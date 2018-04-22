@@ -1,5 +1,11 @@
-import { getDefaultCreateStatus, CreateStatus, getCreatingStatus, getCreatedStatus, getCreateErrorStatus } from "@reusable-parts/common-ngrx-patterns/src/create-state/create.state";
-import { NewMealActions, NewMealActionTypes } from "./new-meal.actions";
+import {
+  getDefaultCreateStatus,
+  CreateStatus,
+  getCreatingStatus,
+  getCreatedStatus,
+  getCreateErrorStatus,
+} from '@reusable-parts/common-ngrx-patterns/src/create-state/create.state';
+import { NewMealActions, NewMealActionTypes } from './new-meal.actions';
 
 export function newMealReducer(
   state = getDefaultCreateStatus(),

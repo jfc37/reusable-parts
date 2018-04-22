@@ -22,10 +22,10 @@ export class UpdateMealSuccess implements Action {
 export class UpdateMealFailure implements Action {
   readonly type = MealUpdatingActionTypes.UpdateFailure;
 
-  constructor(public id: string, public error: string) { }
+  constructor(public id: string, public error: string) {}
 }
 
-export type MealUpdatingActions
-  = UpdateMeal
+export type MealUpdatingActions =
+  | UpdateMeal
   | UpdateMealSuccess
   | UpdateMealFailure;

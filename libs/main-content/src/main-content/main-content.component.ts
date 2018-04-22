@@ -5,8 +5,7 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
   selector: 'jfc-main-content',
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss'],
-  animations   : fuseAnimations,
+  animations: fuseAnimations,
   encapsulation: ViewEncapsulation.None,
 })
-export class MainContentComponent {
-}
+export class MainContentComponent {}

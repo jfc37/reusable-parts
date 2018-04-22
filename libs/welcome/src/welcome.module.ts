@@ -4,11 +4,8 @@ import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FuseSharedModule,
-  ],
+  imports: [CommonModule, FuseSharedModule],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent],
 })
-export class WelcomeModule { }
+export class WelcomeModule {}

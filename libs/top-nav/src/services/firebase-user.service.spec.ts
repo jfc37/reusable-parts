@@ -5,11 +5,14 @@ import { FirebaseUserService } from './firebase-user.service';
 describe('FirebaseUserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FirebaseUserService]
+      providers: [FirebaseUserService],
     });
   });
 
-  it('should be created', inject([FirebaseUserService], (service: FirebaseUserService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([FirebaseUserService], (service: FirebaseUserService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

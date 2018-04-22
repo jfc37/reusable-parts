@@ -1,4 +1,4 @@
-import { EntityState, createEntityAdapter } from "@ngrx/entity";
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export interface UpdateStatus {
   id: string;
@@ -13,14 +13,13 @@ export const updateAdapter = createEntityAdapter<UpdateStatus>({
   selectId: updateStatus => updateStatus.id,
 });
 
-
 export function getDefaultUpdateStatus(id: string): UpdateStatus {
   return {
     id,
     updating: false,
     updated: false,
     error: null,
-  }
+  };
 }
 
 export function getUpdatingStatus(id: string): UpdateStatus {
@@ -29,7 +28,7 @@ export function getUpdatingStatus(id: string): UpdateStatus {
     updating: true,
     updated: false,
     error: null,
-  }
+  };
 }
 
 export function getUpdatedStatus(id: string): UpdateStatus {
@@ -38,7 +37,7 @@ export function getUpdatedStatus(id: string): UpdateStatus {
     updating: false,
     updated: true,
     error: null,
-  }
+  };
 }
 
 export function getUpdateErrorStatus(id: string, error: string): UpdateStatus {
@@ -47,5 +46,5 @@ export function getUpdateErrorStatus(id: string, error: string): UpdateStatus {
     updating: false,
     updated: false,
     error: error || 'Issue updating',
-  }
+  };
 }

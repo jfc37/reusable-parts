@@ -23,11 +23,11 @@ export class LoadAllSuccessMeals implements Action {
 export class LoadAllFailureMeals implements Action {
   readonly type = MealLoadingActionTypes.LoadAllFailure;
 
-  constructor(public error: string) { }
+  constructor(public error: string) {}
 }
 
-export type MealLoadingActions
-  = GetAllMeals
+export type MealLoadingActions =
+  | GetAllMeals
   | LoadAllMeals
   | LoadAllSuccessMeals
   | LoadAllFailureMeals;

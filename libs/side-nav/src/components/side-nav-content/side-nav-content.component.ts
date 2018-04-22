@@ -20,7 +20,8 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;
   private onDestroy$ = new ReplaySubject();
 
-  @ViewChild(FusePerfectScrollbarDirective) set directive(theDirective: FusePerfectScrollbarDirective) {
+  @ViewChild(FusePerfectScrollbarDirective)
+  set directive(theDirective: FusePerfectScrollbarDirective) {
     if (!theDirective) {
       return;
     }
@@ -41,19 +42,16 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
     private sidebarService: FuseSidebarService,
     private navigationService: FuseNavigationService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.router.events.subscribe(
-      (event) => {
-        if (event instanceof NavigationEnd) {
-          if (this.sidebarService.getSidebar('navbar')) {
-            this.sidebarService.getSidebar('navbar').close();
-          }
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (this.sidebarService.getSidebar('navbar')) {
+          this.sidebarService.getSidebar('navbar').close();
         }
       }
-    );
+    });
   }
 
   ngOnDestroy() {

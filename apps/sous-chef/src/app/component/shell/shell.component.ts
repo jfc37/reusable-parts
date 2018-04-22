@@ -8,10 +8,9 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'jfc-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss']
+  styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent implements OnInit {
-
   public appName = `Sous Chef`;
   public logoUrl = 'assets/chef.png';
   public menuItems$: Observable<MenuItem[]>;

@@ -6,12 +6,14 @@ import { NavItem } from './app.state';
 
 @Injectable()
 export class AppRepository {
-
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {}
 
   public getAllMealItems(): Observable<NavItem[]> {
-    return this.afs.collection<NavItem>('meals')
+    return this.afs
+      .collection<NavItem>('meals')
       .valueChanges()
-      .map(values => values.map(value => ({name: value.name, slug: value.slug})));
+      .map(values =>
+        values.map(value => ({ name: value.name, slug: value.slug }))
+      );
   }
 }

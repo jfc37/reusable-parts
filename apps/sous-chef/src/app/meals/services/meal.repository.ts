@@ -6,19 +6,23 @@ import { delay, tap, mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class MealRepository {
-
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {}
 
   public getAll(): Observable<Meal[]> {
-    return this.afs.collection<Meal>('meals')
+    return this.afs
+      .collection<Meal>('meals')
       .snapshotChanges()
       .map(actions =>
-        actions.map(a => ({ ...a.payload.doc.data(), id: a.payload.doc.id } as Meal))
+        actions.map(
+          a => ({ ...a.payload.doc.data(), id: a.payload.doc.id } as Meal)
+        )
       );
   }
 
   public update(id: string, meal: Partial<Meal>): Observable<void> {
-    return Observable.fromPromise(this.afs.doc<Meal>(`meals/${id}`).update({...meal}));
+    return Observable.fromPromise(
+      this.afs.doc<Meal>(`meals/${id}`).update({ ...meal })
+    );
   }
 
   public delete(id: string): Observable<void> {
@@ -26,8 +30,8 @@ export class MealRepository {
   }
 
   public create(meal: Partial<Meal>): Observable<void> {
-    return Observable.fromPromise(this.afs.collection<Partial<Meal>>('meals').add(meal))
-      .pipe(mapTo(null));
+    return Observable.fromPromise(
+      this.afs.collection<Partial<Meal>>('meals').add(meal)
+    ).pipe(mapTo(null));
   }
-
 }

@@ -16,7 +16,7 @@ export class ResetLoginPage implements Action {
 export class AttemptLogin implements Action {
   readonly type = LoginActionTypes.AttemptLogin;
 
-  constructor(public email: string, public password: string) { }
+  constructor(public email: string, public password: string) {}
 }
 
 export class LoginRequest implements Action {
@@ -30,11 +30,11 @@ export class LoginSuccess implements Action {
 export class LoginFailure implements Action {
   readonly type = LoginActionTypes.LoginFailure;
 
-  constructor(public error: string) { }
+  constructor(public error: string) {}
 }
 
-export type LoginActions
-  = ResetLoginPage
+export type LoginActions =
+  | ResetLoginPage
   | AttemptLogin
   | LoginRequest
   | LoginSuccess

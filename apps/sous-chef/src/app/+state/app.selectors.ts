@@ -1,10 +1,13 @@
-import { createSelector, createFeatureSelector } from "@ngrx/store";
-import { AppState } from "./app.state";
-import { MenuItemType } from "@reusable-parts/side-nav";
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { AppState } from './app.state';
+import { MenuItemType } from '@reusable-parts/side-nav';
 
 const selector = createFeatureSelector<AppState>('app');
 
-export const allMealItemsSelector = createSelector(selector, state => state.mealItems);
+export const allMealItemsSelector = createSelector(
+  selector,
+  state => state.mealItems
+);
 
 export const cookingInstructionsSelector = createSelector(
   allMealItemsSelector,
@@ -18,7 +21,7 @@ export const cookingInstructionsSelector = createSelector(
       title: item.name,
       type: MenuItemType.Item,
       url: 'meals/cooking/' + item.slug,
-    }))
+    })),
   })
 );
 
@@ -39,6 +42,6 @@ export const sideNavigationSelector = createSelector(
       icon: 'local_dining',
       url: 'meals/all',
     },
-    cookingInstruction
+    cookingInstruction,
   ]
 );

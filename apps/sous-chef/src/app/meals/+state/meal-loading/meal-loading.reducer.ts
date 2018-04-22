@@ -1,12 +1,15 @@
-import { MealLoadingState } from "./meal-loading.state";
-import { MealLoadingActions, MealLoadingActionTypes } from "./meal-loading.actions";
+import { MealLoadingState } from './meal-loading.state';
+import {
+  MealLoadingActions,
+  MealLoadingActionTypes,
+} from './meal-loading.actions';
 
 function getInitialState(): MealLoadingState {
   return {
     loadedAll: false,
     loadingAll: false,
     error: null,
-  }
+  };
 }
 
 export function mealLoadingReducer(

@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { RegistrationAttempt } from '@reusable-parts/register/src/components/register/register.component.model';
 
@@ -7,7 +12,7 @@ import { RegistrationAttempt } from '@reusable-parts/register/src/components/reg
   selector: 'jfc-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  animations: fuseAnimations
+  animations: fuseAnimations,
 })
 export class RegisterComponent implements OnInit {
   /**
@@ -50,7 +55,8 @@ export class RegisterComponent implements OnInit {
   /**
    * Emitted when user attempts to register with email and password
    */
-  @Output() public registrationAttempt = new EventEmitter<RegistrationAttempt>();
+  @Output()
+  public registrationAttempt = new EventEmitter<RegistrationAttempt>();
 
   public registerForm: FormGroup;
 
@@ -59,7 +65,7 @@ export class RegisterComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      passwordConfirm: ['', [Validators.required, confirmPassword]]
+      passwordConfirm: ['', [Validators.required, confirmPassword]],
     });
   }
 
@@ -77,7 +83,11 @@ export class RegisterComponent implements OnInit {
   }
 
   public canRegister() {
-    return this.registerForm.invalid || this.registering || this.registrationSucceeded;
+    return (
+      this.registerForm.invalid ||
+      this.registering ||
+      this.registrationSucceeded
+    );
   }
 }
 
@@ -99,7 +109,7 @@ function confirmPassword(control: AbstractControl) {
 
   if (password.value !== passwordConfirm.value) {
     return {
-      passwordsNotMatch: true
+      passwordsNotMatch: true,
     };
   }
 }

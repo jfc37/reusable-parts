@@ -1,4 +1,4 @@
-import { EntityState, createEntityAdapter } from "@ngrx/entity";
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export interface DeleteStatus {
   id: string;
@@ -13,14 +13,13 @@ export const deleteAdapter = createEntityAdapter<DeleteStatus>({
   selectId: deleteStatus => deleteStatus.id,
 });
 
-
 export function getDefaultDeleteStatus(id: string): DeleteStatus {
   return {
     id,
     deleting: false,
     deleted: false,
     error: null,
-  }
+  };
 }
 
 export function getDeletingStatus(id: string): DeleteStatus {
@@ -29,7 +28,7 @@ export function getDeletingStatus(id: string): DeleteStatus {
     deleting: true,
     deleted: false,
     error: null,
-  }
+  };
 }
 
 export function getDeletedStatus(id: string): DeleteStatus {
@@ -38,7 +37,7 @@ export function getDeletedStatus(id: string): DeleteStatus {
     deleting: false,
     deleted: true,
     error: null,
-  }
+  };
 }
 
 export function getDeleteErrorStatus(id: string, error: string): DeleteStatus {
@@ -47,5 +46,5 @@ export function getDeleteErrorStatus(id: string, error: string): DeleteStatus {
     deleting: false,
     deleted: false,
     error: error || 'Issue deleting',
-  }
+  };
 }

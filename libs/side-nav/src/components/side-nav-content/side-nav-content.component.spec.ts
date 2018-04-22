@@ -6,12 +6,13 @@ describe('SideNavContentComponent', () => {
   let component: SideNavContentComponent;
   let fixture: ComponentFixture<SideNavContentComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SideNavContentComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [SideNavContentComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SideNavContentComponent);

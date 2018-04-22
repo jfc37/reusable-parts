@@ -21,10 +21,10 @@ export class DeleteMealSuccess implements Action {
 export class DeleteMealFailure implements Action {
   readonly type = MealDeletingActionTypes.DeleteFailure;
 
-  constructor(public id: string, public error: string) { }
+  constructor(public id: string, public error: string) {}
 }
 
-export type MealDeletingActions
-  = DeleteMeal
+export type MealDeletingActions =
+  | DeleteMeal
   | DeleteMealSuccess
   | DeleteMealFailure;

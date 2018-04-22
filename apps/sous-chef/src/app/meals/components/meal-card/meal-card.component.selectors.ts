@@ -1,9 +1,14 @@
-import { createSelector } from "@ngrx/store";
-import { allMealsSelector, allFoodSelector, allPreparationStepSelector, allCookingStepSelector } from "../../+state/meals/meals.selectors";
-import { MealCardModel } from "./meal-card.component.model";
-import { allMealDeletingIdsSelector } from "../../+state/meal-deleting/meal-deleting.selectors";
-import { allMealUpdatingIdsSelector } from "../../+state/meal-updating/meail-updating.selectors";
-import { Meal } from "../../+state/meals/meals.state";
+import { createSelector } from '@ngrx/store';
+import {
+  allMealsSelector,
+  allFoodSelector,
+  allPreparationStepSelector,
+  allCookingStepSelector,
+} from '../../+state/meals/meals.selectors';
+import { MealCardModel } from './meal-card.component.model';
+import { allMealDeletingIdsSelector } from '../../+state/meal-deleting/meal-deleting.selectors';
+import { allMealUpdatingIdsSelector } from '../../+state/meal-updating/meail-updating.selectors';
+import { Meal } from '../../+state/meals/meals.state';
 
 export const allMealCardModelsSelector = createSelector(
   allMealsSelector,
@@ -12,27 +17,31 @@ export const allMealCardModelsSelector = createSelector(
   allFoodSelector,
   allPreparationStepSelector,
   allCookingStepSelector,
-  (meals, deletingIds, updatingIds, foodOptions, prepOptions, cookingOptions) => meals.map(meal => ({
-    id: meal.id,
+  (meals, deletingIds, updatingIds, foodOptions, prepOptions, cookingOptions) =>
+    meals.map(
+      meal =>
+        ({
+          id: meal.id,
 
-    title: meal.name,
-    link: meal.link,
-    ingredients: meal.ingredients || [],
-    preparationSteps: meal.preparationSteps || [],
-    cookingSteps: meal.cookingSteps || [],
+          title: meal.name,
+          link: meal.link,
+          ingredients: meal.ingredients || [],
+          preparationSteps: meal.preparationSteps || [],
+          cookingSteps: meal.cookingSteps || [],
 
-    ingredientsTitle: getIngredientsTitle(meal),
-    preparationTitle: getPreparationTitle(meal),
-    cookingStepsTitle: getCookingStepsTitle(meal),
+          ingredientsTitle: getIngredientsTitle(meal),
+          preparationTitle: getPreparationTitle(meal),
+          cookingStepsTitle: getCookingStepsTitle(meal),
 
-    foodOptions,
-    prepOptions,
-    cookingOptions,
+          foodOptions,
+          prepOptions,
+          cookingOptions,
 
-    deleting: deletingIds.includes(meal.id),
-    updating: updatingIds.includes(meal.id),
-  } as MealCardModel))
-)
+          deleting: deletingIds.includes(meal.id),
+          updating: updatingIds.includes(meal.id),
+        } as MealCardModel)
+    )
+);
 
 function getIngredientsTitle(meal: Meal): string {
   if (!meal.ingredients || meal.ingredients.length === 0) {

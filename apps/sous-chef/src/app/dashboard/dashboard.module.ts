@@ -11,9 +11,9 @@ import { MainContentModule } from '@reusable-parts/main-content';
     MainContentModule,
 
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: DashboardComponent }
+      { path: '', pathMatch: 'full', component: DashboardComponent },
     ]),
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
 })
-export class DashboardModule { }
+export class DashboardModule {}

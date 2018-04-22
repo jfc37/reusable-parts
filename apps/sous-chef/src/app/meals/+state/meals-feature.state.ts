@@ -10,7 +10,6 @@ import { newMealReducer } from './new-meal/new-meal.reducer';
 import { UpdateState } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
 import { mealUpdatingReducer } from './meal-updating/meal-updating.reducer';
 
-
 /**
  * Interface to the part of the Store containing MealsState
  * and other information related to MealsData.
@@ -29,4 +28,4 @@ export const mealsFeatureReducer = {
   mealDeleting: mealDeletingReducer,
   mealUpdating: mealUpdatingReducer,
   newMeal: newMealReducer,
-}
+};

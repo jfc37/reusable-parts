@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { TopNavData } from "@reusable-parts/top-nav/src/+state/top-nav.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TopNavData } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
 
 const topNavSelector = createFeatureSelector<TopNavData>('topNav');
 

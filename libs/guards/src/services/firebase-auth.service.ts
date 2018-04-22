@@ -5,13 +5,9 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FirebaseAuthService {
-
-  constructor(private af: AngularFireAuth) {
-  }
+  constructor(private af: AngularFireAuth) {}
 
   public isAuthenticated(): Observable<boolean> {
-    return this.af.authState.pipe(
-      map(user => Boolean(user)),
-    );
+    return this.af.authState.pipe(map(user => Boolean(user)));
   }
 }

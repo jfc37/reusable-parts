@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatAutocompleteModule,
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoPreloading, RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterStateSerializer, StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import {
+  RouterStateSerializer,
+  StoreRouterConnectingModule,
+  routerReducer,
+} from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,7 +34,10 @@ import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards/src/authenticated/authenticated.guard';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { appReducer, initialState as appInitialState } from './+state/app.reducer';
+import {
+  appReducer,
+  initialState as appInitialState,
+} from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
 import { AppRepository } from './+state/app.repository';
 
@@ -55,32 +68,49 @@ import { AppRepository } from './+state/app.repository';
 
     GuardsModule,
 
-    RouterModule.forRoot([
-      { path: '', pathMatch: 'full', redirectTo: 'app' },
-      { path: 'login', loadChildren: '@reusable-parts/login-page#LoginPageModule' },
-      { path: 'register', loadChildren: '@reusable-parts/register-page#RegisterPageModule' },
-      {
-        path: 'app',
-        component: ShellComponent,
-        canActivate: [AuthenticatedGuard],
-        children: [
-          { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-          { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
-          { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-        ]
-      },
-    ], { useHash: false, preloadingStrategy: NoPreloading }),
+    RouterModule.forRoot(
+      [
+        { path: '', pathMatch: 'full', redirectTo: 'app' },
+        {
+          path: 'login',
+          loadChildren: '@reusable-parts/login-page#LoginPageModule',
+        },
+        {
+          path: 'register',
+          loadChildren: '@reusable-parts/register-page#RegisterPageModule',
+        },
+        {
+          path: 'app',
+          component: ShellComponent,
+          canActivate: [AuthenticatedGuard],
+          children: [
+            {
+              path: 'dashboard',
+              loadChildren: './dashboard/dashboard.module#DashboardModule',
+            },
+            { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
+            { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+          ],
+        },
+      ],
+      { useHash: false, preloadingStrategy: NoPreloading }
+    ),
 
-    StoreModule.forRoot({
-      router: routerReducer
-    }, { metaReducers: !environment.production ? [storeFreeze, logger] : [] }),
+    StoreModule.forRoot(
+      {
+        router: routerReducer,
+      },
+      { metaReducers: !environment.production ? [storeFreeze, logger] : [] }
+    ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({
-      stateKey: 'router'
+      stateKey: 'router',
     }),
-    StoreModule.forFeature('app', appReducer, { initialState: appInitialState }),
-    EffectsModule.forFeature([AppEffects])
+    StoreModule.forFeature('app', appReducer, {
+      initialState: appInitialState,
+    }),
+    EffectsModule.forFeature([AppEffects]),
   ],
   providers: [
     AppEffects,
@@ -91,6 +121,6 @@ import { AppRepository } from './+state/app.repository';
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent, ShellComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

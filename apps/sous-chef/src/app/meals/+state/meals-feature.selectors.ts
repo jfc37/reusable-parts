@@ -1,4 +1,6 @@
-import { createFeatureSelector } from "@ngrx/store";
-import { MealsFeatureState } from "./meals-feature.state";
+import { createFeatureSelector } from '@ngrx/store';
+import { MealsFeatureState } from './meals-feature.state';
 
-export const mealsFeatureSelector = createFeatureSelector<MealsFeatureState>('meals');
+export const mealsFeatureSelector = createFeatureSelector<MealsFeatureState>(
+  'meals'
+);

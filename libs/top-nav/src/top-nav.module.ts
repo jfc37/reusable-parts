@@ -1,13 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressBarModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { DumbTopNavComponent } from './components/dumb-top-nav/dumb-top-nav.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { topNavReducer, initialState as topNavInitialState } from './+state/top-nav.reducer';
+import {
+  topNavReducer,
+  initialState as topNavInitialState,
+} from './+state/top-nav.reducer';
 import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
 import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effects';
 
@@ -25,15 +35,14 @@ import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effect
 
     FuseSharedModule,
 
-    StoreModule.forFeature('topNav', topNavReducer, { initialState: topNavInitialState }),
+    StoreModule.forFeature('topNav', topNavReducer, {
+      initialState: topNavInitialState,
+    }),
 
-    EffectsModule.forFeature([TopNavEffects])
+    EffectsModule.forFeature([TopNavEffects]),
   ],
   declarations: [TopNavComponent, DumbTopNavComponent],
   exports: [TopNavComponent],
-  providers: [
-    FirebaseUserService,
-    TopNavEffects,
-  ],
+  providers: [FirebaseUserService, TopNavEffects],
 })
-export class TopNavModule { }
+export class TopNavModule {}

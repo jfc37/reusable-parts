@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 
-
 export enum RegisterActionTypes {
   ResetRegisterPage = '[Register] Reset Page',
 
@@ -17,7 +16,11 @@ export class ResetRegisterPage implements Action {
 export class AttemptRegister implements Action {
   readonly type = RegisterActionTypes.AttemptRegister;
 
-  constructor(public name: string, public email: string, public password: string) { }
+  constructor(
+    public name: string,
+    public email: string,
+    public password: string
+  ) {}
 }
 
 export class RegisterRequest implements Action {
@@ -31,11 +34,11 @@ export class RegisterSuccess implements Action {
 export class RegisterFailure implements Action {
   readonly type = RegisterActionTypes.RegisterFailure;
 
-  constructor(public error: any) { }
+  constructor(public error: any) {}
 }
 
-export type RegisterActions
-  = ResetRegisterPage
+export type RegisterActions =
+  | ResetRegisterPage
   | AttemptRegister
   | RegisterRequest
   | RegisterSuccess
