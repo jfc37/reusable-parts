@@ -13,15 +13,15 @@
   "lint": [
     {
       "project": "./tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     }
   ],
   "test": {
