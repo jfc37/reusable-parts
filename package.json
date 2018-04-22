@@ -19,7 +19,8 @@
     "update:check": "./node_modules/.bin/nx update check",
     "update:skip": "./node_modules/.bin/nx update skip",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
-    "postinstall": "./node_modules/.bin/nx postinstall"
+    "postinstall": "./node_modules/.bin/nx postinstall",
+    "prettier": "prettier"
   },
   "private": true,
   "dependencies": {
