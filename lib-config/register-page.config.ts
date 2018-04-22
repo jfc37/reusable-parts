@@ -3,4 +3,5 @@ export interface RegisterPageConfig {
   description: string;
   loginRoute: string;
   afterRegistrationRoute: string;
+  logoUrl: string;
 }

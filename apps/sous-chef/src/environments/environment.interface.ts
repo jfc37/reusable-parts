@@ -1,3 +1,6 @@
+import { RegisterPageConfig } from "lib-config/register-page.config";
+import { LoginPageConfig } from "lib-config/login-page.config";
+
 export interface Environment {
   production: boolean;
 
@@ -10,21 +13,9 @@ export interface Environment {
     messagingSenderId: string,
   },
 
-  loginPageConfig: {
-    name: string,
-    description: string,
-    afterLoginRoute: string,
-    registerRoute: string,
-    logoUrl: string,
-  },
+  loginPageConfig: LoginPageConfig,
 
-  registerPageConfig: {
-    name: string,
-    description: string,
-    loginRoute: string,
-    afterRegistrationRoute: string,
-    logoUrl: string,
-  },
+  registerPageConfig: RegisterPageConfig,
 
   fuseConfig: {
     layout: {
