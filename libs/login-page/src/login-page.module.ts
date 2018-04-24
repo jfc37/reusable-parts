@@ -17,10 +17,12 @@ import {
 import { LoginEffects } from './+state/login.effects';
 import { CommonModule } from '@angular/common';
 import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/firebase-login.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   imports: [
     CommonModule,
+    ServiceWorkerModule,
 
     LoginModule,
 
