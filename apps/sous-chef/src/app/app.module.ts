@@ -33,6 +33,7 @@ import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {
   appReducer,
@@ -45,6 +46,10 @@ import { AppRepository } from './+state/app.repository';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: true, // #### UNDO AT SOME POINT!
+      // enabled: environment.production,
+    }),
     CommonModule,
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
@@ -70,7 +75,7 @@ import { AppRepository } from './+state/app.repository';
 
     RouterModule.forRoot(
       [
-        { path: '', pathMatch: 'full', redirectTo: 'app' },
+        { path: '', pathMatch: 'full', redirectTo: 'login' },
         {
           path: 'login',
           loadChildren: '@reusable-parts/login-page#LoginPageModule',

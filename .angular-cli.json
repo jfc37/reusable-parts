@@ -1,33 +1,7 @@
 {
   "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "reusable-parts",
-    "npmScope": "reusable-parts",
-    "latestMigration": "20180405-add-workspace-schematic-command"
-  },
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "./tsconfig.spec.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
-    },
-    {
-      "project": "apps/sous-chef/src/tsconfig.app.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
-    },
-    {
-      "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
+    "name": "reusable-parts"
   },
   "apps": [
     {
@@ -45,6 +19,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
+      "serviceWorker": true,
       "styles": [
         "styles.scss"
       ],
@@ -53,98 +28,120 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
-      },
-      "tags": []
+      }
     },
     {
       "name": "common-ngrx-patterns",
-      "root": "libs/common-ngrx-patterns/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/common-ngrx-patterns/src",
+      "test": "../../../test.js"
     },
     {
       "name": "fuse",
-      "root": "libs/fuse",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/fuse",
+      "test": "../../../test.js"
     },
     {
       "name": "guards",
-      "root": "libs/guards/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/guards/src",
+      "test": "../../../test.js"
     },
     {
       "name": "login",
-      "root": "libs/login/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/login/src",
+      "test": "../../../test.js"
     },
     {
       "name": "login-page",
-      "root": "libs/login-page/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/login-page/src",
+      "test": "../../../test.js"
     },
     {
       "name": "main-content",
-      "root": "libs/main-content/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/main-content/src",
+      "test": "../../../test.js"
     },
     {
       "name": "register",
-      "root": "libs/register/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/register/src",
+      "test": "../../../test.js"
     },
     {
       "name": "register-page",
-      "root": "libs/register-page/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/register-page/src",
+      "test": "../../../test.js"
     },
     {
       "name": "side-nav",
-      "root": "libs/side-nav/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/side-nav/src",
+      "test": "../../../test.js"
     },
     {
       "name": "top-nav",
-      "root": "libs/top-nav/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/top-nav/src",
+      "test": "../../../test.js"
     },
     {
       "name": "welcome",
-      "root": "libs/welcome/src",
-      "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "root": "libs/welcome/src",
+      "test": "../../../test.js"
     },
     {
       "name": "$workspaceRoot",
-      "root": ".",
-      "appRoot": ""
+      "appRoot": "",
+      "root": "."
     }
   ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "./tsconfig.spec.json",
+      "exclude": [
+  "**/node_modules/**",
+  "**/@fuse/**"
+]
+    },
+    {
+      "project": "apps/sous-chef/src/tsconfig.app.json",
+      "exclude": [
+  "**/node_modules/**",
+  "**/@fuse/**"
+]
+    },
+    {
+      "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
+      "exclude": [
+  "**/node_modules/**",
+  "**/@fuse/**"
+]
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
   "defaults": {
+    "styleExt": "scss",
+    "component": {
+    },
     "schematics": {
       "collection": "@nrwl/schematics"
-    },
-    "styleExt": "scss",
-    "component": {}
+    }
   },
   "warnings": {
     "typescriptMismatch": false
