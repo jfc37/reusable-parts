@@ -46,10 +46,6 @@ import { AppRepository } from './+state/app.repository';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: true, // #### UNDO AT SOME POINT!
-      // enabled: environment.production,
-    }),
     CommonModule,
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
