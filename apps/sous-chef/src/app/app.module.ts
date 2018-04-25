@@ -29,7 +29,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
-import { AppComponent, LogUpdateService } from './app.component';
+import { AppComponent } from './app.component';
 import { CustomRouterStateSerializer, logger } from './custom-route.state';
 import { ShellComponent } from './component/shell/shell.component';
 import { AuthenticatedGuard } from '@reusable-parts/guards';
@@ -41,6 +41,7 @@ import {
 } from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
 import { AppRepository } from './+state/app.repository';
+import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { AppRepository } from './+state/app.repository';
     FuseModule.forRoot(environment.fuseConfig),
     FuseSharedModule,
 
+    CommonPwaPartsModule,
     TopNavModule,
     SideNavModule,
     MainContentModule,
@@ -119,7 +121,6 @@ import { AppRepository } from './+state/app.repository';
   providers: [
     AppEffects,
     AppRepository,
-    LogUpdateService,
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },

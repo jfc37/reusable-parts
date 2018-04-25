@@ -37,6 +37,13 @@
       "test": "../../../test.js"
     },
     {
+      "name": "common-pwa-parts",
+      "root": "libs/common-pwa-parts/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "fuse",
       "appRoot": "",
       "root": "libs/fuse",
@@ -111,23 +118,23 @@
     {
       "project": "./tsconfig.spec.json",
       "exclude": [
-  "**/node_modules/**",
-  "**/@fuse/**"
-]
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
     },
     {
       "project": "apps/sous-chef/src/tsconfig.app.json",
       "exclude": [
-  "**/node_modules/**",
-  "**/@fuse/**"
-]
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
     },
     {
       "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
       "exclude": [
-  "**/node_modules/**",
-  "**/@fuse/**"
-]
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
     }
   ],
   "test": {
@@ -137,8 +144,7 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {
-    },
+    "component": {},
     "schematics": {
       "collection": "@nrwl/schematics"
     }
