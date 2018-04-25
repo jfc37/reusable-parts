@@ -76,7 +76,7 @@ import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
 
     RouterModule.forRoot(
       [
-        { path: '', pathMatch: 'full', redirectTo: 'login' },
+        { path: '', pathMatch: 'full', redirectTo: 'app/dashboard' },
         {
           path: 'login',
           loadChildren: '@reusable-parts/login-page#LoginPageModule',

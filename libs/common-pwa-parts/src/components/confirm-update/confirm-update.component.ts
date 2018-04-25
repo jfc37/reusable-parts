@@ -27,7 +27,8 @@ export class ConfirmUpdateComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     if (this.updates.isEnabled) {
-      interval(4000)
+      // poll every 5 minutes
+      interval(300000)
         .pipe(
           takeUntil(this.onDestroy$),
           takeWhile(() => !this.hasUpdates),
