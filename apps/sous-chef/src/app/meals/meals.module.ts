@@ -29,6 +29,7 @@ import { NewMealEffects } from './+state/new-meal/new-meal.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MealUpdatingEffects } from './+state/meal-updating/meal-updating.effects';
 import { CookingInstructionsComponent } from './cooking-instructions/cooking-instructions.component';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { CookingInstructionsComponent } from './cooking-instructions/cooking-ins
     FlexLayoutModule,
 
     MainContentModule,
+    CommonUiComponentsModule,
 
     MatButtonModule,
     MatMenuModule,

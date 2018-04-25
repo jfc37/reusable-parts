@@ -44,6 +44,13 @@
       "tags": []
     },
     {
+      "name": "common-ui-components",
+      "root": "libs/common-ui-components/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "fuse",
       "appRoot": "",
       "root": "libs/fuse",

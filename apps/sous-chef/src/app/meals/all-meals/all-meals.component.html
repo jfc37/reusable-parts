@@ -1,9 +1,7 @@
 <jfc-main-content>
   <h1 class="main-content-header">Meals</h1>
-  <p class="main-content-body">
-    <ng-container *ngIf="loading$ | async; else loaded">
-      loading...
-    </ng-container>
+  <div class="main-content-body">
+    <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
     <ng-template #loaded>
       <ng-container *ngIf="error$ | async as error; else content">
         {{error}}
@@ -35,5 +33,5 @@
         </div>
       </ng-template>
     </ng-template>
-  </p>
+  </div>
 </jfc-main-content>

@@ -1,9 +1,7 @@
 <jfc-main-content>
   <h1 class="main-content-header">{{title$ | async}}</h1>
   <p class="main-content-body">
-    <ng-container *ngIf="loading$ | async; else loaded">
-      loading...
-    </ng-container>
+    <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
     <ng-template #loaded>
       <ng-container *ngIf="error$ | async as error; else content">
         {{error}}
@@ -14,7 +12,8 @@
           fxLayoutAlign="stretch"
           fxFlexAlign="stretch"
           fxLayoutGap="grid">
-          <div class="fuse-card" fxFlex="50">
+          <div class="fuse-card"
+            fxFlex="50">
             <div class="p-16 pb-0">
               <div class="h1 font-weight-300">Prep Work</div>
             </div>
@@ -25,7 +24,8 @@
             </mat-selection-list>
           </div>
 
-          <div class="fuse-card" fxFlex="50">
+          <div class="fuse-card"
+            fxFlex="50">
             <div class="p-16 pb-0">
               <div class="h1 font-weight-300">Cooking Steps</div>
             </div>

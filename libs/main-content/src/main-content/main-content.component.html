@@ -13,9 +13,10 @@
   <!-- CONTENT -->
   <div class="content p-24 mat-white-bg"
     fusePerfectScrollbar>
-    <div [@animate]="{value:'*',params:{delay:'200ms',x:'-25px'}}">
+    <div class="animate"
+      [@animate]="{value:'*',params:{delay:'200ms',x:'-25px'}}">
       <ng-content select=".main-content-body"></ng-content>
-    <!-- </div> -->
+    </div>
 
   </div>
   <!-- / CONTENT -->
