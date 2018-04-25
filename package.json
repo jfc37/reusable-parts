@@ -21,7 +21,9 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "postinstall": "./node_modules/.bin/nx postinstall",
     "prettier": "prettier --write \"{apps,libs}/**/*.ts\"",
-    "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\""
+    "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\"",
+
+    "pwa": "ng build --prod && cd dist/apps/sous-chef && http-server -p 8080"
   },
   "private": true,
   "dependencies": {
