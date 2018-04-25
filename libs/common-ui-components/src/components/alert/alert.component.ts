@@ -1,5 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
+export enum AlertType {
+  error = 'error',
+  warning = 'warning',
+  info = 'info',
+  success = 'success',
+}
+
 @Component({
   selector: 'jfc-alert',
   templateUrl: './alert.component.html',
@@ -38,11 +45,4 @@ export class AlertComponent implements OnChanges {
       }
     }
   }
-}
-
-export enum AlertType {
-  error = 'error',
-  warning = 'warning',
-  info = 'info',
-  success = 'success',
 }
