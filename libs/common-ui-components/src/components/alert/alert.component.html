@@ -1,0 +1,11 @@
+<div class="p-16 mb-16 font-size-16"
+  [ngClass]="colourClass">
+  <div fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px">
+    <mat-icon>{{icon}}</mat-icon>
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
