@@ -1,0 +1,6 @@
+<jfc-side-nav [menuItems]="menuItems$ | async"
+  [name]="appName"
+  [logoUrl]="logoUrl">
+  <jfc-top-nav [redirectRouteAfterLogout]="'login'"></jfc-top-nav>
+    <router-outlet></router-outlet>
+</jfc-side-nav>

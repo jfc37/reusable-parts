@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoPreloading, RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
 import {
+  RouterStateSerializer,
   StoreRouterConnectingModule,
   routerReducer,
-  RouterStateSerializer,
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -15,21 +16,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
 import {
-  logger,
   CustomRouterStateSerializer,
+  logger,
 } from '@reusable-parts/common-ngrx-patterns';
 import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
-import { GuardsModule } from '@reusable-parts/guards';
+import { AuthenticatedGuard, GuardsModule } from '@reusable-parts/guards';
 import { MainContentModule } from '@reusable-parts/main-content';
 import { SideNavModule } from '@reusable-parts/side-nav';
 import { TopNavModule } from '@reusable-parts/top-nav';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ShellComponent } from './components/shell/shell.component';
 
 @NgModule({
   imports: [
@@ -67,6 +67,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
           path: 'register',
           loadChildren: '@reusable-parts/register-page#RegisterPageModule',
         },
+        {
+          path: 'app',
+          component: ShellComponent,
+          canActivate: [AuthenticatedGuard],
+        },
       ],
       { useHash: false, preloadingStrategy: NoPreloading }
     ),
@@ -93,7 +98,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, ShellComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
