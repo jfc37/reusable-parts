@@ -1,8 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { RegisterPageComponent } from './component/register-page/register-page.component';
-import { RegisterModule } from '@reusable-parts/register';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
@@ -11,12 +10,28 @@ import {
 } from './+state/register.reducer';
 import { RegisterEffects } from './+state/register.effects';
 import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/service/firebase-registration.service';
+import { WelcomeModule } from '@reusable-parts/welcome';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material';
+import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { DumbRegisterComponent } from '@reusable-parts/register-page/src/components/dumb-register/dumb-register.component';
 
 @NgModule({
   imports: [
     CommonModule,
 
-    RegisterModule,
+    WelcomeModule,
+
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+
+    FuseSharedModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: RegisterPageComponent },
@@ -28,7 +43,7 @@ import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/s
 
     EffectsModule.forFeature([RegisterEffects]),
   ],
-  declarations: [RegisterPageComponent],
+  declarations: [RegisterPageComponent, DumbRegisterComponent],
   providers: [RegisterEffects, FirebaseRegistrationService],
 })
 export class RegisterPageModule {

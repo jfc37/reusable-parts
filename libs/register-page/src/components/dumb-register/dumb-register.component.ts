@@ -6,15 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
-import { RegistrationAttempt } from '@reusable-parts/register/src/components/register/register.component.model';
+import { RegistrationAttempt } from './dumb-register.component.model';
 
 @Component({
-  selector: 'jfc-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'jfc-dumb-register',
+  templateUrl: './dumb-register.component.html',
+  styleUrls: ['./dumb-register.component.scss'],
   animations: fuseAnimations,
 })
-export class RegisterComponent implements OnInit {
+export class DumbRegisterComponent implements OnInit {
   /**
    * Name of the website
    * Included in the welcome message

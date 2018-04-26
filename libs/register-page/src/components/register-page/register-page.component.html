@@ -1,8 +1,8 @@
-<jfc-register [name]="config.name"
+<jfc-dumb-register [name]="config.name"
   [description]="config.description"
   [logoUrl]="config.logoUrl"
   [registering]="registering$ | async"
   [registrationSucceeded]="registrationSucceeded$ | async"
   [registrationError]="registrationError$ | async"
   [loginRoute]="config.loginRoute"
-  (registrationAttempt)="registrationAttempt($event)"></jfc-register>
+  (registrationAttempt)="registrationAttempt($event)"></jfc-dumb-register>
