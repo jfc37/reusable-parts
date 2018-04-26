@@ -19,12 +19,14 @@ import {
 } from '@angular/material';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { DumbRegisterComponent } from '@reusable-parts/register-page/src/components/dumb-register/dumb-register.component';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 
 @NgModule({
   imports: [
     CommonModule,
 
     WelcomeModule,
+    CommonUiComponentsModule,
 
     MatButtonModule,
     MatCheckboxModule,

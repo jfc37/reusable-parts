@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -14,7 +22,7 @@ import { RegistrationAttempt } from './dumb-register.component.model';
   styleUrls: ['./dumb-register.component.scss'],
   animations: fuseAnimations,
 })
-export class DumbRegisterComponent implements OnInit {
+export class DumbRegisterComponent implements OnInit, OnChanges {
   /**
    * Name of the website
    * Included in the welcome message
@@ -67,6 +75,14 @@ export class DumbRegisterComponent implements OnInit {
       password: ['', Validators.required],
       passwordConfirm: ['', [Validators.required, confirmPassword]],
     });
+
+    this.updateFormState();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['registering'] && !changes['registering'].isFirstChange()) {
+      this.updateFormState();
+    }
   }
 
   public displayError(field: string): boolean {
@@ -88,6 +104,14 @@ export class DumbRegisterComponent implements OnInit {
       this.registering ||
       this.registrationSucceeded
     );
+  }
+
+  private updateFormState() {
+    if (this.registering) {
+      this.registerForm.disable();
+    } else {
+      this.registerForm.enable();
+    }
   }
 }
 

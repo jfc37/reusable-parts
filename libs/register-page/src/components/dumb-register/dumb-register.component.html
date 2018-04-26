@@ -15,7 +15,8 @@
 
       <div class="logo"
         fxHide.gt-xs>
-        <span>F</span>
+        <img [src]="logoUrl"
+          alt="Logo">
       </div>
 
       <div class="title">CREATE AN ACCOUNT</div>
@@ -73,21 +74,18 @@
           <a href="#">terms and conditions</a>
         </div>
 
-        <div *ngIf="registrationError"
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutAlign="space-between center">
-          <span class="text">{{registrationError}}</span>
-        </div>
+        <jfc-alert *ngIf="registrationError"
+          type="error">
+          {{registrationError}}
+        </jfc-alert>
 
-        <div *ngIf="registrationSucceeded"
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutAlign="space-between center">
-          <span class="text">Registration succeeded</span>
-        </div>
+        <jfc-alert *ngIf="registrationSucceeded"
+          type="success">
+          Registration succeeded
+        </jfc-alert>
 
         <button mat-raised-button
+          type="submit"
           color="accent"
           class="submit-button"
           aria-label="CREATE AN ACCOUNT"
