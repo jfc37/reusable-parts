@@ -1,31 +1,43 @@
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NxModule } from '@nrwl/nx';
-import { RouterModule, NoPreloading } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoPreloading, RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import {
+  StoreRouterConnectingModule,
+  routerReducer,
+  RouterStateSerializer,
+} from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TranslateModule } from '@ngx-translate/core';
+import { NxModule } from '@nrwl/nx';
+import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
+import {
+  logger,
+  CustomRouterStateSerializer,
+} from '@reusable-parts/common-ngrx-patterns';
+import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
+import { GuardsModule } from '@reusable-parts/guards';
+import { MainContentModule } from '@reusable-parts/main-content';
+import { SideNavModule } from '@reusable-parts/side-nav';
+import { TopNavModule } from '@reusable-parts/top-nav';
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { TranslateModule } from '@ngx-translate/core';
-import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
-import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
-import { TopNavModule } from '@reusable-parts/top-nav';
-import { SideNavModule } from '@reusable-parts/side-nav';
-import { MainContentModule } from '@reusable-parts/main-content';
-import { GuardsModule } from '@reusable-parts/guards';
-import { StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production,
+    }),
     CommonModule,
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
@@ -63,7 +75,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       {
         router: routerReducer,
       },
-      { metaReducers: !environment.production ? [storeFreeze, logger] : [] }
+      { metaReducers: !environment.production ? [logger] : [] }
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
@@ -74,6 +86,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     //   initialState: appInitialState,
     // }),
     // EffectsModule.forFeature([AppEffects]),
+  ],
+  providers: [
+    { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
+    { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
+    { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],

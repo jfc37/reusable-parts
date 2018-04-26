@@ -57,6 +57,13 @@
       }
     },
     {
+      "name": "common-config",
+      "root": "libs/common-config/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "common-ngrx-patterns",
       "appRoot": "",
       "root": "libs/common-ngrx-patterns/src",

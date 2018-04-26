@@ -7,3 +7,6 @@ export * from './src/create-state/create.state';
 
 export * from './src/update-state/update.state';
 export * from './src/update-state/update.selectors';
+
+export * from './src/meta-reducers/logger.reducer';
+export * from './src/router-state/router.state';
