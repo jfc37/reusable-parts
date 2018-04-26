@@ -5,10 +5,39 @@
   },
   "apps": [
     {
+      "name": "fullswing",
+      "root": "apps/fullswing/src",
+      "outDir": "dist/apps/fullswing",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "jfc",
+      "styles": [
+        "styles.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "tags": []
+    },
+    {
       "name": "sous-chef",
       "root": "apps/sous-chef/src",
       "outDir": "dist/apps/sous-chef",
-      "assets": ["assets", "favicon.ico"],
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -17,7 +46,9 @@
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "serviceWorker": true,
-      "styles": ["styles.scss"],
+      "styles": [
+        "styles.scss"
+      ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -113,15 +144,32 @@
   "lint": [
     {
       "project": "./tsconfig.spec.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "exclude": [
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
     },
     {
       "project": "apps/sous-chef/src/tsconfig.app.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "exclude": [
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
     },
     {
       "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "exclude": [
+        "**/node_modules/**",
+        "**/@fuse/**"
+      ]
+    },
+    {
+      "project": "apps/fullswing/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/fullswing/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
