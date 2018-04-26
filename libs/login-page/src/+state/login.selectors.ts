@@ -15,7 +15,11 @@ export const hasLoggedInSelector = createSelector(
 
 export const emailAndPasswordSelector = createSelector(
   loginFeatureSelector,
-  state => ({ email: state.email, password: state.password })
+  state => ({
+    email: state.email,
+    password: state.password,
+    rememberMe: state.rememberMe,
+  })
 );
 
 export const loginErrorMessageSelector = createSelector(

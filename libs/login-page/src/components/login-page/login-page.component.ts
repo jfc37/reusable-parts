@@ -56,7 +56,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  public loginAttempt({ email, password }): void {
-    this.store.dispatch(new AttemptLogin(email, password));
+  public loginAttempt({ email, password, rememberMe }): void {
+    this.store.dispatch(new AttemptLogin(email, password, rememberMe));
   }
 }

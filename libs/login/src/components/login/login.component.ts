@@ -1,5 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.component.model';
 
@@ -56,8 +61,9 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit() {
     this.loginForm = new FormBuilder().group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+      rememberMe: new FormControl(false),
     });
   }
 
@@ -70,6 +76,7 @@ export class LoginComponent implements OnInit {
     this.loginAttempt.emit({
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value,
+      rememberMe: this.loginForm.get('rememberMe').value,
     });
   }
 }

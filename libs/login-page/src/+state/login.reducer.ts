@@ -9,6 +9,7 @@ import { LoginActions, LoginActionTypes } from './login.actions';
 export interface LoginData {
   email: string;
   password: string;
+  rememberMe: boolean;
 
   isLoggingIn: boolean;
   hasLoggedIn: boolean;
@@ -28,6 +29,7 @@ export interface LoginState {
 export const initialState: LoginData = {
   email: null,
   password: null,
+  rememberMe: false,
 
   isLoggingIn: false,
   hasLoggedIn: false,
@@ -50,6 +52,7 @@ export function loginReducer(
         ...state,
         email: action.email,
         password: action.password,
+        rememberMe: action.rememberMe,
       };
     }
 

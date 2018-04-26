@@ -16,7 +16,11 @@ export class ResetLoginPage implements Action {
 export class AttemptLogin implements Action {
   readonly type = LoginActionTypes.AttemptLogin;
 
-  constructor(public email: string, public password: string) {}
+  constructor(
+    public email: string,
+    public password: string,
+    public rememberMe: boolean
+  ) {}
 }
 
 export class LoginRequest implements Action {
