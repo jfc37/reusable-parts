@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,7 +22,7 @@ import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.c
   styleUrls: ['./login.component.scss'],
   animations: fuseAnimations,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnChanges {
   /**
    * Name of the website
    * Included in the welcome message
@@ -65,6 +73,22 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
       rememberMe: new FormControl(false),
     });
+
+    this.updateFormState();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['loggingIn'] && !changes['loggingIn'].isFirstChange()) {
+      this.updateFormState();
+    }
+  }
+
+  private updateFormState() {
+    if (this.loggingIn) {
+      this.loginForm.disable();
+    } else {
+      this.loginForm.enable();
+    }
   }
 
   public displayError(field: string): boolean {
