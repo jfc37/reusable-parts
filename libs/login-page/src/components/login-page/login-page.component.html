@@ -1,8 +1,8 @@
-<jfc-login [name]="config.name"
+<jfc-dumb-login [name]="config.name"
   [description]="config.description"
   [logoUrl]="config.logoUrl"
   [loggingIn]="isLoggingIn$ | async"
   [loginError]="loginError$ | async"
   [loginSucceeded]="loginSucceeded$ | async"
   [registerRoute]="config.registerRoute"
-  (loginAttempt)="loginAttempt($event)"></jfc-login>
+  (loginAttempt)="loginAttempt($event)"></jfc-dumb-login>

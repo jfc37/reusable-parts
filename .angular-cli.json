@@ -8,10 +8,7 @@
       "name": "sous-chef",
       "root": "apps/sous-chef/src",
       "outDir": "dist/apps/sous-chef",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets", "favicon.ico"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -20,9 +17,7 @@
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "serviceWorker": true,
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -60,12 +55,6 @@
       "name": "guards",
       "appRoot": "",
       "root": "libs/guards/src",
-      "test": "../../../test.js"
-    },
-    {
-      "name": "login",
-      "appRoot": "",
-      "root": "libs/login/src",
       "test": "../../../test.js"
     },
     {
@@ -124,24 +113,15 @@
   "lint": [
     {
       "project": "./tsconfig.spec.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/src/tsconfig.app.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     }
   ],
   "test": {

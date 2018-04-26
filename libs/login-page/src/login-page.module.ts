@@ -5,7 +5,6 @@ import {
   ModuleWithProviders,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoginModule } from '@reusable-parts/login';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { LoginPageConfig } from '../../../lib-config/login-page.config';
 import { StoreModule } from '@ngrx/store';
@@ -17,14 +16,35 @@ import {
 import { LoginEffects } from './+state/login.effects';
 import { CommonModule } from '@angular/common';
 import { FirebaseLoginService } from '@reusable-parts/login-page/src/services/firebase-login.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { DumbLoginComponent } from '@reusable-parts/login-page/src/components/dumb-login/dumb-login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WelcomeModule } from '@reusable-parts/welcome';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material';
+import { FuseSharedModule } from '@reusable-parts/@fuse';
 
 @NgModule({
   imports: [
     CommonModule,
-    ServiceWorkerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
 
-    LoginModule,
+    WelcomeModule,
+    CommonUiComponentsModule,
+
+    // angular material components
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+
+    FuseSharedModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: LoginPageComponent },
@@ -36,7 +56,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
     EffectsModule.forFeature([LoginEffects]),
   ],
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, DumbLoginComponent],
   providers: [FirebaseLoginService, LoginEffects],
 })
 export class LoginPageModule {

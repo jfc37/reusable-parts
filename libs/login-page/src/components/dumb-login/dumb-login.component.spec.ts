@@ -6,7 +6,7 @@ import {
 } from '@angular/platform-browser/animations';
 import { FuseIfOnDomDirective } from '@reusable-parts/@fuse/directives/fuse-if-on-dom/fuse-if-on-dom.directive';
 import { getElement } from '../../../../../unit-test-utils/html-queries';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './dumb-login.component';
 import {
   MatButtonModule,
   MatCheckboxModule,

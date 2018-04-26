@@ -14,15 +14,15 @@ import {
   FormControl,
 } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
-import { LoginAttempt } from '@reusable-parts/login/src/components/login/login.component.model';
+import { LoginAttempt } from './dumb-login.component.model';
 
 @Component({
-  selector: 'jfc-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'jfc-dumb-login',
+  templateUrl: './dumb-login.component.html',
+  styleUrls: ['./dumb-login.component.scss'],
   animations: fuseAnimations,
 })
-export class LoginComponent implements OnInit, OnChanges {
+export class DumbLoginComponent implements OnInit, OnChanges {
   /**
    * Name of the website
    * Included in the welcome message
