@@ -15,6 +15,7 @@ import {
   mergeMap,
   switchMap,
   withLatestFrom,
+  tap,
 } from 'rxjs/operators';
 import {
   LoadAllUserRoles,
@@ -23,6 +24,7 @@ import {
   LoadingUserRolesActionTypes,
   ResetAllUserRoles,
 } from './loading-user-roles.actions';
+import { SetUserRoles } from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.actions';
 
 @Injectable()
 export class LoadingUserRolesEffects {
@@ -48,7 +50,10 @@ export class LoadingUserRolesEffects {
         this.repository
           .getAllUserRoles()
           .pipe(
-            mergeMap(meals => [new LoadAllUserRolesSuccess()]),
+            mergeMap(roles => [
+              new SetUserRoles(...roles),
+              new LoadAllUserRolesSuccess(),
+            ]),
             catchError(err =>
               of(
                 new LoadAllUserRolesFailure(err || 'Failed loading user roles')

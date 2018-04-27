@@ -4,12 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { map } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
+import { UserRoles } from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.state';
 
 @Injectable()
 export class FirebaseUsersService {
   constructor(private af: AngularFireAuth) {}
 
-  public getAllUserRoles(): Observable<any> {
+  public getAllUserRoles(): Observable<UserRoles[]> {
     try {
       return fromPromise(
         this.af.app
