@@ -5,6 +5,6 @@ import { FirebaseAuthService } from '@reusable-parts/guards/src/services/firebas
 
 @NgModule({
   imports: [CommonModule],
-  providers: [AuthenticatedGuard, FirebaseAuthService],
+  providers: [AuthenticatedGuard, FirebaseAuthService, FirebaseAuthService],
 })
 export class GuardsModule {}

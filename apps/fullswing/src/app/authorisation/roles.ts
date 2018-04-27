@@ -17,3 +17,9 @@ export function getDefaultNewUserRoles(): UserRoles {
     admin: false,
   };
 }
+
+export enum UserRoleTypes {
+  Student = 'student',
+  Teacher = 'teacher',
+  Admin = 'admin',
+}
