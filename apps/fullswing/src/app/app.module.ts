@@ -33,6 +33,7 @@ import { ShellComponent } from './components/shell/shell.component';
 import { getDefaultNewUserRoles } from './authorisation/roles';
 import { AdminGuard } from './authorisation/admin.guard';
 import { AuthorisationModule } from './authorisation/authorisation.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,7 @@ import { AuthorisationModule } from './authorisation/authorisation.module';
 
     RouterModule.forRoot(
       [
-        { path: '', pathMatch: 'full', redirectTo: 'login' },
+        { path: '', pathMatch: 'full', redirectTo: 'app' },
         {
           path: 'login',
           loadChildren: '@reusable-parts/login-page#LoginPageModule',
@@ -75,6 +76,15 @@ import { AuthorisationModule } from './authorisation/authorisation.module';
           path: 'app',
           component: ShellComponent,
           canActivate: [AuthenticatedGuard],
+          children: [
+            { path: 'dashboard', component: DashboardComponent },
+            {
+              path: 'admin',
+              canActivate: [AdminGuard],
+              loadChildren: './admin/admin.module#AdminModule',
+            },
+            { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+          ],
         },
       ],
       { useHash: false, preloadingStrategy: NoPreloading }
@@ -103,7 +113,7 @@ import { AuthorisationModule } from './authorisation/authorisation.module';
     { provide: 'defaultNewUserRoles', useValue: getDefaultNewUserRoles() },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  declarations: [AppComponent, ShellComponent],
+  declarations: [AppComponent, ShellComponent, DashboardComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

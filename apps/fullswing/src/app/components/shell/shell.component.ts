@@ -31,15 +31,27 @@ export class ShellComponent implements OnInit {
     },
   ];
 
+  private studentSideNav: MenuItem[] = [
+    {
+      id: 'dashboard',
+      title: 'Dashboard',
+      type: MenuItemType.Item,
+      url: 'dashboard',
+    },
+  ];
+
   constructor(public authService: FirebaseAuthService) {}
 
   public ngOnInit(): void {
     this.menuItems$ = this.authService
       .hasRole(UserRoleTypes.Admin)
       .pipe(
-        tap(console.error.bind(null, '111')),
-        map(isAdmin => (isAdmin ? this.adminSideNav : [])),
-        tap(console.error.bind(null, '222'))
+        map(
+          isAdmin =>
+            isAdmin
+              ? [...this.studentSideNav, ...this.adminSideNav]
+              : this.studentSideNav
+        )
       );
   }
 }
