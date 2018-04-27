@@ -31,6 +31,8 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { getDefaultNewUserRoles } from './authorisation/roles';
+import { AdminGuard } from './authorisation/admin.guard';
+import { AuthorisationModule } from './authorisation/authorisation.module';
 
 @NgModule({
   imports: [
@@ -56,6 +58,7 @@ import { getDefaultNewUserRoles } from './authorisation/roles';
     MainContentModule,
 
     GuardsModule,
+    AuthorisationModule,
 
     RouterModule.forRoot(
       [
