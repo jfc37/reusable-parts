@@ -30,6 +30,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ShellComponent } from './components/shell/shell.component';
+import { getDefaultNewUserRoles } from './authorisation/roles';
 
 @NgModule({
   imports: [
@@ -96,6 +97,7 @@ import { ShellComponent } from './components/shell/shell.component';
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
+    { provide: 'defaultNewUserRoles', useValue: getDefaultNewUserRoles() },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
   declarations: [AppComponent, ShellComponent],

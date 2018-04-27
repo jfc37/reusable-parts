@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { catchError, concatMap } from 'rxjs/operators';
+import { catchError, concatMap, concat, tap, map, mapTo } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 const DEFAULT_REGISTERATION_ERROR_MESSAGE = 'Registeration failed';
 const FIREBASE_REGISTERATION_ERRORS = {
@@ -13,31 +14,56 @@ const FIREBASE_REGISTERATION_ERRORS = {
 
 @Injectable()
 export class FirebaseRegistrationService {
-  constructor(private af: AngularFireAuth) {}
+  constructor(
+    private af: AngularFireAuth,
+    @Inject('defaultNewUserRoles') private defaultRoles: any
+  ) {
+    if (!defaultRoles) {
+      throw new Error(
+        `No injector provided for 'defaultNewUserRoles', check you've included it in app.module`
+      );
+    }
+  }
 
   public register(
     name: string,
     email: string,
     password: string
   ): Observable<any> {
-    return Observable.fromPromise(
-      this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
-        email,
-        password
-      )
-    ).pipe(
-      concatMap(() =>
-        Observable.fromPromise(
-          this.af.auth.currentUser.updateProfile({
-            displayName: name,
-            photoURL: undefined,
-          })
-        )
-      ),
+    return this.createUser(email, password).pipe(
+      concatMap(uid => this.setRoles(uid)),
+      concatMap(() => this.updateName(name)),
       catchError(error => {
         throw FIREBASE_REGISTERATION_ERRORS[error.code] ||
           DEFAULT_REGISTERATION_ERROR_MESSAGE;
       })
     );
+  }
+
+  private createUser(email: string, password: string): Observable<string> {
+    return Observable.fromPromise(
+      this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
+        email,
+        password
+      )
+    ).pipe(map(response => response.user.uid));
+  }
+
+  private updateName(name: string): Observable<void> {
+    return Observable.fromPromise(
+      this.af.auth.currentUser.updateProfile({
+        displayName: name,
+        photoURL: undefined,
+      })
+    );
+  }
+
+  private setRoles(uid: string): Observable<string> {
+    return fromPromise(
+      this.af.app
+        .firestore()
+        .doc('user-roles/' + uid)
+        .set(this.defaultRoles)
+    ).pipe(mapTo(uid));
   }
 }
