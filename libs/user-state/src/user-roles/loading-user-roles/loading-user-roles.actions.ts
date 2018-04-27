@@ -1,11 +1,17 @@
 import { Action } from '@ngrx/store';
 
 export enum LoadingUserRolesActionTypes {
+  Reset = '[Loading User Roles] Reset',
+
   GetAll = '[Loading User Roles] Get All',
 
   LoadAll = '[Loading User Roles] Load All',
   LoadAllSuccess = '[Loading User Roles] Load All Success',
   LoadAllFailure = '[Loading User Roles] Load All Failure',
+}
+
+export class ResetAllUserRoles implements Action {
+  readonly type = LoadingUserRolesActionTypes.Reset;
 }
 
 export class GetAllUserRoles implements Action {
@@ -26,6 +32,7 @@ export class LoadAllUserRolesFailure implements Action {
 }
 
 export type LoadingUserRolesActions =
+  | ResetAllUserRoles
   | LoadAllUserRoles
   | LoadAllUserRolesSuccess
   | LoadAllUserRolesFailure;

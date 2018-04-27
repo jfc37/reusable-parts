@@ -1,14 +1,13 @@
-import { Action } from '@ngrx/store';
 import {
-  getDefaultLoadAllState,
   LoadAllState,
-  getLoadingAllState,
-  getLoadedAllState,
+  getDefaultLoadAllState,
   getLoadedAllErrorState,
+  getLoadedAllState,
+  getLoadingAllState,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
-  LoadingUserRolesActions,
   LoadingUserRolesActionTypes,
+  LoadingUserRolesActions,
 } from './loading-user-roles.actions';
 
 export function loadingUserRolesReducer(
@@ -16,6 +15,9 @@ export function loadingUserRolesReducer(
   action: LoadingUserRolesActions
 ): LoadAllState {
   switch (action.type) {
+    case LoadingUserRolesActionTypes.Reset:
+      return getDefaultLoadAllState();
+
     case LoadingUserRolesActionTypes.LoadAll:
       return getLoadingAllState();
 

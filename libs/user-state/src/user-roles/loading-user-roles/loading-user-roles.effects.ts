@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import {
-  LoadingUserRolesActionTypes,
-  LoadAllUserRoles,
-  LoadAllUserRolesSuccess,
-  LoadAllUserRolesFailure,
-} from './loading-user-roles.actions';
-import {
-  map,
-  filter,
-  mapTo,
-  withLatestFrom,
-  switchMap,
-  mergeMap,
-  catchError,
-} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { UserFeatureState } from '@reusable-parts/user-state/src/user-feature.reducer';
-import { shouldLoadAllUserRolesSelectors } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
+import { UserFeatureState } from '@reusable-parts/user-state/src/user-feature.reducer';
+import {
+  hasLoadingAllUserRolesErroredSelector,
+  shouldLoadAllUserRolesSelectors,
+} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
 import { of } from 'rxjs/observable/of';
+import {
+  catchError,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import {
+  LoadAllUserRoles,
+  LoadAllUserRolesFailure,
+  LoadAllUserRolesSuccess,
+  LoadingUserRolesActionTypes,
+  ResetAllUserRoles,
+} from './loading-user-roles.actions';
 
 @Injectable()
 export class LoadingUserRolesEffects {
@@ -27,25 +30,33 @@ export class LoadingUserRolesEffects {
   getAll$ = this.actions$
     .ofType(LoadingUserRolesActionTypes.GetAll)
     .pipe(
+      withLatestFrom(this.store.select(hasLoadingAllUserRolesErroredSelector)),
+      map(([action, shouldReset]) => shouldReset && new ResetAllUserRoles()),
       withLatestFrom(this.store.select(shouldLoadAllUserRolesSelectors)),
-      filter(([action, shouldLoad]) => shouldLoad),
-      mapTo(new LoadAllUserRoles())
+      map(([resetAction, shouldLoad]) =>
+        [resetAction, shouldLoad && new LoadAllUserRoles()].filter(Boolean)
+      ),
+      filter(actions => actions.length > 0),
+      mergeMap(actions => actions)
     );
 
   @Effect()
-  loadAll$ = this.actions$.ofType(LoadingUserRolesActionTypes.LoadAll).pipe(
-    switchMap(() =>
-      this.repository
-        .getAllUserRoles()
-        .pipe(mergeMap(meals => [new LoadAllUserRolesSuccess()]))
-    ),
-    catchError(err => {
-      console.error('Error loading all user roles');
-      return of(
-        new LoadAllUserRolesFailure(err || 'Failed loading user roles')
-      );
-    })
-  );
+  loadAll$ = this.actions$
+    .ofType(LoadingUserRolesActionTypes.LoadAll)
+    .pipe(
+      switchMap(() =>
+        this.repository
+          .getAllUserRoles()
+          .pipe(
+            mergeMap(meals => [new LoadAllUserRolesSuccess()]),
+            catchError(err =>
+              of(
+                new LoadAllUserRolesFailure(err || 'Failed loading user roles')
+              )
+            )
+          )
+      )
+    );
 
   constructor(
     private actions$: Actions,
