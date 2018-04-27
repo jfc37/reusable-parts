@@ -18,7 +18,7 @@ before_script:
 script:
   - npm run prettier:warn
   - ng lint
-  - ng build --prod --app=sous-chef
+  - ng build --prod
 
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN

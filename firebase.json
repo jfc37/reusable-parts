@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/apps/sous-chef",
+    "public": "dist/apps/fullswing",
     "ignore": [
       "firebase.json",
       "**/.*",
