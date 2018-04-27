@@ -30,8 +30,9 @@ export class FirebaseRegistrationService {
     email: string,
     password: string
   ): Observable<any> {
-    return this.createUser(email, password).pipe(
+    return this.createAccount(email, password).pipe(
       concatMap(uid => this.setRoles(uid)),
+      concatMap(uid => this.setUser(uid, name, email)),
       concatMap(() => this.updateName(name)),
       catchError(error => {
         throw FIREBASE_REGISTERATION_ERRORS[error.code] ||
@@ -40,7 +41,7 @@ export class FirebaseRegistrationService {
     );
   }
 
-  private createUser(email: string, password: string): Observable<string> {
+  private createAccount(email: string, password: string): Observable<string> {
     return Observable.fromPromise(
       this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
         email,
@@ -64,6 +65,19 @@ export class FirebaseRegistrationService {
         .firestore()
         .doc('user-roles/' + uid)
         .set(this.defaultRoles)
+    ).pipe(mapTo(uid));
+  }
+
+  private setUser(
+    uid: string,
+    name: string,
+    email: string
+  ): Observable<string> {
+    return fromPromise(
+      this.af.app
+        .firestore()
+        .doc('user/' + uid)
+        .set({ name, email })
     ).pipe(mapTo(uid));
   }
 }

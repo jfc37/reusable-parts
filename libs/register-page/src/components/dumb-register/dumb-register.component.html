@@ -27,10 +27,19 @@
 
         <mat-form-field>
           <input matInput
-            placeholder="Name"
-            formControlName="name">
-          <mat-error *ngIf="displayError('name')">
-            Name is required
+            placeholder="First name"
+            formControlName="firstName">
+          <mat-error *ngIf="displayError('firstName')">
+            First name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+            placeholder="Surname"
+            formControlName="surname">
+          <mat-error *ngIf="displayError('surname')">
+            Surmame is required
           </mat-error>
         </mat-form-field>
 

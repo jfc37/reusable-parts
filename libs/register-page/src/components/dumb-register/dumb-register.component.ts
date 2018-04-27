@@ -70,7 +70,8 @@ export class DumbRegisterComponent implements OnInit, OnChanges {
 
   public ngOnInit() {
     this.registerForm = new FormBuilder().group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
+      surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       passwordConfirm: ['', [Validators.required, confirmPassword]],
@@ -91,8 +92,10 @@ export class DumbRegisterComponent implements OnInit, OnChanges {
   }
 
   public register(): void {
+    const firstName = this.registerForm.get('firstName').value;
+    const surname = this.registerForm.get('surname').value;
     this.registrationAttempt.emit({
-      name: this.registerForm.get('name').value,
+      name: [firstName, surname].join(' '),
       email: this.registerForm.get('email').value,
       password: this.registerForm.get('password').value,
     });
