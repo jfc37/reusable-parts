@@ -12,30 +12,30 @@ import {
   switchMap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { SetUserRoles } from '../user-roles/user-roles.actions';
+import { SetUsers } from '../users/users.actions';
 import {
-  LoadAllUserRoles,
-  LoadAllUserRolesFailure,
-  LoadAllUserRolesSuccess,
-  LoadingUserRolesActionTypes,
-  ResetAllUserRoles,
-} from './loading-user-roles.actions';
+  LoadAllUsers,
+  LoadAllUsersFailure,
+  LoadAllUsersSuccess,
+  LoadingUsersActionTypes,
+  ResetAllUsers,
+} from './loading-users.actions';
 import {
-  hasLoadingAllUserRolesErroredSelector,
-  shouldLoadAllUserRolesSelectors,
-} from './loading-user-roles.selectors';
+  hasLoadingAllUsersErroredSelector,
+  shouldLoadAllUsersSelectors,
+} from './loading-users.selectors';
 
 @Injectable()
-export class LoadingUserRolesEffects {
+export class LoadingUsersEffects {
   @Effect()
   getAll$ = this.actions$
-    .ofType(LoadingUserRolesActionTypes.GetAll)
+    .ofType(LoadingUsersActionTypes.GetAll)
     .pipe(
-      withLatestFrom(this.store.select(hasLoadingAllUserRolesErroredSelector)),
-      map(([action, shouldReset]) => shouldReset && new ResetAllUserRoles()),
-      withLatestFrom(this.store.select(shouldLoadAllUserRolesSelectors)),
+      withLatestFrom(this.store.select(hasLoadingAllUsersErroredSelector)),
+      map(([action, shouldReset]) => shouldReset && new ResetAllUsers()),
+      withLatestFrom(this.store.select(shouldLoadAllUsersSelectors)),
       map(([resetAction, shouldLoad]) =>
-        [resetAction, shouldLoad && new LoadAllUserRoles()].filter(Boolean)
+        [resetAction, shouldLoad && new LoadAllUsers()].filter(Boolean)
       ),
       filter(actions => actions.length > 0),
       mergeMap(actions => actions)
@@ -43,20 +43,18 @@ export class LoadingUserRolesEffects {
 
   @Effect()
   loadAll$ = this.actions$
-    .ofType(LoadingUserRolesActionTypes.LoadAll)
+    .ofType(LoadingUsersActionTypes.LoadAll)
     .pipe(
       switchMap(() =>
         this.repository
-          .getAllUserRoles()
+          .getAllUsers()
           .pipe(
             mergeMap(roles => [
-              new SetUserRoles(...roles),
-              new LoadAllUserRolesSuccess(),
+              new SetUsers(...roles),
+              new LoadAllUsersSuccess(),
             ]),
             catchError(err =>
-              of(
-                new LoadAllUserRolesFailure(err || 'Failed loading user roles')
-              )
+              of(new LoadAllUsersFailure(err || 'Failed loading users'))
             )
           )
       )

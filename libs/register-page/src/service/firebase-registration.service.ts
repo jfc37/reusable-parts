@@ -76,7 +76,7 @@ export class FirebaseRegistrationService {
     return fromPromise(
       this.af.app
         .firestore()
-        .doc('user/' + uid)
+        .doc('users/' + uid)
         .set({ name, email })
     ).pipe(mapTo(uid));
   }

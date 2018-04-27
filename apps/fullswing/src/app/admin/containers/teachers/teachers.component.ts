@@ -7,6 +7,12 @@ import {
   isLoadingAllUserRolesSelector,
   loadingAllUserRolesErrorMessageSelector,
 } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
+import { GetAllUsers } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
+import {
+  loadingSelector,
+  errorsSelector,
+} from './teachers.component.selectors';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-teachers',
@@ -15,16 +21,19 @@ import {
 })
 export class TeachersComponent implements OnInit {
   public loading$: Observable<boolean>;
-  public errorMessage$: Observable<string>;
+  public errorMessages$: Observable<string[]>;
+  public hasError$: Observable<boolean>;
 
   constructor(private store: Store<UserStateModule>) {}
 
   public ngOnInit(): void {
     this.store.dispatch(new GetAllUserRoles());
+    this.store.dispatch(new GetAllUsers());
 
-    this.loading$ = this.store.select(isLoadingAllUserRolesSelector);
-    this.errorMessage$ = this.store.select(
-      loadingAllUserRolesErrorMessageSelector
+    this.loading$ = this.store.select(loadingSelector);
+    this.errorMessages$ = this.store.select(errorsSelector);
+    this.hasError$ = this.errorMessages$.pipe(
+      map(errorMessages => errorMessages.length > 0)
     );
   }
 }

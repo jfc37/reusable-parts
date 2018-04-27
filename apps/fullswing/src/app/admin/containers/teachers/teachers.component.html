@@ -3,8 +3,12 @@
   <div class="main-content-body">
     <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
     <ng-template #loaded>
-      <jfc-alert *ngIf="errorMessage$ | async as errorMessage; else content"
-        type="error">{{errorMessage}}</jfc-alert>
+      <jfc-alert *ngIf="hasError$ | async; else content"
+        type="error">
+        <p *ngFor="let error of errorMessages$ | async">
+          {{error}}
+        </p>
+      </jfc-alert>
       <ng-template #content>
         Teachers....
       </ng-template>
