@@ -1,6 +1,9 @@
 <jfc-main-content>
   <h1 class="main-content-header">Teachers</h1>
   <div class="main-content-body">
-    Teachers....
+    <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
+    <ng-template #loaded>
+      Teachers....
+    </ng-template>
   </div>
 </jfc-main-content>

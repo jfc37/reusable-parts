@@ -4,12 +4,14 @@ import { TeachersComponent } from './containers/teachers/teachers.component';
 import { RouterModule } from '@angular/router';
 import { MainContentModule } from '@reusable-parts/main-content';
 import { UserStateModule } from '@reusable-parts/user-state';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 
 @NgModule({
   imports: [
     CommonModule,
 
     UserStateModule,
+    CommonUiComponentsModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'teachers' },
