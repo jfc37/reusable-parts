@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
-  userFeatureEffects,
   userFeatureReducer,
   initialUserFeatureState,
 } from '@reusable-parts/user-state/src/user-feature.reducer';
+import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
+import { userFeatureEffects } from '@reusable-parts/user-state/src/user-feature.effects';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import {
     }),
     EffectsModule.forFeature(userFeatureEffects),
   ],
-  providers: [...userFeatureEffects],
+  providers: [...userFeatureEffects, FirebaseUsersService],
 })
 export class UserStateModule {}

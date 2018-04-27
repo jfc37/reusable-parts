@@ -3,7 +3,11 @@
   <div class="main-content-body">
     <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
     <ng-template #loaded>
-      Teachers....
+      <jfc-alert *ngIf="errorMessage$ | async as errorMessage; else content"
+        type="error">{{errorMessage}}</jfc-alert>
+      <ng-template #content>
+        Teachers....
+      </ng-template>
     </ng-template>
   </div>
 </jfc-main-content>

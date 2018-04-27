@@ -3,7 +3,10 @@ import { Store } from '@ngrx/store';
 import { UserStateModule } from '@reusable-parts/user-state';
 import { GetAllUserRoles } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
 import { Observable } from 'rxjs/Observable';
-import { isLoadingAllUserRolesSelector } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
+import {
+  isLoadingAllUserRolesSelector,
+  loadingAllUserRolesErrorMessageSelector,
+} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
 
 @Component({
   selector: 'jfc-teachers',
@@ -12,6 +15,7 @@ import { isLoadingAllUserRolesSelector } from '@reusable-parts/user-state/src/us
 })
 export class TeachersComponent implements OnInit {
   public loading$: Observable<boolean>;
+  public errorMessage$: Observable<string>;
 
   constructor(private store: Store<UserStateModule>) {}
 
@@ -19,5 +23,8 @@ export class TeachersComponent implements OnInit {
     this.store.dispatch(new GetAllUserRoles());
 
     this.loading$ = this.store.select(isLoadingAllUserRolesSelector);
+    this.errorMessage$ = this.store.select(
+      loadingAllUserRolesErrorMessageSelector
+    );
   }
 }
