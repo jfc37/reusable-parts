@@ -101,10 +101,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
     }),
-    // StoreModule.forFeature('app', appReducer, {
-    //   initialState: appInitialState,
-    // }),
-    // EffectsModule.forFeature([AppEffects]),
   ],
   providers: [
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
