@@ -23,7 +23,6 @@
     "prettier": "prettier --write \"{apps,libs}/**/*.ts\"",
     "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\"",
     "prepush": "ng lint && npm run prettier:warn",
-
     "pwa": "ng build --prod && cd dist/apps/sous-chef && http-server -p 8080"
   },
   "private": true,
@@ -90,6 +89,7 @@
     "@types/node": "^6.0.106",
     "@types/slug": "^0.9.0",
     "codelyzer": "^4.0.1",
+    "husky": "^0.14.3",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
