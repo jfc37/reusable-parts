@@ -8,10 +8,7 @@
       "name": "fullswing",
       "root": "apps/fullswing/src",
       "outDir": "dist/apps/fullswing",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets", "favicon.ico"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -19,9 +16,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "jfc",
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -34,10 +29,7 @@
       "name": "sous-chef",
       "root": "apps/sous-chef/src",
       "outDir": "dist/apps/sous-chef",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets", "favicon.ico"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -46,9 +38,7 @@
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "serviceWorker": true,
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -72,13 +62,6 @@
     {
       "name": "common-pwa-parts",
       "root": "libs/common-pwa-parts/src",
-      "test": "../../../test.js",
-      "appRoot": "",
-      "tags": []
-    },
-    {
-      "name": "common-state",
-      "root": "libs/common-state/src",
       "test": "../../../test.js",
       "appRoot": "",
       "tags": []
@@ -139,6 +122,13 @@
       "test": "../../../test.js"
     },
     {
+      "name": "user-state",
+      "root": "libs/user-state/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "welcome",
       "appRoot": "",
       "root": "libs/welcome/src",
@@ -158,38 +148,23 @@
   "lint": [
     {
       "project": "./tsconfig.spec.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/src/tsconfig.app.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/sous-chef/e2e/tsconfig.e2e.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/fullswing/src/tsconfig.app.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     },
     {
       "project": "apps/fullswing/e2e/tsconfig.e2e.json",
-      "exclude": [
-        "**/node_modules/**",
-        "**/@fuse/**"
-      ]
+      "exclude": ["**/node_modules/**", "**/@fuse/**"]
     }
   ],
   "test": {

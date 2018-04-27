@@ -5,6 +5,8 @@ export * from './src/delete-state/delete.selectors';
 
 export * from './src/create-state/create.state';
 
+export * from './src/load-all-state/load-all.state';
+
 export * from './src/update-state/update.state';
 export * from './src/update-state/update.selectors';
 
