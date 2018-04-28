@@ -1,7 +1,7 @@
 /**
  * Roles a user can have
  */
-export interface UserRoles {
+export interface FullSwingRoles {
   student: boolean;
   teacher?: boolean;
   admin?: boolean;
@@ -10,7 +10,7 @@ export interface UserRoles {
 /**
  * When creating a new user, they should be a student only
  */
-export function getDefaultNewUserRoles(): UserRoles {
+export function getDefaultNewUserRoles(): FullSwingRoles {
   return {
     student: true,
     teacher: false,
@@ -18,7 +18,7 @@ export function getDefaultNewUserRoles(): UserRoles {
   };
 }
 
-export enum UserRoleTypes {
+export enum FullSwingRoleTypes {
   Student = 'student',
   Teacher = 'teacher',
   Admin = 'admin',

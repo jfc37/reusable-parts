@@ -3,7 +3,7 @@ import { MenuItem, MenuItemType } from '@reusable-parts/side-nav';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { FirebaseAuthService } from '@reusable-parts/guards';
-import { UserRoleTypes } from '../../authorisation/roles';
+import { FullSwingRoleTypes } from '../../authorisation/roles';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -44,7 +44,7 @@ export class ShellComponent implements OnInit {
 
   public ngOnInit(): void {
     this.menuItems$ = this.authService
-      .hasRole(UserRoleTypes.Admin)
+      .hasRole(FullSwingRoleTypes.Admin)
       .pipe(
         map(
           isAdmin =>

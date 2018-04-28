@@ -7,12 +7,8 @@ import {
   isLoadingAllUsersSelector,
   loadingAllUsersErrorMessageSelector,
 } from '@reusable-parts/user-state/src/users/loading-users/loading-users.selectors';
-import { UserRoleTypes } from '../../../authorisation/roles';
-import {
-  userIdsWithRoleSelectorFactory,
-  allUserRolesSelector,
-} from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.selectors';
 import { allUsersWithRoleFactory } from '@reusable-parts/user-state/src/users/users/users.selectors';
+import { FullSwingRoleTypes } from '../../../authorisation/roles';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,
@@ -26,4 +22,6 @@ export const errorsSelector = createSelector(
   (...errors) => errors.filter(Boolean)
 );
 
-export const teachersSelector = allUsersWithRoleFactory(UserRoleTypes.Teacher);
+export const teachersSelector = allUsersWithRoleFactory(
+  FullSwingRoleTypes.Teacher
+);
