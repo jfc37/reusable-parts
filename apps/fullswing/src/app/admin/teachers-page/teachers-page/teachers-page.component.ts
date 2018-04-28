@@ -9,14 +9,14 @@ import {
   errorsSelector,
   loadingSelector,
   teachersSelector,
-} from './teachers.component.selectors';
+} from './teachers-page.component.selectors';
 
 @Component({
   selector: 'jfc-teachers',
-  templateUrl: './teachers.component.html',
-  styleUrls: ['./teachers.component.scss'],
+  templateUrl: './teachers-page.component.html',
+  styleUrls: ['./teachers-page.component.scss'],
 })
-export class TeachersComponent implements OnInit {
+export class TeachersPageComponent implements OnInit {
   public loading$: Observable<boolean>;
   public errorMessages$: Observable<string[]>;
   public hasError$: Observable<boolean>;
