@@ -13,7 +13,10 @@ import {
 } from '@reusable-parts/user-state/src/users/users/users.selectors';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
 import { hasAnyUserRoleUpdateErroredSelector } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
-import { allUserRoleIdsRemoving } from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.selectors';
+import {
+  allUserRoleIdsRemoving,
+  hasAnyUserRoleRemoveErroredSelector,
+} from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.selectors';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,
@@ -55,7 +58,13 @@ export const addTeacherFailedMessageSelector = createSelector(
   hasError => hasError && 'Adding user as a teacher failed. Please try agin.'
 );
 
+export const removeTeacherFailedMessageSelector = createSelector(
+  hasAnyUserRoleRemoveErroredSelector,
+  hasError => hasError && 'Removing user as a teacher failed. Please try agin.'
+);
+
 export const warningMessagesSelector = createSelector(
   addTeacherFailedMessageSelector,
+  removeTeacherFailedMessageSelector,
   (...messages) => messages.filter(Boolean)
 );

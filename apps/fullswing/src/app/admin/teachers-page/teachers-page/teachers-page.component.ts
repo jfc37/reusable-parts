@@ -90,7 +90,8 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$),
         filter(Boolean),
         tap(() => this.addNewTeacher.reset())
-      );
+      )
+      .subscribe();
   }
 
   public ngOnDestroy(): void {
