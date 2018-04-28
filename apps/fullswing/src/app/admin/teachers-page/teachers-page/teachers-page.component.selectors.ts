@@ -7,7 +7,10 @@ import {
   isLoadingAllUsersSelector,
   loadingAllUsersErrorMessageSelector,
 } from '@reusable-parts/user-state/src/users/loading-users/loading-users.selectors';
-import { allUsersWithRoleFactory } from '@reusable-parts/user-state/src/users/users/users.selectors';
+import {
+  allUsersWithRoleFactory,
+  allUsersWithoutRoleFactory,
+} from '@reusable-parts/user-state/src/users/users/users.selectors';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
 
 export const loadingSelector = createSelector(
@@ -24,4 +27,18 @@ export const errorsSelector = createSelector(
 
 export const teachersSelector = allUsersWithRoleFactory(
   FullSwingRoleTypes.Teacher
+);
+
+export const nonTeachersSelector = allUsersWithoutRoleFactory(
+  FullSwingRoleTypes.Teacher
+);
+
+export const teacherModelsSelector = createSelector(
+  teachersSelector,
+  teachers => teachers.map(teacher => ({ ...teacher, disableActions: true }))
+);
+
+export const potentialTeacherModelsSelector = createSelector(
+  nonTeachersSelector,
+  users => users.map(user => ({ name: user.name, id: user.id }))
 );

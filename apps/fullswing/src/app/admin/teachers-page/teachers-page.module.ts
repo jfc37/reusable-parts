@@ -5,11 +5,21 @@ import { MainContentModule } from '@reusable-parts/main-content';
 import { TeachersPageComponent } from './teachers-page/teachers-page.component';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { ViewTeachersComponent } from './components/view-teachers/view-teachers.component';
-import { MatTableModule, MatButtonModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatButtonModule,
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material';
+import { AddNewTeacherComponent } from './components/add-new-teacher/add-new-teacher.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: TeachersPageComponent },
@@ -20,7 +30,14 @@ import { MatTableModule, MatButtonModule } from '@angular/material';
 
     MatTableModule,
     MatButtonModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  declarations: [TeachersPageComponent, ViewTeachersComponent],
+  declarations: [
+    TeachersPageComponent,
+    ViewTeachersComponent,
+    AddNewTeacherComponent,
+  ],
 })
 export class TeachersPageModule {}

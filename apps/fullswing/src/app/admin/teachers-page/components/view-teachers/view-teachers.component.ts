@@ -22,7 +22,7 @@ export class ViewTeachersComponent {
 }
 
 export interface TeacherModel {
-  id?: string;
+  id: string;
   name: string;
   disableActions: boolean;
 }

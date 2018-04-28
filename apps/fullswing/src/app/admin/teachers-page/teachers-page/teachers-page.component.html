@@ -10,6 +10,8 @@
         </p>
       </jfc-alert>
       <ng-template #content>
+        <jfc-add-new-teacher [potentialTeachers]="potentialTeachers$ | async"
+          (addTeacher)="addTeacher($event)"></jfc-add-new-teacher>
         <jfc-view-teachers [teachers]="teachers$ | async"
           (remove)="remove($event)"></jfc-view-teachers>
       </ng-template>
