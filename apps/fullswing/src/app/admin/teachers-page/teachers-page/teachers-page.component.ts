@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserStateModule } from '@reusable-parts/user-state';
 import { GetAllUserRoles } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
@@ -25,6 +30,7 @@ import { FullSwingRoleTypes } from '../../../authorisation/roles';
   selector: 'jfc-teachers',
   templateUrl: './teachers-page.component.html',
   styleUrls: ['./teachers-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersPageComponent implements OnInit {
   @ViewChild(AddNewTeacherComponent)

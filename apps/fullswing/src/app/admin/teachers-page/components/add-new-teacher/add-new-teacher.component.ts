@@ -8,7 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { startWith, map, filter } from 'rxjs/operators';
 
@@ -24,7 +24,10 @@ export class AddNewTeacherComponent implements OnInit, OnChanges {
 
   @Output() public addTeacher = new EventEmitter<string>();
 
-  public selectionFormControl = new FormControl('', Validators.required);
+  public selectionFormControl = new FormControl('', [
+    Validators.required,
+    isSelectionOption,
+  ]);
   public filteredOptions$: Observable<PotentialTeacherModel[]>;
 
   public ngOnInit(): void {
@@ -70,4 +73,12 @@ export class AddNewTeacherComponent implements OnInit, OnChanges {
 export interface PotentialTeacherModel {
   id: string;
   name: string;
+}
+
+function isSelectionOption(control: AbstractControl) {
+  if (!control || typeof control.value === 'string') {
+    return {
+      isSelectionOption: true,
+    };
+  }
 }
