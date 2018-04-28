@@ -37,7 +37,6 @@ export class FirebaseUsersService {
           .collection('users/')
           .get()
       ).pipe(
-        tap(x => console.error('xxx', x)),
         map(collection =>
           collection.docs.map(doc => ({
             id: doc.id,
