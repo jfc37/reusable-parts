@@ -10,8 +10,8 @@
         </p>
       </jfc-alert>
       <ng-template #content>
-        Teachers....
-        <pre>{{teachers$ | async | json}}</pre>
+        <jfc-view-teachers [teachers]="teachers$ | async"
+          (remove)="remove($event)"></jfc-view-teachers>
       </ng-template>
     </ng-template>
   </div>

@@ -37,4 +37,8 @@ export class TeachersPageComponent implements OnInit {
 
     this.teachers$ = this.store.select(teachersSelector);
   }
+
+  public remove(id: string) {
+    console.error('REMOVING TEACHER', id);
+  }
 }
