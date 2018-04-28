@@ -4,6 +4,7 @@ import { UserRoles } from '@reusable-parts/user-state/src/user-roles/user-roles/
 export enum UserRolesActionTypes {
   Set = '[User Roles] Set',
   Add = '[User Roles] Add',
+  Remove = '[User Roles] Remove',
 }
 
 export class SetUserRoles implements Action {
@@ -21,4 +22,10 @@ export class AddUserRole implements Action {
   constructor(public id: string, public role: string) {}
 }
 
-export type UserRolesActions = SetUserRoles | AddUserRole;
+export class RemoveUserRole implements Action {
+  readonly type = UserRolesActionTypes.Remove;
+
+  constructor(public id: string, public role: string) {}
+}
+
+export type UserRolesActions = SetUserRoles | AddUserRole | RemoveUserRole;

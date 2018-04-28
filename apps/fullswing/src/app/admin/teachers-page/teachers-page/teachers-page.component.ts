@@ -33,6 +33,10 @@ import {
   ResetUpdateUserRoles,
 } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.actions';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
+import {
+  ResetRemoveUserRoles,
+  AttemptToRemoveUserRoles,
+} from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.actions';
 
 @Component({
   selector: 'jfc-teachers',
@@ -94,7 +98,10 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
   public remove(id: string) {
-    console.error('REMOVING TEACHER', id);
+    this.store.dispatch(new ResetRemoveUserRoles());
+    this.store.dispatch(
+      new AttemptToRemoveUserRoles(id, FullSwingRoleTypes.Teacher)
+    );
   }
 
   public addTeacher(id: string) {

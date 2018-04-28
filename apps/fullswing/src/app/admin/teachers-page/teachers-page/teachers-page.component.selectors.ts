@@ -13,6 +13,7 @@ import {
 } from '@reusable-parts/user-state/src/users/users/users.selectors';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
 import { hasAnyUserRoleUpdateErroredSelector } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
+import { allUserRoleIdsRemoving } from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.selectors';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,
@@ -36,7 +37,12 @@ export const nonTeachersSelector = allUsersWithoutRoleFactory(
 
 export const teacherModelsSelector = createSelector(
   teachersSelector,
-  teachers => teachers.map(teacher => ({ ...teacher, disableActions: true }))
+  allUserRoleIdsRemoving,
+  (teachers, removingIds) =>
+    teachers.map(teacher => ({
+      ...teacher,
+      disableActions: removingIds.includes(teacher.id),
+    }))
 );
 
 export const potentialTeacherModelsSelector = createSelector(

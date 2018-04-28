@@ -20,6 +20,12 @@ export function userRolesReducer(
         state
       );
 
+    case UserRolesActionTypes.Remove:
+      return userRolesAdapter.updateOne(
+        { id: action.id, changes: { [action.role]: false } },
+        state
+      );
+
     default:
       return state;
   }
