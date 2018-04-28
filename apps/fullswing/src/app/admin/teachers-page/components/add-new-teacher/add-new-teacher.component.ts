@@ -5,6 +5,8 @@ import {
   Input,
   Output,
   OnInit,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +18,7 @@ import { startWith, map, filter } from 'rxjs/operators';
   styleUrls: ['./add-new-teacher.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddNewTeacherComponent implements OnInit {
+export class AddNewTeacherComponent implements OnInit, OnChanges {
   @Input() public potentialTeachers: PotentialTeacherModel[];
   @Input() public disabled: boolean;
 
@@ -31,6 +33,15 @@ export class AddNewTeacherComponent implements OnInit {
       map(val => this.filter(val))
     );
   }
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled'] && !changes['disabled'].isFirstChange()) {
+      if (this.disabled) {
+        this.selectionFormControl.disable();
+      } else {
+        this.selectionFormControl.enable();
+      }
+    }
+  }
 
   public reset(): void {
     this.selectionFormControl.reset();
@@ -42,7 +53,7 @@ export class AddNewTeacherComponent implements OnInit {
   }
 
   public submit(): void {
-    this.addTeacher.emit(this.selectionFormControl.value);
+    this.addTeacher.emit(this.selectionFormControl.value.id);
   }
 
   private filter(val: string): PotentialTeacherModel[] {

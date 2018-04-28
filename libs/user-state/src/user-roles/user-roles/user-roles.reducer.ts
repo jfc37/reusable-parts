@@ -14,6 +14,12 @@ export function userRolesReducer(
     case UserRolesActionTypes.Set:
       return userRolesAdapter.addAll(action.userRoles, state);
 
+    case UserRolesActionTypes.Add:
+      return userRolesAdapter.updateOne(
+        { id: action.id, changes: { [action.role]: true } },
+        state
+      );
+
     default:
       return state;
   }

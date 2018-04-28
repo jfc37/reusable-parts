@@ -7,8 +7,6 @@ export interface UpdateStatus {
   error: string;
 }
 
-export interface UpdateState extends EntityState<UpdateStatus> {}
-
 export const updateAdapter = createEntityAdapter<UpdateStatus>({
   selectId: updateStatus => updateStatus.id,
 });

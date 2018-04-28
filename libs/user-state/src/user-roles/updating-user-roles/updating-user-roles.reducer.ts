@@ -1,31 +1,31 @@
 import {
-  MealUpdatingActions,
-  MealUpdatingActionTypes,
-} from './meal-updating.actions';
-import {
   updateAdapter,
+  UpdateStatus,
+  getUpdatingStatus,
   getUpdatedStatus,
   getUpdateErrorStatus,
-  getUpdatingStatus,
-  UpdateStatus,
 } from '@reusable-parts/common-ngrx-patterns';
+import {
+  UpdatingUserRolesActions,
+  UpdatingUserRolesActionTypes,
+} from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.actions';
 import { EntityState } from '@ngrx/entity';
 
-export function mealUpdatingReducer(
+export function updatingUserRolesReducer(
   state = updateAdapter.getInitialState(),
-  action: MealUpdatingActions
+  action: UpdatingUserRolesActions
 ): EntityState<UpdateStatus> {
   switch (action.type) {
-    case MealUpdatingActionTypes.Update:
+    case UpdatingUserRolesActionTypes.UpdateRequest:
       return updateAdapter.addOne(getUpdatingStatus(action.id), state);
 
-    case MealUpdatingActionTypes.UpdateSuccess:
+    case UpdatingUserRolesActionTypes.UpdateSuccess:
       return updateAdapter.updateOne(
         { id: action.id, changes: getUpdatedStatus(action.id) },
         state
       );
 
-    case MealUpdatingActionTypes.UpdateFailure:
+    case UpdatingUserRolesActionTypes.UpdateFailure:
       return updateAdapter.updateOne(
         {
           id: action.id,

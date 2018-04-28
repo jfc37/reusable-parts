@@ -3,6 +3,7 @@ import { UserRoles } from '@reusable-parts/user-state/src/user-roles/user-roles/
 
 export enum UserRolesActionTypes {
   Set = '[User Roles] Set',
+  Add = '[User Roles] Add',
 }
 
 export class SetUserRoles implements Action {
@@ -14,4 +15,10 @@ export class SetUserRoles implements Action {
   }
 }
 
-export type UserRolesActions = SetUserRoles;
+export class AddUserRole implements Action {
+  readonly type = UserRolesActionTypes.Add;
+
+  constructor(public id: string, public role: string) {}
+}
+
+export type UserRolesActions = SetUserRoles | AddUserRole;

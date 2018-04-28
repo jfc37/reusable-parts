@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, mapTo } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 import { UserRoles } from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.state';
 import { User } from '@reusable-parts/user-state/src/users/users/users.state';
@@ -45,6 +45,20 @@ export class FirebaseUsersService {
           }))
         )
       );
+    } catch (e) {
+      console.error('Error', e);
+      return _throw(e);
+    }
+  }
+
+  public addUserRole(id: string, role: string): Observable<void> {
+    try {
+      return fromPromise(
+        this.af.app
+          .firestore()
+          .doc(`user-roles/${id}`)
+          .update({ [role]: true })
+      ).pipe(mapTo(null));
     } catch (e) {
       console.error('Error', e);
       return _throw(e);

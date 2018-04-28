@@ -5,7 +5,7 @@ import { GetAllUserRoles } from '@reusable-parts/user-state/src/user-roles/loadi
 import { GetAllUsers } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import {
   AddNewTeacherComponent,
   PotentialTeacherModel,
@@ -17,6 +17,9 @@ import {
   potentialTeacherModelsSelector,
   teacherModelsSelector,
 } from './teachers-page.component.selectors';
+import { isUpdatingAnyUserRolesSelector } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
+import { AttemptToUpdateUserRoles } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.actions';
+import { FullSwingRoleTypes } from '../../../authorisation/roles';
 
 @Component({
   selector: 'jfc-teachers',
@@ -32,7 +35,7 @@ export class TeachersPageComponent implements OnInit {
 
   public teachers$: Observable<TeacherModel[]>;
   public potentialTeachers$: Observable<PotentialTeacherModel[]>;
-  public resetAddTeachers$ = new ReplaySubject<boolean>();
+  public disableAddingNewTeacher$: Observable<boolean>;
 
   constructor(private store: Store<UserStateModule>) {}
 
@@ -47,7 +50,11 @@ export class TeachersPageComponent implements OnInit {
     );
 
     this.teachers$ = this.store.select(teacherModelsSelector);
+
     this.potentialTeachers$ = this.store.select(potentialTeacherModelsSelector);
+    this.disableAddingNewTeacher$ = this.store.select(
+      isUpdatingAnyUserRolesSelector
+    );
   }
 
   public remove(id: string) {
@@ -55,7 +62,9 @@ export class TeachersPageComponent implements OnInit {
   }
 
   public addTeacher(id: string) {
-    console.error('ADD TEACHER', id);
+    this.store.dispatch(
+      new AttemptToUpdateUserRoles(id, FullSwingRoleTypes.Teacher)
+    );
 
     this.addNewTeacher.reset();
   }
