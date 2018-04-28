@@ -16,6 +16,9 @@ export function updatingUserRolesReducer(
   action: UpdatingUserRolesActions
 ): EntityState<UpdateStatus> {
   switch (action.type) {
+    case UpdatingUserRolesActionTypes.Reset:
+      return updateAdapter.getInitialState();
+
     case UpdatingUserRolesActionTypes.UpdateRequest:
       return updateAdapter.addOne(getUpdatingStatus(action.id), state);
 

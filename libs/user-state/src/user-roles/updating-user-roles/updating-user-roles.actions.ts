@@ -1,11 +1,17 @@
 import { Action } from '@ngrx/store';
 
 export enum UpdatingUserRolesActionTypes {
+  Reset = '[Updating User Roles] Reset',
+
   UpdateAttempt = '[Updating User Roles] Attempt',
 
   UpdateRequest = '[Updating User Roles] Request',
   UpdateSuccess = '[Updating User Roles] Success',
   UpdateFailure = '[Updating User Roles] Failure',
+}
+
+export class ResetUpdateUserRoles implements Action {
+  readonly type = UpdatingUserRolesActionTypes.Reset;
 }
 
 export class AttemptToUpdateUserRoles implements Action {
@@ -29,6 +35,7 @@ export class UpdateUserRolesFailure implements Action {
 }
 
 export type UpdatingUserRolesActions =
+  | ResetUpdateUserRoles
   | AttemptToUpdateUserRoles
   | UpdateUserRolesRequest
   | UpdateUserRolesSuccess

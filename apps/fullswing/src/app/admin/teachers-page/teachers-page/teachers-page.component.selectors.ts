@@ -12,6 +12,7 @@ import {
   allUsersWithoutRoleFactory,
 } from '@reusable-parts/user-state/src/users/users/users.selectors';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
+import { hasAnyUserRoleUpdateErroredSelector } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,
@@ -41,4 +42,14 @@ export const teacherModelsSelector = createSelector(
 export const potentialTeacherModelsSelector = createSelector(
   nonTeachersSelector,
   users => users.map(user => ({ name: user.name, id: user.id }))
+);
+
+export const addTeacherFailedMessageSelector = createSelector(
+  hasAnyUserRoleUpdateErroredSelector,
+  hasError => hasError && 'Adding user as a teacher failed. Please try agin.'
+);
+
+export const warningMessagesSelector = createSelector(
+  addTeacherFailedMessageSelector,
+  (...messages) => messages.filter(Boolean)
 );

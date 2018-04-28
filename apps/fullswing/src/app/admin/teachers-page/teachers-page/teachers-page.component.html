@@ -5,11 +5,17 @@
     <ng-template #loaded>
       <jfc-alert *ngIf="hasError$ | async; else content"
         type="error">
-        <p *ngFor="let error of errorMessages$ | async">
+        <div *ngFor="let error of errorMessages$ | async">
           {{error}}
-        </p>
+        </div>
       </jfc-alert>
       <ng-template #content>
+        <jfc-alert *ngIf="hasWarnings$ | async"
+          type="warning">
+          <div *ngFor="let warning of warningMessages$ | async">
+            {{warning}}
+          </div>
+        </jfc-alert>
         <jfc-add-new-teacher [potentialTeachers]="potentialTeachers$ | async"
           [disabled]="disableAddingNewTeacher$ | async"
           (addTeacher)="addTeacher($event)"></jfc-add-new-teacher>

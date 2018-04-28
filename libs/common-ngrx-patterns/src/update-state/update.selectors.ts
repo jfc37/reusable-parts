@@ -11,6 +11,18 @@ export function allUpdatingSelectorFn(selector) {
   );
 }
 
+export function allUpdatedSelectorFn(selector) {
+  return createSelector(allFn(selector), updates =>
+    updates.filter(update => update.updated)
+  );
+}
+
+export function allUpdateErroredSelectorFn(selector) {
+  return createSelector(allFn(selector), updates =>
+    updates.filter(update => update.error)
+  );
+}
+
 export function allUpdatingIdsSelectorFn(selector) {
   return createSelector(allUpdatingSelectorFn(selector), updates =>
     updates.map(update => update.id)
@@ -18,8 +30,17 @@ export function allUpdatingIdsSelectorFn(selector) {
 }
 
 export function isAnyUpdatingSelectorFn(selector) {
-  return createSelector(
-    allUpdatingSelectorFn(selector),
-    updates => updates.length > 0
-  );
+  return createSelector(allUpdatingSelectorFn(selector), isNonEmpty);
+}
+
+export function hasAnyUpdatedSelectorFn(selector) {
+  return createSelector(allUpdatedSelectorFn(selector), isNonEmpty);
+}
+
+export function hasAnyUpdateErroredSelectorFn(selector) {
+  return createSelector(allUpdateErroredSelectorFn(selector), isNonEmpty);
+}
+
+function isNonEmpty(arr: any[]) {
+  return arr.length > 0;
 }
