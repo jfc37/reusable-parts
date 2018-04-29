@@ -9,6 +9,7 @@ import { MatTableModule, MatButtonModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: ViewBlocksPageComponent },

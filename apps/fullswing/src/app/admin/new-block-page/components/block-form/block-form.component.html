@@ -1,0 +1,90 @@
+<form name="form"
+  [formGroup]="form"
+  novalidate>
+
+  <mat-form-field>
+    <input matInput
+      autocomplete="off"
+      placeholder="Name"
+      formControlName="name">
+    <mat-error *ngIf="displayError('name')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      autocomplete="off"
+      formControlName="startDate"
+      placeholder="Start date"
+      [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix
+      [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="displayError('startDate')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- <mat-form-field>
+    <input matInput
+      placeholder="Start time"
+      formControlName="startTime">
+    <mat-error *ngIf="displayError('startTime')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      placeholder="Minutes per class"
+      formControlName="classLength">
+    <mat-error *ngIf="displayError('classLength')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      placeholder="Number of classes"
+      formControlName="numberOfClasses">
+    <mat-error *ngIf="displayError('numberOfClasses')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      placeholder="Class capacity"
+      formControlName="classCapacity">
+    <mat-error *ngIf="displayError('classCapacity')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      placeholder="Teacher"
+      formControlName="teacher">
+    <mat-error *ngIf="displayError('teacher')">
+      Surmame is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+      placeholder="Invite only"
+      formControlName="inviteOnly">
+  </mat-form-field> -->
+
+
+  <button mat-raised-button
+    type="submit"
+    color="accent"
+    class="submit-button"
+    [attr.aria-label]="saveButtonText"
+    [disabled]="disabled || form.invalid"
+    (click)="submit()">
+    {{saveButtonText}}
+  </button>
+</form>

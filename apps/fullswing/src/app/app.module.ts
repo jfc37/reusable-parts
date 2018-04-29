@@ -34,6 +34,7 @@ import { getDefaultNewUserRoles } from './authorisation/roles';
 import { AdminGuard } from './authorisation/admin.guard';
 import { AuthorisationModule } from './authorisation/authorisation.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -57,6 +58,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     TopNavModule,
     SideNavModule,
     MainContentModule,
+
+    MatNativeDateModule,
 
     GuardsModule,
     AuthorisationModule,
@@ -108,6 +111,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
     { provide: 'defaultNewUserRoles', useValue: getDefaultNewUserRoles() },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-NZ' },
   ],
   declarations: [AppComponent, ShellComponent, DashboardComponent],
   bootstrap: [AppComponent],

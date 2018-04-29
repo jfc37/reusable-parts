@@ -1,17 +1,15 @@
 <jfc-main-content>
   <h1 class="main-content-header">Blocks</h1>
   <div class="main-content-body">
-    <!-- <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
-      <ng-template #loaded>
-        <jfc-alert *ngIf="hasError$ | async; else content"
-          type="error">
-          <div *ngFor="let error of errorMessages$ | async">
-            {{error}}
-          </div>
-        </jfc-alert>
-        <ng-template #content> -->
-    Blocks...
-    <!-- </ng-template>
-      </ng-template> -->
+    <jfc-alert type="info">
+      No blocks. Want to create a new one?
+    </jfc-alert>
+
+    <a mat-raised-button
+      color="accent"
+      aria-label="New block"
+      [routerLink]="'/app/admin/blocks/new'">
+      Add
+    </a>
   </div>
 </jfc-main-content>

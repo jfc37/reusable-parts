@@ -1,0 +1,8 @@
+<jfc-main-content>
+  <h1 class="main-content-header">Create new block</h1>
+  <div class="main-content-body">
+    <jfc-block-form [disabled]="disabled$ | async"
+      [saveButtonText]="saveButtonText$ | async"
+      (save)="save($event)"></jfc-block-form>
+  </div>
+</jfc-main-content>
