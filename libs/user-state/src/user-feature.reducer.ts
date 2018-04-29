@@ -7,6 +7,8 @@ import {
   UpdateStatus,
   DeleteStatus,
   deleteAdapter,
+  getInitialUpdateState,
+  getInitialDeleteState,
 } from '@reusable-parts/common-ngrx-patterns';
 import { loadingUserRolesReducer } from './user-roles/loading-user-roles/loading-user-roles.reducer';
 import { userRolesReducer } from './user-roles/user-roles/user-roles.reducer';
@@ -46,8 +48,8 @@ export const userFeatureReducer = {
 
 export const initialUserFeatureState: UserFeatureState = {
   loadingUserRoles: getDefaultLoadAllState(),
-  updatingUserRoles: updateAdapter.getInitialState(),
-  removingUserRoles: deleteAdapter.getInitialState(),
+  updatingUserRoles: getInitialUpdateState(),
+  removingUserRoles: getInitialDeleteState(),
   userRoles: getInitialUserRolesState(),
 
   loadingUsers: getDefaultLoadAllState(),

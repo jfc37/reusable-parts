@@ -13,6 +13,12 @@ export const deleteAdapter = createEntityAdapter<DeleteStatus>({
   selectId: deleteStatus => deleteStatus.id,
 });
 
+export function getInitialDeleteState(): EntityState<DeleteStatus> {
+  return {
+    ...deleteAdapter.getInitialState(),
+  };
+}
+
 export function getDefaultDeleteStatus(id: string): DeleteStatus {
   return {
     id,

@@ -11,6 +11,12 @@ export const updateAdapter = createEntityAdapter<UpdateStatus>({
   selectId: updateStatus => updateStatus.id,
 });
 
+export function getInitialUpdateState(): EntityState<UpdateStatus> {
+  return {
+    ...updateAdapter.getInitialState(),
+  };
+}
+
 export function getDefaultUpdateStatus(id: string): UpdateStatus {
   return {
     id,
