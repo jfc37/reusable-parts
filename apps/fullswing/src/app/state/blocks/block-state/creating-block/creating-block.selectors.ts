@@ -10,6 +10,7 @@ import {
   isCreatingSelectorFn,
   hasCreateErroredSelectorFn,
   shouldCreateSelectorFn,
+  hasCreatedSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns/src/create-state/create.selector';
 
 const selector = createSelector(
@@ -18,6 +19,8 @@ const selector = createSelector(
 );
 
 export const isCreatingBlockSelector = isCreatingSelectorFn(selector);
+
+export const hasCreatedBlockSelector = hasCreatedSelectorFn(selector);
 
 export const hasCreateBlockErroredSelector = hasCreateErroredSelectorFn(
   selector

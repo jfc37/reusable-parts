@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs/observable/of';
+import {
+  catchError,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
+import { BlockRepository } from '../block.repository';
 import {
   AttemptCreateBlock,
-  CreatingBlockActionTypes,
-  ResetCreateBlock,
+  CreateBlockFailure,
   CreateBlockRequest,
   CreateBlockSuccess,
-  CreateBlockFailure,
+  CreatingBlockActionTypes,
+  ResetCreateBlock,
 } from './creating-block.actions';
-import {
-  withLatestFrom,
-  map,
-  filter,
-  mergeMap,
-  tap,
-  switchMap,
-  catchError,
-  delay,
-} from 'rxjs/operators';
 import {
   hasCreateBlockErroredSelector,
   shouldCreateBlockSelector,
 } from './creating-block.selectors';
-import { BlockRepository } from '../block.repository';
-import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class CreateBlockEffects {
@@ -53,7 +51,6 @@ export class CreateBlockEffects {
   loadAll$ = this.actions$
     .ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest)
     .pipe(
-      delay(5000),
       switchMap(action =>
         this.repository
           .create(action.block)
