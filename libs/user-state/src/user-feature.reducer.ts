@@ -46,15 +46,17 @@ export const userFeatureReducer = {
   users: usersReducer,
 };
 
-export const initialUserFeatureState: UserFeatureState = {
-  loadingUserRoles: getDefaultLoadAllState(),
-  updatingUserRoles: getInitialUpdateState(),
-  removingUserRoles: getInitialDeleteState(),
-  userRoles: getInitialUserRolesState(),
+export function getInitialUserFeatureState(): UserFeatureState {
+  return {
+    loadingUserRoles: getDefaultLoadAllState(),
+    updatingUserRoles: getInitialUpdateState(),
+    removingUserRoles: getInitialDeleteState(),
+    userRoles: getInitialUserRolesState(),
 
-  loadingUsers: getDefaultLoadAllState(),
-  users: getInitialUserState(),
-};
+    loadingUsers: getDefaultLoadAllState(),
+    users: getInitialUserState(),
+  };
+}
 
 export const userFeatureSelector = createFeatureSelector<UserFeatureState>(
   'userFeature'

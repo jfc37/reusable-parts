@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, INITIAL_STATE } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
   userFeatureReducer,
-  initialUserFeatureState,
+  getInitialUserFeatureState,
 } from '@reusable-parts/user-state/src/user-feature.reducer';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
 import { userFeatureEffects } from '@reusable-parts/user-state/src/user-feature.effects';
@@ -12,11 +12,13 @@ import { userFeatureEffects } from '@reusable-parts/user-state/src/user-feature.
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('userFeature', userFeatureReducer, {
-      initialState: initialUserFeatureState,
-    }),
+    StoreModule.forFeature('userFeature', userFeatureReducer),
     EffectsModule.forFeature(userFeatureEffects),
   ],
-  providers: [...userFeatureEffects, FirebaseUsersService],
+  providers: [
+    ...userFeatureEffects,
+    FirebaseUsersService,
+    { provide: INITIAL_STATE, useFactory: getInitialUserFeatureState },
+  ],
 })
 export class UserStateModule {}
