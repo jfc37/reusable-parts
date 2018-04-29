@@ -1,6 +1,12 @@
 <jfc-main-content>
   <h1 class="main-content-header">Create new block</h1>
   <div class="main-content-body">
+    <jfc-alert *ngIf="hasWarnings$ | async"
+      type="warning">
+      <div *ngFor="let warning of warningMessages$ | async">
+        {{warning}}
+      </div>
+    </jfc-alert>
     <jfc-block-form [disabled]="disabled$ | async"
       [saveButtonText]="saveButtonText$ | async"
       (save)="save($event)"></jfc-block-form>

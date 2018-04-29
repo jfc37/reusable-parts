@@ -32,6 +32,6 @@ export function getCreateErrorStatus(error: string): CreateStatus {
   return {
     creating: false,
     created: false,
-    error: error || 'Issue creating',
+    error,
   };
 }
