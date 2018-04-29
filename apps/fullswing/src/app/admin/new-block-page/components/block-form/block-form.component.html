@@ -22,16 +22,16 @@
       [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="displayError('startDate')">
-      Surmame is required
+      Start date is required
     </mat-error>
   </mat-form-field>
 
-  <!-- <mat-form-field>
+  <mat-form-field>
     <input matInput
       placeholder="Start time"
       formControlName="startTime">
     <mat-error *ngIf="displayError('startTime')">
-      Surmame is required
+      Start time is required
     </mat-error>
   </mat-form-field>
 
@@ -62,7 +62,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <input matInput
       placeholder="Teacher"
       formControlName="teacher">

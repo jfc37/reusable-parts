@@ -62,6 +62,7 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
   }
 
   public save(model: BlockFormModel): void {
-    this.store.dispatch(new AttemptCreateBlock(model));
+    console.error(model);
+    // this.store.dispatch(new AttemptCreateBlock(model));
   }
 }

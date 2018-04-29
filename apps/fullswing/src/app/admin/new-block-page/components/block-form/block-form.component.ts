@@ -8,6 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup, Validator, Validators, FormControl } from '@angular/forms';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'jfc-block-form',
@@ -27,10 +28,10 @@ export class BlockFormComponent implements OnInit, OnChanges {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       startDate: new FormControl('', Validators.required),
-      // startTime: new FormControl('', Validators.required),
-      // classLength: new FormControl('', Validators.required),
-      // numberOfClasses: new FormControl('', Validators.required),
-      // classCapacity: new FormControl('', Validators.required),
+      startTime: new FormControl('', Validators.required),
+      classLength: new FormControl('', Validators.required),
+      numberOfClasses: new FormControl('', Validators.required),
+      classCapacity: new FormControl('', Validators.required),
       // teacher: new FormControl('', Validators.required),
       // inviteOnly: new FormControl(''),
     });
@@ -50,7 +51,12 @@ export class BlockFormComponent implements OnInit, OnChanges {
   }
 
   public submit(): void {
-    this.save.emit(this.form.value);
+    const value = {
+      ...this.form.value,
+      startDate: format(this.form.value['startDate'], 'YYYY-MM-DD'),
+    };
+
+    this.save.emit(value);
   }
 
   private updateFormBasedOnModel() {
@@ -64,10 +70,10 @@ export class BlockFormComponent implements OnInit, OnChanges {
 export interface BlockFormModel {
   name: string;
   startDate: string;
-  startTime?: string;
-  classLength?: number;
-  numberOfClasses?: number;
-  classCapacity?: number;
+  startTime: string;
+  classLength: number;
+  numberOfClasses: number;
+  classCapacity: number;
   teacherIds?: string[];
   inviteOnly?: boolean;
 }
