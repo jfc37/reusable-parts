@@ -17,6 +17,11 @@ import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
         path: 'teachers',
         loadChildren: './teachers-page/teachers-page.module#TeachersPageModule',
       },
+      {
+        path: 'blocks',
+        loadChildren:
+          './view-blocks-page/view-blocks-page.module#ViewBlocksPageModule',
+      },
     ]),
   ],
 })

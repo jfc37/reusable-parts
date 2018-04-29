@@ -27,6 +27,12 @@ export class ShellComponent implements OnInit {
           type: MenuItemType.Item,
           url: 'admin/teachers',
         },
+        {
+          id: 'blocks',
+          title: 'Blocks',
+          type: MenuItemType.Item,
+          url: 'admin/blocks',
+        },
       ],
     },
   ];
