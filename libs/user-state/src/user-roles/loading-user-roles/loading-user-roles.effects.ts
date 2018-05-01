@@ -20,10 +20,16 @@ import {
   LoadAllUserRolesSuccess,
   LoadingUserRolesActionTypes,
   ResetAllUserRoles,
+  GetUserRolesByRole,
+  LoadUserRolesByRole,
+  LoadUserRolesByRoleSuccess,
+  LoadUserRolesByRoleFailure,
 } from './loading-user-roles.actions';
 import {
   hasLoadingAllUserRolesErroredSelector,
   shouldLoadAllUserRolesSelectors,
+  allUserRoleIdsErrored,
+  allUserRoleIdsLoadingOrLoaded,
 } from './loading-user-roles.selectors';
 
 @Injectable()
@@ -36,7 +42,6 @@ export class LoadingUserRolesEffects {
         this.store.select(hasLoadingAllUserRolesErroredSelector),
         (action, shouldReset) => shouldReset && new ResetAllUserRoles()
       ),
-      tap(console.error.bind(null, '111')),
       withLatestFrom(
         this.store.select(shouldLoadAllUserRolesSelectors),
         (resetAction, shouldLoad) => [
@@ -45,9 +50,7 @@ export class LoadingUserRolesEffects {
         ]
       ),
       map(actions => actions.filter(Boolean)),
-      tap(console.error.bind(null, '222')),
       filter(actions => actions.length > 0),
-      tap(console.error.bind(null, '333')),
       mergeMap(actions => actions)
     );
 
@@ -66,6 +69,55 @@ export class LoadingUserRolesEffects {
             catchError(err =>
               of(
                 new LoadAllUserRolesFailure(err || 'Failed loading user roles')
+              )
+            )
+          )
+      )
+    );
+
+  @Effect()
+  getByRoleReset$ = this.actions$
+    .ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole)
+    .pipe(
+      withLatestFrom(
+        this.store.select(allUserRoleIdsErrored),
+        (action, erroredIds) =>
+          erroredIds[action.role] && new ResetAllUserRoles()
+      ),
+      filter(Boolean)
+    );
+
+  @Effect()
+  getByRoleLoad$ = this.actions$
+    .ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole)
+    .pipe(
+      withLatestFrom(
+        this.store.select(allUserRoleIdsLoadingOrLoaded),
+        (action, loadingOrLoadedIds) =>
+          !loadingOrLoadedIds[action.role] &&
+          new LoadUserRolesByRole(action.role)
+      ),
+      filter(Boolean)
+    );
+
+  @Effect()
+  loadByRole$ = this.actions$
+    .ofType<LoadUserRolesByRole>(LoadingUserRolesActionTypes.LoadByRole)
+    .pipe(
+      switchMap(action =>
+        this.repository
+          .getUserRolesByRole(action.role)
+          .pipe(
+            mergeMap(roles => [
+              new SetUserRoles(...roles),
+              new LoadUserRolesByRoleSuccess(action.role),
+            ]),
+            catchError(err =>
+              of(
+                new LoadUserRolesByRoleFailure(
+                  action.role,
+                  err || 'Failed loading user roles'
+                )
               )
             )
           )

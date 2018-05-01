@@ -16,6 +16,11 @@ import { map, takeUntil, filter, tap } from 'rxjs/operators';
 import { warningMessagesSelector } from './new-block-page.component.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Router } from '@angular/router';
+import {
+  LoadUserRolesByRole,
+  GetUserRolesByRole,
+} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
+import { FullSwingRoleTypes } from '../../../authorisation/roles';
 
 @Component({
   selector: 'jfc-new-block-page',
@@ -37,6 +42,7 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.store.dispatch(new ResetCreateBlock());
+    this.store.dispatch(new GetUserRolesByRole(FullSwingRoleTypes.Teacher));
 
     this.saveButtonText$ = of('Create');
     this.disabled$ = this.store.select(isCreatingBlockSelector);

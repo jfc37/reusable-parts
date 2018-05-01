@@ -17,6 +17,14 @@ export function allLoadedSelectorFn(selector) {
   );
 }
 
+export function allLoadingOrLoadedSelectorFn(selector) {
+  return createSelector(
+    allLoadingSelectorFn,
+    allLoadedSelectorFn,
+    (loadingIds, loadedIds) => ({ ...loadingIds, ...loadedIds })
+  );
+}
+
 export function allLoadErroredSelectorFn(selector) {
   return createSelector(allFn(selector), loads =>
     loads.filter(load => load.error)

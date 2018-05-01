@@ -29,6 +29,25 @@ export class FirebaseUsersService {
     }
   }
 
+  public getUserRolesByRole(role: string): Observable<UserRoles[]> {
+    try {
+      return fromPromise(
+        this.af.app
+          .firestore()
+          .collection('user-roles/')
+          .where(role, '==', true)
+          .get()
+      ).pipe(
+        map(collection =>
+          collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        )
+      );
+    } catch (e) {
+      console.error('Error', e);
+      return _throw(e);
+    }
+  }
+
   public getAllUsers(): Observable<User[]> {
     try {
       return fromPromise(

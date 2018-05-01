@@ -37,6 +37,24 @@ export function loadingUserRolesReducer(
         state
       );
 
+    case LoadingUserRolesActionTypes.LoadByRole:
+      return loadAdapter.addOne(getLoadingStatus(action.role), state);
+
+    case LoadingUserRolesActionTypes.LoadByRoleSuccess:
+      return loadAdapter.updateOne(
+        { id: action.role, changes: getLoadedStatus(action.role) },
+        state
+      );
+
+    case LoadingUserRolesActionTypes.LoadByRoleFailure:
+      return loadAdapter.updateOne(
+        {
+          id: action.role,
+          changes: getLoadErrorStatus(action.role, action.error),
+        },
+        state
+      );
+
     default:
       return state;
   }
