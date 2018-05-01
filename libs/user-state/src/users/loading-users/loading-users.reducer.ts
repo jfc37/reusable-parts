@@ -1,31 +1,41 @@
 import {
-  LoadAllState,
-  getDefaultLoadAllState,
-  getLoadedAllErrorState,
-  getLoadedAllState,
-  getLoadingAllState,
+  loadAdapter,
+  LoadStatus,
+  getLoadingStatus,
+  getLoadedStatus,
+  getLoadErrorStatus,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   LoadingUsersActionTypes,
   LoadingUsersActions,
 } from './loading-users.actions';
+import { EntityState } from '@ngrx/entity';
 
 export function loadingUsersReducer(
-  state = getDefaultLoadAllState(),
+  state = loadAdapter.getInitialState(),
   action: LoadingUsersActions
-): LoadAllState {
+): EntityState<LoadStatus> {
   switch (action.type) {
     case LoadingUsersActionTypes.Reset:
-      return getDefaultLoadAllState();
+      return loadAdapter.getInitialState();
 
     case LoadingUsersActionTypes.LoadAll:
-      return getLoadingAllState();
+      return loadAdapter.addOne(getLoadingStatus('all'), state);
 
     case LoadingUsersActionTypes.LoadAllSuccess:
-      return getLoadedAllState();
+      return loadAdapter.updateOne(
+        { id: 'all', changes: getLoadedStatus('all') },
+        state
+      );
 
     case LoadingUsersActionTypes.LoadAllFailure:
-      return getLoadedAllErrorState(action.error);
+      return loadAdapter.updateOne(
+        {
+          id: 'all',
+          changes: getLoadErrorStatus('all', action.error),
+        },
+        state
+      );
 
     default:
       return state;

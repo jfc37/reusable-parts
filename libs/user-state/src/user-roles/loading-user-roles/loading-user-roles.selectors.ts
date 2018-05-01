@@ -1,9 +1,13 @@
 import { createSelector } from '@ngrx/store';
 import { userFeatureSelector } from '@reusable-parts/user-state/src/user-feature.reducer';
 import {
-  isLoadingAll,
-  shouldLoadAll,
-  hasAllErrored,
+  isAnyLoadingSelectorFn,
+  hasAnyLoadedSelectorFn,
+  hasAnyLoadErroredSelectorFn,
+  allLoadingIdsSelectorFn,
+  isLoadingIdSelectorFn,
+  hasErroredLoadingIdSelectorFn,
+  shouldLoadIdSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
 const selector = createSelector(
@@ -11,14 +15,22 @@ const selector = createSelector(
   state => state.loadingUserRoles
 );
 
-export const isLoadingAllUserRolesSelector = createSelector(
+export const isLoadingAnyUserRolesSelector = isAnyLoadingSelectorFn(selector);
+export const hasAnyUserRoleLoadErroredSelector = hasAnyLoadErroredSelectorFn(
+  selector
+);
+export const hasAnyUserRoleLoadedSelector = hasAnyLoadedSelectorFn(selector);
+
+export const allUserRoleIdsLoading = allLoadingIdsSelectorFn(selector);
+
+export const isLoadingAllUserRolesSelector = isLoadingIdSelectorFn(
   selector,
-  isLoadingAll
+  'all'
 );
 
-export const hasLoadingAllUserRolesErroredSelector = createSelector(
+export const hasLoadingAllUserRolesErroredSelector = hasErroredLoadingIdSelectorFn(
   selector,
-  hasAllErrored
+  'all'
 );
 
 export const loadingAllUserRolesErrorMessageSelector = createSelector(
@@ -26,7 +38,7 @@ export const loadingAllUserRolesErrorMessageSelector = createSelector(
   hasError => hasError && 'There was an issue loading user roles'
 );
 
-export const shouldLoadAllUserRolesSelectors = createSelector(
+export const shouldLoadAllUserRolesSelectors = shouldLoadIdSelectorFn(
   selector,
-  shouldLoadAll
+  'all'
 );

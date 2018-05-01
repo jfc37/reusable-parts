@@ -11,6 +11,7 @@ import {
   mergeMap,
   switchMap,
   withLatestFrom,
+  tap,
 } from 'rxjs/operators';
 import { SetUserRoles } from '../user-roles/user-roles.actions';
 import {
@@ -31,13 +32,22 @@ export class LoadingUserRolesEffects {
   getAll$ = this.actions$
     .ofType(LoadingUserRolesActionTypes.GetAll)
     .pipe(
-      withLatestFrom(this.store.select(hasLoadingAllUserRolesErroredSelector)),
-      map(([action, shouldReset]) => shouldReset && new ResetAllUserRoles()),
-      withLatestFrom(this.store.select(shouldLoadAllUserRolesSelectors)),
-      map(([resetAction, shouldLoad]) =>
-        [resetAction, shouldLoad && new LoadAllUserRoles()].filter(Boolean)
+      withLatestFrom(
+        this.store.select(hasLoadingAllUserRolesErroredSelector),
+        (action, shouldReset) => shouldReset && new ResetAllUserRoles()
       ),
+      tap(console.error.bind(null, '111')),
+      withLatestFrom(
+        this.store.select(shouldLoadAllUserRolesSelectors),
+        (resetAction, shouldLoad) => [
+          resetAction,
+          shouldLoad && new LoadAllUserRoles(),
+        ]
+      ),
+      map(actions => actions.filter(Boolean)),
+      tap(console.error.bind(null, '222')),
       filter(actions => actions.length > 0),
+      tap(console.error.bind(null, '333')),
       mergeMap(actions => actions)
     );
 

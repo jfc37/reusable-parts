@@ -1,10 +1,5 @@
 import { createSelector } from '@ngrx/store';
 import { userFeatureSelector } from '@reusable-parts/user-state/src/user-feature.reducer';
-import {
-  isLoadingAll,
-  shouldLoadAll,
-  hasAllErrored,
-} from '@reusable-parts/common-ngrx-patterns';
 import { blockFeatureSelector } from '../block-feature.reducer';
 import {
   isCreatingSelectorFn,
