@@ -43,7 +43,7 @@ export class RemovingUserRolesEffects {
   remove$ = this.actions$
     .ofType<RemoveUserRolesRequest>(RemovingUserRolesActionTypes.RemoveRequest)
     .pipe(
-      switchMap(action =>
+      mergeMap(action =>
         this.repository
           .removeUserRole(action.id, action.role)
           .pipe(

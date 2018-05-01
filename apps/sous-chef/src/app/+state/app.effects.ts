@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { startWith, switchMap, map } from 'rxjs/operators';
+import { startWith, switchMap, map, exhaustMap } from 'rxjs/operators';
 import { AppActionTypes, SetMealItems } from './app.actions';
 import { AppRepository } from './app.repository';
 
@@ -11,7 +11,7 @@ export class AppEffects {
     .ofType(AppActionTypes.Initialise)
     .pipe(
       startWith(null),
-      switchMap(() => this.repository.getAllMealItems()),
+      exhaustMap(() => this.repository.getAllMealItems()),
       map(items => new SetMealItems(items))
     );
 

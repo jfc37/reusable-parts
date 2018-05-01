@@ -10,7 +10,7 @@ import {
   shouldLoadIdSelectorFn,
   allLoadErroredIdsSelectorFn,
   allLoadedSelectorFn,
-  allLoadingOrLoadedSelectorFn,
+  allLoadingOrLoadedIdsSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
 const selector = createSelector(
@@ -26,7 +26,7 @@ export const hasAnyUserRoleLoadedSelector = hasAnyLoadedSelectorFn(selector);
 
 export const allUserRoleIdsLoading = allLoadingIdsSelectorFn(selector);
 export const allUserRoleIdsLoaded = allLoadedSelectorFn(selector);
-export const allUserRoleIdsLoadingOrLoaded = allLoadingOrLoadedSelectorFn(
+export const allUserRoleIdsLoadingOrLoaded = allLoadingOrLoadedIdsSelectorFn(
   selector
 );
 export const allUserRoleIdsErrored = allLoadErroredIdsSelectorFn(selector);

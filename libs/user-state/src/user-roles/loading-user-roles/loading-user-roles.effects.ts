@@ -12,6 +12,7 @@ import {
   switchMap,
   withLatestFrom,
   tap,
+  exhaustMap,
 } from 'rxjs/operators';
 import { SetUserRoles } from '../user-roles/user-roles.actions';
 import {
@@ -58,7 +59,7 @@ export class LoadingUserRolesEffects {
   loadAll$ = this.actions$
     .ofType(LoadingUserRolesActionTypes.LoadAll)
     .pipe(
-      switchMap(() =>
+      exhaustMap(() =>
         this.repository
           .getAllUserRoles()
           .pipe(
@@ -94,8 +95,10 @@ export class LoadingUserRolesEffects {
       withLatestFrom(
         this.store.select(allUserRoleIdsLoadingOrLoaded),
         (action, loadingOrLoadedIds) =>
-          !loadingOrLoadedIds[action.role] &&
-          new LoadUserRolesByRole(action.role)
+          !(
+            loadingOrLoadedIds.includes(action.role) ||
+            loadingOrLoadedIds.includes('all')
+          ) && new LoadUserRolesByRole(action.role)
       ),
       filter(Boolean)
     );
@@ -104,7 +107,7 @@ export class LoadingUserRolesEffects {
   loadByRole$ = this.actions$
     .ofType<LoadUserRolesByRole>(LoadingUserRolesActionTypes.LoadByRole)
     .pipe(
-      switchMap(action =>
+      mergeMap(action =>
         this.repository
           .getUserRolesByRole(action.role)
           .pipe(

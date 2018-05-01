@@ -9,6 +9,7 @@ import {
   mergeMap,
   switchMap,
   withLatestFrom,
+  exhaustMap,
 } from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
 import { BlockRepository } from '../block.repository';
@@ -51,7 +52,7 @@ export class CreateBlockEffects {
   loadAll$ = this.actions$
     .ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest)
     .pipe(
-      switchMap(action =>
+      exhaustMap(action =>
         this.repository
           .create(action.block)
           .pipe(

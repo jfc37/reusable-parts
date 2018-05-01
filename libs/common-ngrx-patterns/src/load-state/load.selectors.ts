@@ -19,9 +19,15 @@ export function allLoadedSelectorFn(selector) {
 
 export function allLoadingOrLoadedSelectorFn(selector) {
   return createSelector(
-    allLoadingSelectorFn,
-    allLoadedSelectorFn,
-    (loadingIds, loadedIds) => ({ ...loadingIds, ...loadedIds })
+    allLoadingSelectorFn(selector),
+    allLoadedSelectorFn(selector),
+    (loadingIds, loadedIds) => [...loadingIds, ...loadedIds]
+  );
+}
+
+export function allLoadingOrLoadedIdsSelectorFn(selector) {
+  return createSelector(allLoadingOrLoadedSelectorFn(selector), loads =>
+    loads.map(load => load.id)
   );
 }
 
@@ -33,6 +39,12 @@ export function allLoadErroredSelectorFn(selector) {
 
 export function allLoadingIdsSelectorFn(selector) {
   return createSelector(allLoadingSelectorFn(selector), loads =>
+    loads.map(load => load.id)
+  );
+}
+
+export function allLoadedIdsSelectorFn(selector) {
+  return createSelector(allLoadedSelectorFn(selector), loads =>
     loads.map(load => load.id)
   );
 }

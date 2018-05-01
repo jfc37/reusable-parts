@@ -5,6 +5,7 @@ import {
   userAdapter,
   UserState,
 } from './users.state';
+import { Update } from '@ngrx/entity';
 
 export function usersReducer(
   state = getInitialUserState(),
@@ -12,7 +13,10 @@ export function usersReducer(
 ): UserState {
   switch (action.type) {
     case UsersActionTypes.Set:
-      return userAdapter.addAll(action.users, state);
+      return userAdapter.upsertMany(
+        action.users.map(user => ({ id: user.id, changes: user })),
+        state
+      );
 
     default:
       return state;

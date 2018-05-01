@@ -7,6 +7,7 @@ import {
   withLatestFrom,
   mergeMap,
   switchMap,
+  exhaustMap,
 } from 'rxjs/operators';
 import { MealsFeatureState } from '../meals-feature.state';
 import {
@@ -32,7 +33,7 @@ export class MealLoadingEffects {
   @Effect()
   loadAll$ = this.actions$.pipe(
     ofType(MealLoadingActionTypes.LoadAll),
-    switchMap(() => this.repository.getAll()),
+    exhaustMap(() => this.repository.getAll()),
     mergeMap(meals => [new SetMeals(...meals), new LoadAllSuccessMeals()])
   );
 

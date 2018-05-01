@@ -65,8 +65,8 @@
   <mat-form-field>
     <mat-select placeholder="Teacher">
       <mat-option *ngFor="let teacher of teachers"
-        [value]="teacher.id">
-        {{ teacher.name }}
+        [value]="teacher.value">
+        {{ teacher.label }}
       </mat-option>
     </mat-select>
   </mat-form-field>

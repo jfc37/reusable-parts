@@ -12,6 +12,7 @@ import {
   switchMap,
   withLatestFrom,
   tap,
+  exhaustMap,
 } from 'rxjs/operators';
 import {
   UpdatingUserRolesActionTypes,
@@ -40,7 +41,7 @@ export class UpdatingUserRolesEffects {
   update$ = this.actions$
     .ofType<UpdateUserRolesRequest>(UpdatingUserRolesActionTypes.UpdateRequest)
     .pipe(
-      switchMap(action =>
+      exhaustMap(action =>
         this.repository
           .addUserRole(action.id, action.role)
           .pipe(

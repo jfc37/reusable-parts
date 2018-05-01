@@ -12,7 +12,7 @@ import {
   isCreatingBlockSelector,
   hasCreatedBlockSelector,
 } from '../../../state/blocks/block-state/creating-block/creating-block.selectors';
-import { map, takeUntil, filter, tap } from 'rxjs/operators';
+import { map, takeUntil, filter, tap, mergeMap } from 'rxjs/operators';
 import { warningMessagesSelector } from './new-block-page.component.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Router } from '@angular/router';
@@ -21,6 +21,12 @@ import {
   GetUserRolesByRole,
 } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
+import {
+  teacherIdsSelector,
+  teacherOptionsSelector,
+} from '../../../state/teachers-state/teachers.selectors';
+import { merge } from 'rxjs/operators/merge';
+import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
 
 @Component({
   selector: 'jfc-new-block-page',
@@ -32,6 +38,7 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
   public disabled$: Observable<boolean>;
   public warningMessages$: Observable<string[]>;
   public hasWarnings$: Observable<boolean>;
+  public teachers$: Observable<any>;
 
   private onDestroy$ = new ReplaySubject();
 
@@ -43,9 +50,18 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new ResetCreateBlock());
     this.store.dispatch(new GetUserRolesByRole(FullSwingRoleTypes.Teacher));
+    this.store
+      .select(teacherIdsSelector)
+      .pipe(
+        takeUntil(this.onDestroy$),
+        mergeMap(a => a),
+        tap(id => this.store.dispatch(new GetUser(id)))
+      )
+      .subscribe();
 
     this.saveButtonText$ = of('Create');
     this.disabled$ = this.store.select(isCreatingBlockSelector);
+    this.teachers$ = this.store.select(teacherOptionsSelector);
 
     this.warningMessages$ = this.store.select(warningMessagesSelector);
     this.hasWarnings$ = this.warningMessages$.pipe(

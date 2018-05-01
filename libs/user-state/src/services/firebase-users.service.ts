@@ -70,6 +70,26 @@ export class FirebaseUsersService {
     }
   }
 
+  public getUser(id: string): Observable<User> {
+    try {
+      return fromPromise(
+        this.af.app
+          .firestore()
+          .doc(`users/${id}`)
+          .get()
+      ).pipe(
+        map(doc => ({
+          id: doc.id,
+          email: doc.data().email,
+          name: doc.data().name,
+        }))
+      );
+    } catch (e) {
+      console.error('Error', e);
+      return _throw(e);
+    }
+  }
+
   public addUserRole(id: string, role: string): Observable<void> {
     return this.setUserRole(id, role, true);
   }

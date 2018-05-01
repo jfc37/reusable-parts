@@ -17,6 +17,10 @@ import {
   allUserRoleIdsRemoving,
   hasAnyUserRoleRemoveErroredSelector,
 } from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.selectors';
+import {
+  teachersSelector,
+  nonTeachersSelector,
+} from '../../../state/teachers-state/teachers.selectors';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,
@@ -28,14 +32,6 @@ export const errorsSelector = createSelector(
   loadingAllUserRolesErrorMessageSelector,
   loadingAllUsersErrorMessageSelector,
   (...errors) => errors.filter(Boolean)
-);
-
-export const teachersSelector = allUsersWithRoleFactory(
-  FullSwingRoleTypes.Teacher
-);
-
-export const nonTeachersSelector = allUsersWithoutRoleFactory(
-  FullSwingRoleTypes.Teacher
 );
 
 export const teacherModelsSelector = createSelector(

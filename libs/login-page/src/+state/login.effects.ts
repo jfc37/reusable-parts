@@ -12,6 +12,7 @@ import {
   mapTo,
   switchMap,
   withLatestFrom,
+  exhaustMap,
 } from 'rxjs/operators';
 import {
   LoginActionTypes,
@@ -36,7 +37,7 @@ export class LoginEffects {
   loginRequest$ = this.actions$.pipe(
     ofType(LoginActionTypes.LoginRequest),
     withLatestFrom(this.store.select(emailAndPasswordSelector)),
-    switchMap(([action, { email, password, rememberMe }]) =>
+    exhaustMap(([action, { email, password, rememberMe }]) =>
       this.loginService
         .login(email, password, rememberMe)
         .pipe(

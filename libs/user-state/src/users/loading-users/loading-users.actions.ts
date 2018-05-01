@@ -8,6 +8,12 @@ export enum LoadingUsersActionTypes {
   LoadAll = '[Loading User] Load All',
   LoadAllSuccess = '[Loading User] Load All Success',
   LoadAllFailure = '[Loading User] Load All Failure',
+
+  Get = '[Loading User] Get',
+
+  Load = '[Loading User] Load',
+  LoadSuccess = '[Loading User] Load Success',
+  LoadFailure = '[Loading User] Load Failure',
 }
 
 export class ResetAllUsers implements Action {
@@ -31,8 +37,32 @@ export class LoadAllUsersFailure implements Action {
   constructor(public error: string) {}
 }
 
+export class GetUser implements Action {
+  readonly type = LoadingUsersActionTypes.Get;
+  constructor(public id: string) {}
+}
+
+export class LoadUser implements Action {
+  readonly type = LoadingUsersActionTypes.Load;
+  constructor(public id: string) {}
+}
+
+export class LoadUserSuccess implements Action {
+  readonly type = LoadingUsersActionTypes.LoadSuccess;
+  constructor(public id: string) {}
+}
+
+export class LoadUserFailure implements Action {
+  readonly type = LoadingUsersActionTypes.LoadFailure;
+  constructor(public id: string, public error: string) {}
+}
+
 export type LoadingUsersActions =
   | ResetAllUsers
   | LoadAllUsers
   | LoadAllUsersSuccess
-  | LoadAllUsersFailure;
+  | LoadAllUsersFailure
+  | GetUser
+  | LoadUser
+  | LoadUserSuccess
+  | LoadUserFailure;
