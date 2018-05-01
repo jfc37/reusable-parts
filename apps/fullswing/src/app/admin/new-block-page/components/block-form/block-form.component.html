@@ -62,16 +62,16 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- <mat-form-field>
-    <input matInput
-      placeholder="Teacher"
-      formControlName="teacher">
-    <mat-error *ngIf="displayError('teacher')">
-      Surmame is required
-    </mat-error>
+  <mat-form-field>
+    <mat-select placeholder="Teacher">
+      <mat-option *ngFor="let teacher of teachers"
+        [value]="teacher.id">
+        {{ teacher.name }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <input matInput
       placeholder="Invite only"
       formControlName="inviteOnly">

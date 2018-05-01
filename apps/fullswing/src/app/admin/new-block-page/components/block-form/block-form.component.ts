@@ -17,7 +17,17 @@ import { format } from 'date-fns';
 })
 export class BlockFormComponent implements OnInit, OnChanges {
   @Input() public block: BlockFormModel;
-
+  @Input()
+  public teachers: TeacherModel[] = [
+    {
+      id: 'aaa',
+      name: 'Tim Burton',
+    },
+    {
+      id: 'bbb',
+      name: 'Julie Panda',
+    },
+  ];
   @Input() public disabled: boolean;
   @Input() public saveButtonText: string;
 
@@ -76,4 +86,9 @@ export interface BlockFormModel {
   classCapacity: number;
   teacherIds?: string[];
   inviteOnly?: boolean;
+}
+
+export interface TeacherModel {
+  id: string;
+  name: string;
 }
