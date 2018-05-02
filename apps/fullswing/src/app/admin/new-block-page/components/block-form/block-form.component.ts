@@ -37,11 +37,16 @@ export class BlockFormComponent implements OnInit, OnChanges {
     });
 
     this.updateFormBasedOnModel();
+    this.updateDisableForm();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['block'] && !changes['block'].isFirstChange()) {
       this.updateFormBasedOnModel();
+    }
+
+    if (changes['disabled'] && !changes['disabled'].isFirstChange()) {
+      this.updateDisableForm();
     }
   }
 
@@ -63,6 +68,14 @@ export class BlockFormComponent implements OnInit, OnChanges {
     if (this.block) {
       this.form.get('name').setValue(this.block.name);
       this.form.get('startDate').setValue(this.block.startDate);
+    }
+  }
+
+  private updateDisableForm(): void {
+    if (this.disabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
     }
   }
 }

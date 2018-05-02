@@ -29,7 +29,19 @@ import {
 @Injectable()
 export class CreateBlockEffects {
   @Effect()
-  attempt$ = this.actions$
+  attemptReset$ = this.actions$
+    .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
+    .pipe(
+      map(action => action.block),
+      withLatestFrom(
+        this.store.select(hasCreateBlockErroredSelector),
+        (requestAction, hasError) => hasError && new ResetCreateBlock()
+      ),
+      filter(Boolean)
+    );
+
+  @Effect()
+  attemptLoad$ = this.actions$
     .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
     .pipe(
       map(action => action.block),
@@ -37,19 +49,11 @@ export class CreateBlockEffects {
         this.store.select(shouldCreateBlockSelector),
         (block, shouldCreate) => shouldCreate && new CreateBlockRequest(block)
       ),
-      withLatestFrom(
-        this.store.select(hasCreateBlockErroredSelector),
-        (requestAction, hasError) => [
-          hasError && new ResetCreateBlock(),
-          requestAction,
-        ]
-      ),
-      filter(actions => actions.length > 0),
-      mergeMap(actions => actions.filter(Boolean))
+      filter(Boolean)
     );
 
   @Effect()
-  loadAll$ = this.actions$
+  create$ = this.actions$
     .ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest)
     .pipe(
       exhaustMap(action =>
