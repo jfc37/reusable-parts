@@ -3,15 +3,15 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { BlockFormModel } from '../components/block-form/block-form.component';
 import { Store } from '@ngrx/store';
-import { BlockFeatureState } from '../../../state/blocks/block-state/block-feature.reducer';
+import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
 import {
   AttemptCreateBlock,
   ResetCreateBlock,
-} from '../../../state/blocks/block-state/creating-block/creating-block.actions';
+} from '../../../state/block-state/creating-block/creating-block.actions';
 import {
   isCreatingBlockSelector,
   hasCreatedBlockSelector,
-} from '../../../state/blocks/block-state/creating-block/creating-block.selectors';
+} from '../../../state/block-state/creating-block/creating-block.selectors';
 import { map, takeUntil, filter, tap, mergeMap } from 'rxjs/operators';
 import { warningMessagesSelector } from './new-block-page.component.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';

@@ -15,7 +15,7 @@ import {
 import { BlockFormComponent } from './components/block-form/block-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
-import { BlockStateModule } from '../../state/blocks/block-state/block-state.module';
+import { BlockStateModule } from '../../state/block-state/block-state.module';
 
 @NgModule({
   imports: [

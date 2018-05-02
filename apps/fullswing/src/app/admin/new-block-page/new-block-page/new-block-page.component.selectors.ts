@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { hasCreateBlockErroredSelector } from '../../../state/blocks/block-state/creating-block/creating-block.selectors';
+import { hasCreateBlockErroredSelector } from '../../../state/block-state/creating-block/creating-block.selectors';
 
 export const createErrorMessageSelector = createSelector(
   hasCreateBlockErroredSelector,
