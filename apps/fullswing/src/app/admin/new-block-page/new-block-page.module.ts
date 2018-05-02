@@ -10,6 +10,7 @@ import {
   MatFormFieldModule,
   MatDatepickerModule,
   MatSelectModule,
+  MatSlideToggleModule,
 } from '@angular/material';
 import { BlockFormComponent } from './components/block-form/block-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ import { BlockStateModule } from '../../state/blocks/block-state/block-state.mod
     MatFormFieldModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatSlideToggleModule,
 
     FuseSharedModule,
   ],

@@ -32,8 +32,8 @@ export class BlockFormComponent implements OnInit, OnChanges {
       classLength: new FormControl('', Validators.required),
       numberOfClasses: new FormControl('', Validators.required),
       classCapacity: new FormControl('', Validators.required),
-      // teacher: new FormControl('', Validators.required),
-      // inviteOnly: new FormControl(''),
+      teacher: new FormControl('', Validators.required),
+      inviteOnly: new FormControl(false),
     });
 
     this.updateFormBasedOnModel();
@@ -74,8 +74,8 @@ export interface BlockFormModel {
   classLength: number;
   numberOfClasses: number;
   classCapacity: number;
-  teacherIds?: string[];
-  inviteOnly?: boolean;
+  teacherIds: string[];
+  inviteOnly: boolean;
 }
 
 export interface TeacherModel {
