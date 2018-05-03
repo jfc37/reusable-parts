@@ -5,7 +5,7 @@ import { _throw } from 'rxjs/observable/throw';
 import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { mapTo } from 'rxjs/operators';
+import { mapTo, tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class BlockRepository {
@@ -13,15 +13,63 @@ export class BlockRepository {
 
   public create(block: Block): Observable<void> {
     try {
-      return fromPromise(
-        this.af.app
+      const promise = this.af.app.firestore().runTransaction(transaction => {
+        const b = this.af.app
           .firestore()
           .collection('blocks')
-          .add(block)
-      ).pipe(mapTo(null));
+          .doc();
+        transaction.set(b, block);
+
+        createArrayOfSize(block.numberOfClasses)
+          .map((v, index) =>
+            createClassFromBlock({ ...block, id: b.id }, index)
+          )
+          .forEach(blockClass =>
+            transaction.set(
+              this.af.app
+                .firestore()
+                .collection('classes')
+                .doc(),
+              blockClass
+            )
+          );
+
+        return of(null).toPromise();
+      });
+      return fromPromise(promise).pipe(
+        tap(console.error.bind(null, 'CREATED BLOCK!')),
+        mapTo(null)
+      );
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
     }
   }
+}
+
+interface Class {
+  id?: string;
+  blockId: string;
+  name: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  teacherIds: string[];
+}
+
+function createClassFromBlock(block: Block, index: number): Class {
+  const c = {
+    blockId: block.id,
+    name: block.name + ' - Week ' + (index + 1),
+    startTime: block.startTime,
+    date: block.startDate,
+    teacherIds: block.teacherIds,
+    endTime: 'xxx',
+  };
+  console.error('xx', c);
+  return c;
+}
+
+function createArrayOfSize(size: number): number[] {
+  return Array.apply(null, { length: size }).map(Number.call, Number);
 }

@@ -16,7 +16,17 @@ import { format } from 'date-fns';
   styleUrls: ['./block-form.component.scss'],
 })
 export class BlockFormComponent implements OnInit, OnChanges {
-  @Input() public block: BlockFormModel;
+  @Input()
+  public block: BlockFormModel = {
+    classCapacity: 30,
+    startTime: '19:30',
+    name: 'TEST',
+    teacherIds: ['aaa'],
+    startDate: '2017-10-30',
+    classLength: 40,
+    numberOfClasses: 3,
+    inviteOnly: false,
+  };
   @Input() public teachers: TeacherModel[];
   @Input() public disabled: boolean;
   @Input() public saveButtonText: string;
@@ -59,6 +69,7 @@ export class BlockFormComponent implements OnInit, OnChanges {
     const value = {
       ...this.form.value,
       startDate: format(this.form.value['startDate'], 'YYYY-MM-DD'),
+      teacherIds: [this.form.value['teacher']],
     };
 
     this.save.emit(value);
@@ -68,6 +79,12 @@ export class BlockFormComponent implements OnInit, OnChanges {
     if (this.block) {
       this.form.get('name').setValue(this.block.name);
       this.form.get('startDate').setValue(this.block.startDate);
+      this.form.get('inviteOnly').setValue(this.block.inviteOnly);
+      this.form.get('classCapacity').setValue(this.block.classCapacity);
+      this.form.get('classLength').setValue(this.block.classLength);
+      this.form.get('numberOfClasses').setValue(this.block.numberOfClasses);
+      this.form.get('startTime').setValue(this.block.startTime);
+      this.form.get('teacher').setValue(this.block.teacherIds[0]);
     }
   }
 
