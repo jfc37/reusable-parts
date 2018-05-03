@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { updateAdapter } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 
 function allFn(selector) {
   return createSelector(selector, updateAdapter.getSelectors().selectAll);
@@ -30,17 +31,13 @@ export function allUpdatingIdsSelectorFn(selector) {
 }
 
 export function isAnyUpdatingSelectorFn(selector) {
-  return createSelector(allUpdatingSelectorFn(selector), isNonEmpty);
+  return createSelector(allUpdatingSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasAnyUpdatedSelectorFn(selector) {
-  return createSelector(allUpdatedSelectorFn(selector), isNonEmpty);
+  return createSelector(allUpdatedSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasAnyUpdateErroredSelectorFn(selector) {
-  return createSelector(allUpdateErroredSelectorFn(selector), isNonEmpty);
-}
-
-function isNonEmpty(arr: any[]) {
-  return arr.length > 0;
+  return createSelector(allUpdateErroredSelectorFn(selector), isArrayNotEmpty);
 }

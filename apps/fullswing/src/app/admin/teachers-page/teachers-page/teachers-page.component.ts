@@ -37,6 +37,7 @@ import {
   ResetRemoveUserRoles,
   AttemptToRemoveUserRoles,
 } from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.actions';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 
 @Component({
   selector: 'jfc-teachers',
@@ -68,14 +69,10 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
 
     this.loading$ = this.store.select(loadingSelector);
     this.errorMessages$ = this.store.select(errorsSelector);
-    this.hasError$ = this.errorMessages$.pipe(
-      map(errorMessages => errorMessages.length > 0)
-    );
+    this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
     this.warningMessages$ = this.store.select(warningMessagesSelector);
-    this.hasWarnings$ = this.warningMessages$.pipe(
-      map(warningMessages => warningMessages.length > 0)
-    );
+    this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
     this.teachers$ = this.store.select(teacherModelsSelector);
 

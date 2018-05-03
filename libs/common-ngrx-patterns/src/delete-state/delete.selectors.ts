@@ -1,5 +1,6 @@
 import { deleteAdapter } from '@reusable-parts/common-ngrx-patterns/src/delete-state/delete.state';
 import { createSelector } from '@ngrx/store';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 
 function allFn(selector) {
   return createSelector(selector, deleteAdapter.getSelectors().selectAll);
@@ -30,17 +31,13 @@ export function allDeletingIdsSelectorFn(selector) {
 }
 
 export function isAnyDeletingSelectorFn(selector) {
-  return createSelector(allDeletingSelectorFn(selector), isNonEmpty);
+  return createSelector(allDeletingSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasAnyDeletedSelectorFn(selector) {
-  return createSelector(allDeletedSelectorFn(selector), isNonEmpty);
+  return createSelector(allDeletedSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasAnyDeleteErroredSelectorFn(selector) {
-  return createSelector(allDeleteErroredSelectorFn(selector), isNonEmpty);
-}
-
-function isNonEmpty(arr: any[]) {
-  return arr.length > 0;
+  return createSelector(allDeleteErroredSelectorFn(selector), isArrayNotEmpty);
 }

@@ -1,5 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { loadAdapter } from '@reusable-parts/common-ngrx-patterns/src/load-state/load.state';
+import {
+  isArrayNotEmpty,
+  areAllArgumentsFalsy,
+} from '@reusable-parts/common-functions';
 
 function allFn(selector) {
   return createSelector(selector, loadAdapter.getSelectors().selectAll);
@@ -60,11 +64,11 @@ export function isLoadingIdSelectorFn(selector, id) {
 }
 
 export function isAnyLoadingSelectorFn(selector) {
-  return createSelector(allLoadingSelectorFn(selector), isNonEmpty);
+  return createSelector(allLoadingSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasAnyLoadedSelectorFn(selector) {
-  return createSelector(allLoadedSelectorFn(selector), isNonEmpty);
+  return createSelector(allLoadedSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasLoadedIdSelectorFn(selector, id) {
@@ -72,7 +76,7 @@ export function hasLoadedIdSelectorFn(selector, id) {
 }
 
 export function hasAnyLoadErroredSelectorFn(selector) {
-  return createSelector(allLoadErroredSelectorFn(selector), isNonEmpty);
+  return createSelector(allLoadErroredSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function hasErroredLoadingIdSelectorFn(selector, id) {
@@ -80,10 +84,6 @@ export function hasErroredLoadingIdSelectorFn(selector, id) {
     allLoadErroredIdsSelectorFn(selector),
     arrayIncludesFn(id)
   );
-}
-
-function isNonEmpty(arr: any[]) {
-  return arr.length > 0;
 }
 
 function arrayIncludesFn(value): (array: any[]) => boolean {
@@ -94,10 +94,6 @@ export function shouldLoadIdSelectorFn(selector, id) {
   return createSelector(
     hasLoadedIdSelectorFn(selector, id),
     isLoadingIdSelectorFn(selector, id),
-    allFalsy
+    areAllArgumentsFalsy
   );
-}
-
-function allFalsy(...args: boolean[]) {
-  return args.every(arg => !arg);
 }

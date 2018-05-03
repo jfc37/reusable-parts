@@ -1,6 +1,7 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { updateAdapter } from '@reusable-parts/common-ngrx-patterns/src/update-state/update.state';
 import { CreateStatus } from '@reusable-parts/common-ngrx-patterns';
+import { areAllArgumentsFalsy } from '@reusable-parts/common-functions';
 
 export function isCreatingSelectorFn(
   selector: MemoizedSelector<any, CreateStatus>
@@ -26,10 +27,6 @@ export function shouldCreateSelectorFn(
   return createSelector(
     isCreatingSelectorFn(selector),
     hasCreatedSelectorFn(selector),
-    allArgumentsFalse
+    areAllArgumentsFalsy
   );
-}
-
-function allArgumentsFalse(...args: any[]) {
-  return args.every(arg => !arg);
 }

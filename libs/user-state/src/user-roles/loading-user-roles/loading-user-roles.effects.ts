@@ -32,6 +32,7 @@ import {
   allUserRoleIdsErrored,
   allUserRoleIdsLoadingOrLoaded,
 } from './loading-user-roles.selectors';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 
 @Injectable()
 export class LoadingUserRolesEffects {
@@ -51,7 +52,7 @@ export class LoadingUserRolesEffects {
         ]
       ),
       map(actions => actions.filter(Boolean)),
-      filter(actions => actions.length > 0),
+      filter(isArrayNotEmpty),
       mergeMap(actions => actions)
     );
 

@@ -32,6 +32,7 @@ import {
 import { merge } from 'rxjs/operators/merge';
 import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
 import { Block } from '../../../state/block-state/block';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 
 @Component({
   selector: 'jfc-new-block-page',
@@ -73,14 +74,10 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
     this.teachers$ = this.store.select(teacherOptionsSelector);
 
     this.warningMessages$ = this.store.select(warningMessagesSelector);
-    this.hasWarnings$ = this.warningMessages$.pipe(
-      map(warningMessages => warningMessages.length > 0)
-    );
+    this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
     this.loading$ = this.store.select(loadingSelector);
     this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
-    this.hasError$ = this.errorMessages$.pipe(
-      map(messages => messages.length > 0)
-    );
+    this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
     this.store
       .select(hasCreatedBlockSelector)
