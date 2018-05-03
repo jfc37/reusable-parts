@@ -13,7 +13,11 @@ import {
   hasCreatedBlockSelector,
 } from '../../../state/block-state/creating-block/creating-block.selectors';
 import { map, takeUntil, filter, tap, mergeMap } from 'rxjs/operators';
-import { warningMessagesSelector } from './new-block-page.component.selectors';
+import {
+  warningMessagesSelector,
+  loadingSelector,
+  fatalErrorMessagesSelector,
+} from './new-block-page.component.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Router } from '@angular/router';
 import {
@@ -27,6 +31,7 @@ import {
 } from '../../../state/teachers-state/teachers.selectors';
 import { merge } from 'rxjs/operators/merge';
 import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
+import { Block } from '../../../state/block-state/block';
 
 @Component({
   selector: 'jfc-new-block-page',
@@ -34,6 +39,10 @@ import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/load
   styleUrls: ['./new-block-page.component.scss'],
 })
 export class NewBlockPageComponent implements OnInit, OnDestroy {
+  public loading$: Observable<boolean>;
+  public errorMessages$: Observable<string[]>;
+  public hasError$: Observable<boolean>;
+
   public saveButtonText$: Observable<string>;
   public disabled$: Observable<boolean>;
   public warningMessages$: Observable<string[]>;
@@ -67,6 +76,11 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
     this.hasWarnings$ = this.warningMessages$.pipe(
       map(warningMessages => warningMessages.length > 0)
     );
+    this.loading$ = this.store.select(loadingSelector);
+    this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
+    this.hasError$ = this.errorMessages$.pipe(
+      map(messages => messages.length > 0)
+    );
 
     this.store
       .select(hasCreatedBlockSelector)
@@ -84,6 +98,16 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
   }
 
   public save(model: BlockFormModel): void {
-    this.store.dispatch(new AttemptCreateBlock(model));
+    const block: Block = {
+      name: model.name,
+      numberOfClasses: model.numberOfClasses,
+      teacherIds: model.teacherIds,
+      startDate: model.startDate,
+      startTime: model.startTime,
+      classLength: model.classLength,
+      classCapacity: model.classCapacity,
+      inviteOnly: model.inviteOnly,
+    };
+    this.store.dispatch(new AttemptCreateBlock(block));
   }
 }

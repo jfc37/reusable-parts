@@ -10,7 +10,7 @@
         placeholder="Name"
         formControlName="name">
       <mat-error *ngIf="displayError('name')">
-        Name is required
+        Field is required
       </mat-error>
     </mat-form-field>
   </div>
@@ -26,7 +26,7 @@
         [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="displayError('startDate')">
-        Start date is required
+        Field is required
       </mat-error>
     </mat-form-field>
 
@@ -36,7 +36,7 @@
         placeholder="Start time"
         formControlName="startTime">
       <mat-error *ngIf="displayError('startTime')">
-        Start time is required
+        Field is required
       </mat-error>
     </mat-form-field>
   </div>
@@ -49,7 +49,7 @@
         placeholder="Minutes per class"
         formControlName="classLength">
       <mat-error *ngIf="displayError('classLength')">
-        Surmame is required
+        Field is required
       </mat-error>
     </mat-form-field>
 
@@ -60,7 +60,7 @@
         placeholder="Number of classes"
         formControlName="numberOfClasses">
       <mat-error *ngIf="displayError('numberOfClasses')">
-        Surmame is required
+        Field is required
       </mat-error>
     </mat-form-field>
 
@@ -71,7 +71,7 @@
         placeholder="Class capacity"
         formControlName="classCapacity">
       <mat-error *ngIf="displayError('classCapacity')">
-        Surmame is required
+        Field is required
       </mat-error>
     </mat-form-field>
   </div>
@@ -85,10 +85,13 @@
           {{ teacher.label }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="displayError('teacher')">
+        Field is required
+      </mat-error>
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="pb-20">
     <mat-slide-toggle formControlName="inviteOnly">
       Invite only
     </mat-slide-toggle>

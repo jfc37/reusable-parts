@@ -16,17 +16,7 @@ import { format } from 'date-fns';
   styleUrls: ['./block-form.component.scss'],
 })
 export class BlockFormComponent implements OnInit, OnChanges {
-  @Input()
-  public block: BlockFormModel = {
-    classCapacity: 30,
-    startTime: '19:30',
-    name: 'TEST',
-    teacherIds: ['aaa'],
-    startDate: '2017-10-30',
-    classLength: 40,
-    numberOfClasses: 3,
-    inviteOnly: false,
-  };
+  @Input() public block: BlockFormModel;
   @Input() public teachers: TeacherModel[];
   @Input() public disabled: boolean;
   @Input() public saveButtonText: string;

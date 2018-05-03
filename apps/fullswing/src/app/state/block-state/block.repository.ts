@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { mapTo, tap, map } from 'rxjs/operators';
+import { addMinutes, format } from 'date-fns';
 
 @Injectable()
 export class BlockRepository {
@@ -36,10 +37,7 @@ export class BlockRepository {
 
         return of(null).toPromise();
       });
-      return fromPromise(promise).pipe(
-        tap(console.error.bind(null, 'CREATED BLOCK!')),
-        mapTo(null)
-      );
+      return fromPromise(promise).pipe(mapTo(null));
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
@@ -58,15 +56,18 @@ interface Class {
 }
 
 function createClassFromBlock(block: Block, index: number): Class {
+  const [hour, minute] = block.startTime.split(':').map(x => Number(x));
+  const startTimeAsDate = new Date(null, null, null, hour, minute);
+  const endTimeAsDate = addMinutes(startTimeAsDate, block.classLength);
+  const endTime = format(endTimeAsDate, 'HH:mm');
   const c = {
     blockId: block.id,
     name: block.name + ' - Week ' + (index + 1),
     startTime: block.startTime,
     date: block.startDate,
     teacherIds: block.teacherIds,
-    endTime: 'xxx',
+    endTime,
   };
-  console.error('xx', c);
   return c;
 }
 

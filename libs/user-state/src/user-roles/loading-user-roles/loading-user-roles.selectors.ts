@@ -31,13 +31,18 @@ export const allUserRoleIdsLoadingOrLoaded = allLoadingOrLoadedIdsSelectorFn(
 );
 export const allUserRoleIdsErrored = allLoadErroredIdsSelectorFn(selector);
 
-export const isLoadingAllUserRolesSelector = isLoadingIdSelectorFn(
-  selector,
+export function isLoadingUserRolesSelectorFn(roleType: string) {
+  return isLoadingIdSelectorFn(selector, roleType);
+}
+export const isLoadingAllUserRolesSelector = isLoadingUserRolesSelectorFn(
   'all'
 );
 
-export const hasLoadingAllUserRolesErroredSelector = hasErroredLoadingIdSelectorFn(
-  selector,
+export function hasLoadingUserRolesErroredSelectorFn(roleType: string) {
+  return hasErroredLoadingIdSelectorFn(selector, roleType);
+}
+
+export const hasLoadingAllUserRolesErroredSelector = hasLoadingUserRolesErroredSelectorFn(
   'all'
 );
 
