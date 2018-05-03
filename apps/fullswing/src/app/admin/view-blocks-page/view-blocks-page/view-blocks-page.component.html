@@ -1,15 +1,22 @@
 <jfc-main-content>
   <h1 class="main-content-header">Blocks</h1>
   <div class="main-content-body">
-    <jfc-alert type="info">
+    <div class="pb-20">
+      <a mat-raised-button
+        color="accent"
+        aria-label="New block"
+        [routerLink]="'/app/admin/blocks/new'">
+        Add
+      </a>
+    </div>
+
+    <jfc-alert *ngIf="hasNoBlocks$ | async; else showBlocks"
+      type="info">
       No blocks. Want to create a new one?
     </jfc-alert>
 
-    <a mat-raised-button
-      color="accent"
-      aria-label="New block"
-      [routerLink]="'/app/admin/blocks/new'">
-      Add
-    </a>
+    <ng-template #showBlocks>
+      <jfc-blocks-table [rows]="rows$ | async"></jfc-blocks-table>
+    </ng-template>
   </div>
 </jfc-main-content>

@@ -1,0 +1,53 @@
+<div class="mat-elevation-z8">
+  <mat-table #table
+    [dataSource]="rows">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Between -->
+    <ng-container matColumnDef="between">
+      <mat-header-cell *matHeaderCellDef> Between </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.between}} </mat-cell>
+    </ng-container>
+
+    <!-- Day -->
+    <ng-container matColumnDef="day">
+      <mat-header-cell *matHeaderCellDef> Day </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+    </ng-container>
+
+    <!-- Time -->
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-button
+          color="accent"
+          [disabled]="element.disableGenerate"
+          (click)="generateBlock.emit(element.id)">Generate</button>
+        <button mat-button
+          color="warn"
+          [disabled]="element.disableDelete"
+          (click)="deleteBlock.emit(element.id)">Remove</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

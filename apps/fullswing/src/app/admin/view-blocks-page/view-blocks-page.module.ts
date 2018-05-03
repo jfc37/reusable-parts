@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { MainContentModule } from '@reusable-parts/main-content';
 import { MatTableModule, MatButtonModule } from '@angular/material';
+import { BlocksTableComponent } from './components/blocks-table/blocks-table.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { MatTableModule, MatButtonModule } from '@angular/material';
     MatTableModule,
     MatButtonModule,
   ],
-  declarations: [ViewBlocksPageComponent],
+  declarations: [ViewBlocksPageComponent, BlocksTableComponent],
 })
 export class ViewBlocksPageModule {}
