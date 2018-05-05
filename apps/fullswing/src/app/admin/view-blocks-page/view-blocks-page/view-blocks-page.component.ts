@@ -55,6 +55,5 @@ export class ViewBlocksPageComponent implements OnInit {
     this.store.dispatch(
       new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection)
     );
-    this.store.dispatch(new GetMoreBlocks());
   }
 }

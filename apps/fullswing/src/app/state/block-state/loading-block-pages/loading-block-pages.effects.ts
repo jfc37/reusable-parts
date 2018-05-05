@@ -26,7 +26,10 @@ import {
   LoadingBlockPagesActionTypes,
 } from './loading-block-pages.actions';
 import { isLoadingAnyPagesSelector } from './loading-block-pages.selectors';
-import { SetBlockPage } from '../block-pages/block-pages.actions';
+import {
+  SetBlockPage,
+  BlockPagesActionTypes,
+} from '../block-pages/block-pages.actions';
 import {
   currentBlockPageOrderAndDirectionSelector,
   hasAnyCurrentBlockPagesSelector,
@@ -37,7 +40,10 @@ import {
 export class LoadingBlockPagesEffects {
   @Effect()
   getFirstPage$ = this.actions$
-    .ofType<GetMoreBlocks>(LoadingBlockPagesActionTypes.GetMore)
+    .ofType<GetMoreBlocks>(
+      LoadingBlockPagesActionTypes.GetMore,
+      BlockPagesActionTypes.ChangeSortOrder
+    )
     .pipe(
       withLatestFrom(this.store.select(hasAnyCurrentBlockPagesSelector)),
       filter(([action, hasCurrentPage]) => !hasCurrentPage),
