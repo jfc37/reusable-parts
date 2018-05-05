@@ -18,6 +18,7 @@ import {
   blockRowsSelector,
   isLoadingSelector,
 } from './view-blocks-page.component.selectors';
+import { hasMoreBlockPagesToRetrieveSelector } from '../../../state/block-state/block-pages/block-pages.selectors';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -28,6 +29,7 @@ export class ViewBlocksPageComponent implements OnInit {
   public loading$: Observable<boolean>;
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
+  public showLoadMoreButton$: Observable<boolean>;
 
   constructor(private store: Store<BlockFeatureState>) {}
 
@@ -37,6 +39,9 @@ export class ViewBlocksPageComponent implements OnInit {
       .select(blockRowsSelector)
       .pipe(filter(isArrayNotEmpty));
     this.hasNoBlocks$ = this.store.select(hasNoBlocksSelector);
+    this.showLoadMoreButton$ = this.store.select(
+      hasMoreBlockPagesToRetrieveSelector
+    );
 
     this.store.dispatch(new ResetLoadBlockPages());
     this.store.dispatch(new GetMoreBlocks());

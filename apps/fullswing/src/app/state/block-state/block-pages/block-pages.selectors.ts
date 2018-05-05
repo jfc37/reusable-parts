@@ -5,6 +5,8 @@ import {
   hasAnyCurrentPagesSelectorFn,
   latestCurrentPageKeySelectorFn,
   dataIdsForCurrentPagesSelectorFn,
+  hasReachedFinalPageSelectorFn,
+  hasMorePagesToRetrieveSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
 const selector = createSelector(
@@ -25,5 +27,13 @@ export const latestCurrentBlockPageSelector = latestCurrentPageKeySelectorFn(
 );
 
 export const blockIdsForCurrentPagesSelector = dataIdsForCurrentPagesSelectorFn(
+  selector
+);
+
+export const hasReachedFinalBlockPageSelector = hasReachedFinalPageSelectorFn(
+  selector
+);
+
+export const hasMoreBlockPagesToRetrieveSelector = hasMorePagesToRetrieveSelectorFn(
   selector
 );

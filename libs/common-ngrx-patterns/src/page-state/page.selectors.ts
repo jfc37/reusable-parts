@@ -29,6 +29,23 @@ function allCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
   );
 }
 
+export function hasReachedFinalPageSelectorFn(
+  selector: MemoizedSelector<any, PageState>
+) {
+  return createSelector(allCurrentPagesSelectorFn(selector), pages =>
+    pages.some(page => page.key.isFinalPage)
+  );
+}
+
+export function hasMorePagesToRetrieveSelectorFn(
+  selector: MemoizedSelector<any, PageState>
+) {
+  return createSelector(
+    hasReachedFinalPageSelectorFn(selector),
+    hasFinalPage => !hasFinalPage
+  );
+}
+
 export function hasAnyCurrentPagesSelectorFn(
   selector: MemoizedSelector<any, PageState>
 ) {

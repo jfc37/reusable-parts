@@ -8,6 +8,7 @@ export interface PageKey {
   endAt?: string;
   pageSize: number;
   pageNumber: number;
+  isFinalPage?: boolean;
 }
 
 export enum SortDirection {

@@ -29,7 +29,8 @@
           (sortChanged)="sortChanged($event)"></jfc-blocks-table>
       </ng-template>
 
-      <div class="pt-20">
+      <div *ngIf="showLoadMoreButton$ | async"
+        class="pt-20">
         <button mat-button
           color="accent"
           class="submit-button"

@@ -39,6 +39,7 @@ export function pageKeyToId(key: PageKey): string {
     key.endAt,
     key.pageNumber,
     key.pageSize,
+    key.isFinalPage,
   ].join('|');
 }
 
@@ -50,10 +51,13 @@ export function idToPageKey(id: string): PageKey {
     endAt,
     pageNumberStr,
     pageSizeStr,
+    ,
+    isFinalPageStr,
   ] = id.split('|');
   const sortDirection = sortDirectionStr as SortDirection;
   const pageNumber = Number(pageNumberStr);
   const pageSize = Number(pageSizeStr);
+  const isFinalPage = isFinalPageStr === 'true';
   return {
     orderBy,
     sortDirection,
@@ -61,6 +65,7 @@ export function idToPageKey(id: string): PageKey {
     endAt,
     pageNumber,
     pageSize,
+    isFinalPage,
   };
 }
 
@@ -89,7 +94,8 @@ export const DEFAULT_PAGE_SIZE = 50;
 
 export function getNewKey(key: PageKey, results: any[]): PageKey {
   const endAt = (getLastItemInArray(results) || {})[key.orderBy];
-  return { ...key, endAt };
+  const isFinalPage = results.length < key.pageSize;
+  return { ...key, endAt, isFinalPage };
 }
 
 export const pageAdapter = createEntityAdapter<Page>({

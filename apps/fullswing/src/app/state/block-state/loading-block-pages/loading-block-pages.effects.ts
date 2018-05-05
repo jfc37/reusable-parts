@@ -2,20 +2,29 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {
+  createPage,
   getFirstPageKey,
   getNewKey,
   getNextPageKey,
-  createPage,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   exhaustMap,
   filter,
   map,
   mergeMap,
-  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
+import {
+  BlockPagesActionTypes,
+  SetBlockPage,
+} from '../block-pages/block-pages.actions';
+import {
+  currentBlockPageOrderAndDirectionSelector,
+  hasAnyCurrentBlockPagesSelector,
+  hasMoreBlockPagesToRetrieveSelector,
+  latestCurrentBlockPageSelector,
+} from '../block-pages/block-pages.selectors';
 import { BlockRepository } from '../block.repository';
 import { SetBlocks } from '../blocks/blocks.actions';
 import {
@@ -26,15 +35,6 @@ import {
   LoadingBlockPagesActionTypes,
 } from './loading-block-pages.actions';
 import { isLoadingAnyPagesSelector } from './loading-block-pages.selectors';
-import {
-  SetBlockPage,
-  BlockPagesActionTypes,
-} from '../block-pages/block-pages.actions';
-import {
-  currentBlockPageOrderAndDirectionSelector,
-  hasAnyCurrentBlockPagesSelector,
-  latestCurrentBlockPageSelector,
-} from '../block-pages/block-pages.selectors';
 
 @Injectable()
 export class LoadingBlockPagesEffects {
@@ -63,6 +63,8 @@ export class LoadingBlockPagesEffects {
     .pipe(
       withLatestFrom(this.store.select(hasAnyCurrentBlockPagesSelector)),
       filter(([action, hasCurrentPage]) => hasCurrentPage),
+      withLatestFrom(this.store.select(hasMoreBlockPagesToRetrieveSelector)),
+      filter(([action, hasMorePagesToRetrieve]) => hasMorePagesToRetrieve),
       withLatestFrom(
         this.store.select(latestCurrentBlockPageSelector),
         (action, latestPage) => latestPage
