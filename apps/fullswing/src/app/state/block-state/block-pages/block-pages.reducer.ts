@@ -15,6 +15,9 @@ export function blockPagesReducer(
   action: BlockPagesActions
 ): PageState {
   switch (action.type) {
+    case BlockPagesActionTypes.Reset:
+      return getInitialPageState('startDate', SortDirection.Descending);
+
     case BlockPagesActionTypes.Set:
       return pageAdapter.addOne(action.page, state);
 

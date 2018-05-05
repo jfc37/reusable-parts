@@ -4,7 +4,10 @@ import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 import { Observable } from 'rxjs/Observable';
 import { filter } from 'rxjs/operators';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
-import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
+import {
+  ChangeBlockSortOrder,
+  ResetBlockPages,
+} from '../../../state/block-state/block-pages/block-pages.actions';
 import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import {
   GetMoreBlocks,
@@ -43,6 +46,7 @@ export class ViewBlocksPageComponent implements OnInit {
       hasMoreBlockPagesToRetrieveSelector
     );
 
+    this.store.dispatch(new ResetBlockPages());
     this.store.dispatch(new ResetLoadBlockPages());
     this.store.dispatch(new GetMoreBlocks());
   }
