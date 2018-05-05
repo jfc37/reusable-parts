@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { addWeeks, format } from 'date-fns';
+import { of } from 'rxjs/observable/of';
 import {
-  AttemptGenerateBlock,
-  GeneratingBlockActionTypes,
-  GenerateBlockRequest,
-  GenerateBlockFailure,
-  GenerateBlockSuccess,
-} from './generating-block.actions';
-import {
-  withLatestFrom,
+  catchError,
   filter,
   map,
   mergeMap,
-  catchError,
+  withLatestFrom,
 } from 'rxjs/operators';
-import { allGeneratingBlockIdsSelector } from './generating-block.selectors';
-import { BlockRepository } from '../block.repository';
-import { BlockFeatureState } from '../block-feature.reducer';
-import { blocksDictionarySelector } from '../blocks/blocks.selectors';
-import { addWeeks, format } from 'date-fns';
-import { of } from 'rxjs/observable/of';
-import { SetBlocks } from '../blocks/blocks.actions';
 import { Block } from '../block';
-import { allBlockPagesSelector } from '../block-pages/block-pages.selectors';
+import { BlockFeatureState } from '../block-feature.reducer';
 import { SetBlockPage } from '../block-pages/block-pages.actions';
+import { allBlockPagesSelector } from '../block-pages/block-pages.selectors';
+import { BlockRepository } from '../block.repository';
+import { SetBlocks } from '../blocks/blocks.actions';
+import { blocksDictionarySelector } from '../blocks/blocks.selectors';
+import {
+  AttemptGenerateBlock,
+  GenerateBlockFailure,
+  GenerateBlockRequest,
+  GenerateBlockSuccess,
+  GeneratingBlockActionTypes,
+  ResetGenerateBlock,
+} from './generating-block.actions';
+import { allGeneratingBlockIdsSelector } from './generating-block.selectors';
 
 @Injectable()
 export class GeneratingBlockEffects {
@@ -78,6 +79,11 @@ export class GeneratingBlockEffects {
       ),
       map(updatedPages => new SetBlockPage(...updatedPages))
     );
+
+  @Effect()
+  generateSuccessReset$ = this.actions$
+    .ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess)
+    .pipe(map(() => new ResetGenerateBlock()));
 
   constructor(
     private actions$: Actions,

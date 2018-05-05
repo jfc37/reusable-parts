@@ -8,3 +8,7 @@ export function areAllArgumentsFalsy(...args) {
 export function isAtleastOneArgumentsTruthy(...args) {
   return args.some(Boolean);
 }
+
+export function includeOnlyTruthyArguments(...args) {
+  return args.filter(Boolean);
+}

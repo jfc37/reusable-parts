@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 import { Observable } from 'rxjs/Observable';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
 import {
   ChangeBlockSortOrder,
@@ -20,6 +20,7 @@ import {
 import {
   blockRowsSelector,
   isLoadingSelector,
+  warningMessagesSelector,
 } from './view-blocks-page.component.selectors';
 import { hasMoreBlockPagesToRetrieveSelector } from '../../../state/block-state/block-pages/block-pages.selectors';
 import { AttemptGenerateBlock } from '../../../state/block-state/generating-block/generating-block.actions';
@@ -34,6 +35,8 @@ export class ViewBlocksPageComponent implements OnInit {
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
   public showLoadMoreButton$: Observable<boolean>;
+  public warningMessages$: Observable<string[]>;
+  public hasWarnings$: Observable<boolean>;
 
   constructor(private store: Store<BlockFeatureState>) {}
 
@@ -46,6 +49,9 @@ export class ViewBlocksPageComponent implements OnInit {
     this.showLoadMoreButton$ = this.store.select(
       hasMoreBlockPagesToRetrieveSelector
     );
+
+    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
     this.store.dispatch(new ResetBlockPages());
     this.store.dispatch(new ResetLoadBlockPages());

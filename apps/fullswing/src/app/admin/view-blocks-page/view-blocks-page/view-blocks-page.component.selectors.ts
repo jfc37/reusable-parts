@@ -6,8 +6,14 @@ import {
   BlockStatusTypes,
 } from '../components/blocks-table/blocks-table.component';
 import { hasNotLoadedAnyBlockPagesSelector } from '../../../state/block-state/loading-block-pages/loading-block-pages.selectors';
-import { isAtleastOneArgumentsTruthy } from '@reusable-parts/common-functions';
-import { allGeneratingBlockIdsSelector } from '../../../state/block-state/generating-block/generating-block.selectors';
+import {
+  isAtleastOneArgumentsTruthy,
+  includeOnlyTruthyArguments,
+} from '@reusable-parts/common-functions';
+import {
+  allGeneratingBlockIdsSelector,
+  hasAnyBlockGenerateErroredSelector,
+} from '../../../state/block-state/generating-block/generating-block.selectors';
 
 export const isLoadingSelector = createSelector(
   hasNotLoadedAnyBlockPagesSelector,
@@ -38,4 +44,14 @@ export const blockRowsSelector = createSelector(
           disableGenerate: generatingIds.includes(block.id),
         } as BlockRowModel)
     )
+);
+
+const generateBlockErrorMessageSelect = createSelector(
+  hasAnyBlockGenerateErroredSelector,
+  hasError => hasError && 'Problem generating block. Please try again'
+);
+
+export const warningMessagesSelector = createSelector(
+  generateBlockErrorMessageSelect,
+  includeOnlyTruthyArguments
 );

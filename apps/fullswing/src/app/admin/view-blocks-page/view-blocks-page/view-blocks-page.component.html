@@ -19,6 +19,13 @@
         </a>
       </div>
 
+      <jfc-alert *ngIf="hasWarnings$ | async"
+        type="warning">
+        <div *ngFor="let warning of warningMessages$ | async">
+          {{warning}}
+        </div>
+      </jfc-alert>
+
       <jfc-alert *ngIf="hasNoBlocks$ | async; else showBlocks"
         type="info">
         No blocks. Want to create a new one?
