@@ -4,8 +4,13 @@ import {
   Input,
   Output,
   ChangeDetectionStrategy,
+  ViewChild,
+  AfterViewInit,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'jfc-blocks-table',
@@ -13,16 +18,15 @@ import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
   styleUrls: ['./blocks-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BlocksTableComponent {
+export class BlocksTableComponent implements AfterViewInit, OnChanges {
   @Input() public rows: BlockRowModel[];
 
-  @Output()
-  public sortChanged = new EventEmitter<{
-    orderBy: string;
-    sortDirection: SortDirection;
-  }>();
+  @Output() public sortChanged = new EventEmitter<SortChange>();
   @Output() public generateBlock = new EventEmitter<string>();
   @Output() public deleteBlock = new EventEmitter<string>();
+
+  @ViewChild(MatSort) sort: MatSort;
+  public dataSource = new MatTableDataSource(this.rows);
 
   public displayedColumns = [
     'name',
@@ -32,6 +36,16 @@ export class BlocksTableComponent {
     'time',
     'actions',
   ];
+
+  public ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['rows']) {
+      this.dataSource.data = this.rows;
+    }
+  }
 
   public sortChange(data) {
     this.sortChanged.emit({
@@ -57,4 +71,9 @@ export enum BlockStatusTypes {
   Active = 'active',
   Future = 'future',
   Finished = 'finished',
+}
+
+export interface SortChange {
+  orderBy: string;
+  sortDirection: SortDirection;
 }

@@ -2,7 +2,7 @@
   <mat-table #table
     matSort
     (matSortChange)="sortChange($event)"
-    [dataSource]="rows">
+    [dataSource]="dataSource">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">

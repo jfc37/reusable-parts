@@ -8,6 +8,7 @@ import { of } from 'rxjs/observable/of';
 import {
   BlockRowModel,
   BlockStatusTypes,
+  SortChange,
 } from '../components/blocks-table/blocks-table.component';
 import { Store } from '@ngrx/store';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
@@ -51,10 +52,7 @@ export class ViewBlocksPageComponent implements OnInit {
     this.store.dispatch(new GetMoreBlocks());
   }
 
-  public sortChanged(sortChange: {
-    orderBy: string;
-    sortDirection: SortDirection;
-  }) {
+  public sortChanged(sortChange: SortChange) {
     if (sortChange.orderBy === 'between') {
       sortChange.orderBy = 'startDate';
     }
