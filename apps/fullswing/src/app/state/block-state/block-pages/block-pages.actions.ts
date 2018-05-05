@@ -16,7 +16,11 @@ export class ResetBlockPages implements Action {
 export class SetBlockPage implements Action {
   readonly type = BlockPagesActionTypes.Set;
 
-  constructor(public page: Page) {}
+  public pages: Page[];
+
+  constructor(...pages: Page[]) {
+    this.pages = pages;
+  }
 }
 
 export class ChangeBlockSortOrder implements Action {

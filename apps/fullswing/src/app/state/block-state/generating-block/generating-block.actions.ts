@@ -30,7 +30,7 @@ export class GenerateBlockRequest implements Action {
 export class GenerateBlockSuccess implements Action {
   readonly type = GeneratingBlockActionTypes.GenerateSuccess;
 
-  constructor(public id: string) {}
+  constructor(public id: string, public newBlockId: string) {}
 }
 
 export class GenerateBlockFailure implements Action {

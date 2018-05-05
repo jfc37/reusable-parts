@@ -21,7 +21,10 @@ export function generatingBlocksReducer(
       return updateAdapter.getInitialState();
 
     case GeneratingBlockActionTypes.GenerateRequest:
-      return updateAdapter.addOne(getUpdatingStatus(action.id), state);
+      return updateAdapter.upsertOne(
+        { id: action.id, changes: getUpdatingStatus(action.id) },
+        state
+      );
 
     case GeneratingBlockActionTypes.GenerateSuccess:
       return updateAdapter.updateOne(

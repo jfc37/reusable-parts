@@ -7,6 +7,10 @@ function allFn(selector) {
   return createSelector(selector, pageAdapter.getSelectors().selectAll);
 }
 
+export function allPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
+  return allFn(selector);
+}
+
 export function currentOrderAndDirectionSelectorFn(
   selector: MemoizedSelector<any, PageState>
 ) {

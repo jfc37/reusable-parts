@@ -7,12 +7,15 @@ import {
   dataIdsForCurrentPagesSelectorFn,
   hasReachedFinalPageSelectorFn,
   hasMorePagesToRetrieveSelectorFn,
+  allPagesSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
 const selector = createSelector(
   blockFeatureSelector,
   state => state.blockPages
 );
+
+export const allBlockPagesSelector = allPagesSelectorFn(selector);
 
 export const currentBlockPageOrderAndDirectionSelector = currentOrderAndDirectionSelectorFn(
   selector

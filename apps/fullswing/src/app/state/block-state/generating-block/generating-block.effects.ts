@@ -23,6 +23,8 @@ import { addWeeks, format } from 'date-fns';
 import { of } from 'rxjs/observable/of';
 import { SetBlocks } from '../blocks/blocks.actions';
 import { Block } from '../block';
+import { allBlockPagesSelector } from '../block-pages/block-pages.selectors';
+import { SetBlockPage } from '../block-pages/block-pages.actions';
 
 @Injectable()
 export class GeneratingBlockEffects {
@@ -53,13 +55,28 @@ export class GeneratingBlockEffects {
           .pipe(
             mergeMap(newBlock => [
               new SetBlocks(newBlock),
-              new GenerateBlockSuccess(id),
+              new GenerateBlockSuccess(id, newBlock.id),
             ]),
             catchError(err =>
               of(new GenerateBlockFailure(id, err || 'Failed generating block'))
             )
           )
       )
+    );
+
+  @Effect()
+  generateSuccess$ = this.actions$
+    .ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess)
+    .pipe(
+      withLatestFrom(
+        this.store.select(allBlockPagesSelector),
+        (action, pages) =>
+          pages.filter(page => page.ids.includes(action.id)).map(page => ({
+            ...page,
+            ids: [...page.ids, action.newBlockId],
+          }))
+      ),
+      map(updatedPages => new SetBlockPage(...updatedPages))
     );
 
   constructor(
