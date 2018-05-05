@@ -7,6 +7,7 @@ import {
   getInitialLoadState,
   PageState,
   getInitialPageState,
+  SortDirection,
 } from '@reusable-parts/common-ngrx-patterns';
 import { creatingBlockReducer } from './creating-block/creating-block.reducer';
 import { loadingBlocksReducer } from './loading-block-pages/loading-block-pages.reducer';
@@ -38,7 +39,7 @@ export function getInitialBlockFeatureState(): BlockFeatureState {
 
     blocks: getInitialBlocksState(),
     loadingBlockPages: getInitialLoadState(),
-    blockPages: getInitialPageState('name'),
+    blockPages: getInitialPageState('startDate', SortDirection.Descending),
   };
 }
 

@@ -3,6 +3,7 @@ import {
   getInitialPageState,
   PageState,
   pageAdapter,
+  SortDirection,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   BlockPagesActions,
@@ -10,7 +11,7 @@ import {
 } from './block-pages.actions';
 
 export function blockPagesReducer(
-  state = getInitialPageState('name'),
+  state = getInitialPageState('startDate', SortDirection.Descending),
   action: BlockPagesActions
 ): PageState {
   switch (action.type) {

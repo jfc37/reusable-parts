@@ -28,14 +28,7 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   public dataSource = new MatTableDataSource(this.rows);
 
-  public displayedColumns = [
-    'name',
-    'status',
-    'between',
-    'day',
-    'time',
-    'actions',
-  ];
+  public displayedColumns = ['name', 'startDate', 'day', 'time', 'actions'];
 
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -49,8 +42,8 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
 
   public sortChange(data) {
     this.sortChanged.emit({
-      orderBy: data['active'] || 'name',
-      sortDirection: data['direction'] || 'asc',
+      orderBy: data['active'] || 'startDate',
+      sortDirection: data['direction'] || 'desc',
     });
   }
 }
@@ -58,6 +51,7 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
 export interface BlockRowModel {
   id: string;
   name: string;
+  startDate: string;
   status: BlockStatusTypes;
   between: string;
   day: string;

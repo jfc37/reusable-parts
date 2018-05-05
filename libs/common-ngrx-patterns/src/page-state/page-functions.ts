@@ -96,11 +96,14 @@ export const pageAdapter = createEntityAdapter<Page>({
   selectId: page => pageKeyToId(page.key),
 });
 
-export function getInitialPageState(defaultOrderBy: string): PageState {
+export function getInitialPageState(
+  defaultOrderBy: string,
+  sortDirection: SortDirection = SortDirection.Ascending
+): PageState {
   return {
     ...pageAdapter.getInitialState(),
     currentOrderBy: defaultOrderBy,
-    currentSortDirection: SortDirection.Ascending,
+    currentSortDirection: sortDirection,
   };
 }
 

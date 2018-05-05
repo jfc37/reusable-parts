@@ -1,29 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  isArrayEmpty,
-  isArrayNotEmpty,
-} from '@reusable-parts/common-functions';
+import { Store } from '@ngrx/store';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { filter } from 'rxjs/operators';
+import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
+import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
+import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
+import {
+  GetMoreBlocks,
+  ResetLoadBlockPages,
+} from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
 import {
   BlockRowModel,
-  BlockStatusTypes,
   SortChange,
 } from '../components/blocks-table/blocks-table.component';
-import { Store } from '@ngrx/store';
-import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
-import {
-  ResetLoadBlockPages,
-  GetMoreBlocks,
-} from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
-import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
 import {
   blockRowsSelector,
   isLoadingSelector,
 } from './view-blocks-page.component.selectors';
-import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
-import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -53,9 +47,6 @@ export class ViewBlocksPageComponent implements OnInit {
   }
 
   public sortChanged(sortChange: SortChange) {
-    if (sortChange.orderBy === 'between') {
-      sortChange.orderBy = 'startDate';
-    }
     this.store.dispatch(
       new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection)
     );

@@ -11,14 +11,8 @@
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <!-- Status -->
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-    </ng-container>
-
     <!-- Between -->
-    <ng-container matColumnDef="between">
+    <ng-container matColumnDef="startDate">
       <mat-header-cell *matHeaderCellDef
         mat-sort-header> Between </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.between}} </mat-cell>

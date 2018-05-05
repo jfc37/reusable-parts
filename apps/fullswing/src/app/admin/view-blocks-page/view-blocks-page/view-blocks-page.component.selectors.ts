@@ -21,15 +21,16 @@ export const blockRowsSelector = createSelector(
         ({
           id: block.id,
           name: block.name,
+          startDate: block.startDate,
           day: format(block.startDate, 'dddd'),
           status: BlockStatusTypes.Active,
           time: block.startTime,
           between:
-            format(block.startDate, 'DD MMM') +
+            format(block.startDate, 'DD MMMM') +
             ' - ' +
             format(
               addWeeks(block.startDate, block.numberOfClasses - 1),
-              'DD MMM'
+              'DD MMMM'
             ),
           disableDelete: false,
           disableGenerate: false,
