@@ -7,13 +7,13 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { mapTo, tap, map } from 'rxjs/operators';
 import { addMinutes, format } from 'date-fns';
-import { PaginationKey, loadPage } from '@reusable-parts/common-ngrx-patterns';
+import { PageKey, loadPage } from '@reusable-parts/common-ngrx-patterns';
 
 @Injectable()
 export class BlockRepository {
   constructor(private af: AngularFireAuth) {}
 
-  public load(key: PaginationKey): Observable<Block[]> {
+  public load(key: PageKey): Observable<Block[]> {
     try {
       return loadPage<Block>(this.af, key, 'blocks');
     } catch (e) {

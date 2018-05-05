@@ -1,10 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import {
   isAnyLoadingSelectorFn,
-  idToPaginationKey,
+  idToPageKey,
   allLoadedSelectorFn,
   allLoadedIdsSelectorFn,
-  getLastestPageSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 import { blockFeatureSelector } from '../block-feature.reducer';
 

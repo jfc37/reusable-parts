@@ -5,8 +5,8 @@ import {
   LoadStatus,
   getDefaultCreateStatus,
   getInitialLoadState,
-  PaginationDataState,
-  getInitialPaginationDataState,
+  PageState,
+  getInitialPageState,
 } from '@reusable-parts/common-ngrx-patterns';
 import { creatingBlockReducer } from './creating-block/creating-block.reducer';
 import { loadingBlocksReducer } from './loading-block-pages/loading-block-pages.reducer';
@@ -21,7 +21,7 @@ export interface BlockFeatureState {
   readonly blocks: EntityState<Block>;
 
   readonly loadingBlockPages: EntityState<LoadStatus>;
-  readonly blockPages: PaginationDataState;
+  readonly blockPages: PageState;
 }
 
 export const blockFeatureReducer = {
@@ -38,7 +38,7 @@ export function getInitialBlockFeatureState(): BlockFeatureState {
 
     blocks: getInitialBlocksState(),
     loadingBlockPages: getInitialLoadState(),
-    blockPages: getInitialPaginationDataState('name'),
+    blockPages: getInitialPageState('name'),
   };
 }
 

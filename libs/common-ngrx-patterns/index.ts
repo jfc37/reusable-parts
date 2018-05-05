@@ -11,10 +11,9 @@ export * from './src/load-state/load.selectors';
 export * from './src/update-state/update.state';
 export * from './src/update-state/update.selectors';
 
-export * from './src/pagination-state/loading-page.selectors';
-export * from './src/pagination-state/page.selectors';
-export * from './src/pagination-state/pagination.state';
-export * from './src/pagination-state/pagination-functions';
+export * from './src/page-state/page.selectors';
+export * from './src/page-state/page.state';
+export * from './src/page-state/page-functions';
 
 export * from './src/meta-reducers/logger.reducer';
 export * from './src/router-state/router.state';

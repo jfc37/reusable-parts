@@ -1,8 +1,8 @@
 import { Update, EntityState } from '@ngrx/entity';
 import {
-  getInitialPaginationDataState,
-  PaginationDataState,
-  paginationDataAdapter,
+  getInitialPageState,
+  PageState,
+  pageAdapter,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   BlockPagesActions,
@@ -10,12 +10,12 @@ import {
 } from './block-pages.actions';
 
 export function blockPagesReducer(
-  state = getInitialPaginationDataState('name'),
+  state = getInitialPageState('name'),
   action: BlockPagesActions
-): PaginationDataState {
+): PageState {
   switch (action.type) {
     case BlockPagesActionTypes.Set:
-      return paginationDataAdapter.addOne(action.page, state);
+      return pageAdapter.addOne(action.page, state);
 
     case BlockPagesActionTypes.ChangeSortOrder:
       return {

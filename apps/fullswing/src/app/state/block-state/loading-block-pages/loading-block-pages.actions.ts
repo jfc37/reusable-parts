@@ -1,8 +1,5 @@
 import { Action } from '@ngrx/store';
-import {
-  PaginationKey,
-  SortDirection,
-} from '@reusable-parts/common-ngrx-patterns';
+import { PageKey, SortDirection } from '@reusable-parts/common-ngrx-patterns';
 
 export enum LoadingBlockPagesActionTypes {
   Reset = '[Loading Block Pages] Reset',
@@ -27,23 +24,23 @@ export class GetMoreBlocks implements Action {
 export class AttemptLoadBlockPages implements Action {
   readonly type = LoadingBlockPagesActionTypes.Attempt;
 
-  constructor(public key: PaginationKey) {}
+  constructor(public key: PageKey) {}
 }
 
 export class LoadBlockPagesRequest implements Action {
   readonly type = LoadingBlockPagesActionTypes.LoadRequest;
 
-  constructor(public key: PaginationKey) {}
+  constructor(public key: PageKey) {}
 }
 
 export class LoadBlockPagesSuccess implements Action {
   readonly type = LoadingBlockPagesActionTypes.LoadSuccess;
-  constructor(public key: PaginationKey, public updatedKey: PaginationKey) {}
+  constructor(public key: PageKey, public updatedKey: PageKey) {}
 }
 
 export class LoadBlockPagesFailure implements Action {
   readonly type = LoadingBlockPagesActionTypes.LoadFailure;
-  constructor(public key: PaginationKey, public error: string) {}
+  constructor(public key: PageKey, public error: string) {}
 }
 
 export type LoadingBlockPagesActions =

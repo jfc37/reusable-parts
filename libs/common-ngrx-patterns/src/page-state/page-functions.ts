@@ -1,19 +1,19 @@
-import {
-  PaginationKey,
-  SortDirection,
-  PaginationData,
-  PaginationDataState,
-} from '@reusable-parts/common-ngrx-patterns/src/pagination-state/pagination.state';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { Observable } from 'rxjs/Observable';
-import { getLastItemInArray } from '@reusable-parts/common-functions';
 import { createEntityAdapter } from '@ngrx/entity';
-import { map, tap } from 'rxjs/operators';
+import { getLastItemInArray } from '@reusable-parts/common-functions';
+import {
+  Page,
+  PageKey,
+  PageState,
+  SortDirection,
+} from '@reusable-parts/common-ngrx-patterns/src/page-state/page.state';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { map } from 'rxjs/operators';
 
 export function loadPage<T extends { id?: string }>(
   af: AngularFireAuth,
-  key: PaginationKey,
+  key: PageKey,
   collection: string
 ): Observable<T[]> {
   let query = af.app
@@ -27,12 +27,11 @@ export function loadPage<T extends { id?: string }>(
   }
 
   return fromPromise(query.get()).pipe(
-    tap(console.error.bind(null, 'query result')),
     map(data => data.docs.map(doc => ({ id: doc.id, ...doc.data() } as T)))
   );
 }
 
-export function paginationKeyToId(key: PaginationKey): string {
+export function pageKeyToId(key: PageKey): string {
   return [
     key.orderBy,
     key.sortDirection,
@@ -43,7 +42,7 @@ export function paginationKeyToId(key: PaginationKey): string {
   ].join('|');
 }
 
-export function idToPaginationKey(id: string): PaginationKey {
+export function idToPageKey(id: string): PageKey {
   const [
     orderBy,
     sortDirectionStr,
@@ -68,7 +67,7 @@ export function idToPaginationKey(id: string): PaginationKey {
 export function getFirstPageKey(
   orderBy: string,
   sortDirection: SortDirection
-): PaginationKey {
+): PageKey {
   return {
     orderBy,
     sortDirection,
@@ -77,7 +76,7 @@ export function getFirstPageKey(
   };
 }
 
-export function getNextPageKey(key: PaginationKey): PaginationKey {
+export function getNextPageKey(key: PageKey): PageKey {
   return {
     ...key,
     endAt: null,
@@ -88,29 +87,27 @@ export function getNextPageKey(key: PaginationKey): PaginationKey {
 
 export const DEFAULT_PAGE_SIZE = 1;
 
-export function getNewKey(key: PaginationKey, results: any[]): PaginationKey {
+export function getNewKey(key: PageKey, results: any[]): PageKey {
   const endAt = (getLastItemInArray(results) || {})[key.orderBy];
   return { ...key, endAt };
 }
 
-export const paginationDataAdapter = createEntityAdapter<PaginationData>({
-  selectId: page => paginationKeyToId(page.key),
+export const pageAdapter = createEntityAdapter<Page>({
+  selectId: page => pageKeyToId(page.key),
 });
 
-export function getInitialPaginationDataState(
-  defaultOrderBy: string
-): PaginationDataState {
+export function getInitialPageState(defaultOrderBy: string): PageState {
   return {
-    ...paginationDataAdapter.getInitialState(),
+    ...pageAdapter.getInitialState(),
     currentOrderBy: defaultOrderBy,
     currentSortDirection: SortDirection.Ascending,
   };
 }
 
 export function createPage(
-  key: PaginationKey,
+  key: PageKey,
   results: Array<{ id?: string }>
-): PaginationData {
+): Page {
   return {
     ids: results.map(data => data.id),
     key,

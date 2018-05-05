@@ -1,20 +1,14 @@
-import { createSelector, MemoizedSelector } from '@ngrx/store';
-import {
-  PaginationDataState,
-  idToPaginationKey,
-  paginationDataAdapter,
-} from '@reusable-parts/common-ngrx-patterns';
+import { MemoizedSelector, createSelector } from '@ngrx/store';
 import { isArrayNotEmpty } from '@reusable-parts/common-functions';
+import { pageAdapter } from '@reusable-parts/common-ngrx-patterns/src/page-state/page-functions';
+import { PageState } from '@reusable-parts/common-ngrx-patterns/src/page-state/page.state';
 
 function allFn(selector) {
-  return createSelector(
-    selector,
-    paginationDataAdapter.getSelectors().selectAll
-  );
+  return createSelector(selector, pageAdapter.getSelectors().selectAll);
 }
 
 export function currentOrderAndDirectionSelectorFn(
-  selector: MemoizedSelector<any, PaginationDataState>
+  selector: MemoizedSelector<any, PageState>
 ) {
   return createSelector(selector, state => ({
     orderBy: state.currentOrderBy,
@@ -22,9 +16,7 @@ export function currentOrderAndDirectionSelectorFn(
   }));
 }
 
-function allCurrentPagesSelectorFn(
-  selector: MemoizedSelector<any, PaginationDataState>
-) {
+function allCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
   return createSelector(
     allFn(selector),
     currentOrderAndDirectionSelectorFn(selector),
@@ -38,13 +30,13 @@ function allCurrentPagesSelectorFn(
 }
 
 export function hasAnyCurrentPagesSelectorFn(
-  selector: MemoizedSelector<any, PaginationDataState>
+  selector: MemoizedSelector<any, PageState>
 ) {
   return createSelector(allCurrentPagesSelectorFn(selector), isArrayNotEmpty);
 }
 
 export function latestCurrentPageKeySelectorFn(
-  selector: MemoizedSelector<any, PaginationDataState>
+  selector: MemoizedSelector<any, PageState>
 ) {
   return createSelector(
     allCurrentPagesSelectorFn(selector),
@@ -54,7 +46,7 @@ export function latestCurrentPageKeySelectorFn(
 }
 
 export function dataIdsForCurrentPagesSelectorFn(
-  selector: MemoizedSelector<any, PaginationDataState>
+  selector: MemoizedSelector<any, PageState>
 ) {
   return createSelector(allCurrentPagesSelectorFn(selector), pages =>
     pages.map(page => page.ids).reduce((accum, curr) => [...accum, ...curr], [])

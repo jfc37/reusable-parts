@@ -1,7 +1,7 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { paginationKeyToId } from '@reusable-parts/common-ngrx-patterns';
+import { pageKeyToId } from '@reusable-parts/common-ngrx-patterns';
 
-export interface PaginationKey {
+export interface PageKey {
   orderBy: string;
   sortDirection: SortDirection;
   startAfter?: string;
@@ -15,12 +15,12 @@ export enum SortDirection {
   Descending = 'desc',
 }
 
-export interface PaginationData {
-  key: PaginationKey;
+export interface Page {
+  key: PageKey;
   ids: string[];
 }
 
-export interface PaginationDataState extends EntityState<PaginationData> {
+export interface PageState extends EntityState<Page> {
   currentOrderBy: string;
   currentSortDirection: SortDirection;
 }

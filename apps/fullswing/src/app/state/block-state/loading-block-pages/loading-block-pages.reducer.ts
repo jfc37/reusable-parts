@@ -4,8 +4,8 @@ import {
   getLoadingStatus,
   getLoadedStatus,
   getLoadErrorStatus,
-  paginationKeyToId,
-  PaginationKey,
+  pageKeyToId,
+  PageKey,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   LoadingBlockPagesActionTypes,
@@ -23,28 +23,22 @@ export function loadingBlocksReducer(
 
     case LoadingBlockPagesActionTypes.LoadRequest:
       return loadAdapter.addOne(
-        getLoadingStatus(paginationKeyToId(action.key)),
+        getLoadingStatus(pageKeyToId(action.key)),
         state
       );
 
     case LoadingBlockPagesActionTypes.LoadSuccess:
-      const removed = loadAdapter.removeOne(
-        paginationKeyToId(action.key),
-        state
-      );
+      const removed = loadAdapter.removeOne(pageKeyToId(action.key), state);
       return loadAdapter.addOne(
-        getLoadedStatus(paginationKeyToId(action.updatedKey)),
+        getLoadedStatus(pageKeyToId(action.updatedKey)),
         removed
       );
 
     case LoadingBlockPagesActionTypes.LoadFailure:
       return loadAdapter.updateOne(
         {
-          id: paginationKeyToId(action.key),
-          changes: getLoadErrorStatus(
-            paginationKeyToId(action.key),
-            action.error
-          ),
+          id: pageKeyToId(action.key),
+          changes: getLoadErrorStatus(pageKeyToId(action.key), action.error),
         },
         state
       );
