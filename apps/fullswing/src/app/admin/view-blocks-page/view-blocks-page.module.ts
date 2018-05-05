@@ -4,7 +4,11 @@ import { ViewBlocksPageComponent } from './view-blocks-page/view-blocks-page.com
 import { RouterModule } from '@angular/router';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { MainContentModule } from '@reusable-parts/main-content';
-import { MatTableModule, MatButtonModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatButtonModule,
+  MatSortModule,
+} from '@angular/material';
 import { BlocksTableComponent } from './components/blocks-table/blocks-table.component';
 import { BlockStateModule } from '../../state/block-state/block-state.module';
 
@@ -22,6 +26,7 @@ import { BlockStateModule } from '../../state/block-state/block-state.module';
 
     MatTableModule,
     MatButtonModule,
+    MatSortModule,
 
     BlockStateModule,
   ],

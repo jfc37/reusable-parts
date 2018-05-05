@@ -16,7 +16,8 @@
     </jfc-alert>
 
     <ng-template #showBlocks>
-      <jfc-blocks-table [rows]="rows$ | async"></jfc-blocks-table>
+      <jfc-blocks-table [rows]="rows$ | async"
+        (sortChanged)="sortChanged($event)"></jfc-blocks-table>
     </ng-template>
 
     <div class="pt-20">

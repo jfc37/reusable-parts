@@ -1,10 +1,13 @@
 <div class="mat-elevation-z8">
   <mat-table #table
+    matSort
+    (matSortChange)="sortChange($event)"
     [dataSource]="rows">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header> Name </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
@@ -16,7 +19,8 @@
 
     <!-- Between -->
     <ng-container matColumnDef="between">
-      <mat-header-cell *matHeaderCellDef> Between </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header> Between </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.between}} </mat-cell>
     </ng-container>
 

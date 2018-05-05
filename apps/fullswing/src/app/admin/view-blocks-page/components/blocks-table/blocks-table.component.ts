@@ -5,6 +5,7 @@ import {
   Output,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
 
 @Component({
   selector: 'jfc-blocks-table',
@@ -15,6 +16,11 @@ import {
 export class BlocksTableComponent {
   @Input() public rows: BlockRowModel[];
 
+  @Output()
+  public sortChanged = new EventEmitter<{
+    orderBy: string;
+    sortDirection: SortDirection;
+  }>();
   @Output() public generateBlock = new EventEmitter<string>();
   @Output() public deleteBlock = new EventEmitter<string>();
 
@@ -26,6 +32,14 @@ export class BlocksTableComponent {
     'time',
     'actions',
   ];
+
+  public sortChange(data) {
+    this.sortChanged.emit({
+      orderBy: data['active'],
+      sortDirection: data['direction'],
+    });
+    console.error('xxx', data);
+  }
 }
 
 export interface BlockRowModel {

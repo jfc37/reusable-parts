@@ -24,6 +24,9 @@ export class ViewBlocksPageComponent implements OnInit {
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
 
+  private orderBy = 'name';
+  private sortDirection = SortDirection.Ascending;
+
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit(): void {
@@ -31,10 +34,18 @@ export class ViewBlocksPageComponent implements OnInit {
     this.hasNoBlocks$ = this.rows$.map(isArrayEmpty);
 
     this.store.dispatch(new ResetLoadBlocks());
-    this.store.dispatch(new GetMoreBlocks('name', SortDirection.Ascending));
+    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
   }
 
   public loadMore() {
-    this.store.dispatch(new GetMoreBlocks('name', SortDirection.Ascending));
+    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
+  }
+
+  public sortChanged(sortChange: {
+    orderBy: string;
+    sortDirection: SortDirection;
+  }) {
+    this.orderBy = sortChange.orderBy;
+    this.sortDirection = sortChange.sortDirection;
   }
 }
