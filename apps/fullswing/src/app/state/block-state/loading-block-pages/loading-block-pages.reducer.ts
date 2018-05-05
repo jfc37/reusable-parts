@@ -8,26 +8,26 @@ import {
   PaginationKey,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
-  LoadingBlocksActionTypes,
-  LoadingBlocksActions,
-} from './loading-blocks.actions';
+  LoadingBlockPagesActionTypes,
+  LoadingBlockPagesActions,
+} from './loading-block-pages.actions';
 import { EntityState } from '@ngrx/entity';
 
 export function loadingBlocksReducer(
   state = loadAdapter.getInitialState(),
-  action: LoadingBlocksActions
+  action: LoadingBlockPagesActions
 ): EntityState<LoadStatus> {
   switch (action.type) {
-    case LoadingBlocksActionTypes.Reset:
+    case LoadingBlockPagesActionTypes.Reset:
       return loadAdapter.getInitialState();
 
-    case LoadingBlocksActionTypes.LoadRequest:
+    case LoadingBlockPagesActionTypes.LoadRequest:
       return loadAdapter.addOne(
         getLoadingStatus(paginationKeyToId(action.key)),
         state
       );
 
-    case LoadingBlocksActionTypes.LoadSuccess:
+    case LoadingBlockPagesActionTypes.LoadSuccess:
       const removed = loadAdapter.removeOne(
         paginationKeyToId(action.key),
         state
@@ -37,7 +37,7 @@ export function loadingBlocksReducer(
         removed
       );
 
-    case LoadingBlocksActionTypes.LoadFailure:
+    case LoadingBlockPagesActionTypes.LoadFailure:
       return loadAdapter.updateOne(
         {
           id: paginationKeyToId(action.key),

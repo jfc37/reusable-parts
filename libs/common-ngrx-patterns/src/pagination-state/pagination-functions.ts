@@ -9,6 +9,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Observable } from 'rxjs/Observable';
 import { getLastItemInArray } from '@reusable-parts/common-functions';
 import { createEntityAdapter } from '@ngrx/entity';
+import { map, tap } from 'rxjs/operators';
 
 export function loadPage<T extends { id?: string }>(
   af: AngularFireAuth,
@@ -25,8 +26,9 @@ export function loadPage<T extends { id?: string }>(
     query = query.startAfter(key.startAfter);
   }
 
-  return fromPromise(query.get()).map(data =>
-    data.docs.map(doc => ({ id: doc.id, ...doc.data() } as T))
+  return fromPromise(query.get()).pipe(
+    tap(console.error.bind(null, 'query result')),
+    map(data => data.docs.map(doc => ({ id: doc.id, ...doc.data() } as T)))
   );
 }
 

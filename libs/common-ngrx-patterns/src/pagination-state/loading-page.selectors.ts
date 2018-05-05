@@ -4,12 +4,12 @@ import {
   allLoadedIdsSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
-function getAllLoadedBlockPageIdsSelectorFn(selector) {
+function getAllLoadedPageIdsSelectorFn(selector) {
   return allLoadedIdsSelectorFn(selector);
 }
 
 function getAllLoadedPaginationKeysSelectorFn(selector) {
-  return createSelector(getAllLoadedBlockPageIdsSelectorFn(selector), ids =>
+  return createSelector(getAllLoadedPageIdsSelectorFn(selector), ids =>
     ids
       .map(idToPaginationKey)
       .sort((a, b) => (a.pageNumber > b.pageNumber ? -1 : 1))

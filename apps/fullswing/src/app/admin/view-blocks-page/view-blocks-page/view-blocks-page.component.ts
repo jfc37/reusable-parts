@@ -9,9 +9,9 @@ import {
 import { Store } from '@ngrx/store';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
 import {
-  ResetLoadBlocks,
+  ResetLoadBlockPages,
   GetMoreBlocks,
-} from '../../../state/block-state/loading-blocks/loading-blocks.actions';
+} from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
 import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
 import { blockRowsSelector } from './view-blocks-page.component.selectors';
 import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
@@ -25,33 +25,30 @@ export class ViewBlocksPageComponent implements OnInit {
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
 
-  private orderBy = 'name';
-  private sortDirection = SortDirection.Ascending;
-
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit(): void {
     this.rows$ = this.store.select(blockRowsSelector);
     this.hasNoBlocks$ = this.rows$.map(isArrayEmpty);
 
-    this.store.dispatch(new ResetLoadBlocks());
-    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
+    this.store.dispatch(new ResetLoadBlockPages());
+    this.store.dispatch(new GetMoreBlocks());
   }
 
   public loadMore() {
-    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
+    this.store.dispatch(new GetMoreBlocks());
   }
 
   public sortChanged(sortChange: {
     orderBy: string;
     sortDirection: SortDirection;
   }) {
-    this.orderBy = sortChange.orderBy;
-    this.sortDirection = sortChange.sortDirection;
-
+    if (sortChange.orderBy === 'between') {
+      sortChange.orderBy = 'startDate';
+    }
     this.store.dispatch(
-      new ChangeBlockSortOrder(this.orderBy, this.sortDirection)
+      new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection)
     );
-    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
+    this.store.dispatch(new GetMoreBlocks());
   }
 }

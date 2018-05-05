@@ -1,4 +1,7 @@
 import { CreateBlockEffects } from './creating-block/creating-block.effects';
-import { LoadingBlocksEffects } from './loading-blocks/loading-blocks.effects';
+import { LoadingBlockPagesEffects } from './loading-block-pages/loading-block-pages.effects';
 
-export const blockFeatureEffects = [CreateBlockEffects, LoadingBlocksEffects];
+export const blockFeatureEffects = [
+  CreateBlockEffects,
+  LoadingBlockPagesEffects,
+];

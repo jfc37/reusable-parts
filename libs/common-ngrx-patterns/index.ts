@@ -11,6 +11,8 @@ export * from './src/load-state/load.selectors';
 export * from './src/update-state/update.state';
 export * from './src/update-state/update.selectors';
 
+export * from './src/pagination-state/loading-page.selectors';
+export * from './src/pagination-state/page.selectors';
 export * from './src/pagination-state/pagination.state';
 export * from './src/pagination-state/pagination-functions';
 
