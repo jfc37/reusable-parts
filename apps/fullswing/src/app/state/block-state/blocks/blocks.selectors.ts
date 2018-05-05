@@ -16,15 +16,10 @@ const blocksSelector = createSelector(
   blockAdapter.getSelectors().selectAll
 );
 
-export const allBlocksSelector = blocksSelector;
-
 export const blocksForCurrentPagesSelector = createSelector(
-  allBlocksSelector,
+  blocksSelector,
   blockIdsForCurrentPagesSelector,
   (allBlocks, ids) => allBlocks.filter(block => ids.includes(block.id))
 );
 
-export const hasNoBlocksSelector = createSelector(
-  allBlocksSelector,
-  isArrayEmpty
-);
+export const hasNoBlocksSelector = createSelector(blocksSelector, isArrayEmpty);
