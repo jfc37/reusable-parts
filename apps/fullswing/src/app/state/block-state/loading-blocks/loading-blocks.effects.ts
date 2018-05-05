@@ -6,9 +6,17 @@ import {
   getNewKey,
   getNextPageKey,
 } from '@reusable-parts/common-ngrx-patterns';
-import { exhaustMap, filter, map, withLatestFrom, tap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  filter,
+  map,
+  mergeMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
 import { BlockRepository } from '../block.repository';
+import { SetBlocks } from '../blocks/blocks.actions';
 import {
   AttemptLoadBlocks,
   GetMoreBlocks,
@@ -17,7 +25,7 @@ import {
   LoadingBlocksActionTypes,
 } from './loading-blocks.actions';
 import {
-  getLastestPageSelector,
+  getLastestBlockPageSelector,
   hasFirstPageSelector,
   isLoadingAnyPagesSelector,
 } from './loading-blocks.selectors';
@@ -43,7 +51,7 @@ export class LoadingBlocksEffects {
     .ofType<GetMoreBlocks>(LoadingBlocksActionTypes.GetMore)
     .pipe(
       withLatestFrom(
-        this.store.select(getLastestPageSelector),
+        this.store.select(getLastestBlockPageSelector),
         (action, latestPage) => latestPage
       ),
       filter(lastestPage => Boolean(lastestPage)),
@@ -67,10 +75,10 @@ export class LoadingBlocksEffects {
         this.repository
           .load(action.key)
           .pipe(
-            map(
-              blocks =>
-                new LoadBlocksSuccess(action.key, getNewKey(action.key, blocks))
-            )
+            mergeMap(blocks => [
+              new SetBlocks(...blocks),
+              new LoadBlocksSuccess(action.key, getNewKey(action.key, blocks)),
+            ])
           )
       )
     );

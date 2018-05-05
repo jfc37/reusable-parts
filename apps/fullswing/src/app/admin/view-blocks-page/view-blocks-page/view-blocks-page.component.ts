@@ -13,6 +13,7 @@ import {
   GetMoreBlocks,
 } from '../../../state/block-state/loading-blocks/loading-blocks.actions';
 import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
+import { blockRowsSelector } from './view-blocks-page.component.selectors';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -26,7 +27,7 @@ export class ViewBlocksPageComponent implements OnInit {
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit(): void {
-    this.rows$ = of([]);
+    this.rows$ = this.store.select(blockRowsSelector);
     this.hasNoBlocks$ = this.rows$.map(isArrayEmpty);
 
     this.store.dispatch(new ResetLoadBlocks());

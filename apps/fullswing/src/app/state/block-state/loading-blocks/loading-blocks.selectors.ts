@@ -6,6 +6,7 @@ import {
   allLoadedIdsSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 import { blockFeatureSelector } from '../block-feature.reducer';
+import { getLastestPageSelectorFn } from '@reusable-parts/common-ngrx-patterns/src/pagination-state/pagination.selectors';
 
 const selector = createSelector(
   blockFeatureSelector,
@@ -17,21 +18,6 @@ export const hasFirstPageSelector = createSelector(
   state => state.ids.length > 0
 );
 
-export const getAllLoadedBlockPageIdsSelector = allLoadedIdsSelectorFn(
-  selector
-);
-
-export const getAllLoadedBlockPaginationKeysSelector = createSelector(
-  getAllLoadedBlockPageIdsSelector,
-  ids =>
-    ids
-      .map(idToPaginationKey)
-      .sort((a, b) => (a.pageNumber > b.pageNumber ? 1 : -1))
-);
-
-export const getLastestPageSelector = createSelector(
-  getAllLoadedBlockPaginationKeysSelector,
-  pages => pages[0]
-);
+export const getLastestBlockPageSelector = getLastestPageSelectorFn(selector);
 
 export const isLoadingAnyPagesSelector = isAnyLoadingSelectorFn(selector);
