@@ -3,21 +3,25 @@ import { createFeatureSelector } from '@ngrx/store';
 import {
   CreateStatus,
   LoadStatus,
+  PageState,
+  SortDirection,
+  UpdateStatus,
   getDefaultCreateStatus,
   getInitialLoadState,
-  PageState,
   getInitialPageState,
-  SortDirection,
+  getInitialUpdateState,
 } from '@reusable-parts/common-ngrx-patterns';
-import { creatingBlockReducer } from './creating-block/creating-block.reducer';
-import { loadingBlocksReducer } from './loading-block-pages/loading-block-pages.reducer';
 import { Block } from './block';
+import { blockPagesReducer } from './block-pages/block-pages.reducer';
 import { blocksReducer } from './blocks/blocks.reducer';
 import { getInitialBlocksState } from './blocks/blocks.state';
-import { blockPagesReducer } from './block-pages/block-pages.reducer';
+import { creatingBlockReducer } from './creating-block/creating-block.reducer';
+import { generatingBlocksReducer } from './generating-block/generating-block.reducer';
+import { loadingBlocksReducer } from './loading-block-pages/loading-block-pages.reducer';
 
 export interface BlockFeatureState {
   readonly creatingBlock: CreateStatus;
+  readonly generatingBlocks: EntityState<UpdateStatus>;
 
   readonly blocks: EntityState<Block>;
 
@@ -27,8 +31,10 @@ export interface BlockFeatureState {
 
 export const blockFeatureReducer = {
   creatingBlock: creatingBlockReducer,
+  generatingBlocks: generatingBlocksReducer,
 
   blocks: blocksReducer,
+
   loadingBlockPages: loadingBlocksReducer,
   blockPages: blockPagesReducer,
 };
@@ -36,8 +42,10 @@ export const blockFeatureReducer = {
 export function getInitialBlockFeatureState(): BlockFeatureState {
   return {
     creatingBlock: getDefaultCreateStatus(),
+    generatingBlocks: getInitialUpdateState(),
 
     blocks: getInitialBlocksState(),
+
     loadingBlockPages: getInitialLoadState(),
     blockPages: getInitialPageState('startDate', SortDirection.Descending),
   };

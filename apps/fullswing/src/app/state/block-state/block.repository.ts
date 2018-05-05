@@ -22,18 +22,18 @@ export class BlockRepository {
     }
   }
 
-  public create(block: Block): Observable<void> {
+  public create(block: Block): Observable<Block> {
     try {
       const promise = this.af.app.firestore().runTransaction(transaction => {
-        const b = this.af.app
+        const createdBlockDoc = this.af.app
           .firestore()
           .collection('blocks')
           .doc();
-        transaction.set(b, block);
+        transaction.set(createdBlockDoc, block);
 
         createArrayOfSize(block.numberOfClasses)
           .map((v, index) =>
-            createClassFromBlock({ ...block, id: b.id }, index)
+            createClassFromBlock({ ...block, id: createdBlockDoc.id }, index)
           )
           .forEach(blockClass =>
             transaction.set(
@@ -45,9 +45,9 @@ export class BlockRepository {
             )
           );
 
-        return of(null).toPromise();
+        return of({ ...block, id: createdBlockDoc.id }).toPromise();
       });
-      return fromPromise(promise).pipe(mapTo(null));
+      return fromPromise(promise);
     } catch (e) {
       console.error('Error', e);
       return _throw(e);

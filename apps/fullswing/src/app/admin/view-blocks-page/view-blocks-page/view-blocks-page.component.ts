@@ -22,6 +22,7 @@ import {
   isLoadingSelector,
 } from './view-blocks-page.component.selectors';
 import { hasMoreBlockPagesToRetrieveSelector } from '../../../state/block-state/block-pages/block-pages.selectors';
+import { AttemptGenerateBlock } from '../../../state/block-state/generating-block/generating-block.actions';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -61,5 +62,7 @@ export class ViewBlocksPageComponent implements OnInit {
     );
   }
 
-  public generateBlock(id: string): void {}
+  public generateBlock(id: string): void {
+    this.store.dispatch(new AttemptGenerateBlock(id));
+  }
 }

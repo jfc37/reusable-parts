@@ -7,6 +7,7 @@ import {
 } from '../components/blocks-table/blocks-table.component';
 import { hasNotLoadedAnyBlockPagesSelector } from '../../../state/block-state/loading-block-pages/loading-block-pages.selectors';
 import { isAtleastOneArgumentsTruthy } from '@reusable-parts/common-functions';
+import { allGeneratingBlockIdsSelector } from '../../../state/block-state/generating-block/generating-block.selectors';
 
 export const isLoadingSelector = createSelector(
   hasNotLoadedAnyBlockPagesSelector,
@@ -15,7 +16,8 @@ export const isLoadingSelector = createSelector(
 
 export const blockRowsSelector = createSelector(
   blocksForCurrentPagesSelector,
-  blocks =>
+  allGeneratingBlockIdsSelector,
+  (blocks, generatingIds) =>
     blocks.map(
       block =>
         ({
@@ -33,7 +35,7 @@ export const blockRowsSelector = createSelector(
               'DD MMMM'
             ),
           disableDelete: false,
-          disableGenerate: false,
+          disableGenerate: generatingIds.includes(block.id),
         } as BlockRowModel)
     )
 );

@@ -46,6 +46,10 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
       sortDirection: data['direction'] || 'desc',
     });
   }
+
+  public generateClicked(element): void {
+    this.generateBlock.emit(element.id);
+  }
 }
 
 export interface BlockRowModel {
