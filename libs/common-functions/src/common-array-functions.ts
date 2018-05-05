@@ -11,3 +11,10 @@ export function isArrayEmpty(array: any[]): boolean {
 export function isArrayNotEmpty(array: any[]): boolean {
   return array.length > 0;
 }
+
+/**
+ * Returns the last item in an array
+ */
+export function getLastItemInArray(array: any[]) {
+  return array[array.length - 1];
+}

@@ -18,5 +18,13 @@
     <ng-template #showBlocks>
       <jfc-blocks-table [rows]="rows$ | async"></jfc-blocks-table>
     </ng-template>
+
+    <button mat-raised-button
+      color="accent"
+      class="submit-button"
+      [attr.aria-label]="saveButtonText"
+      (click)="loadMore()">
+      Load more
+    </button>
   </div>
 </jfc-main-content>

@@ -6,6 +6,7 @@ import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { MainContentModule } from '@reusable-parts/main-content';
 import { MatTableModule, MatButtonModule } from '@angular/material';
 import { BlocksTableComponent } from './components/blocks-table/blocks-table.component';
+import { BlockStateModule } from '../../state/block-state/block-state.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import { BlocksTableComponent } from './components/blocks-table/blocks-table.com
 
     MatTableModule,
     MatButtonModule,
+
+    BlockStateModule,
   ],
   declarations: [ViewBlocksPageComponent, BlocksTableComponent],
 })

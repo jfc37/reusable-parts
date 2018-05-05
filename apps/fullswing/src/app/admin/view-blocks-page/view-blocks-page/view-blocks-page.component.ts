@@ -6,6 +6,13 @@ import {
   BlockRowModel,
   BlockStatusTypes,
 } from '../components/blocks-table/blocks-table.component';
+import { Store } from '@ngrx/store';
+import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
+import {
+  ResetLoadBlocks,
+  GetMoreBlocks,
+} from '../../../state/block-state/loading-blocks/loading-blocks.actions';
+import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -16,19 +23,17 @@ export class ViewBlocksPageComponent implements OnInit {
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
 
-  ngOnInit() {
-    this.rows$ = of([
-      {
-        id: 'aaa',
-        name: 'Blues Level 2',
-        time: '19:30',
-        day: 'Monday',
-        disableDelete: false,
-        disableGenerate: false,
-        status: BlockStatusTypes.Active,
-        between: '18 May - 25 August',
-      } as BlockRowModel,
-    ]);
+  constructor(private store: Store<BlockFeatureState>) {}
+
+  public ngOnInit(): void {
+    this.rows$ = of([]);
     this.hasNoBlocks$ = this.rows$.map(isArrayEmpty);
+
+    this.store.dispatch(new ResetLoadBlocks());
+    this.store.dispatch(new GetMoreBlocks('name', SortDirection.Ascending));
+  }
+
+  public loadMore() {
+    this.store.dispatch(new GetMoreBlocks('name', SortDirection.Ascending));
   }
 }

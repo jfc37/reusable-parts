@@ -3,6 +3,7 @@ import { loadAdapter } from '@reusable-parts/common-ngrx-patterns/src/load-state
 import {
   isArrayNotEmpty,
   areAllArgumentsFalsy,
+  isArrayEmpty,
 } from '@reusable-parts/common-functions';
 
 function allFn(selector) {
@@ -65,6 +66,10 @@ export function isLoadingIdSelectorFn(selector, id) {
 
 export function isAnyLoadingSelectorFn(selector) {
   return createSelector(allLoadingSelectorFn(selector), isArrayNotEmpty);
+}
+
+export function isNotLoadingAnySelectorFn(selector) {
+  return createSelector(allLoadingSelectorFn(selector), isArrayEmpty);
 }
 
 export function hasAnyLoadedSelectorFn(selector) {
