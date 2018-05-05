@@ -47,13 +47,15 @@ export class ViewBlocksPageComponent implements OnInit {
     this.store.dispatch(new GetMoreBlocks());
   }
 
-  public loadMore() {
+  public loadMore(): void {
     this.store.dispatch(new GetMoreBlocks());
   }
 
-  public sortChanged(sortChange: SortChange) {
+  public sortChanged(sortChange: SortChange): void {
     this.store.dispatch(
       new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection)
     );
   }
+
+  public generateBlock(id: string): void {}
 }

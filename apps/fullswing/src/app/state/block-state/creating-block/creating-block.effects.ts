@@ -20,14 +20,40 @@ import {
   CreateBlockSuccess,
   CreatingBlockActionTypes,
   ResetCreateBlock,
+  CreateFromExistingBlock,
 } from './creating-block.actions';
 import {
   hasCreateBlockErroredSelector,
   shouldCreateBlockSelector,
 } from './creating-block.selectors';
+import { blocksDictionarySelector } from '../blocks/blocks.selectors';
+import { Block } from '../block';
+import { addWeeks, format } from 'date-fns';
 
 @Injectable()
 export class CreateBlockEffects {
+  @Effect()
+  createFromExisting$ = this.actions$
+    .ofType<CreateFromExistingBlock>(
+      CreatingBlockActionTypes.CreateFromExisting
+    )
+    .pipe(
+      withLatestFrom(
+        this.store.select(blocksDictionarySelector),
+        (action, blocks) => blocks[action.id]
+      ),
+      filter(Boolean),
+      map((block: Block) => ({
+        ...block,
+        id: null,
+        startDate: format(
+          addWeeks(block.startDate, block.numberOfClasses),
+          'YYYY-MM-DD'
+        ),
+      })),
+      map(block => new AttemptCreateBlock(block))
+    );
+
   @Effect()
   attemptReset$ = this.actions$
     .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
@@ -41,7 +67,7 @@ export class CreateBlockEffects {
     );
 
   @Effect()
-  attemptLoad$ = this.actions$
+  attemptCreate$ = this.actions$
     .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
     .pipe(
       map(action => action.block),

@@ -26,7 +26,8 @@
 
       <ng-template #showBlocks>
         <jfc-blocks-table [rows]="rows$ | async"
-          (sortChanged)="sortChanged($event)"></jfc-blocks-table>
+          (sortChanged)="sortChanged($event)"
+          (generateBlock)="generateBlock($event)"></jfc-blocks-table>
       </ng-template>
 
       <div *ngIf="showLoadMoreButton$ | async"

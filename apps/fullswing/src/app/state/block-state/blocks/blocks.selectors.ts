@@ -16,6 +16,11 @@ const blocksSelector = createSelector(
   blockAdapter.getSelectors().selectAll
 );
 
+export const blocksDictionarySelector = createSelector(
+  selector,
+  blockAdapter.getSelectors().selectEntities
+);
+
 export const blocksForCurrentPagesSelector = createSelector(
   blocksSelector,
   blockIdsForCurrentPagesSelector,
