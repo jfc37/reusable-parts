@@ -1,11 +1,14 @@
 import {
   PaginationKey,
   SortDirection,
+  PaginationData,
+  PaginationDataState,
 } from '@reusable-parts/common-ngrx-patterns/src/pagination-state/pagination.state';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Observable } from 'rxjs/Observable';
 import { getLastItemInArray } from '@reusable-parts/common-functions';
+import { createEntityAdapter } from '@ngrx/entity';
 
 export function loadPage<T extends { id?: string }>(
   af: AngularFireAuth,
@@ -86,4 +89,28 @@ export const DEFAULT_PAGE_SIZE = 1;
 export function getNewKey(key: PaginationKey, results: any[]): PaginationKey {
   const endAt = (getLastItemInArray(results) || {})[key.orderBy];
   return { ...key, endAt };
+}
+
+export const paginationDataAdapter = createEntityAdapter<PaginationData>({
+  selectId: page => paginationKeyToId(page.key),
+});
+
+export function getInitialPaginationDataState(
+  defaultOrderBy: string
+): PaginationDataState {
+  return {
+    ...paginationDataAdapter.getInitialState(),
+    currentOrderBy: defaultOrderBy,
+    currentSortDirection: SortDirection.Ascending,
+  };
+}
+
+export function createPage(
+  key: PaginationKey,
+  results: Array<{ id?: string }>
+): PaginationData {
+  return {
+    ids: results.map(data => data.id),
+    key,
+  };
 }

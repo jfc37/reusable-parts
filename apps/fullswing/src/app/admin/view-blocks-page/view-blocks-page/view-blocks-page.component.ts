@@ -14,6 +14,7 @@ import {
 } from '../../../state/block-state/loading-blocks/loading-blocks.actions';
 import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
 import { blockRowsSelector } from './view-blocks-page.component.selectors';
+import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -47,5 +48,10 @@ export class ViewBlocksPageComponent implements OnInit {
   }) {
     this.orderBy = sortChange.orderBy;
     this.sortDirection = sortChange.sortDirection;
+
+    this.store.dispatch(
+      new ChangeBlockSortOrder(this.orderBy, this.sortDirection)
+    );
+    this.store.dispatch(new GetMoreBlocks(this.orderBy, this.sortDirection));
   }
 }

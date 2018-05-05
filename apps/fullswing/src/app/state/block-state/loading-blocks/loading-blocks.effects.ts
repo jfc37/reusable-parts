@@ -5,6 +5,7 @@ import {
   getFirstPageKey,
   getNewKey,
   getNextPageKey,
+  createPage,
 } from '@reusable-parts/common-ngrx-patterns';
 import {
   exhaustMap,
@@ -29,6 +30,7 @@ import {
   hasFirstPageSelector,
   isLoadingAnyPagesSelector,
 } from './loading-blocks.selectors';
+import { SetBlockPage } from '../block-pages/block-pages.actions';
 
 @Injectable()
 export class LoadingBlocksEffects {
@@ -77,6 +79,7 @@ export class LoadingBlocksEffects {
           .pipe(
             mergeMap(blocks => [
               new SetBlocks(...blocks),
+              new SetBlockPage(createPage(action.key, blocks)),
               new LoadBlocksSuccess(action.key, getNewKey(action.key, blocks)),
             ])
           )
