@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { map } from 'rxjs/operators';
 
+export const DEFAULT_PAGE_SIZE = 50;
+
 export function loadPage<T extends { id?: string }>(
   af: AngularFireAuth,
   key: PageKey,
@@ -89,8 +91,6 @@ export function getNextPageKey(key: PageKey): PageKey {
     pageNumber: key.pageNumber + 1,
   };
 }
-
-export const DEFAULT_PAGE_SIZE = 50;
 
 export function getNewKey(key: PageKey, results: any[]): PageKey {
   const endAt = (getLastItemInArray(results) || {})[key.orderBy];
