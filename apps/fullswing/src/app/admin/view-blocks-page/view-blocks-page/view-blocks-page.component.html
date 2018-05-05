@@ -1,33 +1,45 @@
 <jfc-main-content>
   <h1 class="main-content-header">Blocks</h1>
   <div class="main-content-body">
-    <div class="pb-20">
-      <a mat-raised-button
-        color="accent"
-        aria-label="New block"
-        [routerLink]="'/app/admin/blocks/new'">
-        Add
-      </a>
-    </div>
+    <jfc-loader *ngIf="loading$ | async; else loaded"></jfc-loader>
+    <ng-template #loaded>
+      <!-- <jfc-alert *ngIf="hasError$ | async; else content"
+          type="error">
+          <div *ngFor="let error of errorMessages$ | async">
+            {{error}}
+          </div>
+        </jfc-alert> -->
+      <!-- <ng-template #content> -->
+      <div class="pb-20">
+        <a mat-raised-button
+          color="accent"
+          aria-label="New block"
+          [routerLink]="'/app/admin/blocks/new'">
+          Add
+        </a>
+      </div>
 
-    <jfc-alert *ngIf="hasNoBlocks$ | async; else showBlocks"
-      type="info">
-      No blocks. Want to create a new one?
-    </jfc-alert>
+      <jfc-alert *ngIf="hasNoBlocks$ | async; else showBlocks"
+        type="info">
+        No blocks. Want to create a new one?
+      </jfc-alert>
 
-    <ng-template #showBlocks>
-      <jfc-blocks-table [rows]="rows$ | async"
-        (sortChanged)="sortChanged($event)"></jfc-blocks-table>
+      <ng-template #showBlocks>
+        <jfc-blocks-table [rows]="rows$ | async"
+          (sortChanged)="sortChanged($event)"></jfc-blocks-table>
+      </ng-template>
+
+      <div class="pt-20">
+        <button mat-raised-button
+          color="accent"
+          class="submit-button"
+          [attr.aria-label]="saveButtonText"
+          (click)="loadMore()">
+          Load more
+        </button>
+      </div>
+      <!-- </ng-template> -->
     </ng-template>
 
-    <div class="pt-20">
-      <button mat-raised-button
-        color="accent"
-        class="submit-button"
-        [attr.aria-label]="saveButtonText"
-        (click)="loadMore()">
-        Load more
-      </button>
-    </div>
   </div>
 </jfc-main-content>

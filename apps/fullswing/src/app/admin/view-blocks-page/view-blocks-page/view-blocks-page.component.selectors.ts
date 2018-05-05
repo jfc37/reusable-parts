@@ -5,6 +5,13 @@ import {
   BlockRowModel,
   BlockStatusTypes,
 } from '../components/blocks-table/blocks-table.component';
+import { hasNotLoadedAnyBlockPagesSelector } from '../../../state/block-state/loading-block-pages/loading-block-pages.selectors';
+import { isAtleastOneArgumentsTruthy } from '@reusable-parts/common-functions';
+
+export const isLoadingSelector = createSelector(
+  hasNotLoadedAnyBlockPagesSelector,
+  isAtleastOneArgumentsTruthy
+);
 
 export const blockRowsSelector = createSelector(
   blocksForCurrentPagesSelector,

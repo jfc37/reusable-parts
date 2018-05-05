@@ -13,8 +13,12 @@ import {
   GetMoreBlocks,
 } from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
 import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
-import { blockRowsSelector } from './view-blocks-page.component.selectors';
+import {
+  blockRowsSelector,
+  isLoadingSelector,
+} from './view-blocks-page.component.selectors';
 import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
+import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -22,14 +26,16 @@ import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/blo
   styleUrls: ['./view-blocks-page.component.scss'],
 })
 export class ViewBlocksPageComponent implements OnInit {
+  public loading$: Observable<boolean>;
   public rows$: Observable<BlockRowModel[]>;
   public hasNoBlocks$: Observable<boolean>;
 
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit(): void {
+    this.loading$ = this.store.select(isLoadingSelector);
     this.rows$ = this.store.select(blockRowsSelector);
-    this.hasNoBlocks$ = this.rows$.map(isArrayEmpty);
+    this.hasNoBlocks$ = this.store.select(hasNoBlocksSelector);
 
     this.store.dispatch(new ResetLoadBlockPages());
     this.store.dispatch(new GetMoreBlocks());

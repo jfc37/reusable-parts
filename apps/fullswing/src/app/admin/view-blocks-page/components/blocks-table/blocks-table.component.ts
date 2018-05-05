@@ -35,10 +35,9 @@ export class BlocksTableComponent {
 
   public sortChange(data) {
     this.sortChanged.emit({
-      orderBy: data['active'],
-      sortDirection: data['direction'],
+      orderBy: data['active'] || 'name',
+      sortDirection: data['direction'] || 'asc',
     });
-    console.error('xxx', data);
   }
 }
 

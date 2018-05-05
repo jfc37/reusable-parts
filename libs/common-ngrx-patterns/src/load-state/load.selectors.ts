@@ -68,12 +68,12 @@ export function isAnyLoadingSelectorFn(selector) {
   return createSelector(allLoadingSelectorFn(selector), isArrayNotEmpty);
 }
 
-export function isNotLoadingAnySelectorFn(selector) {
-  return createSelector(allLoadingSelectorFn(selector), isArrayEmpty);
-}
-
 export function hasAnyLoadedSelectorFn(selector) {
   return createSelector(allLoadedSelectorFn(selector), isArrayNotEmpty);
+}
+
+export function hasNotLoadedAnySelectorFn(selector) {
+  return createSelector(allLoadedSelectorFn(selector), isArrayEmpty);
 }
 
 export function hasLoadedIdSelectorFn(selector, id) {
