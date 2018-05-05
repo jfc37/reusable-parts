@@ -85,7 +85,7 @@ export function getNextPageKey(key: PageKey): PageKey {
   };
 }
 
-export const DEFAULT_PAGE_SIZE = 1;
+export const DEFAULT_PAGE_SIZE = 50;
 
 export function getNewKey(key: PageKey, results: any[]): PageKey {
   const endAt = (getLastItemInArray(results) || {})[key.orderBy];

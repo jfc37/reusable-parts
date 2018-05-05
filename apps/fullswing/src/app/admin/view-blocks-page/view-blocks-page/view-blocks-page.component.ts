@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { isArrayEmpty } from '@reusable-parts/common-functions';
+import {
+  isArrayEmpty,
+  isArrayNotEmpty,
+} from '@reusable-parts/common-functions';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {
@@ -19,6 +22,7 @@ import {
 } from './view-blocks-page.component.selectors';
 import { ChangeBlockSortOrder } from '../../../state/block-state/block-pages/block-pages.actions';
 import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -34,7 +38,9 @@ export class ViewBlocksPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loading$ = this.store.select(isLoadingSelector);
-    this.rows$ = this.store.select(blockRowsSelector);
+    this.rows$ = this.store
+      .select(blockRowsSelector)
+      .pipe(filter(isArrayNotEmpty));
     this.hasNoBlocks$ = this.store.select(hasNoBlocksSelector);
 
     this.store.dispatch(new ResetLoadBlockPages());
