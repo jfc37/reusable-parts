@@ -28,7 +28,7 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   public dataSource = new MatTableDataSource(this.rows);
 
-  public displayedColumns = ['name', 'startDate', 'day', 'time', 'actions'];
+  public displayedColumns = ['name', 'startDate', 'day', 'actions'];
 
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
