@@ -23,7 +23,8 @@
     "prettier": "prettier --write \"{apps,libs}/**/*.ts\"",
     "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\"",
     "prepush": "ng lint && npm run prettier:warn",
-    "pwa": "ng build --prod && cd dist/apps/sous-chef && http-server -p 8080"
+    "pwa": "ng build --prod && cd dist/apps/sous-chef && http-server -p 8080",
+    "cypress:open": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -84,12 +85,11 @@
     "@angularclass/hmr": "2.1.3",
     "@ngrx/schematics": "5.2.0",
     "@nrwl/schematics": "0.10.2",
-    "@types/jasmine": "~2.8.3",
-    "@types/jasminewd2": "~2.0.2",
     "@types/lodash": "4.14.106",
     "@types/node": "^6.0.106",
     "@types/slug": "^0.9.0",
     "codelyzer": "^4.0.1",
+    "cypress": "^2.1.0",
     "husky": "^0.14.3",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
