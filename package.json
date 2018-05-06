@@ -24,7 +24,8 @@
     "prettier:warn": "prettier -l \"{apps,libs}/**/*.ts\"",
     "prepush": "ng lint && npm run prettier:warn",
     "pwa": "ng build --prod && cd dist/apps/sous-chef && http-server -p 8080",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:record": "cypress run --record"
   },
   "private": true,
   "dependencies": {

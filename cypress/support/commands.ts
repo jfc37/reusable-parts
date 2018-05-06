@@ -1,4 +1,4 @@
-const url = 'http://localhost:4200';
+const url = Cypress.env('baseUrl');
 
 export function clearSession() {
   cy.visit(url, {

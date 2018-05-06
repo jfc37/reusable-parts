@@ -10,6 +10,7 @@ branches:
 
 cache:
   directories:
+    - ~/.npm
     - node_modules
 
 before_script:
