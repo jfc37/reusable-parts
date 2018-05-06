@@ -14,6 +14,9 @@ export function blocksReducer(
         state
       );
 
+    case BlocksActionTypes.Remove:
+      return blockAdapter.removeOne(action.id, state);
+
     default:
       return state;
   }

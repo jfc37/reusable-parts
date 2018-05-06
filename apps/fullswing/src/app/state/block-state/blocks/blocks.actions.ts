@@ -3,6 +3,8 @@ import { Block } from '../block';
 
 export enum BlocksActionTypes {
   Set = '[Blocks] Set',
+
+  Remove = '[Blocks] Remove',
 }
 
 export class SetBlocks implements Action {
@@ -14,4 +16,10 @@ export class SetBlocks implements Action {
   }
 }
 
-export type BlocksActions = SetBlocks;
+export class RemoveBlock implements Action {
+  readonly type = BlocksActionTypes.Remove;
+
+  constructor(public id: string) {}
+}
+
+export type BlocksActions = SetBlocks | RemoveBlock;

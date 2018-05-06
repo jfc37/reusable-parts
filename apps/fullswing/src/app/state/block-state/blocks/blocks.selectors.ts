@@ -6,7 +6,7 @@ import { isArrayEmpty } from '@reusable-parts/common-functions';
 
 const selector = createSelector(blockFeatureSelector, state => state.blocks);
 
-const blockEntitiesSelector = createSelector(
+export const blockEntitiesSelector = createSelector(
   selector,
   blockAdapter.getSelectors().selectEntities
 );

@@ -8,4 +8,5 @@ export interface Block {
   classCapacity: number;
   teacherIds: string[];
   inviteOnly: boolean;
+  classIds?: string[];
 }

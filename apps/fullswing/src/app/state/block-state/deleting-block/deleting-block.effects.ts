@@ -16,8 +16,11 @@ import { BlockFeatureState } from '../block-feature.reducer';
 import { SetBlockPage } from '../block-pages/block-pages.actions';
 import { allBlockPagesSelector } from '../block-pages/block-pages.selectors';
 import { BlockRepository } from '../block.repository';
-import { SetBlocks } from '../blocks/blocks.actions';
-import { blocksDictionarySelector } from '../blocks/blocks.selectors';
+import { SetBlocks, RemoveBlock } from '../blocks/blocks.actions';
+import {
+  blocksDictionarySelector,
+  blockEntitiesSelector,
+} from '../blocks/blocks.selectors';
 import {
   AttemptDeleteBlock,
   DeleteBlockFailure,
@@ -42,30 +45,27 @@ export class DeletingBlockEffects {
 
   @Effect()
   delete$ = this.actions$
-    .ofType<AttemptDeleteBlock>(DeletingBlockActionTypes.DeleteRequest)
+    .ofType<DeleteBlockRequest>(DeletingBlockActionTypes.DeleteRequest)
     .pipe(
-      delay(4000),
-      map(action => new DeleteBlockFailure(action.id, 'boom'))
-      // withLatestFrom(
-      //   this.store.select(blocksDictionarySelector),
-      //   (action, blocks) => ({
-      //     id: action.id,
-      //     block: createNextBlock(blocks[action.id]),
-      //   })
-      // ),
-      // mergeMap(({ id, block }) =>
-      //   this.repository
-      //     .create(block)
-      //     .pipe(
-      //       mergeMap(newBlock => [
-      //         new SetBlocks(newBlock),
-      //         new DeleteBlockSuccess(id, newBlock.id),
-      //       ]),
-      //       catchError(err =>
-      //         of(new DeleteBlockFailure(id, err || 'Failed deleting block'))
-      //       )
-      //     )
-      // )
+      withLatestFrom(
+        this.store.select(blockEntitiesSelector),
+        (action, blocks) => blocks[action.id]
+      ),
+      mergeMap(block =>
+        this.repository
+          .delete(block)
+          .pipe(
+            mergeMap(() => [
+              new RemoveBlock(block.id),
+              new DeleteBlockSuccess(block.id),
+            ]),
+            catchError(err =>
+              of(
+                new DeleteBlockFailure(block.id, err || 'Failed deleting block')
+              )
+            )
+          )
+      )
     );
 
   @Effect()

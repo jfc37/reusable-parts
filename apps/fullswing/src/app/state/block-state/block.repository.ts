@@ -29,23 +29,34 @@ export class BlockRepository {
           .firestore()
           .collection('blocks')
           .doc();
-        transaction.set(createdBlockDoc, block);
 
-        createArrayOfSize(block.numberOfClasses)
-          .map((v, index) =>
-            createClassFromBlock({ ...block, id: createdBlockDoc.id }, index)
-          )
-          .forEach(blockClass =>
-            transaction.set(
-              this.af.app
-                .firestore()
-                .collection('classes')
-                .doc(),
-              blockClass
-            )
-          );
+        const classDocs = createArrayOfSize(block.numberOfClasses).map(() =>
+          this.af.app
+            .firestore()
+            .collection('classes')
+            .doc()
+        );
 
-        return of({ ...block, id: createdBlockDoc.id }).toPromise();
+        const newBlock = {
+          ...block,
+          classIds: classDocs.map(doc => doc.id),
+        };
+
+        transaction.set(createdBlockDoc, newBlock);
+
+        classDocs
+          .map((doc, index) => ({
+            blockClass: createClassFromBlock(
+              { ...newBlock, id: createdBlockDoc.id },
+              index
+            ),
+            doc,
+          }))
+          .forEach(({ blockClass, doc }) => {
+            transaction.set(doc, blockClass);
+          });
+
+        return of({ ...newBlock, id: createdBlockDoc.id }).toPromise();
       });
       return fromPromise(promise);
     } catch (e) {
@@ -54,26 +65,25 @@ export class BlockRepository {
     }
   }
 
-  // public delete(id: string): Observable<void> {
-  //   try {
-  //     const promise = this.af.app.firestore().runTransaction(transaction => {
-  //       const blockToDelete = this.af.app.firestore().doc('blocks/' + id);
-  //       transaction.delete(blockToDelete);
+  public delete(block: Block): Observable<void> {
+    try {
+      const promise = this.af.app.firestore().runTransaction(transaction => {
+        const blockDoc = this.af.app.firestore().doc('blocks/' + block.id);
 
-  //       this.af.app
-  //         .firestore()
-  //         .collection('classes')
-  //         .where('blockId', '==', id)
-  //         .get().then(data => data.forEach(d => d.id));
+        const classesToDelete = block.classIds
+          .map(id => this.af.app.firestore().doc('classes/' + id))
+          .forEach(classDoc => transaction.delete(classDoc));
 
-  //       return of(null).toPromise();
-  //     });
-  //     return fromPromise(promise);
-  //   } catch (e) {
-  //     console.error('Error', e);
-  //     return _throw(e);
-  //   }
-  // }
+        transaction.delete(blockDoc);
+
+        return of(null).toPromise();
+      });
+      return fromPromise(promise);
+    } catch (e) {
+      console.error('Error', e);
+      return _throw(e);
+    }
+  }
 }
 
 interface Class {
