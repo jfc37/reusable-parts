@@ -14,6 +14,10 @@ import {
   allGeneratingBlockIdsSelector,
   hasAnyBlockGenerateErroredSelector,
 } from '../../../state/block-state/generating-block/generating-block.selectors';
+import {
+  allDeletingBlockIdsSelector,
+  hasAnyBlockDeleteErroredSelector,
+} from '../../../state/block-state/deleting-block/deleting-block.selectors';
 
 export const isLoadingSelector = createSelector(
   hasNotLoadedAnyBlockPagesSelector,
@@ -23,7 +27,8 @@ export const isLoadingSelector = createSelector(
 export const blockRowsSelector = createSelector(
   blocksForCurrentPagesSelector,
   allGeneratingBlockIdsSelector,
-  (blocks, generatingIds) =>
+  allDeletingBlockIdsSelector,
+  (blocks, generatingIds, deletingIds) =>
     blocks.map(
       block =>
         ({
@@ -40,18 +45,24 @@ export const blockRowsSelector = createSelector(
               addWeeks(block.startDate, block.numberOfClasses - 1),
               'DD MMMM'
             ),
-          disableDelete: false,
           disableGenerate: generatingIds.includes(block.id),
+          disableDelete: deletingIds.includes(block.id),
         } as BlockRowModel)
     )
 );
 
-const generateBlockErrorMessageSelect = createSelector(
+const generateBlockErrorMessageSelector = createSelector(
   hasAnyBlockGenerateErroredSelector,
   hasError => hasError && 'Problem generating block. Please try again'
 );
 
+const deleteBlockErrorMessageSelector = createSelector(
+  hasAnyBlockDeleteErroredSelector,
+  hasError => hasError && 'Problem deleting block. Please try again'
+);
+
 export const warningMessagesSelector = createSelector(
-  generateBlockErrorMessageSelect,
+  generateBlockErrorMessageSelector,
+  deleteBlockErrorMessageSelector,
   includeOnlyTruthyArguments
 );

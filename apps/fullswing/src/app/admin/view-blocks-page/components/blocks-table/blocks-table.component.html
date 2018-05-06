@@ -41,7 +41,7 @@
         <button mat-button
           color="warn"
           [disabled]="element.disableDelete"
-          (click)="deleteBlock.emit(element.id)">Remove</button>
+          (click)="deleteClicked(element)">Remove</button>
       </mat-cell>
     </ng-container>
 

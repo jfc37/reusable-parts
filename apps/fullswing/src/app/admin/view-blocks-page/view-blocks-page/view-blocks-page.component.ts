@@ -23,7 +23,14 @@ import {
   warningMessagesSelector,
 } from './view-blocks-page.component.selectors';
 import { hasMoreBlockPagesToRetrieveSelector } from '../../../state/block-state/block-pages/block-pages.selectors';
-import { AttemptGenerateBlock } from '../../../state/block-state/generating-block/generating-block.actions';
+import {
+  AttemptGenerateBlock,
+  ResetGenerateBlock,
+} from '../../../state/block-state/generating-block/generating-block.actions';
+import {
+  AttemptDeleteBlock,
+  ResetDeleteBlock,
+} from '../../../state/block-state/deleting-block/deleting-block.actions';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -55,6 +62,8 @@ export class ViewBlocksPageComponent implements OnInit {
 
     this.store.dispatch(new ResetBlockPages());
     this.store.dispatch(new ResetLoadBlockPages());
+    this.store.dispatch(new ResetGenerateBlock());
+    this.store.dispatch(new ResetDeleteBlock());
     this.store.dispatch(new GetMoreBlocks());
   }
 
@@ -70,5 +79,9 @@ export class ViewBlocksPageComponent implements OnInit {
 
   public generateBlock(id: string): void {
     this.store.dispatch(new AttemptGenerateBlock(id));
+  }
+
+  public deleteBlock(id: string): void {
+    this.store.dispatch(new AttemptDeleteBlock(id));
   }
 }

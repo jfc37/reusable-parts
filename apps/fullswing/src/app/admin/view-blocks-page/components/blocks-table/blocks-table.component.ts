@@ -50,6 +50,10 @@ export class BlocksTableComponent implements AfterViewInit, OnChanges {
   public generateClicked(element): void {
     this.generateBlock.emit(element.id);
   }
+
+  public deleteClicked(element): void {
+    this.deleteBlock.emit(element.id);
+  }
 }
 
 export interface BlockRowModel {

@@ -53,6 +53,27 @@ export class BlockRepository {
       return _throw(e);
     }
   }
+
+  // public delete(id: string): Observable<void> {
+  //   try {
+  //     const promise = this.af.app.firestore().runTransaction(transaction => {
+  //       const blockToDelete = this.af.app.firestore().doc('blocks/' + id);
+  //       transaction.delete(blockToDelete);
+
+  //       this.af.app
+  //         .firestore()
+  //         .collection('classes')
+  //         .where('blockId', '==', id)
+  //         .get().then(data => data.forEach(d => d.id));
+
+  //       return of(null).toPromise();
+  //     });
+  //     return fromPromise(promise);
+  //   } catch (e) {
+  //     console.error('Error', e);
+  //     return _throw(e);
+  //   }
+  // }
 }
 
 interface Class {
