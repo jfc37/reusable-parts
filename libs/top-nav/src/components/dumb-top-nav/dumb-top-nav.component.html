@@ -37,6 +37,7 @@
         color="accent"></mat-spinner>
       <ng-template #profile>
         <button mat-button
+          data-test-id="user-menu-button"
           [matMenuTriggerFor]="userMenu"
           class="user-button">
           <div fxLayout="row"
@@ -56,6 +57,7 @@
         [overlapTrigger]="false">
 
         <button mat-menu-item
+          data-test-id="log-out-button"
           (click)="logoutClicked.emit()">
           <mat-icon>exit_to_app</mat-icon>
           <span>Logout</span>

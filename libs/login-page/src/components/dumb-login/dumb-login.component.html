@@ -28,6 +28,7 @@
 
         <mat-form-field>
           <input matInput
+            data-test-id="email-input"
             placeholder="Email"
             formControlName="email">
           <mat-error *ngIf="displayError('email')"
@@ -38,6 +39,7 @@
 
         <mat-form-field>
           <input matInput
+            data-test-id="password-input"
             type="password"
             placeholder="Password"
             formControlName="password">
@@ -64,6 +66,7 @@
         </div>
 
         <jfc-alert *ngIf="loginError"
+          data-test-id="login-error-message"
           type="error">
           {{loginError}}
         </jfc-alert>

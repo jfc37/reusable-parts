@@ -1,0 +1,43 @@
+// import {
+//   clearSession,
+//   testId,
+//   visit,
+//   assertOnDashboard,
+// } from '../support/commands';
+
+// describe('Register new account', () => {
+//   beforeEach(() => {
+//     clearSession();
+//     visit('register');
+//   });
+
+//   it(`Basic successful registration`, () => {
+//     const guid = String(Math.floor(Math.random() * 1000));
+//     const container = cy.get(testId('register-page'));
+
+//     const firstName = container.get(testId('first-name-input'));
+//     firstName.type('E2E User');
+
+//     const surname = container.get(testId('surname-input'));
+//     surname.type(guid);
+
+//     const email = container.get(testId('email-input'));
+//     email.type('e2e-' + guid + '@email.com');
+
+//     const password = container.get(testId('password-input'));
+//     password.type('password');
+
+//     const confirmPassword = container.get(testId('confirm-password-input'));
+//     confirmPassword.type('password');
+
+//     const termsAndConditions = container.get(
+//       testId('terms-and-conditions-checkbox')
+//     );
+//     termsAndConditions.click();
+
+//     const createAccountButton = container.get(testId('create-account-button'));
+//     createAccountButton.click();
+
+//     assertOnDashboard();
+//   });
+// });
