@@ -1,4 +1,9 @@
-import { clearSession, testId, assertOnDashboard } from '../support/commands';
+import {
+  clearSession,
+  testId,
+  assertOnDashboard,
+  assertOnLoginPage,
+} from '../support/commands';
 
 describe('Login', () => {
   beforeEach(() => {
@@ -33,5 +38,6 @@ describe('Login', () => {
     loginButton.click();
 
     const errorMessage = container.get(testId('login-error-message'));
+    assertOnLoginPage();
   });
 });

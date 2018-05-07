@@ -1,4 +1,4 @@
-const url = Cypress.env('baseUrl');
+const url = Cypress.env('baseUrl') || 'http://localhost:4200';
 
 export function clearSession() {
   cy.visit(url, {
@@ -6,6 +6,7 @@ export function clearSession() {
       win.sessionStorage.clear();
     },
   });
+  cy.visit(url);
 }
 
 export function testId(id: string): string {
@@ -17,5 +18,17 @@ export function visit(path: string): void {
 }
 
 export function assertOnDashboard(): void {
-  cy.url().should('contain', 'dashboard');
+  assertOnPage('dashboard');
+}
+
+export function assertOnLoginPage(): void {
+  assertOnPage('login');
+}
+
+export function assertOnRegisterPage(): void {
+  assertOnPage('register');
+}
+
+function assertOnPage(path: string): void {
+  cy.url().should('contain', path);
 }

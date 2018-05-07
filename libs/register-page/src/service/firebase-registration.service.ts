@@ -1,7 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { catchError, concatMap, concat, tap, map, mapTo } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  concat,
+  tap,
+  map,
+  mapTo,
+  mergeMap,
+} from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 const DEFAULT_REGISTERATION_ERROR_MESSAGE = 'Registeration failed';
@@ -31,9 +39,11 @@ export class FirebaseRegistrationService {
     password: string
   ): Observable<any> {
     return this.createAccount(email, password).pipe(
-      concatMap(uid => this.setRoles(uid)),
-      concatMap(uid => this.setUser(uid, name, email)),
-      concatMap(() => this.updateName(name)),
+      mergeMap(uid => [
+        this.setRoles(uid),
+        this.setUser(uid, name, email),
+        this.updateName(name),
+      ]),
       catchError(error => {
         throw FIREBASE_REGISTERATION_ERRORS[error.code] ||
           DEFAULT_REGISTERATION_ERROR_MESSAGE;

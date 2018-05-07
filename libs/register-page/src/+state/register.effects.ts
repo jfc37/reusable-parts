@@ -13,6 +13,7 @@ import {
   mapTo,
   switchMap,
   withLatestFrom,
+  exhaustMap,
 } from 'rxjs/operators';
 import {
   RegisterActionTypes,
@@ -36,7 +37,7 @@ export class RegisterEffects {
   registerRequest$ = this.actions$.pipe(
     ofType(RegisterActionTypes.RegisterRequest),
     withLatestFrom(this.store.select(accountSelector)),
-    switchMap(([action, { name, email, password }]) =>
+    exhaustMap(([action, { name, email, password }]) =>
       this.registrationService
         .register(name, email, password)
         .pipe(
