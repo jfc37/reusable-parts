@@ -32,3 +32,18 @@ export function assertOnRegisterPage(): void {
 function assertOnPage(path: string): void {
   cy.url().should('contain', path);
 }
+
+export function loginAsAdmin() {
+  const container = cy.get(testId('login-page'));
+
+  const email = container.get(testId('email-input'));
+  email.type('admin@email.com');
+
+  const password = container.get(testId('password-input'));
+  password.type('password');
+
+  const loginButton = container.get(testId('login-button'));
+  loginButton.click();
+
+  assertOnDashboard();
+}
