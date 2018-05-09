@@ -19,13 +19,15 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button mat-button
+            data-test-id="remove-teacher-button"
             color="warn"
             [disabled]="element.disableActions"
             (click)="remove.emit(element.id)">Remove</button>
         </mat-cell>
       </ng-container>
 
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+        [attr.data-test-id]="row.name + '-row'"></mat-row>
     </mat-table>
   </div>
 </ng-template>

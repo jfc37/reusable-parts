@@ -1,4 +1,8 @@
 {
   "baseUrl": "http://localhost:4200",
-  "projectId": "9nftdh"
+  "chromeWebSecurity": false,
+  "projectId": "9nftdh",
+  "videoRecording": false,
+  "viewportWidth": 1300,
+  "viewportHeight": 660
 }
