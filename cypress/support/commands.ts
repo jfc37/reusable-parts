@@ -1,16 +1,7 @@
 export function clearSession() {
-  cy.visit('', {
-    onLoad: win => {
-      console.error('xxx ONLOAD', win.sessionStorage);
-      win.sessionStorage.clear();
-    },
-  });
-  cy.visit('', {
-    onLoad: win => {
-      console.error('xxx ONLOAD', win.sessionStorage);
-      win.sessionStorage.clear();
-    },
-  });
+  cy.visit('');
+  cy.get(testId('user-menu-button')).click({ force: true });
+  cy.get(testId('log-out-button')).click({ force: true });
 }
 
 export function testId(id: string): string {

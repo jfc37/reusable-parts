@@ -25,7 +25,7 @@ export class FirebaseAuthService {
             .then(doc => doc.data()),
         ),
       ),
-      pluck(role),
+      map(userRoles => userRoles && userRoles[role]),
       map(Boolean),
     );
   }

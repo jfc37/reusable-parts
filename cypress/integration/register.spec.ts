@@ -6,7 +6,7 @@ describe('Register new account', () => {
     cy.get(testId('register-link')).click();
   });
 
-  xit(`Basic successful registration`, () => {
+  it(`Basic successful registration`, () => {
     const guid = String(Math.floor(Math.random() * 1000));
     const container = cy.get(testId('register-page'));
 
