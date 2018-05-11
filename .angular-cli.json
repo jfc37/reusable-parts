@@ -1,14 +1,18 @@
 {
   "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "reusable-parts"
+    "name": "reusable-parts",
+    "latestMigration": "20180424-add-tsconfig-tools"
   },
   "apps": [
     {
       "name": "fullswing",
       "root": "apps/fullswing/src",
       "outDir": "dist/apps/fullswing",
-      "assets": ["assets", "favicon.ico"],
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -16,7 +20,9 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "jfc",
-      "styles": ["styles.scss"],
+      "styles": [
+        "styles.scss"
+      ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -30,100 +36,127 @@
       "root": "libs/common-config/src",
       "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "tags": [],
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "common-functions",
       "root": "libs/common-functions/src",
       "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "tags": [],
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "common-ngrx-patterns",
       "appRoot": "",
       "root": "libs/common-ngrx-patterns/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "common-pwa-parts",
       "root": "libs/common-pwa-parts/src",
       "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "tags": [],
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "common-ui-components",
       "root": "libs/common-ui-components/src",
       "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "tags": [],
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "fuse",
       "appRoot": "",
       "root": "libs/fuse",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "guards",
       "appRoot": "",
       "root": "libs/guards/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "login-page",
       "appRoot": "",
       "root": "libs/login-page/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "main-content",
       "appRoot": "",
       "root": "libs/main-content/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "register",
       "appRoot": "",
       "root": "libs/register/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "register-page",
       "appRoot": "",
       "root": "libs/register-page/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "side-nav",
       "appRoot": "",
       "root": "libs/side-nav/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "top-nav",
       "appRoot": "",
       "root": "libs/top-nav/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "user-state",
       "root": "libs/user-state/src",
       "test": "../../../test.js",
       "appRoot": "",
-      "tags": []
+      "tags": [],
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "welcome",
       "appRoot": "",
       "root": "libs/welcome/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     },
     {
       "name": "$workspaceRoot",
       "appRoot": "",
-      "root": "."
+      "root": ".",
+      "tsconfig": "tsconfig.app.json",
+      "tags": []
     }
   ],
   "e2e": {
@@ -134,15 +167,15 @@
   "lint": [
     {
       "project": "./tsconfig.spec.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "apps/fullswing/src/tsconfig.app.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "project": "./apps/fullswing/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "apps/fullswing/e2e/tsconfig.e2e.json",
-      "exclude": ["**/node_modules/**", "**/@fuse/**"]
+      "project": "./apps/fullswing/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
