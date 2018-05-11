@@ -51,13 +51,6 @@ export class ShellComponent implements OnInit {
   public ngOnInit(): void {
     this.menuItems$ = this.authService
       .hasRole(FullSwingRoleTypes.Admin)
-      .pipe(
-        map(
-          isAdmin =>
-            isAdmin
-              ? [...this.studentSideNav, ...this.adminSideNav]
-              : this.studentSideNav
-        )
-      );
+      .pipe(map(isAdmin => (isAdmin ? [...this.studentSideNav, ...this.adminSideNav] : this.studentSideNav)));
   }
 }

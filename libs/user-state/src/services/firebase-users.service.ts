@@ -17,12 +17,8 @@ export class FirebaseUsersService {
         this.af.app
           .firestore()
           .collection('user-roles/')
-          .get()
-      ).pipe(
-        map(collection =>
-          collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-        )
-      );
+          .get(),
+      ).pipe(map(collection => collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))));
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
@@ -36,12 +32,8 @@ export class FirebaseUsersService {
           .firestore()
           .collection('user-roles/')
           .where(role, '==', true)
-          .get()
-      ).pipe(
-        map(collection =>
-          collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-        )
-      );
+          .get(),
+      ).pipe(map(collection => collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))));
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
@@ -54,15 +46,15 @@ export class FirebaseUsersService {
         this.af.app
           .firestore()
           .collection('users/')
-          .get()
+          .get(),
       ).pipe(
         map(collection =>
           collection.docs.map(doc => ({
             id: doc.id,
             email: doc.data().email,
             name: doc.data().name,
-          }))
-        )
+          })),
+        ),
       );
     } catch (e) {
       console.error('Error', e);
@@ -76,13 +68,13 @@ export class FirebaseUsersService {
         this.af.app
           .firestore()
           .doc(`users/${id}`)
-          .get()
+          .get(),
       ).pipe(
         map(doc => ({
           id: doc.id,
           email: doc.data().email,
           name: doc.data().name,
-        }))
+        })),
       );
     } catch (e) {
       console.error('Error', e);
@@ -98,17 +90,13 @@ export class FirebaseUsersService {
     return this.setUserRole(id, role, false);
   }
 
-  private setUserRole(
-    id: string,
-    role: string,
-    value: boolean
-  ): Observable<void> {
+  private setUserRole(id: string, role: string, value: boolean): Observable<void> {
     try {
       return fromPromise(
         this.af.app
           .firestore()
           .doc(`user-roles/${id}`)
-          .update({ [role]: value })
+          .update({ [role]: value }),
       ).pipe(mapTo(null));
     } catch (e) {
       console.error('Error', e);

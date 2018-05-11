@@ -16,8 +16,8 @@ export class FirebaseUserService {
                 displayName: user.displayName || user.email,
                 avatarUrl: user.photoURL,
               }
-            : null
-      )
+            : null,
+      ),
     );
   }
 

@@ -34,10 +34,7 @@ export const initialState: TopNavData = {
   loggedOut: false,
 };
 
-export function topNavReducer(
-  state = initialState,
-  action: TopNavActions
-): TopNavData {
+export function topNavReducer(state = initialState, action: TopNavActions): TopNavData {
   switch (action.type) {
     case TopNavActionTypes.GetUser: {
       return initialState;

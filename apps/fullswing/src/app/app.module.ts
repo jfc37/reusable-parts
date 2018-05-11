@@ -5,20 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoPreloading, RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  RouterStateSerializer,
-  StoreRouterConnectingModule,
-  routerReducer,
-} from '@ngrx/router-store';
+import { RouterStateSerializer, StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule } from '@ngx-translate/core';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
-import {
-  CustomRouterStateSerializer,
-  logger,
-} from '@reusable-parts/common-ngrx-patterns';
+import { CustomRouterStateSerializer, logger } from '@reusable-parts/common-ngrx-patterns';
 import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
 import { AuthenticatedGuard, GuardsModule } from '@reusable-parts/guards';
 import { MainContentModule } from '@reusable-parts/main-content';
@@ -90,14 +83,14 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
           ],
         },
       ],
-      { useHash: false, preloadingStrategy: NoPreloading }
+      { useHash: false, preloadingStrategy: NoPreloading },
     ),
 
     StoreModule.forRoot(
       {
         router: routerReducer,
       },
-      { metaReducers: !environment.production ? [logger] : [] }
+      { metaReducers: !environment.production ? [logger] : [] },
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

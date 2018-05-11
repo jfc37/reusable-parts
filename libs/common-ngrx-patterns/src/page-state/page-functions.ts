@@ -16,7 +16,7 @@ export const DEFAULT_PAGE_SIZE = 50;
 export function loadPage<T extends { id?: string }>(
   af: AngularFireAuth,
   key: PageKey,
-  collection: string
+  collection: string,
 ): Observable<T[]> {
   let query = af.app
     .firestore()
@@ -28,9 +28,7 @@ export function loadPage<T extends { id?: string }>(
     query = query.startAfter(key.startAfter);
   }
 
-  return fromPromise(query.get()).pipe(
-    map(data => data.docs.map(doc => ({ id: doc.id, ...doc.data() } as T)))
-  );
+  return fromPromise(query.get()).pipe(map(data => data.docs.map(doc => ({ id: doc.id, ...doc.data() } as T))));
 }
 
 export function pageKeyToId(key: PageKey): string {
@@ -46,16 +44,7 @@ export function pageKeyToId(key: PageKey): string {
 }
 
 export function idToPageKey(id: string): PageKey {
-  const [
-    orderBy,
-    sortDirectionStr,
-    startAfter,
-    endAt,
-    pageNumberStr,
-    pageSizeStr,
-    ,
-    isFinalPageStr,
-  ] = id.split('|');
+  const [orderBy, sortDirectionStr, startAfter, endAt, pageNumberStr, pageSizeStr, , isFinalPageStr] = id.split('|');
   const sortDirection = sortDirectionStr as SortDirection;
   const pageNumber = Number(pageNumberStr);
   const pageSize = Number(pageSizeStr);
@@ -71,10 +60,7 @@ export function idToPageKey(id: string): PageKey {
   };
 }
 
-export function getFirstPageKey(
-  orderBy: string,
-  sortDirection: SortDirection
-): PageKey {
+export function getFirstPageKey(orderBy: string, sortDirection: SortDirection): PageKey {
   return {
     orderBy,
     sortDirection,
@@ -104,7 +90,7 @@ export const pageAdapter = createEntityAdapter<Page>({
 
 export function getInitialPageState(
   defaultOrderBy: string,
-  sortDirection: SortDirection = SortDirection.Ascending
+  sortDirection: SortDirection = SortDirection.Ascending,
 ): PageState {
   return {
     ...pageAdapter.getInitialState(),
@@ -113,10 +99,7 @@ export function getInitialPageState(
   };
 }
 
-export function createPage(
-  key: PageKey,
-  results: Array<{ id?: string }>
-): Page {
+export function createPage(key: PageKey, results: Array<{ id?: string }>): Page {
   return {
     ids: results.map(data => data.id),
     key,

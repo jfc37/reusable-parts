@@ -5,28 +5,18 @@ import { userIdsWithRoleSelectorFactory } from '@reusable-parts/user-state/src/u
 
 const selector = createSelector(userFeatureSelector, state => state.users);
 
-const userEntitiesSelector = createSelector(
-  selector,
-  userAdapter.getSelectors().selectEntities
-);
+const userEntitiesSelector = createSelector(selector, userAdapter.getSelectors().selectEntities);
 
-const usersSelector = createSelector(
-  selector,
-  userAdapter.getSelectors().selectAll
-);
+const usersSelector = createSelector(selector, userAdapter.getSelectors().selectAll);
 
 export function allUsersWithRoleFactory(role: string) {
-  return createSelector(
-    userEntitiesSelector,
-    userIdsWithRoleSelectorFactory(role),
-    (users, userIds) => userIds.map(id => users[id]).filter(Boolean)
+  return createSelector(userEntitiesSelector, userIdsWithRoleSelectorFactory(role), (users, userIds) =>
+    userIds.map(id => users[id]).filter(Boolean),
   );
 }
 
 export function allUsersWithoutRoleFactory(role: string) {
-  return createSelector(
-    usersSelector,
-    userIdsWithRoleSelectorFactory(role),
-    (users, userIds) => users.filter(user => !userIds.includes(user.id))
+  return createSelector(usersSelector, userIdsWithRoleSelectorFactory(role), (users, userIds) =>
+    users.filter(user => !userIds.includes(user.id)),
   );
 }

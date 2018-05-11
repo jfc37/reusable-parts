@@ -6,12 +6,7 @@ import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    FuseSharedModule,
-  ],
+  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule, FuseSharedModule],
   declarations: [LoaderComponent, AlertComponent],
   exports: [LoaderComponent, AlertComponent],
 })

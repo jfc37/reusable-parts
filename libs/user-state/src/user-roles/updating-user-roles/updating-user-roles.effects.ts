@@ -4,16 +4,7 @@ import { Store } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
-import {
-  catchError,
-  filter,
-  map,
-  mergeMap,
-  switchMap,
-  withLatestFrom,
-  tap,
-  exhaustMap,
-} from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, switchMap, withLatestFrom, tap, exhaustMap } from 'rxjs/operators';
 import {
   UpdatingUserRolesActionTypes,
   AttemptToUpdateUserRoles,
@@ -28,13 +19,11 @@ import { AddUserRole } from '@reusable-parts/user-state/src/user-roles/user-role
 export class UpdatingUserRolesEffects {
   @Effect()
   attempt$ = this.actions$
-    .ofType<AttemptToUpdateUserRoles>(
-      UpdatingUserRolesActionTypes.UpdateAttempt
-    )
+    .ofType<AttemptToUpdateUserRoles>(UpdatingUserRolesActionTypes.UpdateAttempt)
     .pipe(
       withLatestFrom(this.store.select(allUserRoleIdsUpdating)),
       filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
-      map(([action]) => new UpdateUserRolesRequest(action.id, action.role))
+      map(([action]) => new UpdateUserRolesRequest(action.id, action.role)),
     );
 
   @Effect()
@@ -45,25 +34,15 @@ export class UpdatingUserRolesEffects {
         this.repository
           .addUserRole(action.id, action.role)
           .pipe(
-            mergeMap(roles => [
-              new AddUserRole(action.id, action.role),
-              new UpdateUserRolesSuccess(action.id),
-            ]),
-            catchError(err =>
-              of(
-                new UpdateUserRolesFailure(
-                  action.id,
-                  err || 'Failed updating user roles'
-                )
-              )
-            )
-          )
-      )
+            mergeMap(roles => [new AddUserRole(action.id, action.role), new UpdateUserRolesSuccess(action.id)]),
+            catchError(err => of(new UpdateUserRolesFailure(action.id, err || 'Failed updating user roles'))),
+          ),
+      ),
     );
 
   constructor(
     private actions$: Actions,
     private store: Store<UserFeatureState>,
-    private repository: FirebaseUsersService
+    private repository: FirebaseUsersService,
   ) {}
 }

@@ -11,7 +11,7 @@ describe('LoginPageComponent', () => {
       TestBed.configureTestingModule({
         declarations: [LoginPageComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

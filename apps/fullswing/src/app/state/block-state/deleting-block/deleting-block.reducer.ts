@@ -6,24 +6,18 @@ import {
   getDeletingStatus,
   getDeleteErrorStatus,
 } from '@reusable-parts/common-ngrx-patterns';
-import {
-  DeletingBlockActionTypes,
-  DeletingBlockActions,
-} from './deleting-block.actions';
+import { DeletingBlockActionTypes, DeletingBlockActions } from './deleting-block.actions';
 
 export function deletingBlocksReducer(
   state = deleteAdapter.getInitialState(),
-  action: DeletingBlockActions
+  action: DeletingBlockActions,
 ): EntityState<DeleteStatus> {
   switch (action.type) {
     case DeletingBlockActionTypes.Reset:
       return deleteAdapter.getInitialState();
 
     case DeletingBlockActionTypes.DeleteRequest:
-      return deleteAdapter.upsertOne(
-        { id: action.id, changes: getDeletingStatus(action.id) },
-        state
-      );
+      return deleteAdapter.upsertOne({ id: action.id, changes: getDeletingStatus(action.id) }, state);
 
     case DeletingBlockActionTypes.DeleteSuccess:
       return deleteAdapter.updateOne(
@@ -31,7 +25,7 @@ export function deletingBlocksReducer(
           id: action.id,
           changes: getDeletedStatus(action.id),
         },
-        state
+        state,
       );
 
     case DeletingBlockActionTypes.DeleteFailure:
@@ -40,7 +34,7 @@ export function deletingBlocksReducer(
           id: action.id,
           changes: getDeleteErrorStatus(action.id, action.error),
         },
-        state
+        state,
       );
 
     default:

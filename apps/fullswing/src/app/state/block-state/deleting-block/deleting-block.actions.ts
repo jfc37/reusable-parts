@@ -38,8 +38,4 @@ export class DeleteBlockFailure implements Action {
   constructor(public id: string, public error: string) {}
 }
 
-export type DeletingBlockActions =
-  | ResetDeleteBlock
-  | DeleteBlockRequest
-  | DeleteBlockSuccess
-  | DeleteBlockFailure;
+export type DeletingBlockActions = ResetDeleteBlock | DeleteBlockRequest | DeleteBlockSuccess | DeleteBlockFailure;

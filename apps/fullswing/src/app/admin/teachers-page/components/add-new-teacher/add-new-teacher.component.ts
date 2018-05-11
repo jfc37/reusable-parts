@@ -24,17 +24,11 @@ export class AddNewTeacherComponent implements OnInit, OnChanges {
 
   @Output() public addTeacher = new EventEmitter<string>();
 
-  public selectionFormControl = new FormControl('', [
-    Validators.required,
-    isSelectionOption,
-  ]);
+  public selectionFormControl = new FormControl('', [Validators.required, isSelectionOption]);
   public filteredOptions$: Observable<PotentialTeacherModel[]>;
 
   public ngOnInit(): void {
-    this.filteredOptions$ = this.selectionFormControl.valueChanges.pipe(
-      startWith(''),
-      map(val => this.filter(val))
-    );
+    this.filteredOptions$ = this.selectionFormControl.valueChanges.pipe(startWith(''), map(val => this.filter(val)));
   }
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['disabled'] && !changes['disabled'].isFirstChange()) {
@@ -64,9 +58,7 @@ export class AddNewTeacherComponent implements OnInit, OnChanges {
       return [];
     }
     val = val.toLowerCase();
-    return this.potentialTeachers.filter(
-      option => option.name.toLowerCase().indexOf(val) === 0
-    );
+    return this.potentialTeachers.filter(option => option.name.toLowerCase().indexOf(val) === 0);
   }
 }
 

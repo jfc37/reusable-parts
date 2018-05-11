@@ -38,10 +38,7 @@ export const initialState: RegisterData = {
   registerErrorMessage: null,
 };
 
-export function registerReducer(
-  state = initialState,
-  action: RegisterActions
-): RegisterData {
+export function registerReducer(state = initialState, action: RegisterActions): RegisterData {
   switch (action.type) {
     case RegisterActionTypes.ResetRegisterPage: {
       return initialState;

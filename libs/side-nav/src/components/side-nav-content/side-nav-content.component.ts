@@ -28,20 +28,18 @@ export class SideNavContentComponent implements OnInit, OnDestroy {
 
     this.fusePerfectScrollbar = theDirective;
 
-    this.navigationService.onItemCollapseToggled
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(() => {
-        this.fusePerfectScrollbarUpdateTimeout = setTimeout(() => {
-          this.fusePerfectScrollbar.update();
-        }, 310);
-      });
+    this.navigationService.onItemCollapseToggled.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+      this.fusePerfectScrollbarUpdateTimeout = setTimeout(() => {
+        this.fusePerfectScrollbar.update();
+      }, 310);
+    });
   }
   private fusePerfectScrollbarUpdateTimeout;
 
   constructor(
     private sidebarService: FuseSidebarService,
     private navigationService: FuseNavigationService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {

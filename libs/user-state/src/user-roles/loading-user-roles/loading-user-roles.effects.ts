@@ -4,16 +4,7 @@ import { Store } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
-import {
-  catchError,
-  filter,
-  map,
-  mergeMap,
-  switchMap,
-  withLatestFrom,
-  tap,
-  exhaustMap,
-} from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, switchMap, withLatestFrom, tap, exhaustMap } from 'rxjs/operators';
 import { SetUserRoles } from '../user-roles/user-roles.actions';
 import {
   LoadAllUserRoles,
@@ -42,18 +33,15 @@ export class LoadingUserRolesEffects {
     .pipe(
       withLatestFrom(
         this.store.select(hasLoadingAllUserRolesErroredSelector),
-        (action, shouldReset) => shouldReset && new ResetAllUserRoles()
+        (action, shouldReset) => shouldReset && new ResetAllUserRoles(),
       ),
-      withLatestFrom(
-        this.store.select(shouldLoadAllUserRolesSelectors),
-        (resetAction, shouldLoad) => [
-          resetAction,
-          shouldLoad && new LoadAllUserRoles(),
-        ]
-      ),
+      withLatestFrom(this.store.select(shouldLoadAllUserRolesSelectors), (resetAction, shouldLoad) => [
+        resetAction,
+        shouldLoad && new LoadAllUserRoles(),
+      ]),
       map(actions => actions.filter(Boolean)),
       filter(isArrayNotEmpty),
-      mergeMap(actions => actions)
+      mergeMap(actions => actions),
     );
 
   @Effect()
@@ -64,17 +52,10 @@ export class LoadingUserRolesEffects {
         this.repository
           .getAllUserRoles()
           .pipe(
-            mergeMap(roles => [
-              new SetUserRoles(...roles),
-              new LoadAllUserRolesSuccess(),
-            ]),
-            catchError(err =>
-              of(
-                new LoadAllUserRolesFailure(err || 'Failed loading user roles')
-              )
-            )
-          )
-      )
+            mergeMap(roles => [new SetUserRoles(...roles), new LoadAllUserRolesSuccess()]),
+            catchError(err => of(new LoadAllUserRolesFailure(err || 'Failed loading user roles'))),
+          ),
+      ),
     );
 
   @Effect()
@@ -83,10 +64,9 @@ export class LoadingUserRolesEffects {
     .pipe(
       withLatestFrom(
         this.store.select(allUserRoleIdsErrored),
-        (action, erroredIds) =>
-          erroredIds[action.role] && new ResetAllUserRoles()
+        (action, erroredIds) => erroredIds[action.role] && new ResetAllUserRoles(),
       ),
-      filter(Boolean)
+      filter(Boolean),
     );
 
   @Effect()
@@ -96,12 +76,10 @@ export class LoadingUserRolesEffects {
       withLatestFrom(
         this.store.select(allUserRoleIdsLoadingOrLoaded),
         (action, loadingOrLoadedIds) =>
-          !(
-            loadingOrLoadedIds.includes(action.role) ||
-            loadingOrLoadedIds.includes('all')
-          ) && new LoadUserRolesByRole(action.role)
+          !(loadingOrLoadedIds.includes(action.role) || loadingOrLoadedIds.includes('all')) &&
+          new LoadUserRolesByRole(action.role),
       ),
-      filter(Boolean)
+      filter(Boolean),
     );
 
   @Effect()
@@ -112,25 +90,15 @@ export class LoadingUserRolesEffects {
         this.repository
           .getUserRolesByRole(action.role)
           .pipe(
-            mergeMap(roles => [
-              new SetUserRoles(...roles),
-              new LoadUserRolesByRoleSuccess(action.role),
-            ]),
-            catchError(err =>
-              of(
-                new LoadUserRolesByRoleFailure(
-                  action.role,
-                  err || 'Failed loading user roles'
-                )
-              )
-            )
-          )
-      )
+            mergeMap(roles => [new SetUserRoles(...roles), new LoadUserRolesByRoleSuccess(action.role)]),
+            catchError(err => of(new LoadUserRolesByRoleFailure(action.role, err || 'Failed loading user roles'))),
+          ),
+      ),
     );
 
   constructor(
     private actions$: Actions,
     private store: Store<UserFeatureState>,
-    private repository: FirebaseUsersService
+    private repository: FirebaseUsersService,
   ) {}
 }

@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, Validator, Validators, FormControl } from '@angular/forms';
 import { format } from 'date-fns';
 

@@ -36,8 +36,4 @@ export class CreateBlockFailure implements Action {
   constructor(public error: string) {}
 }
 
-export type CreatingBlockActions =
-  | ResetCreateBlock
-  | CreateBlockRequest
-  | CreateBlockSuccess
-  | CreateBlockFailure;
+export type CreatingBlockActions = ResetCreateBlock | CreateBlockRequest | CreateBlockSuccess | CreateBlockFailure;

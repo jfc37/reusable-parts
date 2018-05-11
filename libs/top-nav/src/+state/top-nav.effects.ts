@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
 import { filter, map, mapTo, switchMap } from 'rxjs/operators';
-import {
-  Authenticated,
-  LoggedOut,
-  TopNavActionTypes,
-  UnAuthenticated,
-} from './top-nav.actions';
+import { Authenticated, LoggedOut, TopNavActionTypes, UnAuthenticated } from './top-nav.actions';
 
 @Injectable()
 export class TopNavEffects {
@@ -17,12 +12,7 @@ export class TopNavEffects {
     .pipe(
       switchMap(() => this.firebaseUser.getUser()),
       filter(Boolean),
-      map(
-        user =>
-          user
-            ? new Authenticated(user.displayName, user.avatarUrl)
-            : new UnAuthenticated()
-      )
+      map(user => (user ? new Authenticated(user.displayName, user.avatarUrl) : new UnAuthenticated())),
     );
 
   @Effect()
@@ -30,8 +20,5 @@ export class TopNavEffects {
     .ofType(TopNavActionTypes.LoggingOut)
     .pipe(switchMap(() => this.firebaseUser.logout()), mapTo(new LoggedOut()));
 
-  constructor(
-    private actions$: Actions,
-    private firebaseUser: FirebaseUserService
-  ) {}
+  constructor(private actions$: Actions, private firebaseUser: FirebaseUserService) {}
 }

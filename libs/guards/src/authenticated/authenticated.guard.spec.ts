@@ -13,6 +13,6 @@ describe('AuthenticatedGuard', () => {
     'should ...',
     inject([AuthenticatedGuard], (guard: AuthenticatedGuard) => {
       expect(guard).toBeTruthy();
-    })
+    }),
   );
 });

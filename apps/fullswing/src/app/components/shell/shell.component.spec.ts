@@ -11,7 +11,7 @@ describe('ShellComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ShellComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

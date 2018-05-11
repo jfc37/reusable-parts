@@ -11,7 +11,7 @@ describe('TeachersComponent', () => {
       TestBed.configureTestingModule({
         declarations: [TeachersComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

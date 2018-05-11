@@ -1,18 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-  OnChanges,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { RegistrationAttempt } from './dumb-register.component.model';
 
@@ -63,8 +50,7 @@ export class DumbRegisterComponent implements OnInit, OnChanges {
   /**
    * Emitted when user attempts to register with email and password
    */
-  @Output()
-  public registrationAttempt = new EventEmitter<RegistrationAttempt>();
+  @Output() public registrationAttempt = new EventEmitter<RegistrationAttempt>();
 
   public registerForm: FormGroup;
 
@@ -102,11 +88,7 @@ export class DumbRegisterComponent implements OnInit, OnChanges {
   }
 
   public canRegister() {
-    return (
-      this.registerForm.invalid ||
-      this.registering ||
-      this.registrationSucceeded
-    );
+    return this.registerForm.invalid || this.registering || this.registrationSucceeded;
   }
 
   private updateFormState() {

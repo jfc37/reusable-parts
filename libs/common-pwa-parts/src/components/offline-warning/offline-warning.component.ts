@@ -2,12 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { interval } from 'rxjs/observable/interval';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import {
-  takeUntil,
-  switchMap,
-  map,
-  distinctUntilChanged,
-} from 'rxjs/operators';
+import { takeUntil, switchMap, map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-offline-warning',
@@ -22,7 +17,7 @@ export class OfflineWarningComponent implements OnInit, OnDestroy {
     this.isOffline$ = interval(5000).pipe(
       takeUntil(this.onDestroy$),
       map(() => !navigator.onLine),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 

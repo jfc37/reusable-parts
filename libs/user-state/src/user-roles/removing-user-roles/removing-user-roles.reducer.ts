@@ -13,7 +13,7 @@ import { EntityState } from '@ngrx/entity';
 
 export function removingUserRolesReducer(
   state = deleteAdapter.getInitialState(),
-  action: RemovingUserRolesActions
+  action: RemovingUserRolesActions,
 ): EntityState<DeleteStatus> {
   switch (action.type) {
     case RemovingUserRolesActionTypes.Reset:
@@ -23,10 +23,7 @@ export function removingUserRolesReducer(
       return deleteAdapter.addOne(getDeletingStatus(action.id), state);
 
     case RemovingUserRolesActionTypes.RemoveSuccess:
-      return deleteAdapter.updateOne(
-        { id: action.id, changes: getDeletedStatus(action.id) },
-        state
-      );
+      return deleteAdapter.updateOne({ id: action.id, changes: getDeletedStatus(action.id) }, state);
 
     case RemovingUserRolesActionTypes.RemoveFailure:
       return deleteAdapter.updateOne(
@@ -34,7 +31,7 @@ export function removingUserRolesReducer(
           id: action.id,
           changes: getDeleteErrorStatus(action.id, action.error),
         },
-        state
+        state,
       );
 
     default:

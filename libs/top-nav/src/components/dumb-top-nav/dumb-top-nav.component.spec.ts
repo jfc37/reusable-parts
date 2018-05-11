@@ -11,7 +11,7 @@ describe('DumbTopNavComponent', () => {
       TestBed.configureTestingModule({
         declarations: [DumbTopNavComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

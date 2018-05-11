@@ -16,11 +16,7 @@ describe('RegisterEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [
-        RegisterEffects,
-        DataPersistence,
-        provideMockActions(() => actions$),
-      ],
+      providers: [RegisterEffects, DataPersistence, provideMockActions(() => actions$)],
     });
 
     effects$ = TestBed.get(RegisterEffects);
@@ -29,9 +25,7 @@ describe('RegisterEffects', () => {
   describe('someEffect', () => {
     it('should work', () => {
       actions$ = hot('-a-|', { a: new LoadRegister({}) });
-      expect(effects$.loadRegister$).toBeObservable(
-        hot('-a-|', { a: new RegisterLoaded({}) })
-      );
+      expect(effects$.loadRegister$).toBeObservable(hot('-a-|', { a: new RegisterLoaded({}) }));
     });
   });
 });

@@ -4,33 +4,20 @@ import { isArrayNotEmpty } from '@reusable-parts/common-functions';
 import { Observable } from 'rxjs/Observable';
 import { filter, map } from 'rxjs/operators';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
-import {
-  ChangeBlockSortOrder,
-  ResetBlockPages,
-} from '../../../state/block-state/block-pages/block-pages.actions';
+import { ChangeBlockSortOrder, ResetBlockPages } from '../../../state/block-state/block-pages/block-pages.actions';
 import { hasNoBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import {
   GetMoreBlocks,
   ResetLoadBlockPages,
 } from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
-import {
-  BlockRowModel,
-  SortChange,
-} from '../components/blocks-table/blocks-table.component';
-import {
-  blockRowsSelector,
-  isLoadingSelector,
-  warningMessagesSelector,
-} from './view-blocks-page.component.selectors';
+import { BlockRowModel, SortChange } from '../components/blocks-table/blocks-table.component';
+import { blockRowsSelector, isLoadingSelector, warningMessagesSelector } from './view-blocks-page.component.selectors';
 import { hasMoreBlockPagesToRetrieveSelector } from '../../../state/block-state/block-pages/block-pages.selectors';
 import {
   AttemptGenerateBlock,
   ResetGenerateBlock,
 } from '../../../state/block-state/generating-block/generating-block.actions';
-import {
-  AttemptDeleteBlock,
-  ResetDeleteBlock,
-} from '../../../state/block-state/deleting-block/deleting-block.actions';
+import { AttemptDeleteBlock, ResetDeleteBlock } from '../../../state/block-state/deleting-block/deleting-block.actions';
 
 @Component({
   selector: 'jfc-view-blocks-page',
@@ -49,13 +36,9 @@ export class ViewBlocksPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loading$ = this.store.select(isLoadingSelector);
-    this.rows$ = this.store
-      .select(blockRowsSelector)
-      .pipe(filter(isArrayNotEmpty));
+    this.rows$ = this.store.select(blockRowsSelector).pipe(filter(isArrayNotEmpty));
     this.hasNoBlocks$ = this.store.select(hasNoBlocksSelector);
-    this.showLoadMoreButton$ = this.store.select(
-      hasMoreBlockPagesToRetrieveSelector
-    );
+    this.showLoadMoreButton$ = this.store.select(hasMoreBlockPagesToRetrieveSelector);
 
     this.warningMessages$ = this.store.select(warningMessagesSelector);
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
@@ -72,9 +55,7 @@ export class ViewBlocksPageComponent implements OnInit {
   }
 
   public sortChanged(sortChange: SortChange): void {
-    this.store.dispatch(
-      new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection)
-    );
+    this.store.dispatch(new ChangeBlockSortOrder(sortChange.orderBy, sortChange.sortDirection));
   }
 
   public generateBlock(id: string): void {

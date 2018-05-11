@@ -38,10 +38,7 @@ export const initialState: LoginData = {
   loginErrorMessage: null,
 };
 
-export function loginReducer(
-  state = initialState,
-  action: LoginActions
-): LoginData {
+export function loginReducer(state = initialState, action: LoginActions): LoginData {
   switch (action.type) {
     case LoginActionTypes.ResetLoginPage: {
       return initialState;

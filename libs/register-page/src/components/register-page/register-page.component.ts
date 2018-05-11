@@ -1,9 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  AttemptRegister,
-  ResetRegisterPage,
-} from '@reusable-parts/register-page/src/+state/register.actions';
+import { AttemptRegister, ResetRegisterPage } from '@reusable-parts/register-page/src/+state/register.actions';
 import { RegisterState } from '@reusable-parts/register-page/src/+state/register.reducer';
 import { RegisterPageConfig } from '../../../../../lib-config/register-page.config';
 import { Observable } from 'rxjs/Observable';
@@ -31,7 +28,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   constructor(
     @Inject('registerPageConfig') public config: RegisterPageConfig,
     public store: Store<RegisterState>,
-    public router: Router
+    public router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -46,7 +43,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$),
         filter(Boolean),
         distinctUntilChanged(),
-        tap(() => this.router.navigate([this.config.afterRegistrationRoute]))
+        tap(() => this.router.navigate([this.config.afterRegistrationRoute])),
       )
       .subscribe();
   }

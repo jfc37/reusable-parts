@@ -1,7 +1,4 @@
-import {
-  CreatingBlockActionTypes,
-  CreatingBlockActions,
-} from './creating-block.actions';
+import { CreatingBlockActionTypes, CreatingBlockActions } from './creating-block.actions';
 import {
   getDefaultCreateStatus,
   CreateStatus,
@@ -10,10 +7,7 @@ import {
   getCreateErrorStatus,
 } from '@reusable-parts/common-ngrx-patterns';
 
-export function creatingBlockReducer(
-  state = getDefaultCreateStatus(),
-  action: CreatingBlockActions
-): CreateStatus {
+export function creatingBlockReducer(state = getDefaultCreateStatus(), action: CreatingBlockActions): CreateStatus {
   switch (action.type) {
     case CreatingBlockActionTypes.Reset:
       return getDefaultCreateStatus();

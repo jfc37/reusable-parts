@@ -1,10 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  GetUser,
-  LoggingOut,
-} from '@reusable-parts/top-nav/src/+state/top-nav.actions';
+import { GetUser, LoggingOut } from '@reusable-parts/top-nav/src/+state/top-nav.actions';
 import { TopNavState } from '@reusable-parts/top-nav/src/+state/top-nav.reducer';
 import {
   avatarUrlSelector,
@@ -33,11 +30,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
 
   private onDestroy$ = new ReplaySubject();
 
-  constructor(
-    private router: Router,
-    private store: Store<TopNavState>,
-    private sidebarService: FuseSidebarService
-  ) {}
+  constructor(private router: Router, private store: Store<TopNavState>, private sidebarService: FuseSidebarService) {}
 
   public ngOnInit(): void {
     this.store.dispatch(new GetUser());
@@ -51,7 +44,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.onDestroy$),
         filter(Boolean),
-        tap(() => this.router.navigate([this.redirectRouteAfterLogout]))
+        tap(() => this.router.navigate([this.redirectRouteAfterLogout])),
       )
       .subscribe();
 
@@ -64,7 +57,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
           return false;
         }
       }),
-      filter(emit => emit != null)
+      filter(emit => emit != null),
     );
   }
 

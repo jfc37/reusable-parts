@@ -4,19 +4,11 @@ import { RouterModule } from '@angular/router';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  registerReducer,
-  initialState as registerInitialState,
-} from './+state/register.reducer';
+import { registerReducer, initialState as registerInitialState } from './+state/register.reducer';
 import { RegisterEffects } from './+state/register.effects';
 import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/service/firebase-registration.service';
 import { WelcomeModule } from '@reusable-parts/welcome';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatFormFieldModule,
-  MatInputModule,
-} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { DumbRegisterComponent } from '@reusable-parts/register-page/src/components/dumb-register/dumb-register.component';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
@@ -35,9 +27,7 @@ import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 
     FuseSharedModule,
 
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: RegisterPageComponent },
-    ]),
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: RegisterPageComponent }]),
 
     StoreModule.forFeature('register', registerReducer, {
       initialState: registerInitialState,
@@ -52,12 +42,10 @@ export class RegisterPageModule {
   constructor(
     @Optional()
     @SkipSelf()
-    parentModule: RegisterPageModule
+    parentModule: RegisterPageModule,
   ) {
     if (parentModule) {
-      throw new Error(
-        'RegisterPageModule is already loaded. Import it in the AppModule only!'
-      );
+      throw new Error('RegisterPageModule is already loaded. Import it in the AppModule only!');
     }
   }
 }

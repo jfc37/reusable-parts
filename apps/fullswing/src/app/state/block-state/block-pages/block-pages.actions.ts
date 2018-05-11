@@ -29,7 +29,4 @@ export class ChangeBlockSortOrder implements Action {
   constructor(public orderBy: string, public sortDirection: SortDirection) {}
 }
 
-export type BlockPagesActions =
-  | ResetBlockPages
-  | SetBlockPage
-  | ChangeBlockSortOrder;
+export type BlockPagesActions = ResetBlockPages | SetBlockPage | ChangeBlockSortOrder;

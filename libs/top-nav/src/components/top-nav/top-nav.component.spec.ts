@@ -11,7 +11,7 @@ describe('TopNavComponent', () => {
       TestBed.configureTestingModule({
         declarations: [TopNavComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

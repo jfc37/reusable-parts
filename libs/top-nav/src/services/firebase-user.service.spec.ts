@@ -13,6 +13,6 @@ describe('FirebaseUserService', () => {
     'should be created',
     inject([FirebaseUserService], (service: FirebaseUserService) => {
       expect(service).toBeTruthy();
-    })
+    }),
   );
 });

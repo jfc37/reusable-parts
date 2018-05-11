@@ -4,13 +4,10 @@ import { userFeatureSelector } from '@reusable-parts/user-state/src/user-feature
 
 const selector = createSelector(userFeatureSelector, state => state.userRoles);
 
-export const allUserRolesSelector = createSelector(
-  selector,
-  userRolesAdapter.getSelectors().selectAll
-);
+export const allUserRolesSelector = createSelector(selector, userRolesAdapter.getSelectors().selectAll);
 
 export function userIdsWithRoleSelectorFactory(role: string) {
   return createSelector(allUserRolesSelector, userRoles =>
-    userRoles.filter(userRole => userRole[role]).map(userRole => userRole.id)
+    userRoles.filter(userRole => userRole[role]).map(userRole => userRole.id),
   );
 }

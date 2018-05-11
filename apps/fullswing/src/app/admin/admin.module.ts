@@ -19,13 +19,11 @@ import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
       },
       {
         path: 'blocks',
-        loadChildren:
-          './view-blocks-page/view-blocks-page.module#ViewBlocksPageModule',
+        loadChildren: './view-blocks-page/view-blocks-page.module#ViewBlocksPageModule',
       },
       {
         path: 'blocks/new',
-        loadChildren:
-          './new-block-page/new-block-page.module#NewBlockPageModule',
+        loadChildren: './new-block-page/new-block-page.module#NewBlockPageModule',
       },
     ]),
   ],

@@ -4,10 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { BlockFormModel } from '../components/block-form/block-form.component';
 import { Store } from '@ngrx/store';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
-import {
-  AttemptCreateBlock,
-  ResetCreateBlock,
-} from '../../../state/block-state/creating-block/creating-block.actions';
+import { AttemptCreateBlock, ResetCreateBlock } from '../../../state/block-state/creating-block/creating-block.actions';
 import {
   isCreatingBlockSelector,
   hasCreatedBlockSelector,
@@ -25,10 +22,7 @@ import {
   GetUserRolesByRole,
 } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
-import {
-  teacherIdsSelector,
-  teacherOptionsSelector,
-} from '../../../state/teachers-state/teachers.selectors';
+import { teacherIdsSelector, teacherOptionsSelector } from '../../../state/teachers-state/teachers.selectors';
 import { merge } from 'rxjs/operators/merge';
 import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
 import { Block } from '../../../state/block-state/block';
@@ -52,21 +46,14 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
 
   private onDestroy$ = new ReplaySubject();
 
-  constructor(
-    private store: Store<BlockFeatureState>,
-    private router: Router
-  ) {}
+  constructor(private store: Store<BlockFeatureState>, private router: Router) {}
 
   public ngOnInit(): void {
     this.store.dispatch(new ResetCreateBlock());
     this.store.dispatch(new GetUserRolesByRole(FullSwingRoleTypes.Teacher));
     this.store
       .select(teacherIdsSelector)
-      .pipe(
-        takeUntil(this.onDestroy$),
-        mergeMap(a => a),
-        tap(id => this.store.dispatch(new GetUser(id)))
-      )
+      .pipe(takeUntil(this.onDestroy$), mergeMap(a => a), tap(id => this.store.dispatch(new GetUser(id))))
       .subscribe();
 
     this.saveButtonText$ = of('Create');
@@ -81,11 +68,7 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
 
     this.store
       .select(hasCreatedBlockSelector)
-      .pipe(
-        takeUntil(this.onDestroy$),
-        filter(Boolean),
-        tap(() => this.router.navigateByUrl('/app/admin/blocks'))
-      )
+      .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.router.navigateByUrl('/app/admin/blocks')))
       .subscribe();
   }
 

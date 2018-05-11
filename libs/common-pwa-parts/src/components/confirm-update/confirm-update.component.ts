@@ -2,14 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { interval } from 'rxjs/observable/interval';
-import {
-  switchMap,
-  takeUntil,
-  filter,
-  tap,
-  take,
-  takeWhile,
-} from 'rxjs/operators';
+import { switchMap, takeUntil, filter, tap, take, takeWhile } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @Component({
@@ -35,17 +28,12 @@ export class ConfirmUpdateComponent implements OnInit, OnDestroy {
           switchMap(() => fromPromise(this.updates.checkForUpdate())),
           filter(Boolean),
           tap(() => (this.hasUpdates = true)),
-          take(1)
+          take(1),
         )
         .subscribe();
 
       this.updates.available
-        .pipe(
-          takeUntil(this.onDestroy$),
-          filter(Boolean),
-          tap(() => (this.hasUpdates = true)),
-          take(1)
-        )
+        .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => (this.hasUpdates = true)), take(1))
         .subscribe();
     }
   }

@@ -6,25 +6,16 @@ import { isArrayEmpty } from '@reusable-parts/common-functions';
 
 const selector = createSelector(blockFeatureSelector, state => state.blocks);
 
-export const blockEntitiesSelector = createSelector(
-  selector,
-  blockAdapter.getSelectors().selectEntities
-);
+export const blockEntitiesSelector = createSelector(selector, blockAdapter.getSelectors().selectEntities);
 
-const blocksSelector = createSelector(
-  selector,
-  blockAdapter.getSelectors().selectAll
-);
+const blocksSelector = createSelector(selector, blockAdapter.getSelectors().selectAll);
 
-export const blocksDictionarySelector = createSelector(
-  selector,
-  blockAdapter.getSelectors().selectEntities
-);
+export const blocksDictionarySelector = createSelector(selector, blockAdapter.getSelectors().selectEntities);
 
 export const blocksForCurrentPagesSelector = createSelector(
   blocksSelector,
   blockIdsForCurrentPagesSelector,
-  (allBlocks, ids) => allBlocks.filter(block => ids.includes(block.id))
+  (allBlocks, ids) => allBlocks.filter(block => ids.includes(block.id)),
 );
 
 export const hasNoBlocksSelector = createSelector(blocksSelector, isArrayEmpty);

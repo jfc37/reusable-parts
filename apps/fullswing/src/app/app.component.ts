@@ -12,10 +12,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  constructor(
-    private translate: TranslateService,
-    private fuseTranslationLoader: FuseTranslationLoaderService
-  ) {
+  constructor(private translate: TranslateService, private fuseTranslationLoader: FuseTranslationLoaderService) {
     this.translate.addLangs(['en']);
     this.translate.setDefaultLang('en');
     this.fuseTranslationLoader.loadTranslations({

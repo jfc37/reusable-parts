@@ -6,14 +6,11 @@ import {
   SortDirection,
   pageKeyToId,
 } from '@reusable-parts/common-ngrx-patterns';
-import {
-  BlockPagesActions,
-  BlockPagesActionTypes,
-} from './block-pages.actions';
+import { BlockPagesActions, BlockPagesActionTypes } from './block-pages.actions';
 
 export function blockPagesReducer(
   state = getInitialPageState('startDate', SortDirection.Descending),
-  action: BlockPagesActions
+  action: BlockPagesActions,
 ): PageState {
   switch (action.type) {
     case BlockPagesActionTypes.Reset:
@@ -25,7 +22,7 @@ export function blockPagesReducer(
           id: pageKeyToId(page.key),
           changes: page,
         })),
-        state
+        state,
       );
 
     case BlockPagesActionTypes.ChangeSortOrder:

@@ -32,9 +32,4 @@ export class LoggedOut implements Action {
   readonly type = TopNavActionTypes.LoggedOut;
 }
 
-export type TopNavActions =
-  | GetUser
-  | Authenticated
-  | UnAuthenticated
-  | LoggingOut
-  | LoggedOut;
+export type TopNavActions = GetUser | Authenticated | UnAuthenticated | LoggingOut | LoggedOut;

@@ -23,9 +23,7 @@ import { BlockStateModule } from '../../state/block-state/block-state.module';
     ReactiveFormsModule,
     FormsModule,
 
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: NewBlockPageComponent },
-    ]),
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: NewBlockPageComponent }]),
 
     CommonUiComponentsModule,
     MainContentModule,

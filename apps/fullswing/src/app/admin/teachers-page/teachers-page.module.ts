@@ -21,9 +21,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
 
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: TeachersPageComponent },
-    ]),
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: TeachersPageComponent }]),
 
     CommonUiComponentsModule,
     MainContentModule,
@@ -34,10 +32,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
   ],
-  declarations: [
-    TeachersPageComponent,
-    ViewTeachersComponent,
-    AddNewTeacherComponent,
-  ],
+  declarations: [TeachersPageComponent, ViewTeachersComponent, AddNewTeacherComponent],
 })
 export class TeachersPageModule {}

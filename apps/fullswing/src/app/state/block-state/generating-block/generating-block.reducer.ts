@@ -1,7 +1,4 @@
-import {
-  GeneratingBlockActionTypes,
-  GeneratingBlockActions,
-} from './generating-block.actions';
+import { GeneratingBlockActionTypes, GeneratingBlockActions } from './generating-block.actions';
 import {
   getInitialUpdateState,
   UpdateStatus,
@@ -14,17 +11,14 @@ import { EntityState } from '@ngrx/entity';
 
 export function generatingBlocksReducer(
   state = updateAdapter.getInitialState(),
-  action: GeneratingBlockActions
+  action: GeneratingBlockActions,
 ): EntityState<UpdateStatus> {
   switch (action.type) {
     case GeneratingBlockActionTypes.Reset:
       return updateAdapter.getInitialState();
 
     case GeneratingBlockActionTypes.GenerateRequest:
-      return updateAdapter.upsertOne(
-        { id: action.id, changes: getUpdatingStatus(action.id) },
-        state
-      );
+      return updateAdapter.upsertOne({ id: action.id, changes: getUpdatingStatus(action.id) }, state);
 
     case GeneratingBlockActionTypes.GenerateSuccess:
       return updateAdapter.updateOne(
@@ -32,7 +26,7 @@ export function generatingBlocksReducer(
           id: action.id,
           changes: getUpdatedStatus(action.id),
         },
-        state
+        state,
       );
 
     case GeneratingBlockActionTypes.GenerateFailure:
@@ -41,7 +35,7 @@ export function generatingBlocksReducer(
           id: action.id,
           changes: getUpdateErrorStatus(action.id, action.error),
         },
-        state
+        state,
       );
 
     default:

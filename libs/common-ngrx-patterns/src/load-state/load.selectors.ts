@@ -1,63 +1,44 @@
 import { createSelector } from '@ngrx/store';
 import { loadAdapter } from '@reusable-parts/common-ngrx-patterns/src/load-state/load.state';
-import {
-  isArrayNotEmpty,
-  areAllArgumentsFalsy,
-  isArrayEmpty,
-} from '@reusable-parts/common-functions';
+import { isArrayNotEmpty, areAllArgumentsFalsy, isArrayEmpty } from '@reusable-parts/common-functions';
 
 function allFn(selector) {
   return createSelector(selector, loadAdapter.getSelectors().selectAll);
 }
 
 export function allLoadingSelectorFn(selector) {
-  return createSelector(allFn(selector), loads =>
-    loads.filter(load => load.loading)
-  );
+  return createSelector(allFn(selector), loads => loads.filter(load => load.loading));
 }
 
 export function allLoadedSelectorFn(selector) {
-  return createSelector(allFn(selector), loads =>
-    loads.filter(load => load.loaded)
-  );
+  return createSelector(allFn(selector), loads => loads.filter(load => load.loaded));
 }
 
 export function allLoadingOrLoadedSelectorFn(selector) {
-  return createSelector(
-    allLoadingSelectorFn(selector),
-    allLoadedSelectorFn(selector),
-    (loadingIds, loadedIds) => [...loadingIds, ...loadedIds]
-  );
+  return createSelector(allLoadingSelectorFn(selector), allLoadedSelectorFn(selector), (loadingIds, loadedIds) => [
+    ...loadingIds,
+    ...loadedIds,
+  ]);
 }
 
 export function allLoadingOrLoadedIdsSelectorFn(selector) {
-  return createSelector(allLoadingOrLoadedSelectorFn(selector), loads =>
-    loads.map(load => load.id)
-  );
+  return createSelector(allLoadingOrLoadedSelectorFn(selector), loads => loads.map(load => load.id));
 }
 
 export function allLoadErroredSelectorFn(selector) {
-  return createSelector(allFn(selector), loads =>
-    loads.filter(load => load.error)
-  );
+  return createSelector(allFn(selector), loads => loads.filter(load => load.error));
 }
 
 export function allLoadingIdsSelectorFn(selector) {
-  return createSelector(allLoadingSelectorFn(selector), loads =>
-    loads.map(load => load.id)
-  );
+  return createSelector(allLoadingSelectorFn(selector), loads => loads.map(load => load.id));
 }
 
 export function allLoadedIdsSelectorFn(selector) {
-  return createSelector(allLoadedSelectorFn(selector), loads =>
-    loads.map(load => load.id)
-  );
+  return createSelector(allLoadedSelectorFn(selector), loads => loads.map(load => load.id));
 }
 
 export function allLoadErroredIdsSelectorFn(selector) {
-  return createSelector(allLoadErroredSelectorFn(selector), loads =>
-    loads.map(load => load.id)
-  );
+  return createSelector(allLoadErroredSelectorFn(selector), loads => loads.map(load => load.id));
 }
 
 export function isLoadingIdSelectorFn(selector, id) {
@@ -85,10 +66,7 @@ export function hasAnyLoadErroredSelectorFn(selector) {
 }
 
 export function hasErroredLoadingIdSelectorFn(selector, id) {
-  return createSelector(
-    allLoadErroredIdsSelectorFn(selector),
-    arrayIncludesFn(id)
-  );
+  return createSelector(allLoadErroredIdsSelectorFn(selector), arrayIncludesFn(id));
 }
 
 function arrayIncludesFn(value): (array: any[]) => boolean {
@@ -96,9 +74,5 @@ function arrayIncludesFn(value): (array: any[]) => boolean {
 }
 
 export function shouldLoadIdSelectorFn(selector, id) {
-  return createSelector(
-    hasLoadedIdSelectorFn(selector, id),
-    isLoadingIdSelectorFn(selector, id),
-    areAllArgumentsFalsy
-  );
+  return createSelector(hasLoadedIdSelectorFn(selector, id), isLoadingIdSelectorFn(selector, id), areAllArgumentsFalsy);
 }

@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ChangeDetectionStrategy,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserStateModule } from '@reusable-parts/user-state';
 import { GetAllUserRoles } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
@@ -12,10 +6,7 @@ import { GetAllUsers } from '@reusable-parts/user-state/src/users/loading-users/
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { map, tap, takeUntil, filter } from 'rxjs/operators';
-import {
-  AddNewTeacherComponent,
-  PotentialTeacherModel,
-} from '../components/add-new-teacher/add-new-teacher.component';
+import { AddNewTeacherComponent, PotentialTeacherModel } from '../components/add-new-teacher/add-new-teacher.component';
 import { TeacherModel } from '../components/view-teachers/view-teachers.component';
 import {
   errorsSelector,
@@ -46,8 +37,7 @@ import { isArrayNotEmpty } from '@reusable-parts/common-functions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersPageComponent implements OnInit, OnDestroy {
-  @ViewChild(AddNewTeacherComponent)
-  public addNewTeacher: AddNewTeacherComponent;
+  @ViewChild(AddNewTeacherComponent) public addNewTeacher: AddNewTeacherComponent;
   public loading$: Observable<boolean>;
   public errorMessages$: Observable<string[]>;
   public hasError$: Observable<boolean>;
@@ -77,17 +67,11 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
     this.teachers$ = this.store.select(teacherModelsSelector);
 
     this.potentialTeachers$ = this.store.select(potentialTeacherModelsSelector);
-    this.disableAddingNewTeacher$ = this.store.select(
-      isUpdatingAnyUserRolesSelector
-    );
+    this.disableAddingNewTeacher$ = this.store.select(isUpdatingAnyUserRolesSelector);
 
     this.store
       .select(hasAnyUserRoleUpdatedSelector)
-      .pipe(
-        takeUntil(this.onDestroy$),
-        filter(Boolean),
-        tap(() => this.addNewTeacher.reset())
-      )
+      .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.addNewTeacher.reset()))
       .subscribe();
   }
 
@@ -97,15 +81,11 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
   }
   public remove(id: string) {
     this.store.dispatch(new ResetRemoveUserRoles());
-    this.store.dispatch(
-      new AttemptToRemoveUserRoles(id, FullSwingRoleTypes.Teacher)
-    );
+    this.store.dispatch(new AttemptToRemoveUserRoles(id, FullSwingRoleTypes.Teacher));
   }
 
   public addTeacher(id: string) {
     this.store.dispatch(new ResetUpdateUserRoles());
-    this.store.dispatch(
-      new AttemptToUpdateUserRoles(id, FullSwingRoleTypes.Teacher)
-    );
+    this.store.dispatch(new AttemptToUpdateUserRoles(id, FullSwingRoleTypes.Teacher));
   }
 }

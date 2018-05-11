@@ -8,15 +8,10 @@ import {
   hasAnyUpdatedSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns';
 
-const selector = createSelector(
-  userFeatureSelector,
-  state => state.updatingUserRoles
-);
+const selector = createSelector(userFeatureSelector, state => state.updatingUserRoles);
 
 export const isUpdatingAnyUserRolesSelector = isAnyUpdatingSelectorFn(selector);
-export const hasAnyUserRoleUpdateErroredSelector = hasAnyUpdateErroredSelectorFn(
-  selector
-);
+export const hasAnyUserRoleUpdateErroredSelector = hasAnyUpdateErroredSelectorFn(selector);
 export const hasAnyUserRoleUpdatedSelector = hasAnyUpdatedSelectorFn(selector);
 
 export const allUserRoleIdsUpdating = allUpdatingIdsSelectorFn(selector);

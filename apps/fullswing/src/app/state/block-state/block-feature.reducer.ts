@@ -57,6 +57,4 @@ export function getInitialBlockFeatureState(): BlockFeatureState {
   };
 }
 
-export const blockFeatureSelector = createFeatureSelector<BlockFeatureState>(
-  'blockFeature'
-);
+export const blockFeatureSelector = createFeatureSelector<BlockFeatureState>('blockFeature');

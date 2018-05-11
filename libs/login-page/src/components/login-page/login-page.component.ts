@@ -1,10 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  AttemptLogin,
-  ResetLoginPage,
-} from '@reusable-parts/login-page/src/+state/login.actions';
+import { AttemptLogin, ResetLoginPage } from '@reusable-parts/login-page/src/+state/login.actions';
 import { LoginState } from '@reusable-parts/login-page/src/+state/login.reducer';
 import {
   hasLoggedInSelector,
@@ -31,7 +28,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(
     @Inject('loginPageConfig') public config: LoginPageConfig,
     public store: Store<LoginState>,
-    public router: Router
+    public router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -46,7 +43,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$),
         filter(Boolean),
         distinctUntilChanged(),
-        tap(() => this.router.navigate([this.config.afterLoginRoute]))
+        tap(() => this.router.navigate([this.config.afterLoginRoute])),
       )
       .subscribe();
   }

@@ -4,15 +4,7 @@ import { Store } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
-import {
-  catchError,
-  filter,
-  map,
-  mergeMap,
-  switchMap,
-  withLatestFrom,
-  tap,
-} from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, switchMap, withLatestFrom, tap } from 'rxjs/operators';
 import { SetUsers } from '../users/users.actions';
 import {
   LoadAllUsers,
@@ -38,9 +30,9 @@ export class LoadingUsersEffects {
     .pipe(
       withLatestFrom(
         this.store.select(hasLoadingAllUsersErroredSelector),
-        (action, shouldReset) => shouldReset && new ResetAllUsers()
+        (action, shouldReset) => shouldReset && new ResetAllUsers(),
       ),
-      filter(Boolean)
+      filter(Boolean),
     );
 
   @Effect()
@@ -49,9 +41,9 @@ export class LoadingUsersEffects {
     .pipe(
       withLatestFrom(
         this.store.select(shouldLoadAllUsersSelectors),
-        (action, shouldLoad) => shouldLoad && new LoadAllUsers()
+        (action, shouldLoad) => shouldLoad && new LoadAllUsers(),
       ),
-      filter(Boolean)
+      filter(Boolean),
     );
 
   @Effect()
@@ -62,15 +54,10 @@ export class LoadingUsersEffects {
         this.repository
           .getAllUsers()
           .pipe(
-            mergeMap(users => [
-              new SetUsers(...users),
-              new LoadAllUsersSuccess(),
-            ]),
-            catchError(err =>
-              of(new LoadAllUsersFailure(err || 'Failed loading users'))
-            )
-          )
-      )
+            mergeMap(users => [new SetUsers(...users), new LoadAllUsersSuccess()]),
+            catchError(err => of(new LoadAllUsersFailure(err || 'Failed loading users'))),
+          ),
+      ),
     );
 
   @Effect()
@@ -80,12 +67,9 @@ export class LoadingUsersEffects {
       withLatestFrom(
         this.store.select(allUserIdsLoadingOrLoaded),
         (action, loadingOrLoadedIds) =>
-          !(
-            loadingOrLoadedIds.includes(action.id) ||
-            loadingOrLoadedIds.includes('all')
-          ) && new LoadUser(action.id)
+          !(loadingOrLoadedIds.includes(action.id) || loadingOrLoadedIds.includes('all')) && new LoadUser(action.id),
       ),
-      filter(Boolean)
+      filter(Boolean),
     );
 
   @Effect()
@@ -96,20 +80,15 @@ export class LoadingUsersEffects {
         this.repository
           .getUser(action.id)
           .pipe(
-            mergeMap(user => [
-              new SetUsers(user),
-              new LoadUserSuccess(action.id),
-            ]),
-            catchError(err =>
-              of(new LoadUserFailure(action.id, err || 'Failed loading user'))
-            )
-          )
-      )
+            mergeMap(user => [new SetUsers(user), new LoadUserSuccess(action.id)]),
+            catchError(err => of(new LoadUserFailure(action.id, err || 'Failed loading user'))),
+          ),
+      ),
     );
 
   constructor(
     private actions$: Actions,
     private store: Store<UserFeatureState>,
-    private repository: FirebaseUsersService
+    private repository: FirebaseUsersService,
   ) {}
 }

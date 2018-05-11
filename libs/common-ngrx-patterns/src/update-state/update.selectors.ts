@@ -7,27 +7,19 @@ function allFn(selector) {
 }
 
 export function allUpdatingSelectorFn(selector) {
-  return createSelector(allFn(selector), updates =>
-    updates.filter(update => update.updating)
-  );
+  return createSelector(allFn(selector), updates => updates.filter(update => update.updating));
 }
 
 export function allUpdatedSelectorFn(selector) {
-  return createSelector(allFn(selector), updates =>
-    updates.filter(update => update.updated)
-  );
+  return createSelector(allFn(selector), updates => updates.filter(update => update.updated));
 }
 
 export function allUpdateErroredSelectorFn(selector) {
-  return createSelector(allFn(selector), updates =>
-    updates.filter(update => update.error)
-  );
+  return createSelector(allFn(selector), updates => updates.filter(update => update.error));
 }
 
 export function allUpdatingIdsSelectorFn(selector) {
-  return createSelector(allUpdatingSelectorFn(selector), updates =>
-    updates.map(update => update.id)
-  );
+  return createSelector(allUpdatingSelectorFn(selector), updates => updates.map(update => update.id));
 }
 
 export function isAnyUpdatingSelectorFn(selector) {

@@ -7,27 +7,19 @@ function allFn(selector) {
 }
 
 export function allDeletingSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes =>
-    deletes.filter(_delete => _delete.deleting)
-  );
+  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.deleting));
 }
 
 export function allDeletedSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes =>
-    deletes.filter(_delete => _delete.deleted)
-  );
+  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.deleted));
 }
 
 export function allDeleteErroredSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes =>
-    deletes.filter(_delete => _delete.error)
-  );
+  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.error));
 }
 
 export function allDeletingIdsSelectorFn(selector) {
-  return createSelector(allDeletingSelectorFn(selector), deletes =>
-    deletes.map(_delete => _delete.id)
-  );
+  return createSelector(allDeletingSelectorFn(selector), deletes => deletes.map(_delete => _delete.id));
 }
 
 export function isAnyDeletingSelectorFn(selector) {

@@ -34,7 +34,7 @@ export class BlockRepository {
           this.af.app
             .firestore()
             .collection('classes')
-            .doc()
+            .doc(),
         );
 
         const newBlock = {
@@ -46,10 +46,7 @@ export class BlockRepository {
 
         classDocs
           .map((doc, index) => ({
-            blockClass: createClassFromBlock(
-              { ...newBlock, id: createdBlockDoc.id },
-              index
-            ),
+            blockClass: createClassFromBlock({ ...newBlock, id: createdBlockDoc.id }, index),
             doc,
           }))
           .forEach(({ blockClass, doc }) => {

@@ -16,11 +16,7 @@ describe('LoginEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [
-        LoginEffects,
-        DataPersistence,
-        provideMockActions(() => actions$),
-      ],
+      providers: [LoginEffects, DataPersistence, provideMockActions(() => actions$)],
     });
 
     effects$ = TestBed.get(LoginEffects);
@@ -29,9 +25,7 @@ describe('LoginEffects', () => {
   describe('someEffect', () => {
     it('should work', () => {
       actions$ = hot('-a-|', { a: new LoadLogin({}) });
-      expect(effects$.loadLogin$).toBeObservable(
-        hot('-a-|', { a: new LoginLoaded({}) })
-      );
+      expect(effects$.loadLogin$).toBeObservable(hot('-a-|', { a: new LoginLoaded({}) }));
     });
   });
 });

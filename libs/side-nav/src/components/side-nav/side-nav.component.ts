@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  ViewEncapsulation,
-  OnInit,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
@@ -32,12 +24,10 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private fuseConfig: FuseConfigService) {}
 
   public ngOnInit(): void {
-    this.fuseConfig.onConfigChanged
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(newSettings => {
-        this.folded = newSettings.layout.navigationFolded;
-        this.sideBarClasses = newSettings.colorClasses.navbar;
-      });
+    this.fuseConfig.onConfigChanged.pipe(takeUntil(this.onDestroy$)).subscribe(newSettings => {
+      this.folded = newSettings.layout.navigationFolded;
+      this.sideBarClasses = newSettings.colorClasses.navbar;
+    });
   }
 
   public ngOnDestroy(): void {
@@ -47,8 +37,7 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['menuItems']) {
-      this.fuseMenuItems =
-        this.menuItems && this.menuItems.map(menuItemToFuseMenuItem);
+      this.fuseMenuItems = this.menuItems && this.menuItems.map(menuItemToFuseMenuItem);
     }
   }
 }

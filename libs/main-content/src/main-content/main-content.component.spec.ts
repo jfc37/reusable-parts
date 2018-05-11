@@ -11,7 +11,7 @@ describe('MainContentComponent', () => {
       TestBed.configureTestingModule({
         declarations: [MainContentComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

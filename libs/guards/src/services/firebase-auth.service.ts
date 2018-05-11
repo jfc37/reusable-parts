@@ -22,11 +22,11 @@ export class FirebaseAuthService {
             .firestore()
             .doc(`user-roles/${uid}`)
             .get()
-            .then(doc => doc.data())
-        )
+            .then(doc => doc.data()),
+        ),
       ),
       pluck(role),
-      map(Boolean)
+      map(Boolean),
     );
   }
 }

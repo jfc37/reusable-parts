@@ -16,10 +16,7 @@ import {
   UserRolesState,
   getInitialUserRolesState,
 } from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.state';
-import {
-  UserState,
-  getInitialUserState,
-} from '@reusable-parts/user-state/src/users/users/users.state';
+import { UserState, getInitialUserState } from '@reusable-parts/user-state/src/users/users/users.state';
 import { usersReducer } from '@reusable-parts/user-state/src/users/users/users.reducer';
 import { loadingUsersReducer } from '@reusable-parts/user-state/src/users/loading-users/loading-users.reducer';
 import { updatingUserRolesReducer } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.reducer';
@@ -58,6 +55,4 @@ export function getInitialUserFeatureState(): UserFeatureState {
   };
 }
 
-export const userFeatureSelector = createFeatureSelector<UserFeatureState>(
-  'userFeature'
-);
+export const userFeatureSelector = createFeatureSelector<UserFeatureState>('userFeature');

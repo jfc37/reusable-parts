@@ -13,7 +13,7 @@ import { EntityState } from '@ngrx/entity';
 
 export function updatingUserRolesReducer(
   state = updateAdapter.getInitialState(),
-  action: UpdatingUserRolesActions
+  action: UpdatingUserRolesActions,
 ): EntityState<UpdateStatus> {
   switch (action.type) {
     case UpdatingUserRolesActionTypes.Reset:
@@ -23,10 +23,7 @@ export function updatingUserRolesReducer(
       return updateAdapter.addOne(getUpdatingStatus(action.id), state);
 
     case UpdatingUserRolesActionTypes.UpdateSuccess:
-      return updateAdapter.updateOne(
-        { id: action.id, changes: getUpdatedStatus(action.id) },
-        state
-      );
+      return updateAdapter.updateOne({ id: action.id, changes: getUpdatedStatus(action.id) }, state);
 
     case UpdatingUserRolesActionTypes.UpdateFailure:
       return updateAdapter.updateOne(
@@ -34,7 +31,7 @@ export function updatingUserRolesReducer(
           id: action.id,
           changes: getUpdateErrorStatus(action.id, action.error),
         },
-        state
+        state,
       );
 
     default:

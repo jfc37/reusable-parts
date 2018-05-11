@@ -16,16 +16,12 @@ const FIREBASE_LOGIN_ERRORS = {
 export class FirebaseLoginService {
   constructor(private af: AngularFireAuth) {}
 
-  public login(
-    email: string,
-    password: string,
-    rememberMe: boolean
-  ): Observable<any> {
+  public login(email: string, password: string, rememberMe: boolean): Observable<any> {
     return this.setSessionPersistence(rememberMe).pipe(
       switchMap(() => this.authenticate(email, password)),
       catchError(error => {
         throw FIREBASE_LOGIN_ERRORS[error.code] || DEFAULT_LOGIN_ERROR_MESSAGE;
-      })
+      }),
     );
   }
 
@@ -35,8 +31,6 @@ export class FirebaseLoginService {
   }
 
   private authenticate(email: string, password: string): Observable<void> {
-    return Observable.fromPromise(
-      this.af.auth.signInWithEmailAndPassword(email, password)
-    );
+    return Observable.fromPromise(this.af.auth.signInWithEmailAndPassword(email, password));
   }
 }

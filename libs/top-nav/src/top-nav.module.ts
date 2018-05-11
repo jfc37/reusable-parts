@@ -14,10 +14,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { DumbTopNavComponent } from './components/dumb-top-nav/dumb-top-nav.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  topNavReducer,
-  initialState as topNavInitialState,
-} from './+state/top-nav.reducer';
+import { topNavReducer, initialState as topNavInitialState } from './+state/top-nav.reducer';
 import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
 import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effects';
 

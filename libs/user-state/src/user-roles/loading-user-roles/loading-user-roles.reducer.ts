@@ -5,15 +5,12 @@ import {
   getLoadedStatus,
   getLoadErrorStatus,
 } from '@reusable-parts/common-ngrx-patterns';
-import {
-  LoadingUserRolesActionTypes,
-  LoadingUserRolesActions,
-} from './loading-user-roles.actions';
+import { LoadingUserRolesActionTypes, LoadingUserRolesActions } from './loading-user-roles.actions';
 import { EntityState } from '@ngrx/entity';
 
 export function loadingUserRolesReducer(
   state = loadAdapter.getInitialState(),
-  action: LoadingUserRolesActions
+  action: LoadingUserRolesActions,
 ): EntityState<LoadStatus> {
   switch (action.type) {
     case LoadingUserRolesActionTypes.Reset:
@@ -23,10 +20,7 @@ export function loadingUserRolesReducer(
       return loadAdapter.addOne(getLoadingStatus('all'), state);
 
     case LoadingUserRolesActionTypes.LoadAllSuccess:
-      return loadAdapter.updateOne(
-        { id: 'all', changes: getLoadedStatus('all') },
-        state
-      );
+      return loadAdapter.updateOne({ id: 'all', changes: getLoadedStatus('all') }, state);
 
     case LoadingUserRolesActionTypes.LoadAllFailure:
       return loadAdapter.updateOne(
@@ -34,17 +28,14 @@ export function loadingUserRolesReducer(
           id: 'all',
           changes: getLoadErrorStatus('all', action.error),
         },
-        state
+        state,
       );
 
     case LoadingUserRolesActionTypes.LoadByRole:
       return loadAdapter.addOne(getLoadingStatus(action.role), state);
 
     case LoadingUserRolesActionTypes.LoadByRoleSuccess:
-      return loadAdapter.updateOne(
-        { id: action.role, changes: getLoadedStatus(action.role) },
-        state
-      );
+      return loadAdapter.updateOne({ id: action.role, changes: getLoadedStatus(action.role) }, state);
 
     case LoadingUserRolesActionTypes.LoadByRoleFailure:
       return loadAdapter.updateOne(
@@ -52,7 +43,7 @@ export function loadingUserRolesReducer(
           id: action.role,
           changes: getLoadErrorStatus(action.role, action.error),
         },
-        state
+        state,
       );
 
     default:

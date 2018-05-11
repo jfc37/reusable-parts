@@ -11,7 +11,7 @@ describe('DashboardComponent', () => {
       TestBed.configureTestingModule({
         declarations: [DashboardComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

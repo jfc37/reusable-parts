@@ -16,11 +16,7 @@ export class ResetRegisterPage implements Action {
 export class AttemptRegister implements Action {
   readonly type = RegisterActionTypes.AttemptRegister;
 
-  constructor(
-    public name: string,
-    public email: string,
-    public password: string
-  ) {}
+  constructor(public name: string, public email: string, public password: string) {}
 }
 
 export class RegisterRequest implements Action {
@@ -37,9 +33,4 @@ export class RegisterFailure implements Action {
   constructor(public error: any) {}
 }
 
-export type RegisterActions =
-  | ResetRegisterPage
-  | AttemptRegister
-  | RegisterRequest
-  | RegisterSuccess
-  | RegisterFailure;
+export type RegisterActions = ResetRegisterPage | AttemptRegister | RegisterRequest | RegisterSuccess | RegisterFailure;
