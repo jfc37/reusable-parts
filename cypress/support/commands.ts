@@ -1,12 +1,16 @@
-const url = Cypress.env('baseUrl') || 'http://localhost:4200';
-
 export function clearSession() {
-  cy.visit(url, {
-    onBeforeLoad: win => {
+  cy.visit('', {
+    onLoad: win => {
+      console.error('xxx ONLOAD', win.sessionStorage);
       win.sessionStorage.clear();
     },
   });
-  cy.visit(url);
+  cy.visit('', {
+    onLoad: win => {
+      console.error('xxx ONLOAD', win.sessionStorage);
+      win.sessionStorage.clear();
+    },
+  });
 }
 
 export function testId(id: string): string {
@@ -14,7 +18,7 @@ export function testId(id: string): string {
 }
 
 export function visit(path: string): void {
-  cy.visit(url + '/' + path);
+  cy.visit('/' + path);
 }
 
 export function assertOnDashboard(): void {

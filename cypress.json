@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:4200",
+  "baseUrl": "http://localhost:8080",
   "chromeWebSecurity": false,
   "projectId": "9nftdh",
   "videoRecording": false,
