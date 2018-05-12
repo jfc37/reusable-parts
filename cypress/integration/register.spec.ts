@@ -7,7 +7,7 @@ describe('Register new account', () => {
   });
 
   it(`Basic successful registration`, () => {
-    const guid = String(Math.floor(Math.random() * 1000));
+    const guid = String(Math.floor(Math.random() * 9999));
     const container = cy.get(testId('register-page'));
 
     const firstName = container.get(testId('first-name-input'));
