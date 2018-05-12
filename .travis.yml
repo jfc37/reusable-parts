@@ -29,6 +29,8 @@ before_script:
   - npm install -g firebase-tools http-server
 
 script:
+  - npm run prettier:warn
+  - ng lint
   - ng build --prod
   - nohup http-server ./dist/apps/fullswing -p 8080 &
   - npm run cypress:record:ci
