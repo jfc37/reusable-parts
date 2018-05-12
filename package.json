@@ -27,7 +27,8 @@
     "cypress:open": "cypress open",
     "cypress:record":
       "cypress run --record --key 6e972026-4e59-4057-b742-62b827823af6 --browser chrome --config pageLoadTimeout=10000",
-    "cypress:record:ci": "cypress run --record --browser chrome --config pageLoadTimeout=10000",
+    "cypress:record:ci":
+      "cypress run --key 6e972026-4e59-4057-b742-62b827823af6 --record --browser chrome --config pageLoadTimeout=10000",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "affected:dep-graph": "./node_modules/.bin/nx affected:dep-graph",
     "help": "./node_modules/.bin/nx help"
