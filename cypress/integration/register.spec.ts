@@ -1,4 +1,4 @@
-import { clearSession, testId, visit, assertOnDashboard, assertOnRegisterPage } from '../support/commands';
+import { clearSession, testId, assertOnDashboard, assertOnRegisterPage } from '../support/commands';
 
 describe('Register new account', () => {
   beforeEach(() => {

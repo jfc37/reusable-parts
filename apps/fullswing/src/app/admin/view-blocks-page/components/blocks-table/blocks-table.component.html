@@ -29,10 +29,12 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
         <button mat-button
+          data-test-id="generate-block-button"
           color="accent"
           [disabled]="element.disableGenerate"
           (click)="generateClicked(element)">Generate</button>
         <button mat-button
+          data-test-id="remove-block-button"
           color="warn"
           [disabled]="element.disableDelete"
           (click)="deleteClicked(element)">Remove</button>
@@ -40,6 +42,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      [attr.data-test-id]="row.name + '-row'"></mat-row>
   </mat-table>
 </div>

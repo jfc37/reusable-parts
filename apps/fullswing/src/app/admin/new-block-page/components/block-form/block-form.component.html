@@ -6,6 +6,7 @@
   <div>
     <mat-form-field>
       <input matInput
+        data-test-id="block-name"
         autocomplete="off"
         placeholder="Name"
         formControlName="name">
@@ -19,6 +20,7 @@
     <mat-form-field>
       <input matInput
         autocomplete="off"
+        data-test-id="start-date"
         formControlName="startDate"
         placeholder="Start date"
         [matDatepicker]="picker">
@@ -33,6 +35,7 @@
     <mat-form-field>
       <input matInput
         autocomplete="off"
+        data-test-id="start-time"
         placeholder="Start time"
         formControlName="startTime">
       <mat-error *ngIf="displayError('startTime')">
@@ -45,6 +48,7 @@
     <mat-form-field>
       <input matInput
         type="number"
+        data-test-id="class-length"
         autocomplete="off"
         placeholder="Minutes per class"
         formControlName="classLength">
@@ -56,6 +60,7 @@
     <mat-form-field>
       <input matInput
         type="number"
+        data-test-id="number-of-classes"
         autocomplete="off"
         placeholder="Number of classes"
         formControlName="numberOfClasses">
@@ -67,6 +72,7 @@
     <mat-form-field>
       <input matInput
         type="number"
+        data-test-id="class-capacity"
         autocomplete="off"
         placeholder="Class capacity"
         formControlName="classCapacity">
@@ -79,6 +85,7 @@
   <div>
     <mat-form-field>
       <mat-select formControlName="teacher"
+        data-test-id="teacher"
         placeholder="Teacher">
         <mat-option *ngFor="let teacher of teachers"
           [value]="teacher.value">
@@ -99,6 +106,7 @@
 
   <div>
     <button mat-raised-button
+      data-test-id="save-block-button"
       type="submit"
       color="accent"
       class="submit-button"

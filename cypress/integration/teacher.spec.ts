@@ -1,4 +1,4 @@
-import { clearSession, testId, assertOnDashboard, assertOnLoginPage, loginAsAdmin, visit } from '../support/commands';
+import { clearSession, testId, assertOnDashboard, assertOnLoginPage, loginAsAdmin } from '../support/commands';
 
 describe('Teacher Page', () => {
   beforeEach(() => {

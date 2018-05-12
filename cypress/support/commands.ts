@@ -8,10 +8,6 @@ export function testId(id: string): string {
   return `[data-test-id="${id}"]`;
 }
 
-export function visit(path: string): void {
-  cy.visit('/' + path);
-}
-
 export function assertOnDashboard(): void {
   assertOnPage('dashboard');
 }
