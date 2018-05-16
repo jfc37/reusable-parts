@@ -48,6 +48,11 @@ export class DumbLoginComponent implements OnInit, OnChanges {
   @Input() public registerRoute: string;
 
   /**
+   * Route for forgot password
+   */
+  @Input() public forgotPasswordRoute: string;
+
+  /**
    * Emitted when user attempts to login with email and password
    */
   @Output() public loginAttempt = new EventEmitter<LoginAttempt>();

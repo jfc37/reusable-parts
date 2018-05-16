@@ -69,6 +69,10 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
           loadChildren: '@reusable-parts/register-page#RegisterPageModule',
         },
         {
+          path: 'forgot-password',
+          loadChildren: '@reusable-parts/forgot-password-page#ForgotPasswordPageModule',
+        },
+        {
           path: 'app',
           component: ShellComponent,
           canActivate: [AuthenticatedGuard],
