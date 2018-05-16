@@ -79,6 +79,10 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
               canActivate: [AdminGuard],
               loadChildren: './admin/admin.module#AdminModule',
             },
+            {
+              path: 'enrol',
+              loadChildren: './enrol/enrol.module#EnrolModule',
+            },
             { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
           ],
         },

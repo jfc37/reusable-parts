@@ -44,6 +44,12 @@ export class ShellComponent implements OnInit {
       type: MenuItemType.Item,
       url: 'dashboard',
     },
+    {
+      id: 'block-enrol',
+      title: 'Block Enrol',
+      type: MenuItemType.Item,
+      url: 'enrol/blocks',
+    },
   ];
 
   constructor(public authService: FirebaseAuthService) {}
