@@ -32,4 +32,11 @@ export const environment: EnvironmentInterface = {
     logoUrl: '/assets/fullswing.png',
     loginRoute: 'login',
   },
+  forgotPasswordPageConfig: {
+    afterResetRoute: 'login',
+    name: 'Full Swing',
+    description: 'Dance your socks off',
+    logoUrl: '/assets/fullswing.png',
+    loginRoute: 'login',
+  },
 };

@@ -106,6 +106,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
+    { provide: 'forgotPasswordPageConfig', useValue: environment.forgotPasswordPageConfig },
     { provide: 'defaultNewUserRoles', useValue: getDefaultNewUserRoles() },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     { provide: MAT_DATE_LOCALE, useValue: 'en-NZ' },
