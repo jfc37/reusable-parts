@@ -24,7 +24,7 @@ describe('Blocks Page', () => {
 });
 
 function clickNewButton() {
-  const container = cy.get(testId('view-blocks-page'), { timeout: 5000 });
+  const container = cy.get(testId('view-blocks-page'), { timeout: 10000 });
   container.find(testId('new-block-button')).click();
 }
 
