@@ -41,7 +41,7 @@ import { FuseSharedModule } from '@reusable-parts/@fuse';
     EffectsModule.forFeature([LoginEffects]),
   ],
   declarations: [LoginPageComponent, DumbLoginComponent],
-  providers: [FirebaseLoginService, LoginEffects],
+  providers: [FirebaseLoginService],
 })
 export class LoginPageModule {
   constructor(

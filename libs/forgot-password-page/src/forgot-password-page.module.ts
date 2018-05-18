@@ -7,6 +7,11 @@ import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { DumbForgotPasswordComponent } from './components/dumb-forgot-password/dumb-forgot-password.component';
+import { StoreModule } from '@ngrx/store';
+import { resetReducer, resetInitialState } from '@reusable-parts/forgot-password-page/src/+state/reset.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ResetEffects } from '@reusable-parts/forgot-password-page/src/+state/reset.effects';
+import { FirebaseResetService } from '@reusable-parts/forgot-password-page/src/services/firebase-reset.service';
 
 @NgModule({
   imports: [
@@ -22,8 +27,15 @@ import { DumbForgotPasswordComponent } from './components/dumb-forgot-password/d
     FuseSharedModule,
 
     RouterModule.forChild([{ path: '', pathMatch: 'full', component: ForgotPasswordPageComponent }]),
+
+    StoreModule.forFeature('forgotPassword', resetReducer, {
+      initialState: resetInitialState,
+    }),
+
+    EffectsModule.forFeature([ResetEffects]),
   ],
   declarations: [ForgotPasswordPageComponent, DumbForgotPasswordComponent],
+  providers: [FirebaseResetService, { provide: 'BASEURL', useFactory: baseUrlFactory }],
 })
 export class ForgotPasswordPageModule {
   constructor(
@@ -35,4 +47,8 @@ export class ForgotPasswordPageModule {
       throw new Error('ForgotPasswordPageModule is already loaded. Import it in the AppModule only!');
     }
   }
+}
+
+function baseUrlFactory() {
+  return window.location.origin;
 }
