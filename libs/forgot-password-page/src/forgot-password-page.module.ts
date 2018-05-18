@@ -49,6 +49,6 @@ export class ForgotPasswordPageModule {
   }
 }
 
-function baseUrlFactory() {
+export function baseUrlFactory() {
   return window.location.origin;
 }
