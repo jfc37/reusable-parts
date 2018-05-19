@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { BlockEnrolPageComponent } from './block-enrol-page/block-enrol-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatDividerModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
 import { MainContentModule } from '@reusable-parts/main-content';
-import { MatButtonModule } from '@angular/material';
 import { BlockStateModule } from '../../state/block-state/block-state.module';
+import { BlockEnrolPageComponent } from './block-enrol-page/block-enrol-page.component';
+import { BlockCardComponent } from './components/block-card/block-card.component';
 
 @NgModule({
   imports: [
@@ -18,11 +20,14 @@ import { BlockStateModule } from '../../state/block-state/block-state.module';
 
     CommonUiComponentsModule,
     MainContentModule,
+    FuseSharedModule,
 
     MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
 
     BlockStateModule,
   ],
-  declarations: [BlockEnrolPageComponent],
+  declarations: [BlockEnrolPageComponent, BlockCardComponent],
 })
 export class BlockEnrolPageModule {}

@@ -1,0 +1,15 @@
+<div class="fuse-card">
+  <div class="p-16">
+    <div class="h2">{{title}}</div>
+    <div class="h4 secondary-text">{{time}}</div>
+  </div>
+
+  <div class="p-8 pt-0"
+    fxLayout="row"
+    fxLayoutAlign="start center">
+    <button mat-button
+      [disabled]="disabled"
+      (click)="enrol.emit(id)"
+      color="accent">{{enrolButtonText}}</button>
+  </div>
+</div>

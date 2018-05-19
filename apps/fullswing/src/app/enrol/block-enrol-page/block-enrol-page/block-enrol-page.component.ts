@@ -36,4 +36,8 @@ export class BlockEnrolPageComponent implements OnInit {
     this.store.dispatch(new ResetLoadBlockPages());
     this.store.dispatch(new GetMoreBlocks());
   }
+
+  public enrol(id: string): void {
+    console.error('enrol', id);
+  }
 }
