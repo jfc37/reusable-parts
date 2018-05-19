@@ -4,6 +4,8 @@
     "outDir": "../../../dist/out-tsc/apps/fullswing",
     "module": "es2015"
   },
-  "include": ["**/*.ts", "../../../libs/login-page/index.ts", "../../../libs/register-page/index.ts"],
+  "include": ["**/*.ts", "../../../libs/login-page/index.ts", "../../../libs/register-page/index.ts"
+    , "../../../libs/forgot-password-page/index.ts"
+],
   "exclude": ["**/*.spec.ts"]
 }

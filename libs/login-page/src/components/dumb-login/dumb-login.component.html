@@ -59,8 +59,9 @@
             Remember Me
           </mat-checkbox>
 
-          <a class="forgot-password"
-            [routerLink]="'/pages/auth/forgot-password-2'">
+          <a data-test-id="forgot-password-link"
+            class="forgot-password"
+            [routerLink]="'/' + forgotPasswordRoute">
             Forgot Password?
           </a>
         </div>

@@ -23,9 +23,17 @@ export const environment: EnvironmentInterface = {
     description: 'Dance your socks off',
     logoUrl: '/assets/fullswing.png',
     registerRoute: 'register',
+    forgotPasswordRoute: 'forgot-password',
   },
   registerPageConfig: {
     afterRegistrationRoute: 'app',
+    name: 'Full Swing',
+    description: 'Dance your socks off',
+    logoUrl: '/assets/fullswing.png',
+    loginRoute: 'login',
+  },
+  forgotPasswordPageConfig: {
+    afterResetRoute: 'login',
     name: 'Full Swing',
     description: 'Dance your socks off',
     logoUrl: '/assets/fullswing.png',

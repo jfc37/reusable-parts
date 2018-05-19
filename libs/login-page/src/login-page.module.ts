@@ -1,7 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { LoginPageConfig } from '../../../lib-config/login-page.config';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { loginReducer, initialState as loginInitialState } from './+state/login.reducer';
@@ -42,7 +41,7 @@ import { FuseSharedModule } from '@reusable-parts/@fuse';
     EffectsModule.forFeature([LoginEffects]),
   ],
   declarations: [LoginPageComponent, DumbLoginComponent],
-  providers: [FirebaseLoginService, LoginEffects],
+  providers: [FirebaseLoginService],
 })
 export class LoginPageModule {
   constructor(

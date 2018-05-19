@@ -1,7 +1,7 @@
-export interface RegisterPageConfig {
+export interface ForgotPasswordPageConfig {
   name: string;
   description: string;
+  afterResetRoute: string;
   loginRoute: string;
-  afterRegistrationRoute: string;
   logoUrl: string;
 }

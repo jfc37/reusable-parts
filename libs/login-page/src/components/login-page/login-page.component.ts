@@ -11,7 +11,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { distinctUntilChanged, filter, takeUntil, tap } from 'rxjs/operators';
-import { LoginPageConfig } from '../../../../../lib-config/login-page.config';
+import { LoginPageConfig } from '@reusable-parts/common-config/src/environment/login-page.config';
 
 @Component({
   selector: 'jfc-login-page',

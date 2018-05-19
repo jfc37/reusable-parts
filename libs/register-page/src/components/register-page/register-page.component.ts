@@ -2,7 +2,6 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AttemptRegister, ResetRegisterPage } from '@reusable-parts/register-page/src/+state/register.actions';
 import { RegisterState } from '@reusable-parts/register-page/src/+state/register.reducer';
-import { RegisterPageConfig } from '../../../../../lib-config/register-page.config';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import {
@@ -12,6 +11,7 @@ import {
 } from '@reusable-parts/register-page/src/+state/register.selectors';
 import { takeUntil, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { RegisterPageConfig } from '@reusable-parts/common-config/src/environment/register-page.config';
 
 @Component({
   selector: 'jfc-register-page',

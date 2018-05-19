@@ -69,6 +69,10 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
           loadChildren: '@reusable-parts/register-page#RegisterPageModule',
         },
         {
+          path: 'forgot-password',
+          loadChildren: '@reusable-parts/forgot-password-page#ForgotPasswordPageModule',
+        },
+        {
           path: 'app',
           component: ShellComponent,
           canActivate: [AuthenticatedGuard],
@@ -106,6 +110,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
     { provide: 'unauthenticatedRedirectRoute', useValue: 'login' },
     { provide: 'loginPageConfig', useValue: environment.loginPageConfig },
     { provide: 'registerPageConfig', useValue: environment.registerPageConfig },
+    { provide: 'forgotPasswordPageConfig', useValue: environment.forgotPasswordPageConfig },
     { provide: 'defaultNewUserRoles', useValue: getDefaultNewUserRoles() },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     { provide: MAT_DATE_LOCALE, useValue: 'en-NZ' },
