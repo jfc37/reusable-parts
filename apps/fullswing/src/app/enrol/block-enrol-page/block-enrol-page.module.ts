@@ -9,6 +9,7 @@ import { MainContentModule } from '@reusable-parts/main-content';
 import { BlockStateModule } from '../../state/block-state/block-state.module';
 import { BlockEnrolPageComponent } from './block-enrol-page/block-enrol-page.component';
 import { BlockCardComponent } from './components/block-card/block-card.component';
+import { BlockGroupComponent } from './components/block-group/block-group.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,6 @@ import { BlockCardComponent } from './components/block-card/block-card.component
 
     BlockStateModule,
   ],
-  declarations: [BlockEnrolPageComponent, BlockCardComponent],
+  declarations: [BlockEnrolPageComponent, BlockCardComponent, BlockGroupComponent],
 })
 export class BlockEnrolPageModule {}

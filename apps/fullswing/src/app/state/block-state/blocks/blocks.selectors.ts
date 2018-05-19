@@ -3,6 +3,7 @@ import { blockFeatureSelector } from '../block-feature.reducer';
 import { blockAdapter } from './blocks.state';
 import { blockIdsForCurrentPagesSelector } from '../block-pages/block-pages.selectors';
 import { isArrayEmpty } from '@reusable-parts/common-functions';
+import { getISOWeek } from 'date-fns';
 
 const selector = createSelector(blockFeatureSelector, state => state.blocks);
 
@@ -19,3 +20,7 @@ export const blocksForCurrentPagesSelector = createSelector(
 );
 
 export const hasNoBlocksSelector = createSelector(blocksSelector, isArrayEmpty);
+
+export const upcomingBlocksSelector = createSelector(blocksSelector, blocks =>
+  blocks.filter(block => getISOWeek(block.startDate) >= getISOWeek(new Date())),
+);

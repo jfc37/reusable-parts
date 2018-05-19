@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { BlockCardModel } from './block-card.component.model';
 
 @Component({
   selector: 'jfc-block-card',
@@ -6,11 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./block-card.component.scss'],
 })
 export class BlockCardComponent {
-  @Input() public id: string;
-  @Input() public title: string;
-  @Input() public time: string;
-  @Input() public enrolButtonText: string;
-  @Input() public disabled: boolean;
+  @Input() public model: BlockCardModel;
 
   @Output() public enrol = new EventEmitter<string>();
 }

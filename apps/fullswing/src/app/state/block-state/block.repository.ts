@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Block } from '../block-state/block';
+import { Block, getBlockEndTime } from '../block-state/block';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
 import { of } from 'rxjs/observable/of';
@@ -94,19 +94,14 @@ interface Class {
 }
 
 function createClassFromBlock(block: Block, index: number): Class {
-  const [hour, minute] = block.startTime.split(':').map(x => Number(x));
-  const startTimeAsDate = new Date(null, null, null, hour, minute);
-  const endTimeAsDate = addMinutes(startTimeAsDate, block.classLength);
-  const endTime = format(endTimeAsDate, 'HH:mm');
-  const c = {
+  return {
     blockId: block.id,
     name: block.name + ' - Week ' + (index + 1),
     startTime: block.startTime,
     date: block.startDate,
     teacherIds: block.teacherIds,
-    endTime,
+    endTime: getBlockEndTime(block),
   };
-  return c;
 }
 
 function createArrayOfSize(size: number): number[] {

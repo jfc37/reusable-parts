@@ -17,83 +17,15 @@
           </div>
         </jfc-alert>
 
-        <mat-card class="pb-20 mb-20">
-          <mat-card-header class="h2 pb-24 font-weight-500">
-            Starting Wednesday, 16th of May
-          </mat-card-header>
-
-          <mat-divider></mat-divider>
-
-          <mat-card-content class="pt-24"
-            fxLayout="row"
-            fxLayoutGap="20px">
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="false"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Enrol'"
-              (enrol)="enrol($event)"></jfc-block-card>
-            <br>
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="true"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Already enrolled'"
-              (enrol)="enrol($event)"></jfc-block-card>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="pb-20 mb-20">
-          <mat-card-header class="h2 pb-24 font-weight-500">
-            Starting Thursday, 17th of May
-          </mat-card-header>
-
-          <mat-divider></mat-divider>
-
-          <mat-card-content class="pt-24"
-            fxLayout="row"
-            fxLayoutGap="20px">
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="false"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Enrol'"
-              (enrol)="enrol($event)"></jfc-block-card>
-            <br>
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="true"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Already enrolled'"
-              (enrol)="enrol($event)"></jfc-block-card>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="pb-20 mb-20">
-          <mat-card-header class="h2 pb-24 font-weight-500">
-            Starting Friday, 18th of May
-          </mat-card-header>
-
-          <mat-divider></mat-divider>
-
-          <mat-card-content class="pt-24"
-            fxLayout="row"
-            fxLayoutGap="20px">
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="false"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Enrol'"
-              (enrol)="enrol($event)"></jfc-block-card>
-            <br>
-            <jfc-block-card [title]="'Blues Level 2'"
-              [disabled]="true"
-              [id]="'aaa'"
-              [time]="'18:00 - 19:00'"
-              [enrolButtonText]="'Already enrolled'"
-              (enrol)="enrol($event)"></jfc-block-card>
-          </mat-card-content>
-        </mat-card>
+        <jfc-alert *ngIf="noAvailableBlocks$ | async; else groupings"
+          type="info">
+          No blocks currently available for registration
+        </jfc-alert>
+        <ng-template #groupings>
+          <jfc-block-group *ngFor="let grouping of cards$ | async"
+            [title]="grouping.title"
+            [blockCards]="grouping.cards"></jfc-block-group>
+        </ng-template>
       </ng-template>
     </ng-template>
   </div>
