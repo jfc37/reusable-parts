@@ -18,3 +18,17 @@ export function isArrayNotEmpty(array: any[]): boolean {
 export function getLastItemInArray(array: any[]) {
   return array[array.length - 1];
 }
+
+export function groupBy<T, U>(list: T[], keyGetter: (a: T) => U): Map<U, T[]> {
+  const map = new Map();
+  list.forEach(item => {
+    const key = keyGetter(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
+  });
+  return map;
+}

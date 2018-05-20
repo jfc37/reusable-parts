@@ -5,14 +5,17 @@
 
   <mat-divider></mat-divider>
 
-  <mat-card-content class="pt-24"
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="start"
-    fxFlexAlign="start"
-    fxLayoutGap="20px grid">
-    <jfc-block-card *ngFor="let card of blockCards"
-      [model]="card"
-      (enrol)="enrol.emit($event)"></jfc-block-card>
+  <mat-card-content>
+    <div *ngFor="let group of groupedByTime"
+      class="pt-24"
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="start"
+      fxFlexAlign="start"
+      fxLayoutGap="20px grid">
+      <jfc-block-card *ngFor="let card of group"
+        [model]="card"
+        (enrol)="enrol.emit($event)"></jfc-block-card>
+    </div>
   </mat-card-content>
 </mat-card>
