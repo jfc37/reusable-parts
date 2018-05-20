@@ -11,6 +11,10 @@ import {
 import { isLoadingSelector, modelSelector } from './block-enrol-page.component.selectors';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
 import { isArrayEmpty } from '@reusable-parts/common-functions';
+import {
+  ResetLoadStudentEnrolments,
+  AttemptLoadStudentEnrolments,
+} from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.actions';
 
 @Component({
   selector: 'jfc-block-enrol-page',
@@ -43,6 +47,9 @@ export class BlockEnrolPageComponent implements OnInit {
     this.store.dispatch(new ResetBlockPages());
     this.store.dispatch(new ResetLoadBlockPages());
     this.store.dispatch(new GetMoreBlocks());
+
+    this.store.dispatch(new ResetLoadStudentEnrolments());
+    this.store.dispatch(new AttemptLoadStudentEnrolments());
   }
 
   public enrol(id: string): void {

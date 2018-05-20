@@ -5,8 +5,13 @@ import { Block, getBlockEndTime } from '../../../state/block-state/block';
 import { upcomingBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import { format } from 'date-fns';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
+import { isLoadingEnrolmentSelector } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.selectors';
 
-export const isLoadingSelector = createSelector(hasNotLoadedAnyBlockPagesSelector, isAtleastOneArgumentsTruthy);
+export const isLoadingSelector = createSelector(
+  hasNotLoadedAnyBlockPagesSelector,
+  isLoadingEnrolmentSelector,
+  isAtleastOneArgumentsTruthy,
+);
 
 export const modelSelector = createSelector(upcomingBlocksSelector, getModel);
 function getModel(blocks: Block[]) {

@@ -10,6 +10,7 @@ import { BlockStateModule } from '../../state/block-state/block-state.module';
 import { BlockEnrolPageComponent } from './block-enrol-page/block-enrol-page.component';
 import { BlockCardComponent } from './components/block-card/block-card.component';
 import { BlockGroupComponent } from './components/block-group/block-group.component';
+import { StudentEnrolmentStateModule } from '../../state/student-enrolment-state/student-enrolment-state.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { BlockGroupComponent } from './components/block-group/block-group.compon
     MatDividerModule,
 
     BlockStateModule,
+    StudentEnrolmentStateModule,
   ],
   declarations: [BlockEnrolPageComponent, BlockCardComponent, BlockGroupComponent],
 })
