@@ -20,7 +20,7 @@ export class LoadingStudentEnrolmentsEffects {
     .pipe(
       withLatestFrom(this.store.select(isLoadingEnrolmentSelector)),
       filter(([action, isAnyLoading]) => !isAnyLoading),
-      map(([action]) => new LoadStudentEnrolmentsRequest()),
+      map(([action]) => new LoadStudentEnrolmentsRequest(action.userId)),
     );
 
   // @Effect()

@@ -21,17 +21,17 @@ export function loadingStudentEnrolmentsReducer(
       return loadAdapter.getInitialState();
 
     case LoadingStudentEnrolmentsActionTypes.LoadRequest:
-      return loadAdapter.addOne(getLoadingStatus('current'), state);
+      return loadAdapter.addOne(getLoadingStatus(action.userId), state);
 
     case LoadingStudentEnrolmentsActionTypes.LoadSuccess:
-      const removed = loadAdapter.removeOne('current', state);
-      return loadAdapter.addOne(getLoadedStatus('current'), removed);
+      const removed = loadAdapter.removeOne(action.userId, state);
+      return loadAdapter.addOne(getLoadedStatus(action.userId), removed);
 
     case LoadingStudentEnrolmentsActionTypes.LoadFailure:
       return loadAdapter.updateOne(
         {
-          id: 'current',
-          changes: getLoadErrorStatus('current', action.error),
+          id: action.userId,
+          changes: getLoadErrorStatus(action.userId, action.error),
         },
         state,
       );

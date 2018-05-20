@@ -17,20 +17,23 @@ export class ResetLoadStudentEnrolments implements Action {
 
 export class AttemptLoadStudentEnrolments implements Action {
   readonly type = LoadingStudentEnrolmentsActionTypes.Attempt;
+
+  constructor(public userId: string) {}
 }
 
 export class LoadStudentEnrolmentsRequest implements Action {
   readonly type = LoadingStudentEnrolmentsActionTypes.LoadRequest;
+  constructor(public userId: string) {}
 }
 
 export class LoadStudentEnrolmentsSuccess implements Action {
   readonly type = LoadingStudentEnrolmentsActionTypes.LoadSuccess;
-  constructor(public enrolmentIds: string[]) {}
+  constructor(public userId: string, public enrolmentIds: string[]) {}
 }
 
 export class LoadStudentEnrolmentsFailure implements Action {
   readonly type = LoadingStudentEnrolmentsActionTypes.LoadFailure;
-  constructor(public error: string) {}
+  constructor(public userId: string, public error: string) {}
 }
 
 export type LoadingStudentEnrolmentsActions =

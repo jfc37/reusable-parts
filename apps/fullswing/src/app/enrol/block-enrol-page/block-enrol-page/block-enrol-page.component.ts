@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Store } from '@ngrx/store';
@@ -15,13 +15,16 @@ import {
   ResetLoadStudentEnrolments,
   AttemptLoadStudentEnrolments,
 } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.actions';
+import { currentUserIdSelector } from '@reusable-parts/current-user-state/src/current-user/current-user.selectors';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { takeUntil, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-block-enrol-page',
   templateUrl: './block-enrol-page.component.html',
   styleUrls: ['./block-enrol-page.component.scss'],
 })
-export class BlockEnrolPageComponent implements OnInit {
+export class BlockEnrolPageComponent implements OnInit, OnDestroy {
   public loading$: Observable<boolean>;
   public errorMessages$: Observable<string[]>;
   public hasError$: Observable<boolean>;
@@ -30,6 +33,8 @@ export class BlockEnrolPageComponent implements OnInit {
 
   public cards$: Observable<Array<{ title: string; cards: BlockCardModel[] }>>;
   public noAvailableBlocks$: Observable<boolean>;
+
+  private onDestroy$ = new ReplaySubject<null>();
 
   constructor(private store: Store<BlockFeatureState>) {}
 
@@ -49,7 +54,20 @@ export class BlockEnrolPageComponent implements OnInit {
     this.store.dispatch(new GetMoreBlocks());
 
     this.store.dispatch(new ResetLoadStudentEnrolments());
-    this.store.dispatch(new AttemptLoadStudentEnrolments());
+    this.store
+      .select(currentUserIdSelector)
+      .pipe(
+        takeUntil(this.onDestroy$),
+        filter(Boolean),
+        distinctUntilChanged(),
+        tap(userId => this.store.dispatch(new AttemptLoadStudentEnrolments(userId))),
+      )
+      .subscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy$.next(null);
+    this.onDestroy$.complete();
   }
 
   public enrol(id: string): void {
