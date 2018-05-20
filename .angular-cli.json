@@ -73,6 +73,13 @@
       "tsconfig": "tsconfig.app.json"
     },
     {
+      "name": "current-user-state",
+      "root": "libs/current-user-state/src",
+      "test": "../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "forgot-password-page",
       "root": "libs/forgot-password-page/src",
       "test": "../../../test.js",

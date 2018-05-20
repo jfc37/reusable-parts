@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 export class FirebaseUserService {
   constructor(private af: AngularFireAuth) {}
 
-  public getUser(): Observable<{ displayName: string; avatarUrl: string }> {
+  public getUser(): Observable<{ displayName: string; avatarUrl: string; id: string }> {
     return this.af.authState.pipe(
       map(
         user =>
@@ -15,6 +15,7 @@ export class FirebaseUserService {
             ? {
                 displayName: user.displayName || user.email,
                 avatarUrl: user.photoURL,
+                id: user.uid,
               }
             : null,
       ),

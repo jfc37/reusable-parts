@@ -17,7 +17,7 @@ export class GetUser implements Action {
 export class Authenticated implements Action {
   readonly type = TopNavActionTypes.Authenticated;
 
-  constructor(public displayName: string, public avatarUrl: string) {}
+  constructor(public displayName: string, public avatarUrl: string, public userId: string) {}
 }
 
 export class UnAuthenticated implements Action {

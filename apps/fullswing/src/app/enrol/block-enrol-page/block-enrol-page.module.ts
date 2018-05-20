@@ -11,6 +11,7 @@ import { BlockEnrolPageComponent } from './block-enrol-page/block-enrol-page.com
 import { BlockCardComponent } from './components/block-card/block-card.component';
 import { BlockGroupComponent } from './components/block-group/block-group.component';
 import { StudentEnrolmentStateModule } from '../../state/student-enrolment-state/student-enrolment-state.module';
+import { CurrentUserStateModule } from '@reusable-parts/current-user-state';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { StudentEnrolmentStateModule } from '../../state/student-enrolment-state
 
     BlockStateModule,
     StudentEnrolmentStateModule,
+    CurrentUserStateModule,
   ],
   declarations: [BlockEnrolPageComponent, BlockCardComponent, BlockGroupComponent],
 })

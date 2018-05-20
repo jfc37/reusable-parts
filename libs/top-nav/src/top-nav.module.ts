@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { topNavReducer, initialState as topNavInitialState } from './+state/top-nav.reducer';
 import { FirebaseUserService } from '@reusable-parts/top-nav/src/services/firebase-user.service';
 import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effects';
+import { CurrentUserStateModule } from '@reusable-parts/current-user-state';
 
 @NgModule({
   imports: [
@@ -37,6 +38,8 @@ import { TopNavEffects } from '@reusable-parts/top-nav/src/+state/top-nav.effect
     }),
 
     EffectsModule.forFeature([TopNavEffects]),
+
+    CurrentUserStateModule,
   ],
   declarations: [TopNavComponent, DumbTopNavComponent],
   exports: [TopNavComponent],
