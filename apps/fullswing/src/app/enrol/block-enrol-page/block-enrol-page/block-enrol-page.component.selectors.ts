@@ -28,7 +28,6 @@ export const isLoadingSelector = createSelector(
 
 export const modelSelector = createSelector(upcomingBlocksSelector, enrolmentsForCurrentUserSelector, getModel);
 function getModel(blocks: Block[], enroledIds: string[]) {
-  console.error('xxx', enroledIds);
   return blocks
     .sort((a, b) => Number(new Date(a.startDate)) - Number(new Date(b.startDate)))
     .map(block => ({
