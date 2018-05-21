@@ -8,9 +8,11 @@ import {
   LoadStudentEnrolmentsRequest,
   LoadStudentEnrolmentsSuccess,
   LoadingStudentEnrolmentsActionTypes,
+  LoadStudentEnrolmentsFailure,
 } from './loading-student-enrolment.actions';
 import { isLoadingEnrolmentSelector } from './loading-student-enrolment.selectors';
 import { StudentEnrolmentFeatureState } from '../student-enrolment.reducer';
+import { SetStudentEnrolments } from '../student-enrolment/student-enrolment.actions';
 
 @Injectable()
 export class LoadingStudentEnrolmentsEffects {
@@ -23,20 +25,22 @@ export class LoadingStudentEnrolmentsEffects {
       map(([action]) => new LoadStudentEnrolmentsRequest(action.userId)),
     );
 
-  // @Effect()
-  // load$ = this.actions$
-  //   .ofType<LoadStudentEnrolmentsRequest>(LoadingStudentEnrolmentsActionTypes.LoadRequest)
-  //   .pipe(
-  //     exhaustMap(action =>
-  //       this.repository
-  //         .load(action.userId)
-  //         .pipe(
-  //           mergeMap(blocks => [
-  //             new LoadStudentEnrolmentsSuccess(action.userId, ),
-  //           ]),
-  //         ),
-  //     ),
-  //   );
+  @Effect()
+  load$ = this.actions$.ofType<LoadStudentEnrolmentsRequest>(LoadingStudentEnrolmentsActionTypes.LoadRequest).pipe(
+    mergeMap(action => [
+      new LoadStudentEnrolmentsSuccess(action.userId),
+      new SetStudentEnrolments({ userId: action.userId, enrolmentIds: ['tpRca1juZIwiFhWaj6rK'] }),
+    ]),
+    // exhaustMap(action =>
+    //   this.repository
+    //     .load(action.userId)
+    //     .pipe(
+    //       mergeMap(blocks => [
+    //         new LoadStudentEnrolmentsSuccess(action.userId, ),
+    //       ]),
+    //     ),
+    // ),
+  );
 
   constructor(
     private actions$: Actions,

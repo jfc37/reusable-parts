@@ -28,7 +28,7 @@ export class LoadStudentEnrolmentsRequest implements Action {
 
 export class LoadStudentEnrolmentsSuccess implements Action {
   readonly type = LoadingStudentEnrolmentsActionTypes.LoadSuccess;
-  constructor(public userId: string, public enrolmentIds: string[]) {}
+  constructor(public userId: string) {}
 }
 
 export class LoadStudentEnrolmentsFailure implements Action {

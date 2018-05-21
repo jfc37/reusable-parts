@@ -8,16 +8,16 @@ import {
   ResetLoadBlockPages,
   GetMoreBlocks,
 } from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
-import { isLoadingSelector, modelSelector } from './block-enrol-page.component.selectors';
+import { isLoadingSelector, modelSelector, fatalErrorMessagesSelector } from './block-enrol-page.component.selectors';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
-import { isArrayEmpty } from '@reusable-parts/common-functions';
+import { isArrayEmpty, isArrayNotEmpty } from '@reusable-parts/common-functions';
 import {
   ResetLoadStudentEnrolments,
   AttemptLoadStudentEnrolments,
 } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.actions';
 import { currentUserIdSelector } from '@reusable-parts/current-user-state/src/current-user/current-user.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { takeUntil, filter, distinctUntilChanged, tap } from 'rxjs/operators';
+import { takeUntil, filter, distinctUntilChanged, tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'jfc-block-enrol-page',
@@ -40,8 +40,8 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.loading$ = this.store.select(isLoadingSelector);
-    this.errorMessages$ = of(null);
-    this.hasError$ = of(null);
+    this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
+    this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
     this.warningMessages$ = of(null);
     this.hasWarnings$ = of(null);

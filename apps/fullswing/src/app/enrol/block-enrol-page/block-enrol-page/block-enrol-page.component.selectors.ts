@@ -5,7 +5,20 @@ import { Block, getBlockEndTime } from '../../../state/block-state/block';
 import { upcomingBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import { format } from 'date-fns';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
-import { isLoadingEnrolmentSelector } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.selectors';
+import {
+  isLoadingEnrolmentSelector,
+  hasEnrolmentLoadErroredSelector,
+} from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.selectors';
+import { enrolmentsForCurrentUserSelector } from '../../../state/student-enrolment-state/student-enrolment/student-enrolment.selectors';
+
+export const enrolmentsLoadErrorMessageSelector = createSelector(
+  hasEnrolmentLoadErroredSelector,
+  hasErrored => hasErrored && 'Problem getting enrolment',
+);
+
+export const fatalErrorMessagesSelector = createSelector(enrolmentsLoadErrorMessageSelector, (...messages) =>
+  messages.filter(Boolean),
+);
 
 export const isLoadingSelector = createSelector(
   hasNotLoadedAnyBlockPagesSelector,
@@ -13,8 +26,9 @@ export const isLoadingSelector = createSelector(
   isAtleastOneArgumentsTruthy,
 );
 
-export const modelSelector = createSelector(upcomingBlocksSelector, getModel);
-function getModel(blocks: Block[]) {
+export const modelSelector = createSelector(upcomingBlocksSelector, enrolmentsForCurrentUserSelector, getModel);
+function getModel(blocks: Block[], enroledIds: string[]) {
+  console.error('xxx', enroledIds);
   return blocks
     .sort((a, b) => Number(new Date(a.startDate)) - Number(new Date(b.startDate)))
     .map(block => ({
@@ -23,9 +37,9 @@ function getModel(blocks: Block[]) {
         {
           title: block.name,
           id: block.id,
-          disabled: false,
+          disabled: enroledIds.includes(block.id),
           time: block.startTime + ' - ' + getBlockEndTime(block),
-          enrolButtonText: 'Enrol',
+          enrolButtonText: enroledIds.includes(block.id) ? 'Already enroled' : 'Enrol',
         } as BlockCardModel,
       ],
     }))
