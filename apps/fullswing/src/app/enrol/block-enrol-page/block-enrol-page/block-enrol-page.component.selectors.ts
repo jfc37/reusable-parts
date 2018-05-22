@@ -10,6 +10,19 @@ import {
   hasEnrolmentLoadErroredSelector,
 } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.selectors';
 import { enrolmentsForCurrentUserSelector } from '../../../state/student-enrolment-state/student-enrolment/student-enrolment.selectors';
+import {
+  currentUserEnrollingIds,
+  hasEnrolmentUpdateErroredSelector,
+} from '../../../state/student-enrolment-state/updating-student-enrolment/updating-student-enrolment.selectors';
+
+export const updateErrorMessageSelector = createSelector(
+  hasEnrolmentUpdateErroredSelector,
+  hasError => hasError && 'Problem enrolling in block. Please try again.',
+);
+
+export const warningMessagesSelector = createSelector(updateErrorMessageSelector, (...messages) =>
+  messages.filter(Boolean),
+);
 
 export const enrolmentsLoadErrorMessageSelector = createSelector(
   hasEnrolmentLoadErroredSelector,
@@ -26,8 +39,13 @@ export const isLoadingSelector = createSelector(
   isAtleastOneArgumentsTruthy,
 );
 
-export const modelSelector = createSelector(upcomingBlocksSelector, enrolmentsForCurrentUserSelector, getModel);
-function getModel(blocks: Block[], enroledIds: string[]) {
+export const modelSelector = createSelector(
+  upcomingBlocksSelector,
+  enrolmentsForCurrentUserSelector,
+  currentUserEnrollingIds,
+  getModel,
+);
+function getModel(blocks: Block[], enroledIds: string[], enrollingIds: string[]) {
   return blocks
     .sort((a, b) => Number(new Date(a.startDate)) - Number(new Date(b.startDate)))
     .map(block => ({
@@ -36,7 +54,7 @@ function getModel(blocks: Block[], enroledIds: string[]) {
         {
           title: block.name,
           id: block.id,
-          disabled: enroledIds.includes(block.id),
+          disabled: [...enrollingIds, ...enroledIds].includes(block.id),
           time: block.startTime + ' - ' + getBlockEndTime(block),
           enrolButtonText: enroledIds.includes(block.id) ? 'Already enroled' : 'Enrol',
         } as BlockCardModel,

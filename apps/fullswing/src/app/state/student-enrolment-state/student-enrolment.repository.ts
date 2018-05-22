@@ -25,4 +25,19 @@ export class StudentEnrolmentRepository {
       return _throw(e);
     }
   }
+
+  public update(enrolment: StudentEnrolment): Observable<void> {
+    // try {
+    //   return fromPromise(
+    //     this.af.app
+    //       .firestore()
+    //       .doc(`user-enrolments/${userId}`)
+    //       .get(),
+    //   ).pipe(map(doc => (doc.data() ? doc.data().blockIds : [] || [])));
+    // } catch (e) {
+    // console.error('Error', e);
+    // return _throw(e);
+    // }
+    return _throw('error');
+  }
 }

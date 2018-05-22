@@ -24,7 +24,8 @@
         <ng-template #groupings>
           <jfc-block-group *ngFor="let grouping of cards$ | async"
             [title]="grouping.title"
-            [blockCards]="grouping.cards"></jfc-block-group>
+            [blockCards]="grouping.cards"
+            (enrol)="enrol($event)"></jfc-block-group>
         </ng-template>
       </ng-template>
     </ng-template>

@@ -8,7 +8,12 @@ import {
   ResetLoadBlockPages,
   GetMoreBlocks,
 } from '../../../state/block-state/loading-block-pages/loading-block-pages.actions';
-import { isLoadingSelector, modelSelector, fatalErrorMessagesSelector } from './block-enrol-page.component.selectors';
+import {
+  isLoadingSelector,
+  modelSelector,
+  fatalErrorMessagesSelector,
+  warningMessagesSelector,
+} from './block-enrol-page.component.selectors';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
 import { isArrayEmpty, isArrayNotEmpty } from '@reusable-parts/common-functions';
 import {
@@ -17,7 +22,11 @@ import {
 } from '../../../state/student-enrolment-state/loading-student-enrolment/loading-student-enrolment.actions';
 import { currentUserIdSelector } from '@reusable-parts/current-user-state/src/current-user/current-user.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { takeUntil, filter, distinctUntilChanged, tap, map } from 'rxjs/operators';
+import { takeUntil, filter, distinctUntilChanged, tap, map, take } from 'rxjs/operators';
+import {
+  ResetUpdateStudentEnrolments,
+  AttemptUpdateStudentEnrolments,
+} from '../../../state/student-enrolment-state/updating-student-enrolment/updating-student-enrolment.actions';
 
 @Component({
   selector: 'jfc-block-enrol-page',
@@ -43,8 +52,8 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
     this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
     this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
-    this.warningMessages$ = of(null);
-    this.hasWarnings$ = of(null);
+    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
     this.cards$ = this.store.select(modelSelector);
     this.noAvailableBlocks$ = this.cards$.map(isArrayEmpty);
@@ -54,6 +63,7 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GetMoreBlocks());
 
     this.store.dispatch(new ResetLoadStudentEnrolments());
+    this.store.dispatch(new ResetUpdateStudentEnrolments());
     this.store
       .select(currentUserIdSelector)
       .pipe(
@@ -70,7 +80,15 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  public enrol(id: string): void {
-    console.error('enrol', id);
+  public enrol(blockId: string): void {
+    this.store
+      .select(currentUserIdSelector)
+      .pipe(
+        takeUntil(this.onDestroy$),
+        filter(Boolean),
+        take(1),
+        tap(userId => this.store.dispatch(new AttemptUpdateStudentEnrolments({ userId, enrolmentIds: [blockId] }))),
+      )
+      .subscribe();
   }
 }
