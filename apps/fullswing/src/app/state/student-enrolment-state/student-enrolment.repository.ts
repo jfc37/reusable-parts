@@ -6,7 +6,7 @@ import { _throw } from 'rxjs/observable/throw';
 import { Block } from '../block-state/block';
 import { StudentEnrolment } from './student-enrolment';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { map } from 'rxjs/operators';
+import { map, mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class StudentEnrolmentRepository {
@@ -27,17 +27,16 @@ export class StudentEnrolmentRepository {
   }
 
   public update(enrolment: StudentEnrolment): Observable<void> {
-    // try {
-    //   return fromPromise(
-    //     this.af.app
-    //       .firestore()
-    //       .doc(`user-enrolments/${userId}`)
-    //       .get(),
-    //   ).pipe(map(doc => (doc.data() ? doc.data().blockIds : [] || [])));
-    // } catch (e) {
-    // console.error('Error', e);
-    // return _throw(e);
-    // }
-    return _throw('error');
+    try {
+      return fromPromise(
+        this.af.app
+          .firestore()
+          .doc(`user-enrolments/${enrolment.userId}`)
+          .set({ blockIds: enrolment.enrolmentIds }),
+      ).pipe(mapTo(null));
+    } catch (e) {
+      console.error('Error', e);
+      return _throw(e);
+    }
   }
 }
