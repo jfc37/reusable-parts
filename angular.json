@@ -31,7 +31,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "serviceWorker": false,
+              "serviceWorker": true,
               "fileReplacements": [
                 {
                   "replace": "apps/fullswing/src/environments/environment.ts",
