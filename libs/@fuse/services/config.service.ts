@@ -1,7 +1,8 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Platform } from '@angular/cdk/platform';
+import { BehaviorSubject } from 'rxjs';
+
 import * as _ from 'lodash';
 
 // Create the injection token for the custom config
