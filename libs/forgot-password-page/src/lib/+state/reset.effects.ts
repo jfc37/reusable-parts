@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { catchError, filter, mapTo, switchMap, withLatestFrom, exhaustMap } from 'rxjs/operators';
 import { ResetActionTypes, ResetFailure, ResetRequest, ResetSuccess } from './reset.actions';
 import { ResetState } from './reset.reducer';
@@ -10,6 +9,7 @@ import {
   emailResetSelector,
 } from '@reusable-parts/forgot-password-page/src/lib/+state/reset.selectors';
 import { FirebaseResetService } from '@reusable-parts/forgot-password-page/src/lib/services/firebase-reset.service';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class ResetEffects {
@@ -26,9 +26,7 @@ export class ResetEffects {
     ofType(ResetActionTypes.ResetRequest),
     withLatestFrom(this.store.select(emailResetSelector), (action, email) => email),
     exhaustMap(email =>
-      this.resetService
-        .reset(email)
-        .pipe(mapTo(new ResetSuccess()), catchError(error => Observable.of(new ResetFailure(error)))),
+      this.resetService.reset(email).pipe(mapTo(new ResetSuccess()), catchError(error => of(new ResetFailure(error)))),
     ),
   );
 

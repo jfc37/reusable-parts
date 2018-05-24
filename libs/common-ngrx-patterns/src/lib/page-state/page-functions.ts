@@ -6,20 +6,19 @@ import {
   PageState,
   SortDirection,
 } from '@reusable-parts/common-ngrx-patterns/src/lib/page-state/page.state';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { map } from 'rxjs/operators';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 export const DEFAULT_PAGE_SIZE = 50;
 
 export function loadPage<T extends { id?: string }>(
-  af: AngularFireAuth,
+  af: AngularFirestore,
   key: PageKey,
   collection: string,
 ): Observable<T[]> {
-  let query = af.app
-    .firestore()
+  let query = af.firestore
     .collection(collection)
     .orderBy(key.orderBy, key.sortDirection)
     .limit(key.pageSize);

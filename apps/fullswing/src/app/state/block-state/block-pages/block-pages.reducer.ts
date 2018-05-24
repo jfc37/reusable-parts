@@ -17,13 +17,7 @@ export function blockPagesReducer(
       return getInitialPageState('startDate', SortDirection.Descending);
 
     case BlockPagesActionTypes.Set:
-      return pageAdapter.upsertMany(
-        action.pages.map(page => ({
-          id: pageKeyToId(page.key),
-          changes: page,
-        })),
-        state,
-      );
+      return pageAdapter.upsertMany(action.pages, state);
 
     case BlockPagesActionTypes.ChangeSortOrder:
       return {

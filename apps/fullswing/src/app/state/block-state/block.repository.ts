@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
 import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { mapTo, tap, map } from 'rxjs/operators';
 import { addMinutes, format } from 'date-fns';
 import { PageKey, loadPage } from '@reusable-parts/common-ngrx-patterns/src';
 
 @Injectable()
 export class BlockRepository {
-  constructor(private af: AngularFireAuth) {}
+  constructor(private af: AngularFirestore) {}
 
   public load(key: PageKey): Observable<Block[]> {
     try {
@@ -24,17 +24,11 @@ export class BlockRepository {
 
   public create(block: Block): Observable<Block> {
     try {
-      const promise = this.af.app.firestore().runTransaction(transaction => {
-        const createdBlockDoc = this.af.app
-          .firestore()
-          .collection('blocks')
-          .doc();
+      const promise = this.af.firestore.runTransaction(transaction => {
+        const createdBlockDoc = this.af.firestore.collection('blocks').doc();
 
         const classDocs = createArrayOfSize(block.numberOfClasses).map(() =>
-          this.af.app
-            .firestore()
-            .collection('classes')
-            .doc(),
+          this.af.firestore.collection('classes').doc(),
         );
 
         const newBlock = {
@@ -64,11 +58,11 @@ export class BlockRepository {
 
   public delete(block: Block): Observable<void> {
     try {
-      const promise = this.af.app.firestore().runTransaction(transaction => {
-        const blockDoc = this.af.app.firestore().doc('blocks/' + block.id);
+      const promise = this.af.firestore.runTransaction(transaction => {
+        const blockDoc = this.af.firestore.doc('blocks/' + block.id);
 
         const classesToDelete = block.classIds
-          .map(id => this.af.app.firestore().doc('classes/' + id))
+          .map(id => this.af.firestore.doc('classes/' + id))
           .forEach(classDoc => transaction.delete(classDoc));
 
         transaction.delete(blockDoc);

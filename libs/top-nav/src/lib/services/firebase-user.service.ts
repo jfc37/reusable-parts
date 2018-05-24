@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @Injectable()
 export class FirebaseUserService {
@@ -22,6 +23,6 @@ export class FirebaseUserService {
   }
 
   public logout(): Observable<void> {
-    return Observable.fromPromise(this.af.auth.signOut());
+    return fromPromise(this.af.auth.signOut());
   }
 }

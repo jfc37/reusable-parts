@@ -6,10 +6,10 @@ import {
   isRegisteringSelector,
 } from '@reusable-parts/register-page/src/lib/+state/register.selectors';
 import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/lib/service/firebase-registration.service';
-import { Observable } from 'rxjs/Observable';
 import { catchError, filter, mapTo, switchMap, withLatestFrom, exhaustMap } from 'rxjs/operators';
 import { RegisterActionTypes, RegisterFailure, RegisterRequest, RegisterSuccess } from './register.actions';
 import { RegisterState } from './register.reducer';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class RegisterEffects {
@@ -28,7 +28,7 @@ export class RegisterEffects {
     exhaustMap(([action, { name, email, password }]) =>
       this.registrationService
         .register(name, email, password)
-        .pipe(mapTo(new RegisterSuccess()), catchError(error => Observable.of(new RegisterFailure(error)))),
+        .pipe(mapTo(new RegisterSuccess()), catchError(error => of(new RegisterFailure(error)))),
     ),
   );
 

@@ -17,7 +17,7 @@ export function deletingBlocksReducer(
       return deleteAdapter.getInitialState();
 
     case DeletingBlockActionTypes.DeleteRequest:
-      return deleteAdapter.upsertOne({ id: action.id, changes: getDeletingStatus(action.id) }, state);
+      return deleteAdapter.upsertOne(getDeletingStatus(action.id), state);
 
     case DeletingBlockActionTypes.DeleteSuccess:
       return deleteAdapter.updateOne(

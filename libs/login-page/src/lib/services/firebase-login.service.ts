@@ -31,6 +31,6 @@ export class FirebaseLoginService {
   }
 
   private authenticate(email: string, password: string): Observable<void> {
-    return Observable.fromPromise(this.af.auth.signInWithEmailAndPassword(email, password));
+    return fromPromise(this.af.auth.signInWithEmailAndPassword(email, password));
   }
 }
