@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem, MenuItemType } from '@reusable-parts/side-nav';
+import { MenuItem, MenuItemType } from '@reusable-parts/side-nav/src';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { FirebaseAuthService } from '@reusable-parts/guards';
+import { FirebaseAuthService } from '@reusable-parts/guards/src';
 import { FullSwingRoleTypes } from '../../authorisation/roles';
 import { map, tap } from 'rxjs/operators';
 

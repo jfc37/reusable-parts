@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { allUpdatingIdsSelectorFn, hasAnyUpdateErroredSelectorFn } from '@reusable-parts/common-ngrx-patterns';
+import { allUpdatingIdsSelectorFn, hasAnyUpdateErroredSelectorFn } from '@reusable-parts/common-ngrx-patterns/src';
 import { blockFeatureSelector } from '../block-feature.reducer';
 
 const selector = createSelector(blockFeatureSelector, state => state.generatingBlocks);

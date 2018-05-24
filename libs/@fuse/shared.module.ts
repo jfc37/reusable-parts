@@ -6,14 +6,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FuseDirectivesModule } from '@reusable-parts/@fuse/directives/directives';
 import { FusePipesModule } from '@reusable-parts/@fuse/pipes/pipes.module';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports  : [
-        // CommonModule,
+        CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule,
 
         FlexLayoutModule,
 
@@ -21,15 +19,14 @@ import { RouterModule } from '@angular/router';
         FusePipesModule
     ],
     exports  : [
-        // CommonModule,
+        CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule,
 
         FlexLayoutModule,
 
         FuseDirectivesModule,
-        FusePipesModule,
+        FusePipesModule
     ]
 })
 export class FuseSharedModule

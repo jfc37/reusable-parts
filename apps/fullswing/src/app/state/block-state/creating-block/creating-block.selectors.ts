@@ -1,12 +1,12 @@
 import { createSelector } from '@ngrx/store';
-import { userFeatureSelector } from '@reusable-parts/user-state/src/user-feature.reducer';
+import { userFeatureSelector } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 import { blockFeatureSelector } from '../block-feature.reducer';
 import {
   isCreatingSelectorFn,
   hasCreateErroredSelectorFn,
   shouldCreateSelectorFn,
   hasCreatedSelectorFn,
-} from '@reusable-parts/common-ngrx-patterns/src/create-state/create.selector';
+} from '@reusable-parts/common-ngrx-patterns/src/lib/create-state/create.selector';
 
 const selector = createSelector(blockFeatureSelector, state => state.creatingBlock);
 

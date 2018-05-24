@@ -9,7 +9,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { SortDirection } from '@reusable-parts/common-ngrx-patterns';
+import { SortDirection } from '@reusable-parts/common-ngrx-patterns/src';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({

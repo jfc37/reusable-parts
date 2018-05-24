@@ -1,5 +1,5 @@
-import { EnvironmentInterface } from '@reusable-parts/common-config/src/environment/environment.interface';
-import { standardFuseConfig } from '@reusable-parts/common-config/src/environment/fuse.config';
+import { EnvironmentInterface } from '@reusable-parts/common-config/src/lib/environment/environment.interface';
+import { standardFuseConfig } from '@reusable-parts/common-config/src/lib/environment/fuse.config';
 
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do

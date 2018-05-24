@@ -5,7 +5,7 @@ import {
   pageAdapter,
   SortDirection,
   pageKeyToId,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { BlockPagesActions, BlockPagesActionTypes } from './block-pages.actions';
 
 export function blockPagesReducer(
@@ -17,13 +17,7 @@ export function blockPagesReducer(
       return getInitialPageState('startDate', SortDirection.Descending);
 
     case BlockPagesActionTypes.Set:
-      return pageAdapter.upsertMany(
-        action.pages.map(page => ({
-          id: pageKeyToId(page.key),
-          changes: page,
-        })),
-        state,
-      );
+      return pageAdapter.upsertMany(action.pages, state);
 
     case BlockPagesActionTypes.ChangeSortOrder:
       return {

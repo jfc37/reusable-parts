@@ -6,7 +6,7 @@ import {
   allLoadedIdsSelectorFn,
   hasAnyLoadedSelectorFn,
   hasNotLoadedAnySelectorFn,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { blockFeatureSelector } from '../block-feature.reducer';
 
 const selector = createSelector(blockFeatureSelector, state => state.loadingBlockPages);

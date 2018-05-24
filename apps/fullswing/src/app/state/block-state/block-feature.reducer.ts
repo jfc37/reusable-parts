@@ -12,7 +12,7 @@ import {
   getInitialUpdateState,
   DeleteStatus,
   getInitialDeleteState,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { Block } from './block';
 import { blockPagesReducer } from './block-pages/block-pages.reducer';
 import { blocksReducer } from './blocks/blocks.reducer';

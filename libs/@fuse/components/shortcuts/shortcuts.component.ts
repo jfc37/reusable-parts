@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { ObservableMedia } from '@angular/flex-layout';
+
+import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { FuseMatchMediaService } from '@reusable-parts/@fuse/services/match-media.service';

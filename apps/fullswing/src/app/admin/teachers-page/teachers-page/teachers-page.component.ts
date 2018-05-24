@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserStateModule } from '@reusable-parts/user-state';
-import { GetAllUserRoles } from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
-import { GetAllUsers } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
+import { UserStateModule } from '@reusable-parts/user-state/src';
+import { GetAllUserRoles } from '@reusable-parts/user-state/src/lib/user-roles/loading-user-roles/loading-user-roles.actions';
+import { GetAllUsers } from '@reusable-parts/user-state/src/lib/users/loading-users/loading-users.actions';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { map, tap, takeUntil, filter } from 'rxjs/operators';
@@ -18,17 +18,17 @@ import {
 import {
   isUpdatingAnyUserRolesSelector,
   hasAnyUserRoleUpdatedSelector,
-} from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
+} from '@reusable-parts/user-state/src/lib/user-roles/updating-user-roles/updating-user-roles.selectors';
 import {
   AttemptToUpdateUserRoles,
   ResetUpdateUserRoles,
-} from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.actions';
+} from '@reusable-parts/user-state/src/lib/user-roles/updating-user-roles/updating-user-roles.actions';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
 import {
   ResetRemoveUserRoles,
   AttemptToRemoveUserRoles,
-} from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.actions';
-import { isArrayNotEmpty } from '@reusable-parts/common-functions';
+} from '@reusable-parts/user-state/src/lib/user-roles/removing-user-roles/removing-user-roles.actions';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 
 @Component({
   selector: 'jfc-teachers',

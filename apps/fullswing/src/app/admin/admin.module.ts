@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MainContentModule } from '@reusable-parts/main-content';
-import { UserStateModule } from '@reusable-parts/user-state';
-import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
+import { MainContentModule } from '@reusable-parts/main-content/src';
+import { UserStateModule } from '@reusable-parts/user-state/src';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
 
 @NgModule({
   imports: [

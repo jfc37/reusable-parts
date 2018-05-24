@@ -3,7 +3,7 @@ import { addWeeks, format } from 'date-fns';
 import { blocksForCurrentPagesSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import { BlockRowModel, BlockStatusTypes } from '../components/blocks-table/blocks-table.component';
 import { hasNotLoadedAnyBlockPagesSelector } from '../../../state/block-state/loading-block-pages/loading-block-pages.selectors';
-import { isAtleastOneArgumentsTruthy, includeOnlyTruthyArguments } from '@reusable-parts/common-functions';
+import { isAtleastOneArgumentsTruthy, includeOnlyTruthyArguments } from '@reusable-parts/common-functions/src';
 import {
   allGeneratingBlockIdsSelector,
   hasAnyBlockGenerateErroredSelector,

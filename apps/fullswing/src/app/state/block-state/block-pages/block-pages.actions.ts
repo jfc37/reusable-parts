@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Page, SortDirection } from '@reusable-parts/common-ngrx-patterns';
+import { Page, SortDirection } from '@reusable-parts/common-ngrx-patterns/src';
 
 export enum BlockPagesActionTypes {
   Reset = '[Block Pages] Reset',

@@ -5,7 +5,7 @@ import {
   getCreatingStatus,
   getCreatedStatus,
   getCreateErrorStatus,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 
 export function creatingBlockReducer(state = getDefaultCreateStatus(), action: CreatingBlockActions): CreateStatus {
   switch (action.type) {
