@@ -1,4 +1,5 @@
 {
+  "npmScope": "app",
   "projects": {
     "fullswing": {
       "tags": []
