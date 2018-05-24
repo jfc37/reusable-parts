@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { blockFeatureSelector } from '../block-feature.reducer';
 import { blockAdapter } from './blocks.state';
 import { blockIdsForCurrentPagesSelector } from '../block-pages/block-pages.selectors';
-import { isArrayEmpty } from '@reusable-parts/common-functions';
+import { isArrayEmpty } from '@reusable-parts/common-functions/src';
 
 const selector = createSelector(blockFeatureSelector, state => state.blocks);
 

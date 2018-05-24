@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { MenuItem, MenuItemType } from '@reusable-parts/side-nav';
+import { MenuItem, MenuItemType } from '@reusable-parts/side-nav/src';
 import { TranslateService } from '@ngx-translate/core';
 import { FuseTranslationLoaderService } from '@reusable-parts/@fuse/services/translation-loader.service';
 import { SwUpdate, SwPush } from '@angular/service-worker';

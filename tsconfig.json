@@ -7,13 +7,65 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "types": [],
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@reusable-parts/*": ["libs/*"]
+      "@reusable-parts/*": [
+        "libs/*"
+      ],
+      "@undefined/common-config": [
+        "libs/common-config/src/index.ts"
+      ],
+      "@undefined/common-functions": [
+        "libs/common-functions/src/index.ts"
+      ],
+      "@undefined/common-ngrx-patterns": [
+        "libs/common-ngrx-patterns/src/index.ts"
+      ],
+      "@undefined/common-pwa-parts": [
+        "libs/common-pwa-parts/src/index.ts"
+      ],
+      "@undefined/common-ui-components": [
+        "libs/common-ui-components/src/index.ts"
+      ],
+      "@undefined/forgot-password-page": [
+        "libs/forgot-password-page/src/index.ts"
+      ],
+      "@undefined/guards": [
+        "libs/guards/src/index.ts"
+      ],
+      "@undefined/login-page": [
+        "libs/login-page/src/index.ts"
+      ],
+      "@undefined/main-content": [
+        "libs/main-content/src/index.ts"
+      ],
+      "@undefined/register-page": [
+        "libs/register-page/src/index.ts"
+      ],
+      "@undefined/side-nav": [
+        "libs/side-nav/src/index.ts"
+      ],
+      "@undefined/top-nav": [
+        "libs/top-nav/src/index.ts"
+      ],
+      "@undefined/user-state": [
+        "libs/user-state/src/index.ts"
+      ],
+      "@undefined/welcome": [
+        "libs/welcome/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

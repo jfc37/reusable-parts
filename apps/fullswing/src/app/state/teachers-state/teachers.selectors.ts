@@ -1,14 +1,14 @@
+import { FullSwingRoleTypes } from '../../authorisation/roles';
+import { createSelector } from '@ngrx/store';
 import {
   allUsersWithRoleFactory,
   allUsersWithoutRoleFactory,
-} from '@reusable-parts/user-state/src/users/users/users.selectors';
-import { FullSwingRoleTypes } from '../../authorisation/roles';
-import { userIdsWithRoleSelectorFactory } from '@reusable-parts/user-state/src/user-roles/user-roles/user-roles.selectors';
-import { createSelector } from '@ngrx/store';
+} from '@reusable-parts/user-state/src/lib/users/users/users.selectors';
+import { userIdsWithRoleSelectorFactory } from '@reusable-parts/user-state/src/lib/user-roles/user-roles/user-roles.selectors';
 import {
   isLoadingUserRolesSelectorFn,
   hasLoadingUserRolesErroredSelectorFn,
-} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
+} from '@reusable-parts/user-state/src/lib/user-roles/loading-user-roles/loading-user-roles.selectors';
 
 export const teachersSelector = allUsersWithRoleFactory(FullSwingRoleTypes.Teacher);
 

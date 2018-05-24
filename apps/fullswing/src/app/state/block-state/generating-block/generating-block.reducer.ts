@@ -6,7 +6,7 @@ import {
   getUpdatingStatus,
   getUpdatedStatus,
   getUpdateErrorStatus,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { EntityState } from '@ngrx/entity';
 
 export function generatingBlocksReducer(

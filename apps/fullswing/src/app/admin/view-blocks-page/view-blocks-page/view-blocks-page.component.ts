@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { isArrayNotEmpty } from '@reusable-parts/common-functions';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 import { Observable } from 'rxjs/Observable';
 import { filter, map } from 'rxjs/operators';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';

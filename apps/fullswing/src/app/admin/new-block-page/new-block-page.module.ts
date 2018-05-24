@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewBlockPageComponent } from './new-block-page/new-block-page.component';
 import { RouterModule } from '@angular/router';
-import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components';
-import { MainContentModule } from '@reusable-parts/main-content';
+import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
+import { MainContentModule } from '@reusable-parts/main-content/src';
 import {
   MatButtonModule,
   MatInputModule,

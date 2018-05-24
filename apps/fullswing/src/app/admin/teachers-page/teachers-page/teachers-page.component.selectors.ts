@@ -1,23 +1,19 @@
 import { createSelector } from '@ngrx/store';
+import { FullSwingRoleTypes } from '../../../authorisation/roles';
+import { teachersSelector, nonTeachersSelector } from '../../../state/teachers-state/teachers.selectors';
 import {
   isLoadingAllUserRolesSelector,
   loadingAllUserRolesErrorMessageSelector,
-} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.selectors';
+} from '@reusable-parts/user-state/src/lib/user-roles/loading-user-roles/loading-user-roles.selectors';
 import {
   isLoadingAllUsersSelector,
   loadingAllUsersErrorMessageSelector,
-} from '@reusable-parts/user-state/src/users/loading-users/loading-users.selectors';
-import {
-  allUsersWithRoleFactory,
-  allUsersWithoutRoleFactory,
-} from '@reusable-parts/user-state/src/users/users/users.selectors';
-import { FullSwingRoleTypes } from '../../../authorisation/roles';
-import { hasAnyUserRoleUpdateErroredSelector } from '@reusable-parts/user-state/src/user-roles/updating-user-roles/updating-user-roles.selectors';
+} from '@reusable-parts/user-state/src/lib/users/loading-users/loading-users.selectors';
 import {
   allUserRoleIdsRemoving,
   hasAnyUserRoleRemoveErroredSelector,
-} from '@reusable-parts/user-state/src/user-roles/removing-user-roles/removing-user-roles.selectors';
-import { teachersSelector, nonTeachersSelector } from '../../../state/teachers-state/teachers.selectors';
+} from '@reusable-parts/user-state/src/lib/user-roles/removing-user-roles/removing-user-roles.selectors';
+import { hasAnyUserRoleUpdateErroredSelector } from '@reusable-parts/user-state/src/lib/user-roles/updating-user-roles/updating-user-roles.selectors';
 
 export const loadingSelector = createSelector(
   isLoadingAllUserRolesSelector,

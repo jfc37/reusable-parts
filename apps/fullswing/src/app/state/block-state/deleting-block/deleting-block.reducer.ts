@@ -5,7 +5,7 @@ import {
   getDeletedStatus,
   getDeletingStatus,
   getDeleteErrorStatus,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { DeletingBlockActionTypes, DeletingBlockActions } from './deleting-block.actions';
 
 export function deletingBlocksReducer(

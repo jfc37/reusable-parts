@@ -8,7 +8,7 @@ import {
   hasReachedFinalPageSelectorFn,
   hasMorePagesToRetrieveSelectorFn,
   allPagesSelectorFn,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 
 const selector = createSelector(blockFeatureSelector, state => state.blockPages);
 

@@ -17,16 +17,13 @@ import {
 } from './new-block-page.component.selectors';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Router } from '@angular/router';
-import {
-  LoadUserRolesByRole,
-  GetUserRolesByRole,
-} from '@reusable-parts/user-state/src/user-roles/loading-user-roles/loading-user-roles.actions';
 import { FullSwingRoleTypes } from '../../../authorisation/roles';
 import { teacherIdsSelector, teacherOptionsSelector } from '../../../state/teachers-state/teachers.selectors';
 import { merge } from 'rxjs/operators/merge';
-import { GetUser } from '@reusable-parts/user-state/src/users/loading-users/loading-users.actions';
 import { Block } from '../../../state/block-state/block';
-import { isArrayNotEmpty } from '@reusable-parts/common-functions';
+import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
+import { GetUserRolesByRole } from '@reusable-parts/user-state/src/lib/user-roles/loading-user-roles/loading-user-roles.actions';
+import { GetUser } from '@reusable-parts/user-state/src/lib/users/loading-users/loading-users.actions';
 
 @Component({
   selector: 'jfc-new-block-page',

@@ -6,7 +6,7 @@ import {
   getLoadErrorStatus,
   pageKeyToId,
   PageKey,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { LoadingBlockPagesActionTypes, LoadingBlockPagesActions } from './loading-block-pages.actions';
 import { EntityState } from '@ngrx/entity';
 

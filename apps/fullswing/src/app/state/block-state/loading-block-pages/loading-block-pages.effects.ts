@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { createPage, getFirstPageKey, getNewKey, getNextPageKey } from '@reusable-parts/common-ngrx-patterns';
+import { createPage, getFirstPageKey, getNewKey, getNextPageKey } from '@reusable-parts/common-ngrx-patterns/src';
 import { exhaustMap, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
 import { BlockPagesActionTypes, SetBlockPage } from '../block-pages/block-pages.actions';

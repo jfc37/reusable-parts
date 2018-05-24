@@ -11,12 +11,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule } from '@ngx-translate/core';
 import { NxModule } from '@nrwl/nx';
 import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
-import { CustomRouterStateSerializer, logger } from '@reusable-parts/common-ngrx-patterns';
-import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts';
-import { AuthenticatedGuard, GuardsModule } from '@reusable-parts/guards';
-import { MainContentModule } from '@reusable-parts/main-content';
-import { SideNavModule } from '@reusable-parts/side-nav';
-import { TopNavModule } from '@reusable-parts/top-nav';
+import { CustomRouterStateSerializer, logger } from '@reusable-parts/common-ngrx-patterns/src';
+import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts/src';
+import { AuthenticatedGuard, GuardsModule } from '@reusable-parts/guards/src';
+import { MainContentModule } from '@reusable-parts/main-content/src';
+import { SideNavModule } from '@reusable-parts/side-nav/src';
+import { TopNavModule } from '@reusable-parts/top-nav/src';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -62,15 +62,15 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
         { path: '', pathMatch: 'full', redirectTo: 'app' },
         {
           path: 'login',
-          loadChildren: '@reusable-parts/login-page#LoginPageModule',
+          loadChildren: '@reusable-parts/login-page/src#LoginPageModule',
         },
         {
           path: 'register',
-          loadChildren: '@reusable-parts/register-page#RegisterPageModule',
+          loadChildren: '@reusable-parts/register-page/src#RegisterPageModule',
         },
         {
           path: 'forgot-password',
-          loadChildren: '@reusable-parts/forgot-password-page#ForgotPasswordPageModule',
+          loadChildren: '@reusable-parts/forgot-password-page/src#ForgotPasswordPageModule',
         },
         {
           path: 'app',

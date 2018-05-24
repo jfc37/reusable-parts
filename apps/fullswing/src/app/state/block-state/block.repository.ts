@@ -7,7 +7,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { mapTo, tap, map } from 'rxjs/operators';
 import { addMinutes, format } from 'date-fns';
-import { PageKey, loadPage } from '@reusable-parts/common-ngrx-patterns';
+import { PageKey, loadPage } from '@reusable-parts/common-ngrx-patterns/src';
 
 @Injectable()
 export class BlockRepository {

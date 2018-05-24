@@ -5,7 +5,7 @@ import {
   pageAdapter,
   SortDirection,
   pageKeyToId,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { BlockPagesActions, BlockPagesActionTypes } from './block-pages.actions';
 
 export function blockPagesReducer(
