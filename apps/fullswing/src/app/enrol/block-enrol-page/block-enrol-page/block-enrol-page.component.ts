@@ -15,7 +15,7 @@ import {
   warningMessagesSelector,
 } from './block-enrol-page.component.selectors';
 import { BlockCardModel } from '../components/block-card/block-card.component.model';
-import { isArrayEmpty, isArrayNotEmpty } from '@reusable-parts/common-functions';
+import { isArrayEmpty, isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 import {
   ResetLoadStudentEnrolments,
   AttemptLoadStudentEnrolments,
@@ -56,7 +56,7 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
     this.cards$ = this.store.select(modelSelector);
-    this.noAvailableBlocks$ = this.cards$.map(isArrayEmpty);
+    this.noAvailableBlocks$ = this.cards$.pipe(map(isArrayEmpty));
 
     this.store.dispatch(new ResetBlockPages());
     this.store.dispatch(new ResetLoadBlockPages());

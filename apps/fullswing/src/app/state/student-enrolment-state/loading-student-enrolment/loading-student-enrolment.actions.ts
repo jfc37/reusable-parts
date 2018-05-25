@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PageKey, SortDirection } from '@reusable-parts/common-ngrx-patterns';
+import { PageKey, SortDirection } from '@reusable-parts/common-ngrx-patterns/src';
 
 export enum LoadingStudentEnrolmentsActionTypes {
   Reset = '[Loading Student Enrolments] Reset',

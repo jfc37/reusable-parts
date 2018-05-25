@@ -9,10 +9,7 @@ export function studentEnrolmentsReducer(
 ): EntityState<StudentEnrolment> {
   switch (action.type) {
     case StudentEnrolmentsActionTypes.Set:
-      return studentEnrolmentAdapter.upsertOne(
-        { id: action.studentEnrolment.userId, changes: action.studentEnrolment },
-        state,
-      );
+      return studentEnrolmentAdapter.upsertOne(action.studentEnrolment, state);
 
     case StudentEnrolmentsActionTypes.Remove:
       return studentEnrolmentAdapter.removeOne(action.userId, state);

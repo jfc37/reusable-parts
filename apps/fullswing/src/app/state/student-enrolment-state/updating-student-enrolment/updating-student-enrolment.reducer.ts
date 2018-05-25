@@ -6,7 +6,7 @@ import {
   getUpdatingStatus,
   updateAdapter,
   pageKeyToId,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import {
   UpdatingStudentEnrolmentsActions,
   UpdatingStudentEnrolmentsActionTypes,

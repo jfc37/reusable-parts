@@ -3,7 +3,7 @@ import {
   hasAnyUpdateErroredSelectorFn,
   isAnyUpdatingSelectorFn,
   allUpdatingIdsSelectorFn,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { studentEnrolmentFeatureSelector } from '../student-enrolment.reducer';
 import { currentUserIdSelector } from '@reusable-parts/current-user-state/src/current-user/current-user.selectors';
 import { flatten } from 'ramda';

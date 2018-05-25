@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { createPage, getNewKey } from '@reusable-parts/common-ngrx-patterns';
+import { createPage, getNewKey } from '@reusable-parts/common-ngrx-patterns/src';
 import { exhaustMap, filter, map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators';
 import {
   AttemptUpdateStudentEnrolments,

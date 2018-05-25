@@ -6,7 +6,7 @@ import {
   getLoadingStatus,
   loadAdapter,
   pageKeyToId,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import {
   LoadingStudentEnrolmentsActions,
   LoadingStudentEnrolmentsActionTypes,

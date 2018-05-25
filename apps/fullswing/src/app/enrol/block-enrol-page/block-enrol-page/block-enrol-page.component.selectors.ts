@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { hasNotLoadedAnyBlockPagesSelector } from '../../../state/block-state/loading-block-pages/loading-block-pages.selectors';
-import { isAtleastOneArgumentsTruthy } from '@reusable-parts/common-functions';
+import { isAtleastOneArgumentsTruthy } from '@reusable-parts/common-functions/src';
 import { Block, getBlockEndTime } from '../../../state/block-state/block';
 import { upcomingBlocksSelector } from '../../../state/block-state/blocks/blocks.selectors';
 import { format } from 'date-fns';

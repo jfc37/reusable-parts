@@ -8,7 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { BlockCardModel } from '../block-card/block-card.component.model';
-import { groupBy } from '@reusable-parts/common-functions';
+import { groupBy } from '@reusable-parts/common-functions/src';
 
 @Component({
   selector: 'jfc-block-group',

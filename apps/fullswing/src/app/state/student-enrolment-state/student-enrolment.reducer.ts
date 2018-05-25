@@ -5,7 +5,7 @@ import {
   getInitialLoadState,
   UpdateStatus,
   getInitialUpdateState,
-} from '@reusable-parts/common-ngrx-patterns';
+} from '@reusable-parts/common-ngrx-patterns/src';
 import { loadingStudentEnrolmentsReducer } from './loading-student-enrolment/loading-student-enrolment.reducer';
 import { StudentEnrolment } from './student-enrolment';
 import { studentEnrolmentsReducer } from './student-enrolment/student-enrolment.reducer';
