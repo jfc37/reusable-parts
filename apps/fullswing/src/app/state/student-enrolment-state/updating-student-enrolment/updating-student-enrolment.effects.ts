@@ -16,6 +16,8 @@ import { StudentEnrolmentFeatureState } from '../student-enrolment.reducer';
 import { SetStudentEnrolments } from '../student-enrolment/student-enrolment.actions';
 import { StudentEnrolmentRepository } from '../student-enrolment.repository';
 import { of } from 'rxjs/observable/of';
+import { enrolmentsForCurrentUserSelector } from '../student-enrolment/student-enrolment.selectors';
+import { StudentEnrolment } from '../student-enrolment';
 
 @Injectable()
 export class UpdatingStudentEnrolmentsEffects {
@@ -30,22 +32,25 @@ export class UpdatingStudentEnrolmentsEffects {
     .pipe(
       withLatestFrom(this.store.select(isUpdatingEnrolmentSelector)),
       filter(([action, isAnyUpdating]) => !isAnyUpdating),
-      map(([action]) => new UpdateStudentEnrolmentsRequest(action.enrolment)),
+      map(([action]) => new UpdateStudentEnrolmentsRequest(action.userId, action.blockId)),
     );
 
   @Effect()
   update$ = this.actions$
     .ofType<UpdateStudentEnrolmentsRequest>(UpdatingStudentEnrolmentsActionTypes.UpdateRequest)
     .pipe(
-      exhaustMap(action =>
+      withLatestFrom(this.store.select(enrolmentsForCurrentUserSelector)),
+      exhaustMap(([action, enrolledIds]) =>
         this.repository
-          .update(action.enrolment)
+          .update(action.userId, [action.blockId, ...enrolledIds])
           .pipe(
             mergeMap(enrolmentIds => [
-              new UpdateStudentEnrolmentsSuccess(action.enrolment),
-              new SetStudentEnrolments(action.enrolment),
+              new UpdateStudentEnrolmentsSuccess(action.userId, action.blockId),
+              new SetStudentEnrolments(action.userId, [action.blockId, ...enrolledIds]),
             ]),
-            catchError(error => of(new UpdateStudentEnrolmentsFailure(action.enrolment, error || 'Error'))),
+            catchError(error =>
+              of(new UpdateStudentEnrolmentsFailure(action.userId, action.blockId, error || 'Error')),
+            ),
           ),
       ),
     );

@@ -87,7 +87,7 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$),
         filter(Boolean),
         take(1),
-        tap(userId => this.store.dispatch(new AttemptUpdateStudentEnrolments({ userId, enrolmentIds: [blockId] }))),
+        tap(userId => this.store.dispatch(new AttemptUpdateStudentEnrolments(userId, blockId))),
       )
       .subscribe();
   }

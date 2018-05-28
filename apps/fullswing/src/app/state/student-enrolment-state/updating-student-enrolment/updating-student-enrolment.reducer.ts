@@ -11,7 +11,6 @@ import {
   UpdatingStudentEnrolmentsActions,
   UpdatingStudentEnrolmentsActionTypes,
 } from './updating-student-enrolment.actions';
-import { studentEnrolmentToId } from '../student-enrolment';
 
 export function updatingStudentEnrolmentsReducer(
   state = updateAdapter.getInitialState(),
@@ -22,14 +21,14 @@ export function updatingStudentEnrolmentsReducer(
       return updateAdapter.getInitialState();
 
     case UpdatingStudentEnrolmentsActionTypes.UpdateRequest:
-      return updateAdapter.addOne(getUpdatingStatus(studentEnrolmentToId(action.enrolment)), state);
+      return updateAdapter.addOne(getUpdatingStatus([action.userId, action.blockId].join('|')), state);
 
     case UpdatingStudentEnrolmentsActionTypes.UpdateSuccess:
-      const removed = updateAdapter.removeOne(studentEnrolmentToId(action.enrolment), state);
-      return updateAdapter.addOne(getUpdatedStatus(studentEnrolmentToId(action.enrolment)), removed);
+      const removed = updateAdapter.removeOne([action.userId, action.blockId].join('|'), state);
+      return updateAdapter.addOne(getUpdatedStatus([action.userId, action.blockId].join('|')), removed);
 
     case UpdatingStudentEnrolmentsActionTypes.UpdateFailure:
-      const id = studentEnrolmentToId(action.enrolment);
+      const id = [action.userId, action.blockId].join('|');
       return updateAdapter.updateOne(
         {
           id,

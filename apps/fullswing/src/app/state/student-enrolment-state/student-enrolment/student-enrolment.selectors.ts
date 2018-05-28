@@ -15,5 +15,5 @@ export const studentEnrolmentEntitiesSelector = createSelector(
 export const enrolmentsForCurrentUserSelector = createSelector(
   studentEnrolmentEntitiesSelector,
   currentUserIdSelector,
-  (enrolmentDictionary, userId) => enrolmentDictionary[userId].enrolmentIds || [],
+  (enrolmentDictionary, userId) => (enrolmentDictionary[userId] && enrolmentDictionary[userId].enrolmentIds) || [],
 );

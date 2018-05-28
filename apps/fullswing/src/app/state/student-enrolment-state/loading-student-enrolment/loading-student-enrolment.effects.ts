@@ -37,7 +37,7 @@ export class LoadingStudentEnrolmentsEffects {
           .pipe(
             mergeMap(enrolmentIds => [
               new LoadStudentEnrolmentsSuccess(action.userId),
-              new SetStudentEnrolments({ userId: action.userId, enrolmentIds }),
+              new SetStudentEnrolments(action.userId, enrolmentIds),
             ]),
             catchError(error => of(new LoadStudentEnrolmentsFailure(action.userId, error || 'Error'))),
           ),

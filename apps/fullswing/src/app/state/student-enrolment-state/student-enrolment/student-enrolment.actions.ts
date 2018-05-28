@@ -10,7 +10,7 @@ export enum StudentEnrolmentsActionTypes {
 export class SetStudentEnrolments implements Action {
   readonly type = StudentEnrolmentsActionTypes.Set;
 
-  constructor(public studentEnrolment: StudentEnrolment) {}
+  constructor(public userId: string, public blockIds: string[]) {}
 }
 
 export class RemoveStudentEnrolment implements Action {

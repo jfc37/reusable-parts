@@ -18,22 +18,22 @@ export class ResetUpdateStudentEnrolments implements Action {
 export class AttemptUpdateStudentEnrolments implements Action {
   readonly type = UpdatingStudentEnrolmentsActionTypes.Attempt;
 
-  constructor(public enrolment: StudentEnrolment) {}
+  constructor(public userId, public blockId: string) {}
 }
 
 export class UpdateStudentEnrolmentsRequest implements Action {
   readonly type = UpdatingStudentEnrolmentsActionTypes.UpdateRequest;
-  constructor(public enrolment: StudentEnrolment) {}
+  constructor(public userId, public blockId: string) {}
 }
 
 export class UpdateStudentEnrolmentsSuccess implements Action {
   readonly type = UpdatingStudentEnrolmentsActionTypes.UpdateSuccess;
-  constructor(public enrolment: StudentEnrolment) {}
+  constructor(public userId, public blockId: string) {}
 }
 
 export class UpdateStudentEnrolmentsFailure implements Action {
   readonly type = UpdatingStudentEnrolmentsActionTypes.UpdateFailure;
-  constructor(public enrolment: StudentEnrolment, public error: string) {}
+  constructor(public userId, public blockId: string, public error: string) {}
 }
 
 export type UpdatingStudentEnrolmentsActions =

@@ -23,11 +23,9 @@ export class StudentEnrolmentRepository {
     }
   }
 
-  public update(enrolment: StudentEnrolment): Observable<void> {
+  public update(userId: string, blockIds: string[]): Observable<void> {
     try {
-      return fromPromise(
-        this.af.firestore.doc(`user-enrolments/${enrolment.userId}`).set({ blockIds: enrolment.enrolmentIds }),
-      ).pipe(mapTo(null));
+      return fromPromise(this.af.firestore.doc(`user-enrolments/${userId}`).set({ blockIds })).pipe(mapTo(null));
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
