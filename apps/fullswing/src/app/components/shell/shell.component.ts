@@ -19,17 +19,20 @@ export class ShellComponent implements OnInit {
     {
       id: 'admin',
       title: 'Admin',
+      icon: 'lock',
       type: MenuItemType.Collapse,
       children: [
         {
           id: 'teachers',
           title: 'Teachers',
+          icon: 'people',
           type: MenuItemType.Item,
           url: 'admin/teachers',
         },
         {
           id: 'blocks',
           title: 'Blocks',
+          icon: 'view_module',
           type: MenuItemType.Item,
           url: 'admin/blocks',
         },
@@ -41,12 +44,14 @@ export class ShellComponent implements OnInit {
     {
       id: 'dashboard',
       title: 'Dashboard',
+      icon: 'dashboard',
       type: MenuItemType.Item,
       url: 'dashboard',
     },
     {
       id: 'block-enrol',
       title: 'Block Enrol',
+      icon: 'insert_invitation',
       type: MenuItemType.Item,
       url: 'enrol/blocks',
     },
