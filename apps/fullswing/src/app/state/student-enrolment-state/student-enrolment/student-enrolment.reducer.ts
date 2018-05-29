@@ -11,6 +11,15 @@ export function studentEnrolmentsReducer(
     case StudentEnrolmentsActionTypes.Set:
       return studentEnrolmentAdapter.upsertOne({ userId: action.userId, enrolmentIds: action.blockIds }, state);
 
+    case StudentEnrolmentsActionTypes.Add:
+      return studentEnrolmentAdapter.upsertOne(
+        {
+          userId: action.userId,
+          enrolmentIds: [...state.entities[action.userId].enrolmentIds, action.blockId],
+        },
+        state,
+      );
+
     case StudentEnrolmentsActionTypes.Remove:
       return studentEnrolmentAdapter.removeOne(action.userId, state);
 

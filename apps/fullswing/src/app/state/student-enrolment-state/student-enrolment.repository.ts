@@ -5,8 +5,9 @@ import { _throw } from 'rxjs/observable/throw';
 import { Block } from '../block-state/block';
 import { StudentEnrolment } from './student-enrolment';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { map, mapTo } from 'rxjs/operators';
+import { map, mapTo, tap } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { of } from 'rxjs';
 
 @Injectable()
 export class StudentEnrolmentRepository {
@@ -14,8 +15,8 @@ export class StudentEnrolmentRepository {
 
   public load(userId: string): Observable<string[]> {
     try {
-      return fromPromise(this.af.firestore.doc(`user-enrolments/${userId}`).get()).pipe(
-        map(doc => (doc.data() ? doc.data().blockIds : [] || [])),
+      return fromPromise(this.af.firestore.collection(`user-enrolments/${userId}/blocks`).get()).pipe(
+        map(collection => collection.docs.map(doc => doc.id) || []),
       );
     } catch (e) {
       console.error('Error', e);
@@ -23,9 +24,18 @@ export class StudentEnrolmentRepository {
     }
   }
 
-  public update(userId: string, blockIds: string[]): Observable<void> {
+  public update(userId: string, blockId: string): Observable<void> {
     try {
-      return fromPromise(this.af.firestore.doc(`user-enrolments/${userId}`).set({ blockIds })).pipe(mapTo(null));
+      const promise = this.af.firestore.runTransaction(transaction => {
+        const userEnrolmentDoc = this.af.firestore.doc(`user-enrolments/${userId}/blocks/${blockId}`);
+        transaction.set(userEnrolmentDoc, {});
+
+        const blockEnrolmentDoc = this.af.firestore.doc(`block-enrolments/${blockId}/students/${userId}`);
+        transaction.set(blockEnrolmentDoc, {});
+
+        return of(null).toPromise();
+      });
+      return fromPromise(promise);
     } catch (e) {
       console.error('Error', e);
       return _throw(e);
