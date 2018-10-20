@@ -59,15 +59,11 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "apps/fullswing/src/test.ts",
-            "karmaConfig": "apps/fullswing/karma.conf.js",
-            "polyfills": "apps/fullswing/src/polyfills.ts",
+            "jestConfig": "apps/fullswing/jest.config.js",
             "tsConfig": "apps/fullswing/tsconfig.spec.json",
-            "scripts": [],
-            "styles": ["apps/fullswing/src/styles.scss"],
-            "assets": ["apps/fullswing/src/assets", "apps/fullswing/src/favicon.ico"]
+            "setupFile": "apps/fullswing/src/test-setup.ts"
           }
         },
         "lint": {
@@ -108,14 +104,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/common-config/src/test.ts",
-            "karmaConfig": "libs/common-config/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/common-config/tsconfig.spec.json"
+            "jestConfig": "libs/common-config/jest.config.js",
+            "tsConfig": "libs/common-config/tsconfig.spec.json",
+            "setupFile": "libs/common-config/src/test-setup.ts"
           }
         },
         "lint": {
@@ -134,14 +127,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/common-functions/src/test.ts",
-            "karmaConfig": "libs/common-functions/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/common-functions/tsconfig.spec.json"
+            "jestConfig": "libs/common-functions/jest.config.js",
+            "tsConfig": "libs/common-functions/tsconfig.spec.json",
+            "setupFile": "libs/common-functions/src/test-setup.ts"
           }
         },
         "lint": {
@@ -160,14 +150,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/common-ngrx-patterns/src/test.ts",
-            "karmaConfig": "libs/common-ngrx-patterns/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/common-ngrx-patterns/tsconfig.spec.json"
+            "jestConfig": "libs/common-ngrx-patterns/jest.config.js",
+            "tsConfig": "libs/common-ngrx-patterns/tsconfig.spec.json",
+            "setupFile": "libs/common-ngrx-patterns/src/test-setup.ts"
           }
         },
         "lint": {
@@ -186,14 +173,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/common-pwa-parts/src/test.ts",
-            "karmaConfig": "libs/common-pwa-parts/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/common-pwa-parts/tsconfig.spec.json"
+            "jestConfig": "libs/common-pwa-parts/jest.config.js",
+            "tsConfig": "libs/common-pwa-parts/tsconfig.spec.json",
+            "setupFile": "libs/common-pwa-parts/src/test-setup.ts"
           }
         },
         "lint": {
@@ -212,14 +196,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/common-ui-components/src/test.ts",
-            "karmaConfig": "libs/common-ui-components/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/common-ui-components/tsconfig.spec.json"
+            "jestConfig": "libs/common-ui-components/jest.config.js",
+            "tsConfig": "libs/common-ui-components/tsconfig.spec.json",
+            "setupFile": "libs/common-ui-components/src/test-setup.ts"
           }
         },
         "lint": {
@@ -238,14 +219,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/forgot-password-page/src/test.ts",
-            "karmaConfig": "libs/forgot-password-page/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/forgot-password-page/tsconfig.spec.json"
+            "jestConfig": "libs/forgot-password-page/jest.config.js",
+            "tsConfig": "libs/forgot-password-page/tsconfig.spec.json",
+            "setupFile": "libs/forgot-password-page/src/test-setup.ts"
           }
         },
         "lint": {
@@ -264,14 +242,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/fuse/src/test.ts",
-            "karmaConfig": "libs/fuse/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/fuse/tsconfig.spec.json"
+            "jestConfig": "libs/fuse/jest.config.js",
+            "tsConfig": "libs/fuse/tsconfig.spec.json",
+            "setupFile": "libs/fuse/src/test-setup.ts"
           }
         },
         "lint": {
@@ -290,14 +265,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/guards/src/test.ts",
-            "karmaConfig": "libs/guards/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/guards/tsconfig.spec.json"
+            "jestConfig": "libs/guards/jest.config.js",
+            "tsConfig": "libs/guards/tsconfig.spec.json",
+            "setupFile": "libs/guards/src/test-setup.ts"
           }
         },
         "lint": {
@@ -316,14 +288,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/login-page/src/test.ts",
-            "karmaConfig": "libs/login-page/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/login-page/tsconfig.spec.json"
+            "jestConfig": "libs/login-page/jest.config.js",
+            "tsConfig": "libs/login-page/tsconfig.spec.json",
+            "setupFile": "libs/login-page/src/test-setup.ts"
           }
         },
         "lint": {
@@ -342,14 +311,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/main-content/src/test.ts",
-            "karmaConfig": "libs/main-content/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/main-content/tsconfig.spec.json"
+            "jestConfig": "libs/main-content/jest.config.js",
+            "tsConfig": "libs/main-content/tsconfig.spec.json",
+            "setupFile": "libs/main-content/src/test-setup.ts"
           }
         },
         "lint": {
@@ -368,14 +334,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/register/src/test.ts",
-            "karmaConfig": "libs/register/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/register/tsconfig.spec.json"
+            "jestConfig": "libs/register/jest.config.js",
+            "tsConfig": "libs/register/tsconfig.spec.json",
+            "setupFile": "libs/register/src/test-setup.ts"
           }
         },
         "lint": {
@@ -394,14 +357,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/register-page/src/test.ts",
-            "karmaConfig": "libs/register-page/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/register-page/tsconfig.spec.json"
+            "jestConfig": "libs/register-page/jest.config.js",
+            "tsConfig": "libs/register-page/tsconfig.spec.json",
+            "setupFile": "libs/register-page/src/test-setup.ts"
           }
         },
         "lint": {
@@ -420,14 +380,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/side-nav/src/test.ts",
-            "karmaConfig": "libs/side-nav/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/side-nav/tsconfig.spec.json"
+            "jestConfig": "libs/side-nav/jest.config.js",
+            "tsConfig": "libs/side-nav/tsconfig.spec.json",
+            "setupFile": "libs/side-nav/src/test-setup.ts"
           }
         },
         "lint": {
@@ -446,14 +403,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/top-nav/src/test.ts",
-            "karmaConfig": "libs/top-nav/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/top-nav/tsconfig.spec.json"
+            "jestConfig": "libs/top-nav/jest.config.js",
+            "tsConfig": "libs/top-nav/tsconfig.spec.json",
+            "setupFile": "libs/top-nav/src/test-setup.ts"
           }
         },
         "lint": {
@@ -472,14 +426,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/user-state/src/test.ts",
-            "karmaConfig": "libs/user-state/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/user-state/tsconfig.spec.json"
+            "jestConfig": "libs/user-state/jest.config.js",
+            "tsConfig": "libs/user-state/tsconfig.spec.json",
+            "setupFile": "libs/user-state/src/test-setup.ts"
           }
         },
         "lint": {
@@ -498,14 +449,11 @@
       "projectType": "library",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/welcome/src/test.ts",
-            "karmaConfig": "libs/welcome/karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": [],
-            "tsConfig": "libs/welcome/tsconfig.spec.json"
+            "jestConfig": "libs/welcome/jest.config.js",
+            "tsConfig": "libs/welcome/tsconfig.spec.json",
+            "setupFile": "libs/welcome/src/test-setup.ts"
           }
         },
         "lint": {
@@ -517,6 +465,29 @@
         }
       },
       "prefix": "jfc"
+    },
+    "libname": {
+      "root": "libs/libname",
+      "sourceRoot": "libs/libname/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/libname/tsconfig.lib.json", "libs/libname/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/libname/jest.config.js",
+            "tsConfig": "libs/libname/tsconfig.spec.json",
+            "setupFile": "libs/libname/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "defaultProject": "fullswing",

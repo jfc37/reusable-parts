@@ -54,6 +54,9 @@
     },
     "welcome": {
       "tags": []
+    },
+    "libname": {
+      "tags": []
     }
   }
 }
