@@ -36,7 +36,7 @@ export class ViewBlocksPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loading$ = this.store.pipe(select(isLoadingSelector));
-    this.rows$ = this.store.pipe(select(blockRowsSelector).pipe(filter(isArrayNotEmpty)));
+    this.rows$ = this.store.pipe(select(blockRowsSelector), filter(isArrayNotEmpty));
     this.hasNoBlocks$ = this.store.pipe(select(hasNoBlocksSelector));
     this.showLoadMoreButton$ = this.store.pipe(select(hasMoreBlockPagesToRetrieveSelector));
 
