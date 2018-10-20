@@ -1,10 +1,10 @@
-@import "src/@fuse/components/countdown/countdown.theme";
-@import "src/@fuse/components/material-color-picker/material-color-picker.theme";
-@import "src/@fuse/components/search-bar/search-bar.theme";
-@import "src/@fuse/components/shortcuts/shortcuts.theme";
-@import "src/@fuse/components/sidebar/sidebar.theme";
-@import "src/@fuse/components/theme-options/theme-options.theme";
-@import "src/@fuse/components/widget/widget.theme";
+@import "libs/@fuse/components/countdown/countdown.theme";
+@import "libs/@fuse/components/material-color-picker/material-color-picker.theme";
+@import "libs/@fuse/components/search-bar/search-bar.theme";
+@import "libs/@fuse/components/shortcuts/shortcuts.theme";
+@import "libs/@fuse/components/sidebar/sidebar.theme";
+@import "libs/@fuse/components/theme-options/theme-options.theme";
+@import "libs/@fuse/components/widget/widget.theme";
 
 @mixin fuse-core-theme($theme) {
 

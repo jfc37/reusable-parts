@@ -28,7 +28,7 @@
         min-width: 64px;
         height: 64px;
 
-        @include media-breakpoint-down('xs') {
+        @include media-breakpoint('xs') {
             height: 56px;
         }
     }
@@ -43,7 +43,7 @@
         width: 1px;
         background: rgba(0, 0, 0, .12);
 
-        @include media-breakpoint-down('xs') {
+        @include media-breakpoint('xs') {
             height: 56px;
         }
     }

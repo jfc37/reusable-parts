@@ -24,7 +24,7 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private fuseConfig: FuseConfigService) {}
 
   public ngOnInit(): void {
-    this.fuseConfig.onConfigChanged.pipe(takeUntil(this.onDestroy$)).subscribe(newSettings => {
+    this.fuseConfig.config.pipe(takeUntil(this.onDestroy$)).subscribe(newSettings => {
       this.folded = newSettings.layout.navigationFolded;
       this.sideBarClasses = newSettings.colorClasses.navbar;
     });

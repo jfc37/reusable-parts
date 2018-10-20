@@ -33,7 +33,7 @@ jfc-side-nav {
           overflow: hidden;
           height: 100vh;
 
-          @include media-breakpoint-down('sm') {
+          @include media-breakpoint('sm') {
               height: auto !important;
           }
 
