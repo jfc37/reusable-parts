@@ -4,9 +4,6 @@
     "fullswing": {
       "tags": []
     },
-    "fullswing-e2e": {
-      "tags": []
-    },
     "common-config": {
       "tags": []
     },
@@ -23,9 +20,6 @@
       "tags": []
     },
     "forgot-password-page": {
-      "tags": []
-    },
-    "fuse": {
       "tags": []
     },
     "guards": {

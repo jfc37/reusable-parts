@@ -76,28 +76,6 @@
       },
       "prefix": "jfc"
     },
-    "fullswing-e2e": {
-      "root": "apps/fullswing-e2e",
-      "sourceRoot": "apps/fullswing-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "apps/fullswing-e2e/protractor.conf.js",
-            "devServerTarget": "fullswing:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/fullswing-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "**/@fuse/**"]
-          }
-        }
-      },
-      "prefix": "jfc"
-    },
     "common-config": {
       "root": "libs/common-config",
       "sourceRoot": "libs/common-config/src",
@@ -230,29 +208,6 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["libs/forgot-password-page/tsconfig.lib.json", "libs/forgot-password-page/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "**/@fuse/**"]
-          }
-        }
-      },
-      "prefix": "jfc"
-    },
-    "fuse": {
-      "root": "libs/fuse",
-      "sourceRoot": "libs/fuse/src",
-      "projectType": "library",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/fuse/jest.config.js",
-            "tsConfig": "libs/fuse/tsconfig.spec.json",
-            "setupFile": "libs/fuse/src/test-setup.ts"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/fuse/tsconfig.lib.json", "libs/fuse/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
