@@ -49,7 +49,12 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetCreateBlock());
     this.store.dispatch(new GetUserRolesByRole(FullSwingRoleTypes.Teacher));
     this.store
-      .pipe(select(teacherIdsSelector), takeUntil(this.onDestroy$), mergeMap(a => a), tap(id => this.store.dispatch(new GetUser(id))))
+      .pipe(
+        select(teacherIdsSelector),
+        takeUntil(this.onDestroy$),
+        mergeMap(a => a),
+        tap(id => this.store.dispatch(new GetUser(id))),
+      )
       .subscribe();
 
     this.saveButtonText$ = of('Create');
@@ -63,7 +68,12 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
     this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
     this.store
-      .pipe(select(hasCreatedBlockSelector), takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.router.navigateByUrl('/app/admin/blocks')))
+      .pipe(
+        select(hasCreatedBlockSelector),
+        takeUntil(this.onDestroy$),
+        filter(Boolean),
+        tap(() => this.router.navigateByUrl('/app/admin/blocks')),
+      )
       .subscribe();
   }
 

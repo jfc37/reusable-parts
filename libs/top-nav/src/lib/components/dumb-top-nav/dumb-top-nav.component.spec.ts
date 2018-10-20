@@ -6,13 +6,11 @@ describe('DumbTopNavComponent', () => {
   let component: DumbTopNavComponent;
   let fixture: ComponentFixture<DumbTopNavComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [DumbTopNavComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [DumbTopNavComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DumbTopNavComponent);

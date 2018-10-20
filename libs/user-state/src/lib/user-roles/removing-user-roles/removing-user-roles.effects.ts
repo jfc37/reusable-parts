@@ -21,27 +21,23 @@ import {
 @Injectable()
 export class RemovingUserRolesEffects {
   @Effect()
-  attempt$ = this.actions$
-    .pipe(
-      ofType<AttemptToRemoveUserRoles>(RemovingUserRolesActionTypes.RemoveAttempt),
-      withLatestFrom(this.store.pipe(select(allUserRoleIdsRemoving))),
-      filter(([action, removingIds]) => !removingIds.includes(action.id)),
-      map(([action]) => new RemoveUserRolesRequest(action.id, action.role)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptToRemoveUserRoles>(RemovingUserRolesActionTypes.RemoveAttempt),
+    withLatestFrom(this.store.pipe(select(allUserRoleIdsRemoving))),
+    filter(([action, removingIds]) => !removingIds.includes(action.id)),
+    map(([action]) => new RemoveUserRolesRequest(action.id, action.role)),
+  );
 
   @Effect()
-  remove$ = this.actions$
-    .pipe(
-      ofType<RemoveUserRolesRequest>(RemovingUserRolesActionTypes.RemoveRequest),
-      mergeMap(action =>
-        this.repository
-          .removeUserRole(action.id, action.role)
-          .pipe(
-            mergeMap(roles => [new RemoveUserRole(action.id, action.role), new RemoveUserRolesSuccess(action.id)]),
-            catchError(err => of(new RemoveUserRolesFailure(action.id, err || 'Failed removing user roles'))),
-          ),
+  remove$ = this.actions$.pipe(
+    ofType<RemoveUserRolesRequest>(RemovingUserRolesActionTypes.RemoveRequest),
+    mergeMap(action =>
+      this.repository.removeUserRole(action.id, action.role).pipe(
+        mergeMap(roles => [new RemoveUserRole(action.id, action.role), new RemoveUserRolesSuccess(action.id)]),
+        catchError(err => of(new RemoveUserRolesFailure(action.id, err || 'Failed removing user roles'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

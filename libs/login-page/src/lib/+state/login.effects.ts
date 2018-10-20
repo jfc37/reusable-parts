@@ -26,9 +26,10 @@ export class LoginEffects {
     ofType(LoginActionTypes.LoginRequest),
     withLatestFrom(this.store.pipe(select(emailAndPasswordSelector))),
     exhaustMap(([action, { email, password, rememberMe }]) =>
-      this.loginService
-        .login(email, password, rememberMe)
-        .pipe(mapTo(new LoginSuccess()), catchError(error => of(new LoginFailure(error)))),
+      this.loginService.login(email, password, rememberMe).pipe(
+        mapTo(new LoginSuccess()),
+        catchError(error => of(new LoginFailure(error))),
+      ),
     ),
   );
 

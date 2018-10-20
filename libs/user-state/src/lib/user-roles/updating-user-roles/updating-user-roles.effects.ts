@@ -18,27 +18,23 @@ import { AddUserRole } from '@reusable-parts/user-state/src/lib/user-roles/user-
 @Injectable()
 export class UpdatingUserRolesEffects {
   @Effect()
-  attempt$ = this.actions$
-    .pipe(
-      ofType<AttemptToUpdateUserRoles>(UpdatingUserRolesActionTypes.UpdateAttempt),
-      withLatestFrom(this.store.pipe(select(allUserRoleIdsUpdating))),
-      filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
-      map(([action]) => new UpdateUserRolesRequest(action.id, action.role)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptToUpdateUserRoles>(UpdatingUserRolesActionTypes.UpdateAttempt),
+    withLatestFrom(this.store.pipe(select(allUserRoleIdsUpdating))),
+    filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
+    map(([action]) => new UpdateUserRolesRequest(action.id, action.role)),
+  );
 
   @Effect()
-  update$ = this.actions$
-    .pipe(
-      ofType<UpdateUserRolesRequest>(UpdatingUserRolesActionTypes.UpdateRequest),
-      exhaustMap(action =>
-        this.repository
-          .addUserRole(action.id, action.role)
-          .pipe(
-            mergeMap(roles => [new AddUserRole(action.id, action.role), new UpdateUserRolesSuccess(action.id)]),
-            catchError(err => of(new UpdateUserRolesFailure(action.id, err || 'Failed updating user roles'))),
-          ),
+  update$ = this.actions$.pipe(
+    ofType<UpdateUserRolesRequest>(UpdatingUserRolesActionTypes.UpdateRequest),
+    exhaustMap(action =>
+      this.repository.addUserRole(action.id, action.role).pipe(
+        mergeMap(roles => [new AddUserRole(action.id, action.role), new UpdateUserRolesSuccess(action.id)]),
+        catchError(err => of(new UpdateUserRolesFailure(action.id, err || 'Failed updating user roles'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

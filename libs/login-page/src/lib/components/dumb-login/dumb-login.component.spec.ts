@@ -14,24 +14,22 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          BrowserModule,
-          NoopAnimationsModule,
-          FormsModule,
-          ReactiveFormsModule,
-          MatButtonModule,
-          MatCheckboxModule,
-          MatFormFieldModule,
-          MatInputModule,
-        ],
-        declarations: [LoginComponent, FuseIfOnDomDirective],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        BrowserModule,
+        NoopAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
+      ],
+      declarations: [LoginComponent, FuseIfOnDomDirective],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

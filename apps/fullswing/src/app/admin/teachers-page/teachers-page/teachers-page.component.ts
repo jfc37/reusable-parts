@@ -37,7 +37,8 @@ import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersPageComponent implements OnInit, OnDestroy {
-  @ViewChild(AddNewTeacherComponent) public addNewTeacher: AddNewTeacherComponent;
+  @ViewChild(AddNewTeacherComponent)
+  public addNewTeacher: AddNewTeacherComponent;
   public loading$: Observable<boolean>;
   public errorMessages$: Observable<string[]>;
   public hasError$: Observable<boolean>;
@@ -70,7 +71,12 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
     this.disableAddingNewTeacher$ = this.store.pipe(select(isUpdatingAnyUserRolesSelector));
 
     this.store
-      .pipe(select(hasAnyUserRoleUpdatedSelector), takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.addNewTeacher.reset()))
+      .pipe(
+        select(hasAnyUserRoleUpdatedSelector),
+        takeUntil(this.onDestroy$),
+        filter(Boolean),
+        tap(() => this.addNewTeacher.reset()),
+      )
       .subscribe();
   }
 

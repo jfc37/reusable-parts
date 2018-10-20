@@ -6,13 +6,11 @@ describe('RegisterPageComponent', () => {
   let component: RegisterPageComponent;
   let fixture: ComponentFixture<RegisterPageComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterPageComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [RegisterPageComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterPageComponent);

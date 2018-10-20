@@ -24,33 +24,31 @@ import { allDeletingBlockIdsSelector } from './deleting-block.selectors';
 @Injectable()
 export class DeletingBlockEffects {
   @Effect()
-  attempt$ = this.actions$
-    .pipe(
-      ofType<AttemptDeleteBlock>(DeletingBlockActionTypes.Attempt),
-      filter(action => Boolean(action.id)),
-      withLatestFrom(this.store.pipe(select(allDeletingBlockIdsSelector))),
-      filter(([action, deletingIds]) => !deletingIds.includes(action.id)),
-      map(([action]) => new DeleteBlockRequest(action.id)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptDeleteBlock>(DeletingBlockActionTypes.Attempt),
+    filter(action => Boolean(action.id)),
+    withLatestFrom(this.store.pipe(select(allDeletingBlockIdsSelector))),
+    filter(([action, deletingIds]) => !deletingIds.includes(action.id)),
+    map(([action]) => new DeleteBlockRequest(action.id)),
+  );
 
   @Effect()
-  delete$ = this.actions$
-    .pipe(
-      ofType<DeleteBlockRequest>(DeletingBlockActionTypes.DeleteRequest),
-      withLatestFrom(this.store.pipe(select(blockEntitiesSelector)), (action, blocks) => blocks[action.id]),
-      mergeMap(block =>
-        this.repository
-          .delete(block)
-          .pipe(
-            mergeMap(() => [new RemoveBlock(block.id), new DeleteBlockSuccess(block.id)]),
-            catchError(err => of(new DeleteBlockFailure(block.id, err || 'Failed deleting block'))),
-          ),
+  delete$ = this.actions$.pipe(
+    ofType<DeleteBlockRequest>(DeletingBlockActionTypes.DeleteRequest),
+    withLatestFrom(this.store.pipe(select(blockEntitiesSelector)), (action, blocks) => blocks[action.id]),
+    mergeMap(block =>
+      this.repository.delete(block).pipe(
+        mergeMap(() => [new RemoveBlock(block.id), new DeleteBlockSuccess(block.id)]),
+        catchError(err => of(new DeleteBlockFailure(block.id, err || 'Failed deleting block'))),
       ),
-    );
+    ),
+  );
 
   @Effect()
-  deleteSuccessReset$ = this.actions$
-    .pipe(ofType<DeleteBlockSuccess>(DeletingBlockActionTypes.DeleteSuccess), map(() => new ResetDeleteBlock()));
+  deleteSuccessReset$ = this.actions$.pipe(
+    ofType<DeleteBlockSuccess>(DeletingBlockActionTypes.DeleteSuccess),
+    map(() => new ResetDeleteBlock()),
+  );
 
   constructor(
     private actions$: Actions,

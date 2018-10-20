@@ -18,42 +18,37 @@ import { hasCreateBlockErroredSelector, shouldCreateBlockSelector } from './crea
 @Injectable()
 export class CreateBlockEffects {
   @Effect()
-  attemptReset$ = this.actions$
-    .pipe(
-      ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
-      map(action => action.block),
-      withLatestFrom(
-        this.store.pipe(select(hasCreateBlockErroredSelector)),
-        (requestAction, hasError) => hasError && new ResetCreateBlock(),
-      ),
-      filter(Boolean),
-    );
+  attemptReset$ = this.actions$.pipe(
+    ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
+    map(action => action.block),
+    withLatestFrom(
+      this.store.pipe(select(hasCreateBlockErroredSelector)),
+      (requestAction, hasError) => hasError && new ResetCreateBlock(),
+    ),
+    filter(Boolean),
+  );
 
   @Effect()
-  attemptCreate$ = this.actions$
-    .pipe(
-      ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
-      map(action => action.block),
-      withLatestFrom(
-        this.store.pipe(select(shouldCreateBlockSelector)),
-        (block, shouldCreate) => shouldCreate && new CreateBlockRequest(block),
-      ),
-      filter(Boolean),
-    );
+  attemptCreate$ = this.actions$.pipe(
+    ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
+    map(action => action.block),
+    withLatestFrom(
+      this.store.pipe(select(shouldCreateBlockSelector)),
+      (block, shouldCreate) => shouldCreate && new CreateBlockRequest(block),
+    ),
+    filter(Boolean),
+  );
 
   @Effect()
-  create$ = this.actions$
-    .pipe(
-      ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest),
-      exhaustMap(action =>
-        this.repository
-          .create(action.block)
-          .pipe(
-            mergeMap(roles => [new CreateBlockSuccess()]),
-            catchError(err => of(new CreateBlockFailure(err || 'Failed creating block'))),
-          ),
+  create$ = this.actions$.pipe(
+    ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest),
+    exhaustMap(action =>
+      this.repository.create(action.block).pipe(
+        mergeMap(roles => [new CreateBlockSuccess()]),
+        catchError(err => of(new CreateBlockFailure(err || 'Failed creating block'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

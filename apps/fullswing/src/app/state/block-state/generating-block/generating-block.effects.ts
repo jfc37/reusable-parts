@@ -24,14 +24,13 @@ import { allGeneratingBlockIdsSelector } from './generating-block.selectors';
 @Injectable()
 export class GeneratingBlockEffects {
   @Effect()
-  attempt$ = this.actions$
-    .pipe(
-      ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.Attempt),
-      filter(action => Boolean(action.id)),
-      withLatestFrom(this.store.pipe(select(allGeneratingBlockIdsSelector))),
-      filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
-      map(([action]) => new GenerateBlockRequest(action.id)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.Attempt),
+    filter(action => Boolean(action.id)),
+    withLatestFrom(this.store.pipe(select(allGeneratingBlockIdsSelector))),
+    filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
+    map(([action]) => new GenerateBlockRequest(action.id)),
+  );
 
   @Effect()
   generate$ = this.actions$.pipe(
@@ -41,12 +40,10 @@ export class GeneratingBlockEffects {
       block: createNextBlock(blocks[action.id]),
     })),
     mergeMap(({ id, block }) =>
-      this.repository
-        .create(block)
-        .pipe(
-          mergeMap(newBlock => [new SetBlocks(newBlock), new GenerateBlockSuccess(id, newBlock.id)]),
-          catchError(err => of(new GenerateBlockFailure(id, err || 'Failed generating block'))),
-        ),
+      this.repository.create(block).pipe(
+        mergeMap(newBlock => [new SetBlocks(newBlock), new GenerateBlockSuccess(id, newBlock.id)]),
+        catchError(err => of(new GenerateBlockFailure(id, err || 'Failed generating block'))),
+      ),
     ),
   );
 
@@ -63,8 +60,10 @@ export class GeneratingBlockEffects {
   );
 
   @Effect()
-  generateSuccessReset$ = this.actions$
-    .pipe(ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess), map(() => new ResetGenerateBlock()));
+  generateSuccessReset$ = this.actions$.pipe(
+    ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess),
+    map(() => new ResetGenerateBlock()),
+  );
 
   constructor(
     private actions$: Actions,

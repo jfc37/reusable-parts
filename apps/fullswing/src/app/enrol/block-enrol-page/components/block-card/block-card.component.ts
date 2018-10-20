@@ -8,7 +8,9 @@ import { BlockCardModel } from './block-card.component.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlockCardComponent {
-  @Input() public model: BlockCardModel;
+  @Input()
+  public model: BlockCardModel;
 
-  @Output() public enrol = new EventEmitter<string>();
+  @Output()
+  public enrol = new EventEmitter<string>();
 }

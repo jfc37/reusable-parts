@@ -9,10 +9,7 @@ describe('FirebaseAuthService', () => {
     });
   });
 
-  it(
-    'should be created',
-    inject([FirebaseAuthService], (service: FirebaseAuthService) => {
-      expect(service).toBeTruthy();
-    }),
-  );
+  it('should be created', inject([FirebaseAuthService], (service: FirebaseAuthService) => {
+    expect(service).toBeTruthy();
+  }));
 });

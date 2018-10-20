@@ -6,13 +6,11 @@ describe('TopNavComponent', () => {
   let component: TopNavComponent;
   let fixture: ComponentFixture<TopNavComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [TopNavComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [TopNavComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TopNavComponent);

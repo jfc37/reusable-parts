@@ -25,66 +25,57 @@ import {
 @Injectable()
 export class LoadingUsersEffects {
   @Effect()
-  getAllReset$ = this.actions$
-    .pipe(
-      ofType(LoadingUsersActionTypes.GetAll),
-      withLatestFrom(
-        this.store.pipe(select(hasLoadingAllUsersErroredSelector)),
-        (action, shouldReset) => shouldReset && new ResetAllUsers(),
-      ),
-      filter(Boolean),
-    );
+  getAllReset$ = this.actions$.pipe(
+    ofType(LoadingUsersActionTypes.GetAll),
+    withLatestFrom(
+      this.store.pipe(select(hasLoadingAllUsersErroredSelector)),
+      (action, shouldReset) => shouldReset && new ResetAllUsers(),
+    ),
+    filter(Boolean),
+  );
 
   @Effect()
-  getAllLoad$ = this.actions$
-    .pipe(
-      ofType(LoadingUsersActionTypes.GetAll),
-      withLatestFrom(
-        this.store.pipe(select(shouldLoadAllUsersSelectors)),
-        (action, shouldLoad) => shouldLoad && new LoadAllUsers(),
-      ),
-      filter(Boolean),
-    );
+  getAllLoad$ = this.actions$.pipe(
+    ofType(LoadingUsersActionTypes.GetAll),
+    withLatestFrom(
+      this.store.pipe(select(shouldLoadAllUsersSelectors)),
+      (action, shouldLoad) => shouldLoad && new LoadAllUsers(),
+    ),
+    filter(Boolean),
+  );
 
   @Effect()
-  loadAll$ = this.actions$
-    .pipe(
-      ofType(LoadingUsersActionTypes.LoadAll),
-      mergeMap(() =>
-        this.repository
-          .getAllUsers()
-          .pipe(
-            mergeMap(users => [new SetUsers(...users), new LoadAllUsersSuccess()]),
-            catchError(err => of(new LoadAllUsersFailure(err || 'Failed loading users'))),
-          ),
+  loadAll$ = this.actions$.pipe(
+    ofType(LoadingUsersActionTypes.LoadAll),
+    mergeMap(() =>
+      this.repository.getAllUsers().pipe(
+        mergeMap(users => [new SetUsers(...users), new LoadAllUsersSuccess()]),
+        catchError(err => of(new LoadAllUsersFailure(err || 'Failed loading users'))),
       ),
-    );
+    ),
+  );
 
   @Effect()
-  getLoad$ = this.actions$
-    .pipe(
-      ofType<LoadUser>(LoadingUsersActionTypes.Get),
-      withLatestFrom(
-        this.store.pipe(select(allUserIdsLoadingOrLoaded)),
-        (action, loadingOrLoadedIds) =>
-          !(loadingOrLoadedIds.includes(action.id) || loadingOrLoadedIds.includes('all')) && new LoadUser(action.id),
-      ),
-      filter(Boolean),
-    );
+  getLoad$ = this.actions$.pipe(
+    ofType<LoadUser>(LoadingUsersActionTypes.Get),
+    withLatestFrom(
+      this.store.pipe(select(allUserIdsLoadingOrLoaded)),
+      (action, loadingOrLoadedIds) =>
+        !(loadingOrLoadedIds.includes(action.id) || loadingOrLoadedIds.includes('all')) && new LoadUser(action.id),
+    ),
+    filter(Boolean),
+  );
 
   @Effect()
-  load$ = this.actions$
-    .pipe(
-      ofType<LoadUser>(LoadingUsersActionTypes.Load),
-      mergeMap(action =>
-        this.repository
-          .getUser(action.id)
-          .pipe(
-            mergeMap(user => [new SetUsers(user), new LoadUserSuccess(action.id)]),
-            catchError(err => of(new LoadUserFailure(action.id, err || 'Failed loading user'))),
-          ),
+  load$ = this.actions$.pipe(
+    ofType<LoadUser>(LoadingUsersActionTypes.Load),
+    mergeMap(action =>
+      this.repository.getUser(action.id).pipe(
+        mergeMap(user => [new SetUsers(user), new LoadUserSuccess(action.id)]),
+        catchError(err => of(new LoadUserFailure(action.id, err || 'Failed loading user'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

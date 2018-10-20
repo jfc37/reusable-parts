@@ -19,16 +19,22 @@ import { startWith, map, filter } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddNewTeacherComponent implements OnInit, OnChanges {
-  @Input() public potentialTeachers: PotentialTeacherModel[];
-  @Input() public disabled: boolean;
+  @Input()
+  public potentialTeachers: PotentialTeacherModel[];
+  @Input()
+  public disabled: boolean;
 
-  @Output() public addTeacher = new EventEmitter<string>();
+  @Output()
+  public addTeacher = new EventEmitter<string>();
 
   public selectionFormControl = new FormControl('', [Validators.required, isSelectionOption]);
   public filteredOptions$: Observable<PotentialTeacherModel[]>;
 
   public ngOnInit(): void {
-    this.filteredOptions$ = this.selectionFormControl.valueChanges.pipe(startWith(''), map(val => this.filter(val)));
+    this.filteredOptions$ = this.selectionFormControl.valueChanges.pipe(
+      startWith(''),
+      map(val => this.filter(val)),
+    );
   }
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['disabled'] && !changes['disabled'].isFirstChange()) {

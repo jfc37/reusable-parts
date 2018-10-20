@@ -19,30 +19,26 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class LoadingStudentEnrolmentsEffects {
   @Effect()
-  attemptLoad$ = this.actions$
-    .pipe(
-      ofType<AttemptLoadStudentEnrolments>(LoadingStudentEnrolmentsActionTypes.Attempt),
-      withLatestFrom(this.store.pipe(select(isLoadingEnrolmentSelector))),
-      filter(([action, isAnyLoading]) => !isAnyLoading),
-      map(([action]) => new LoadStudentEnrolmentsRequest(action.userId)),
-    );
+  attemptLoad$ = this.actions$.pipe(
+    ofType<AttemptLoadStudentEnrolments>(LoadingStudentEnrolmentsActionTypes.Attempt),
+    withLatestFrom(this.store.pipe(select(isLoadingEnrolmentSelector))),
+    filter(([action, isAnyLoading]) => !isAnyLoading),
+    map(([action]) => new LoadStudentEnrolmentsRequest(action.userId)),
+  );
 
   @Effect()
-  load$ = this.actions$
-    .pipe(
-      ofType<LoadStudentEnrolmentsRequest>(LoadingStudentEnrolmentsActionTypes.LoadRequest),
-      exhaustMap(action =>
-        this.repository
-          .load(action.userId)
-          .pipe(
-            mergeMap(enrolmentIds => [
-              new LoadStudentEnrolmentsSuccess(action.userId),
-              new SetStudentEnrolments(action.userId, enrolmentIds),
-            ]),
-            catchError(error => of(new LoadStudentEnrolmentsFailure(action.userId, error || 'Error'))),
-          ),
+  load$ = this.actions$.pipe(
+    ofType<LoadStudentEnrolmentsRequest>(LoadingStudentEnrolmentsActionTypes.LoadRequest),
+    exhaustMap(action =>
+      this.repository.load(action.userId).pipe(
+        mergeMap(enrolmentIds => [
+          new LoadStudentEnrolmentsSuccess(action.userId),
+          new SetStudentEnrolments(action.userId, enrolmentIds),
+        ]),
+        catchError(error => of(new LoadStudentEnrolmentsFailure(action.userId, error || 'Error'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

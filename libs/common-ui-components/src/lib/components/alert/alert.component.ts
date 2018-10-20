@@ -13,7 +13,8 @@ export enum AlertType {
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements OnChanges {
-  @Input() public type: AlertType;
+  @Input()
+  public type: AlertType;
 
   public colourClass: string;
   public icon: string;

@@ -26,9 +26,10 @@ export class RegisterEffects {
     ofType(RegisterActionTypes.RegisterRequest),
     withLatestFrom(this.store.pipe(select(accountSelector))),
     exhaustMap(([action, { name, email, password }]) =>
-      this.registrationService
-        .register(name, email, password)
-        .pipe(mapTo(new RegisterSuccess()), catchError(error => of(new RegisterFailure(error)))),
+      this.registrationService.register(name, email, password).pipe(
+        mapTo(new RegisterSuccess()),
+        catchError(error => of(new RegisterFailure(error))),
+      ),
     ),
   );
 

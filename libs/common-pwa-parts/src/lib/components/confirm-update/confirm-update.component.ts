@@ -33,7 +33,12 @@ export class ConfirmUpdateComponent implements OnInit, OnDestroy {
         .subscribe();
 
       this.updates.available
-        .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => (this.hasUpdates = true)), take(1))
+        .pipe(
+          takeUntil(this.onDestroy$),
+          filter(Boolean),
+          tap(() => (this.hasUpdates = true)),
+          take(1),
+        )
         .subscribe();
     }
   }

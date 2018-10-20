@@ -20,7 +20,8 @@ import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sid
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit, OnDestroy {
-  @Input() redirectRouteAfterLogout: string;
+  @Input()
+  redirectRouteAfterLogout: string;
 
   public showLoadingBar$: Observable<boolean>;
   public hasNavigation$: Observable<boolean>;

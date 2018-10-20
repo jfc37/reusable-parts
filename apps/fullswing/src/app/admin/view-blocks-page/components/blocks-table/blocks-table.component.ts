@@ -19,13 +19,18 @@ import { MatSort, MatTableDataSource } from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlocksTableComponent implements AfterViewInit, OnChanges {
-  @Input() public rows: BlockRowModel[];
+  @Input()
+  public rows: BlockRowModel[];
 
-  @Output() public sortChanged = new EventEmitter<SortChange>();
-  @Output() public generateBlock = new EventEmitter<string>();
-  @Output() public deleteBlock = new EventEmitter<string>();
+  @Output()
+  public sortChanged = new EventEmitter<SortChange>();
+  @Output()
+  public generateBlock = new EventEmitter<string>();
+  @Output()
+  public deleteBlock = new EventEmitter<string>();
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort)
+  sort: MatSort;
   public dataSource = new MatTableDataSource(this.rows);
 
   public displayedColumns = ['name', 'startDate', 'day', 'actions'];

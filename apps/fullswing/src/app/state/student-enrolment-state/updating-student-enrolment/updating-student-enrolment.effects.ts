@@ -22,34 +22,32 @@ import { StudentEnrolment } from '../student-enrolment';
 @Injectable()
 export class UpdatingStudentEnrolmentsEffects {
   @Effect()
-  attemptReset$ = this.actions$
-    .pipe(ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt), map(() => new ResetUpdateStudentEnrolments()));
+  attemptReset$ = this.actions$.pipe(
+    ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt),
+    map(() => new ResetUpdateStudentEnrolments()),
+  );
 
   @Effect()
-  attemptUpdate$ = this.actions$
-    .pipe(ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt),
-      withLatestFrom(this.store.pipe(select(isUpdatingEnrolmentSelector))),
-      filter(([action, isAnyUpdating]) => !isAnyUpdating),
-      map(([action]) => new UpdateStudentEnrolmentsRequest(action.userId, action.blockId)),
-    );
+  attemptUpdate$ = this.actions$.pipe(
+    ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt),
+    withLatestFrom(this.store.pipe(select(isUpdatingEnrolmentSelector))),
+    filter(([action, isAnyUpdating]) => !isAnyUpdating),
+    map(([action]) => new UpdateStudentEnrolmentsRequest(action.userId, action.blockId)),
+  );
 
   @Effect()
-  update$ = this.actions$
-    .pipe(ofType<UpdateStudentEnrolmentsRequest>(UpdatingStudentEnrolmentsActionTypes.UpdateRequest),
-      exhaustMap(action =>
-        this.repository
-          .update(action.userId, action.blockId)
-          .pipe(
-            mergeMap(enrolmentIds => [
-              new AddStudentEnrolment(action.userId, action.blockId),
-              new UpdateStudentEnrolmentsSuccess(action.userId, action.blockId),
-            ]),
-            catchError(error =>
-              of(new UpdateStudentEnrolmentsFailure(action.userId, action.blockId, error || 'Error')),
-            ),
-          ),
+  update$ = this.actions$.pipe(
+    ofType<UpdateStudentEnrolmentsRequest>(UpdatingStudentEnrolmentsActionTypes.UpdateRequest),
+    exhaustMap(action =>
+      this.repository.update(action.userId, action.blockId).pipe(
+        mergeMap(enrolmentIds => [
+          new AddStudentEnrolment(action.userId, action.blockId),
+          new UpdateStudentEnrolmentsSuccess(action.userId, action.blockId),
+        ]),
+        catchError(error => of(new UpdateStudentEnrolmentsFailure(action.userId, action.blockId, error || 'Error'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

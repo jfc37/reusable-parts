@@ -26,7 +26,10 @@ export class ResetEffects {
     ofType(ResetActionTypes.ResetRequest),
     withLatestFrom(this.store.pipe(select(emailResetSelector)), (action, email) => email),
     exhaustMap(email =>
-      this.resetService.reset(email).pipe(mapTo(new ResetSuccess()), catchError(error => of(new ResetFailure(error)))),
+      this.resetService.reset(email).pipe(
+        mapTo(new ResetSuccess()),
+        catchError(error => of(new ResetFailure(error))),
+      ),
     ),
   );
 
