@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/lib/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
@@ -29,13 +29,13 @@ import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 export class LoadingUserRolesEffects {
   @Effect()
   getAll$ = this.actions$
-    .ofType(LoadingUserRolesActionTypes.GetAll)
     .pipe(
+      ofType(LoadingUserRolesActionTypes.GetAll),
       withLatestFrom(
-        this.store.select(hasLoadingAllUserRolesErroredSelector),
+        this.store.pipe(select(hasLoadingAllUserRolesErroredSelector)),
         (action, shouldReset) => shouldReset && new ResetAllUserRoles(),
       ),
-      withLatestFrom(this.store.select(shouldLoadAllUserRolesSelectors), (resetAction, shouldLoad) => [
+      withLatestFrom(this.store.pipe(select(shouldLoadAllUserRolesSelectors)), (resetAction, shouldLoad) => [
         resetAction,
         shouldLoad && new LoadAllUserRoles(),
       ]),
@@ -46,8 +46,8 @@ export class LoadingUserRolesEffects {
 
   @Effect()
   loadAll$ = this.actions$
-    .ofType(LoadingUserRolesActionTypes.LoadAll)
     .pipe(
+      ofType(LoadingUserRolesActionTypes.LoadAll),
       exhaustMap(() =>
         this.repository
           .getAllUserRoles()
@@ -60,10 +60,10 @@ export class LoadingUserRolesEffects {
 
   @Effect()
   getByRoleReset$ = this.actions$
-    .ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole)
     .pipe(
+      ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole),
       withLatestFrom(
-        this.store.select(allUserRoleIdsErrored),
+        this.store.pipe(select(allUserRoleIdsErrored)),
         (action, erroredIds) => erroredIds[action.role] && new ResetAllUserRoles(),
       ),
       filter(Boolean),
@@ -71,10 +71,10 @@ export class LoadingUserRolesEffects {
 
   @Effect()
   getByRoleLoad$ = this.actions$
-    .ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole)
     .pipe(
+      ofType<GetUserRolesByRole>(LoadingUserRolesActionTypes.GetByRole),
       withLatestFrom(
-        this.store.select(allUserRoleIdsLoadingOrLoaded),
+        this.store.pipe(select(allUserRoleIdsLoadingOrLoaded)),
         (action, loadingOrLoadedIds) =>
           !(loadingOrLoadedIds.includes(action.role) || loadingOrLoadedIds.includes('all')) &&
           new LoadUserRolesByRole(action.role),
@@ -84,8 +84,8 @@ export class LoadingUserRolesEffects {
 
   @Effect()
   loadByRole$ = this.actions$
-    .ofType<LoadUserRolesByRole>(LoadingUserRolesActionTypes.LoadByRole)
     .pipe(
+      ofType<LoadUserRolesByRole>(LoadingUserRolesActionTypes.LoadByRole),
       mergeMap(action =>
         this.repository
           .getUserRolesByRole(action.role)

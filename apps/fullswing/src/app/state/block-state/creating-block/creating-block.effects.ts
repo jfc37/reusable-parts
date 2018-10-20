@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs/observable/of';
 import { catchError, filter, map, mergeMap, switchMap, withLatestFrom, exhaustMap } from 'rxjs/operators';
 import { BlockFeatureState } from '../block-feature.reducer';
@@ -19,11 +19,11 @@ import { hasCreateBlockErroredSelector, shouldCreateBlockSelector } from './crea
 export class CreateBlockEffects {
   @Effect()
   attemptReset$ = this.actions$
-    .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
     .pipe(
+      ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
       map(action => action.block),
       withLatestFrom(
-        this.store.select(hasCreateBlockErroredSelector),
+        this.store.pipe(select(hasCreateBlockErroredSelector)),
         (requestAction, hasError) => hasError && new ResetCreateBlock(),
       ),
       filter(Boolean),
@@ -31,11 +31,11 @@ export class CreateBlockEffects {
 
   @Effect()
   attemptCreate$ = this.actions$
-    .ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt)
     .pipe(
+      ofType<AttemptCreateBlock>(CreatingBlockActionTypes.Attempt),
       map(action => action.block),
       withLatestFrom(
-        this.store.select(shouldCreateBlockSelector),
+        this.store.pipe(select(shouldCreateBlockSelector)),
         (block, shouldCreate) => shouldCreate && new CreateBlockRequest(block),
       ),
       filter(Boolean),
@@ -43,8 +43,8 @@ export class CreateBlockEffects {
 
   @Effect()
   create$ = this.actions$
-    .ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest)
     .pipe(
+      ofType<CreateBlockRequest>(CreatingBlockActionTypes.CreateRequest),
       exhaustMap(action =>
         this.repository
           .create(action.block)

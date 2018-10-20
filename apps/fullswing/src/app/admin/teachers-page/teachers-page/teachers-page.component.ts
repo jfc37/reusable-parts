@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { UserStateModule } from '@reusable-parts/user-state/src';
 import { GetAllUserRoles } from '@reusable-parts/user-state/src/lib/user-roles/loading-user-roles/loading-user-roles.actions';
 import { GetAllUsers } from '@reusable-parts/user-state/src/lib/users/loading-users/loading-users.actions';
@@ -57,21 +57,20 @@ export class TeachersPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GetAllUserRoles());
     this.store.dispatch(new GetAllUsers());
 
-    this.loading$ = this.store.select(loadingSelector);
-    this.errorMessages$ = this.store.select(errorsSelector);
+    this.loading$ = this.store.pipe(select(loadingSelector));
+    this.errorMessages$ = this.store.pipe(select(errorsSelector));
     this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
-    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.warningMessages$ = this.store.pipe(select(warningMessagesSelector));
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
-    this.teachers$ = this.store.select(teacherModelsSelector);
+    this.teachers$ = this.store.pipe(select(teacherModelsSelector));
 
-    this.potentialTeachers$ = this.store.select(potentialTeacherModelsSelector);
-    this.disableAddingNewTeacher$ = this.store.select(isUpdatingAnyUserRolesSelector);
+    this.potentialTeachers$ = this.store.pipe(select(potentialTeacherModelsSelector));
+    this.disableAddingNewTeacher$ = this.store.pipe(select(isUpdatingAnyUserRolesSelector));
 
     this.store
-      .select(hasAnyUserRoleUpdatedSelector)
-      .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.addNewTeacher.reset()))
+      .pipe(select(hasAnyUserRoleUpdatedSelector), takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.addNewTeacher.reset()))
       .subscribe();
   }
 

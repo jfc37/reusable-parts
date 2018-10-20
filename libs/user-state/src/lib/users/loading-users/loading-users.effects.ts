@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/lib/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
@@ -26,10 +26,10 @@ import {
 export class LoadingUsersEffects {
   @Effect()
   getAllReset$ = this.actions$
-    .ofType(LoadingUsersActionTypes.GetAll)
     .pipe(
+      ofType(LoadingUsersActionTypes.GetAll),
       withLatestFrom(
-        this.store.select(hasLoadingAllUsersErroredSelector),
+        this.store.pipe(select(hasLoadingAllUsersErroredSelector)),
         (action, shouldReset) => shouldReset && new ResetAllUsers(),
       ),
       filter(Boolean),
@@ -37,10 +37,10 @@ export class LoadingUsersEffects {
 
   @Effect()
   getAllLoad$ = this.actions$
-    .ofType(LoadingUsersActionTypes.GetAll)
     .pipe(
+      ofType(LoadingUsersActionTypes.GetAll),
       withLatestFrom(
-        this.store.select(shouldLoadAllUsersSelectors),
+        this.store.pipe(select(shouldLoadAllUsersSelectors)),
         (action, shouldLoad) => shouldLoad && new LoadAllUsers(),
       ),
       filter(Boolean),
@@ -48,8 +48,8 @@ export class LoadingUsersEffects {
 
   @Effect()
   loadAll$ = this.actions$
-    .ofType(LoadingUsersActionTypes.LoadAll)
     .pipe(
+      ofType(LoadingUsersActionTypes.LoadAll),
       mergeMap(() =>
         this.repository
           .getAllUsers()
@@ -62,10 +62,10 @@ export class LoadingUsersEffects {
 
   @Effect()
   getLoad$ = this.actions$
-    .ofType<LoadUser>(LoadingUsersActionTypes.Get)
     .pipe(
+      ofType<LoadUser>(LoadingUsersActionTypes.Get),
       withLatestFrom(
-        this.store.select(allUserIdsLoadingOrLoaded),
+        this.store.pipe(select(allUserIdsLoadingOrLoaded)),
         (action, loadingOrLoadedIds) =>
           !(loadingOrLoadedIds.includes(action.id) || loadingOrLoadedIds.includes('all')) && new LoadUser(action.id),
       ),
@@ -74,8 +74,8 @@ export class LoadingUsersEffects {
 
   @Effect()
   load$ = this.actions$
-    .ofType<LoadUser>(LoadingUsersActionTypes.Load)
     .pipe(
+      ofType<LoadUser>(LoadingUsersActionTypes.Load),
       mergeMap(action =>
         this.repository
           .getUser(action.id)

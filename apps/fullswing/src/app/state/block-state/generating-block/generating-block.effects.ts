@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { addWeeks, format } from 'date-fns';
 import { of } from 'rxjs/observable/of';
 import { catchError, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
@@ -25,17 +25,18 @@ import { allGeneratingBlockIdsSelector } from './generating-block.selectors';
 export class GeneratingBlockEffects {
   @Effect()
   attempt$ = this.actions$
-    .ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.Attempt)
     .pipe(
+      ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.Attempt),
       filter(action => Boolean(action.id)),
-      withLatestFrom(this.store.select(allGeneratingBlockIdsSelector)),
+      withLatestFrom(this.store.pipe(select(allGeneratingBlockIdsSelector))),
       filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
       map(([action]) => new GenerateBlockRequest(action.id)),
     );
 
   @Effect()
-  generate$ = this.actions$.ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.GenerateRequest).pipe(
-    withLatestFrom(this.store.select(blocksDictionarySelector), (action, blocks) => ({
+  generate$ = this.actions$.pipe(
+    ofType<AttemptGenerateBlock>(GeneratingBlockActionTypes.GenerateRequest),
+    withLatestFrom(this.store.pipe(select(blocksDictionarySelector)), (action, blocks) => ({
       id: action.id,
       block: createNextBlock(blocks[action.id]),
     })),
@@ -50,8 +51,9 @@ export class GeneratingBlockEffects {
   );
 
   @Effect()
-  generateSuccess$ = this.actions$.ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess).pipe(
-    withLatestFrom(this.store.select(allBlockPagesSelector), (action, pages) =>
+  generateSuccess$ = this.actions$.pipe(
+    ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess),
+    withLatestFrom(this.store.pipe(select(allBlockPagesSelector)), (action, pages) =>
       pages.filter(page => page.ids.includes(action.id)).map(page => ({
         ...page,
         ids: [...page.ids, action.newBlockId],
@@ -62,8 +64,7 @@ export class GeneratingBlockEffects {
 
   @Effect()
   generateSuccessReset$ = this.actions$
-    .ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess)
-    .pipe(map(() => new ResetGenerateBlock()));
+    .pipe(ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess), map(() => new ResetGenerateBlock()));
 
   constructor(
     private actions$: Actions,

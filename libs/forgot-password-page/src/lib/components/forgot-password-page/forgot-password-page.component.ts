@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ForgotPasswordPageConfig } from '@reusable-parts/common-config/src/lib/environment/forgot-password-page.config';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ResetState } from '@reusable-parts/forgot-password-page/src/lib/+state/reset.reducer';
 import {
   AttemptReset,
@@ -33,9 +33,9 @@ export class ForgotPasswordPageComponent implements OnInit {
   public ngOnInit(): void {
     this.store.dispatch(new ResetForgotPasswordPage());
 
-    this.disabled$ = this.store.select(disabledSelector);
-    this.resetSucceeded$ = this.store.select(hasResetSelector);
-    this.resetError$ = this.store.select(resetErrorMessageSelector);
+    this.disabled$ = this.store.pipe(select(disabledSelector));
+    this.resetSucceeded$ = this.store.pipe(select(hasResetSelector));
+    this.resetError$ = this.store.pipe(select(resetErrorMessageSelector));
   }
 
   public resetAttempt(email: string): void {

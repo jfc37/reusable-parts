@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 import { Observable } from 'rxjs/Observable';
 import { filter, map } from 'rxjs/operators';
@@ -35,12 +35,12 @@ export class ViewBlocksPageComponent implements OnInit {
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit(): void {
-    this.loading$ = this.store.select(isLoadingSelector);
-    this.rows$ = this.store.select(blockRowsSelector).pipe(filter(isArrayNotEmpty));
-    this.hasNoBlocks$ = this.store.select(hasNoBlocksSelector);
-    this.showLoadMoreButton$ = this.store.select(hasMoreBlockPagesToRetrieveSelector);
+    this.loading$ = this.store.pipe(select(isLoadingSelector));
+    this.rows$ = this.store.pipe(select(blockRowsSelector).pipe(filter(isArrayNotEmpty)));
+    this.hasNoBlocks$ = this.store.pipe(select(hasNoBlocksSelector));
+    this.showLoadMoreButton$ = this.store.pipe(select(hasMoreBlockPagesToRetrieveSelector));
 
-    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.warningMessages$ = this.store.pipe(select(warningMessagesSelector));
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
     this.store.dispatch(new ResetBlockPages());
