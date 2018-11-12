@@ -14,6 +14,7 @@ addons:
 branches:
   only:
     - master
+    - feature/truepic-poc
 
 cache:
   directories:
@@ -29,11 +30,8 @@ before_script:
   - npm install -g firebase-tools http-server
 
 script:
-  - npm run prettier:warn
-  - ng lint
   - ng build --prod
-  - nohup http-server ./dist/apps/fullswing -p 8080 &
-  - npm run cypress:record:ci
+  - nohup http-server ./dist/apps/vallum/truepic-poc -p 8080 &
 
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+  - firebase deploy --token $FIREBASE_TOKEN_VALLUM_TRUEPIC
