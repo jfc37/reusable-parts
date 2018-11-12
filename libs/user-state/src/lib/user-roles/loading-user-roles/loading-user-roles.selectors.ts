@@ -13,7 +13,10 @@ import {
   allLoadingOrLoadedIdsSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns/src';
 
-const selector = createSelector(userFeatureSelector, state => state.loadingUserRoles);
+const selector = createSelector(
+  userFeatureSelector,
+  state => state.loadingUserRoles,
+);
 
 export const isLoadingAnyUserRolesSelector = isAnyLoadingSelectorFn(selector);
 export const hasAnyUserRoleLoadErroredSelector = hasAnyLoadErroredSelectorFn(selector);

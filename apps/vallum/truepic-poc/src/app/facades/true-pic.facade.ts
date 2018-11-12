@@ -22,15 +22,14 @@ export class TruePicFacade {
     of(null)
       .pipe(
         delay(2000),
-        tap(
-          () =>
-            id.length < 4
-              ? this.errorMessage$.next('Invalid id')
-              : this.results$.next({
-                  id,
-                  isVerified: true,
-                  score: 99.4,
-                }),
+        tap(() =>
+          id.length < 4
+            ? this.errorMessage$.next('Invalid id')
+            : this.results$.next({
+                id,
+                isVerified: true,
+                score: 99.4,
+              }),
         ),
         tap(() => this.loading$.next(false)),
       )

@@ -10,15 +10,14 @@ export class FirebaseUserService {
 
   public getUser(): Observable<{ displayName: string; avatarUrl: string; id: string }> {
     return this.af.authState.pipe(
-      map(
-        user =>
-          user
-            ? {
-                displayName: user.displayName || user.email,
-                avatarUrl: user.photoURL,
-                id: user.uid,
-              }
-            : null,
+      map(user =>
+        user
+          ? {
+              displayName: user.displayName || user.email,
+              avatarUrl: user.photoURL,
+              id: user.uid,
+            }
+          : null,
       ),
     );
   }

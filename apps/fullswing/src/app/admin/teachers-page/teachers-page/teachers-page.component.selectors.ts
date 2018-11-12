@@ -27,15 +27,19 @@ export const errorsSelector = createSelector(
   (...errors) => errors.filter(Boolean),
 );
 
-export const teacherModelsSelector = createSelector(teachersSelector, allUserRoleIdsRemoving, (teachers, removingIds) =>
-  teachers.map(teacher => ({
-    ...teacher,
-    disableActions: removingIds.includes(teacher.id),
-  })),
+export const teacherModelsSelector = createSelector(
+  teachersSelector,
+  allUserRoleIdsRemoving,
+  (teachers, removingIds) =>
+    teachers.map(teacher => ({
+      ...teacher,
+      disableActions: removingIds.includes(teacher.id),
+    })),
 );
 
-export const potentialTeacherModelsSelector = createSelector(nonTeachersSelector, users =>
-  users.map(user => ({ name: user.name, id: user.id })),
+export const potentialTeacherModelsSelector = createSelector(
+  nonTeachersSelector,
+  users => users.map(user => ({ name: user.name, id: user.id })),
 );
 
 export const addTeacherFailedMessageSelector = createSelector(

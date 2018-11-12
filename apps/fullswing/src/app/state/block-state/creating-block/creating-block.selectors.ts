@@ -8,7 +8,10 @@ import {
   hasCreatedSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns/src/lib/create-state/create.selector';
 
-const selector = createSelector(blockFeatureSelector, state => state.creatingBlock);
+const selector = createSelector(
+  blockFeatureSelector,
+  state => state.creatingBlock,
+);
 
 export const isCreatingBlockSelector = isCreatingSelectorFn(selector);
 

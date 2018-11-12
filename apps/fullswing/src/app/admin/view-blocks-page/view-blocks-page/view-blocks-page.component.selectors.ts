@@ -13,7 +13,10 @@ import {
   hasAnyBlockDeleteErroredSelector,
 } from '../../../state/block-state/deleting-block/deleting-block.selectors';
 
-export const isLoadingSelector = createSelector(hasNotLoadedAnyBlockPagesSelector, isAtleastOneArgumentsTruthy);
+export const isLoadingSelector = createSelector(
+  hasNotLoadedAnyBlockPagesSelector,
+  isAtleastOneArgumentsTruthy,
+);
 
 export const blockRowsSelector = createSelector(
   blocksForCurrentPagesSelector,

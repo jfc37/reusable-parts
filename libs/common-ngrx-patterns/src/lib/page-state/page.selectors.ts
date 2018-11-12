@@ -4,7 +4,10 @@ import { pageAdapter } from '@reusable-parts/common-ngrx-patterns/src/lib/page-s
 import { PageState } from '@reusable-parts/common-ngrx-patterns/src/lib/page-state/page.state';
 
 function allFn(selector) {
-  return createSelector(selector, pageAdapter.getSelectors().selectAll);
+  return createSelector(
+    selector,
+    pageAdapter.getSelectors().selectAll,
+  );
 }
 
 export function allPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
@@ -12,10 +15,13 @@ export function allPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
 }
 
 export function currentOrderAndDirectionSelectorFn(selector: MemoizedSelector<any, PageState>) {
-  return createSelector(selector, state => ({
-    orderBy: state.currentOrderBy,
-    sortDirection: state.currentSortDirection,
-  }));
+  return createSelector(
+    selector,
+    state => ({
+      orderBy: state.currentOrderBy,
+      sortDirection: state.currentSortDirection,
+    }),
+  );
 }
 
 function allCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
@@ -28,15 +34,24 @@ function allCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
 }
 
 export function hasReachedFinalPageSelectorFn(selector: MemoizedSelector<any, PageState>) {
-  return createSelector(allCurrentPagesSelectorFn(selector), pages => pages.some(page => page.key.isFinalPage));
+  return createSelector(
+    allCurrentPagesSelectorFn(selector),
+    pages => pages.some(page => page.key.isFinalPage),
+  );
 }
 
 export function hasMorePagesToRetrieveSelectorFn(selector: MemoizedSelector<any, PageState>) {
-  return createSelector(hasReachedFinalPageSelectorFn(selector), hasFinalPage => !hasFinalPage);
+  return createSelector(
+    hasReachedFinalPageSelectorFn(selector),
+    hasFinalPage => !hasFinalPage,
+  );
 }
 
 export function hasAnyCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
-  return createSelector(allCurrentPagesSelectorFn(selector), isArrayNotEmpty);
+  return createSelector(
+    allCurrentPagesSelectorFn(selector),
+    isArrayNotEmpty,
+  );
 }
 
 export function latestCurrentPageKeySelectorFn(selector: MemoizedSelector<any, PageState>) {
@@ -47,7 +62,8 @@ export function latestCurrentPageKeySelectorFn(selector: MemoizedSelector<any, P
 }
 
 export function dataIdsForCurrentPagesSelectorFn(selector: MemoizedSelector<any, PageState>) {
-  return createSelector(allCurrentPagesSelectorFn(selector), pages =>
-    pages.map(page => page.ids).reduce((accum, curr) => [...accum, ...curr], []),
+  return createSelector(
+    allCurrentPagesSelectorFn(selector),
+    pages => pages.map(page => page.ids).reduce((accum, curr) => [...accum, ...curr], []),
   );
 }

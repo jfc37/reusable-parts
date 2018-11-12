@@ -8,7 +8,10 @@ import {
   hasAnyDeletedSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns/src';
 
-const selector = createSelector(userFeatureSelector, state => state.removingUserRoles);
+const selector = createSelector(
+  userFeatureSelector,
+  state => state.removingUserRoles,
+);
 
 export const isRemovingAnyUserRolesSelector = isAnyDeletingSelectorFn(selector);
 export const hasAnyUserRoleRemoveErroredSelector = hasAnyDeleteErroredSelectorFn(selector);
