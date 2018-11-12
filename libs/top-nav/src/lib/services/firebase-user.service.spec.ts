@@ -9,10 +9,7 @@ describe('FirebaseUserService', () => {
     });
   });
 
-  it(
-    'should be created',
-    inject([FirebaseUserService], (service: FirebaseUserService) => {
-      expect(service).toBeTruthy();
-    }),
-  );
+  it('should be created', inject([FirebaseUserService], (service: FirebaseUserService) => {
+    expect(service).toBeTruthy();
+  }));
 });

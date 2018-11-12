@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AttemptRegister, ResetRegisterPage } from '@reusable-parts/register-page/src/lib/+state/register.actions';
 import { RegisterState } from '@reusable-parts/register-page/src/lib/+state/register.reducer';
 import { Observable } from 'rxjs/Observable';
@@ -34,9 +34,9 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new ResetRegisterPage());
 
-    this.registering$ = this.store.select(isRegisteringSelector);
-    this.registrationSucceeded$ = this.store.select(hasRegisteredSelector);
-    this.registrationError$ = this.store.select(registerErrorMessageSelector);
+    this.registering$ = this.store.pipe(select(isRegisteringSelector));
+    this.registrationSucceeded$ = this.store.pipe(select(hasRegisteredSelector));
+    this.registrationError$ = this.store.pipe(select(registerErrorMessageSelector));
 
     this.registrationSucceeded$
       .pipe(

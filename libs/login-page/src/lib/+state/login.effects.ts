@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import {
   emailAndPasswordSelector,
   isLoggingInSelector,
@@ -16,7 +16,7 @@ export class LoginEffects {
   @Effect()
   loginAttempt$ = this.actions$.pipe(
     ofType(LoginActionTypes.AttemptLogin),
-    withLatestFrom(this.store.select(isLoggingInSelector)),
+    withLatestFrom(this.store.pipe(select(isLoggingInSelector))),
     filter(([action, isLoggingIn]) => !isLoggingIn),
     mapTo(new LoginRequest()),
   );
@@ -24,11 +24,12 @@ export class LoginEffects {
   @Effect()
   loginRequest$ = this.actions$.pipe(
     ofType(LoginActionTypes.LoginRequest),
-    withLatestFrom(this.store.select(emailAndPasswordSelector)),
+    withLatestFrom(this.store.pipe(select(emailAndPasswordSelector))),
     exhaustMap(([action, { email, password, rememberMe }]) =>
-      this.loginService
-        .login(email, password, rememberMe)
-        .pipe(mapTo(new LoginSuccess()), catchError(error => of(new LoginFailure(error)))),
+      this.loginService.login(email, password, rememberMe).pipe(
+        mapTo(new LoginSuccess()),
+        catchError(error => of(new LoginFailure(error))),
+      ),
     ),
   );
 

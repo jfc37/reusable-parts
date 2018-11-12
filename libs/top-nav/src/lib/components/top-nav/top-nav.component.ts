@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { GetUser, LoggingOut } from '@reusable-parts/top-nav/src/lib/+state/top-nav.actions';
 import { TopNavState } from '@reusable-parts/top-nav/src/lib/+state/top-nav.reducer';
 import {
@@ -20,7 +20,8 @@ import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sid
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit, OnDestroy {
-  @Input() redirectRouteAfterLogout: string;
+  @Input()
+  redirectRouteAfterLogout: string;
 
   public showLoadingBar$: Observable<boolean>;
   public hasNavigation$: Observable<boolean>;
@@ -35,13 +36,13 @@ export class TopNavComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new GetUser());
 
-    this.loadingUser$ = this.store.select(isLoadingSelector);
-    this.displayName$ = this.store.select(displayNameSelector);
-    this.avatarUrl$ = this.store.select(avatarUrlSelector);
+    this.loadingUser$ = this.store.pipe(select(isLoadingSelector));
+    this.displayName$ = this.store.pipe(select(displayNameSelector));
+    this.avatarUrl$ = this.store.pipe(select(avatarUrlSelector));
 
     this.store
-      .select(hasLoggedOutSelector)
       .pipe(
+        select(hasLoggedOutSelector),
         takeUntil(this.onDestroy$),
         filter(Boolean),
         tap(() => this.router.navigate([this.redirectRouteAfterLogout])),

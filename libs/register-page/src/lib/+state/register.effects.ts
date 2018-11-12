@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import {
   accountSelector,
   isRegisteringSelector,
@@ -16,7 +16,7 @@ export class RegisterEffects {
   @Effect()
   registerAttempt$ = this.actions$.pipe(
     ofType(RegisterActionTypes.AttemptRegister),
-    withLatestFrom(this.store.select(isRegisteringSelector)),
+    withLatestFrom(this.store.pipe(select(isRegisteringSelector))),
     filter(([action, isRegistering]) => !isRegistering),
     mapTo(new RegisterRequest()),
   );
@@ -24,11 +24,12 @@ export class RegisterEffects {
   @Effect()
   registerRequest$ = this.actions$.pipe(
     ofType(RegisterActionTypes.RegisterRequest),
-    withLatestFrom(this.store.select(accountSelector)),
+    withLatestFrom(this.store.pipe(select(accountSelector))),
     exhaustMap(([action, { name, email, password }]) =>
-      this.registrationService
-        .register(name, email, password)
-        .pipe(mapTo(new RegisterSuccess()), catchError(error => of(new RegisterFailure(error)))),
+      this.registrationService.register(name, email, password).pipe(
+        mapTo(new RegisterSuccess()),
+        catchError(error => of(new RegisterFailure(error))),
+      ),
     ),
   );
 

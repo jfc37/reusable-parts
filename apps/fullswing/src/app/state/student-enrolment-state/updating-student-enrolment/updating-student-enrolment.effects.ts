@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { createPage, getNewKey } from '@reusable-parts/common-ngrx-patterns/src';
 import { exhaustMap, filter, map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators';
 import {
@@ -22,37 +22,32 @@ import { StudentEnrolment } from '../student-enrolment';
 @Injectable()
 export class UpdatingStudentEnrolmentsEffects {
   @Effect()
-  attemptReset$ = this.actions$
-    .ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt)
-    .pipe(map(() => new ResetUpdateStudentEnrolments()));
+  attemptReset$ = this.actions$.pipe(
+    ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt),
+    map(() => new ResetUpdateStudentEnrolments()),
+  );
 
   @Effect()
-  attemptUpdate$ = this.actions$
-    .ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt)
-    .pipe(
-      withLatestFrom(this.store.select(isUpdatingEnrolmentSelector)),
-      filter(([action, isAnyUpdating]) => !isAnyUpdating),
-      map(([action]) => new UpdateStudentEnrolmentsRequest(action.userId, action.blockId)),
-    );
+  attemptUpdate$ = this.actions$.pipe(
+    ofType<AttemptUpdateStudentEnrolments>(UpdatingStudentEnrolmentsActionTypes.Attempt),
+    withLatestFrom(this.store.pipe(select(isUpdatingEnrolmentSelector))),
+    filter(([action, isAnyUpdating]) => !isAnyUpdating),
+    map(([action]) => new UpdateStudentEnrolmentsRequest(action.userId, action.blockId)),
+  );
 
   @Effect()
-  update$ = this.actions$
-    .ofType<UpdateStudentEnrolmentsRequest>(UpdatingStudentEnrolmentsActionTypes.UpdateRequest)
-    .pipe(
-      exhaustMap(action =>
-        this.repository
-          .update(action.userId, action.blockId)
-          .pipe(
-            mergeMap(enrolmentIds => [
-              new AddStudentEnrolment(action.userId, action.blockId),
-              new UpdateStudentEnrolmentsSuccess(action.userId, action.blockId),
-            ]),
-            catchError(error =>
-              of(new UpdateStudentEnrolmentsFailure(action.userId, action.blockId, error || 'Error')),
-            ),
-          ),
+  update$ = this.actions$.pipe(
+    ofType<UpdateStudentEnrolmentsRequest>(UpdatingStudentEnrolmentsActionTypes.UpdateRequest),
+    exhaustMap(action =>
+      this.repository.update(action.userId, action.blockId).pipe(
+        mergeMap(enrolmentIds => [
+          new AddStudentEnrolment(action.userId, action.blockId),
+          new UpdateStudentEnrolmentsSuccess(action.userId, action.blockId),
+        ]),
+        catchError(error => of(new UpdateStudentEnrolmentsFailure(action.userId, action.blockId, error || 'Error'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

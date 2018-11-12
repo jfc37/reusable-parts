@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AttemptLogin, ResetLoginPage } from '@reusable-parts/login-page/src/lib/+state/login.actions';
 import { LoginState } from '@reusable-parts/login-page/src/lib/+state/login.reducer';
 import {
@@ -34,9 +34,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new ResetLoginPage());
 
-    this.isLoggingIn$ = this.store.select(isLoggingInSelector);
-    this.loginSucceeded$ = this.store.select(hasLoggedInSelector);
-    this.loginError$ = this.store.select(loginErrorMessageSelector);
+    this.isLoggingIn$ = this.store.pipe(select(isLoggingInSelector));
+    this.loginSucceeded$ = this.store.pipe(select(hasLoggedInSelector));
+    this.loginError$ = this.store.pipe(select(loginErrorMessageSelector));
 
     this.loginSucceeded$
       .pipe(

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, mapTo } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 const DEFAULT_LOGIN_ERROR_MESSAGE = 'Login failed';
@@ -31,6 +31,6 @@ export class FirebaseLoginService {
   }
 
   private authenticate(email: string, password: string): Observable<void> {
-    return fromPromise(this.af.auth.signInWithEmailAndPassword(email, password));
+    return fromPromise(this.af.auth.signInWithEmailAndPassword(email, password)).pipe(mapTo(null));
   }
 }

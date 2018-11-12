@@ -13,43 +13,51 @@ export class DumbForgotPasswordComponent implements OnInit, OnChanges {
    * Name of the website
    * Included in the welcome message
    */
-  @Input() public name: string;
+  @Input()
+  public name: string;
 
   /**
    * Description of the website
    * Displayed to the user if provided
    */
-  @Input() public description: string;
+  @Input()
+  public description: string;
 
   /**
    * Logo url
    */
-  @Input() public logoUrl: string;
+  @Input()
+  public logoUrl: string;
 
   /**
    * Route of login
    */
-  @Input() public loginRoute: string;
+  @Input()
+  public loginRoute: string;
 
   /**
    * Should form be disabled?
    */
-  @Input() public disabled: boolean;
+  @Input()
+  public disabled: boolean;
 
   /**
    * Did reset succeed?
    */
-  @Input() public resetSucceeded: boolean;
+  @Input()
+  public resetSucceeded: boolean;
 
   /**
    * Error message to display as a result of reset failure
    */
-  @Input() public resetError: string;
+  @Input()
+  public resetError: string;
 
   /**
    * Emitted when user attempts to reset with email address
    */
-  @Output() public resetAttempt = new EventEmitter<string>();
+  @Output()
+  public resetAttempt = new EventEmitter<string>();
 
   public form: FormGroup;
 

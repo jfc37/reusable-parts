@@ -14,43 +14,51 @@ export class DumbRegisterComponent implements OnInit, OnChanges {
    * Name of the website
    * Included in the welcome message
    */
-  @Input() public name: string;
+  @Input()
+  public name: string;
 
   /**
    * Description of the website
    * Displayed to the user if provided
    */
-  @Input() public description: string;
+  @Input()
+  public description: string;
 
   /**
    * Logo url
    */
-  @Input() public logoUrl: string;
+  @Input()
+  public logoUrl: string;
 
   /**
    * Is currently registering?
    */
-  @Input() public registering: boolean;
+  @Input()
+  public registering: boolean;
 
   /**
    * Did registration succeed?
    */
-  @Input() public registrationSucceeded: boolean;
+  @Input()
+  public registrationSucceeded: boolean;
 
   /**
    * Error message to display as a result of registration failure
    */
-  @Input() public registrationError: string;
+  @Input()
+  public registrationError: string;
 
   /**
    * Route for logging in
    */
-  @Input() public loginRoute: string;
+  @Input()
+  public loginRoute: string;
 
   /**
    * Emitted when user attempts to register with email and password
    */
-  @Output() public registrationAttempt = new EventEmitter<RegistrationAttempt>();
+  @Output()
+  public registrationAttempt = new EventEmitter<RegistrationAttempt>();
 
   public registerForm: FormGroup;
 

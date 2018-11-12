@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/lib/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
@@ -21,27 +21,23 @@ import {
 @Injectable()
 export class RemovingUserRolesEffects {
   @Effect()
-  attempt$ = this.actions$
-    .ofType<AttemptToRemoveUserRoles>(RemovingUserRolesActionTypes.RemoveAttempt)
-    .pipe(
-      withLatestFrom(this.store.select(allUserRoleIdsRemoving)),
-      filter(([action, removingIds]) => !removingIds.includes(action.id)),
-      map(([action]) => new RemoveUserRolesRequest(action.id, action.role)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptToRemoveUserRoles>(RemovingUserRolesActionTypes.RemoveAttempt),
+    withLatestFrom(this.store.pipe(select(allUserRoleIdsRemoving))),
+    filter(([action, removingIds]) => !removingIds.includes(action.id)),
+    map(([action]) => new RemoveUserRolesRequest(action.id, action.role)),
+  );
 
   @Effect()
-  remove$ = this.actions$
-    .ofType<RemoveUserRolesRequest>(RemovingUserRolesActionTypes.RemoveRequest)
-    .pipe(
-      mergeMap(action =>
-        this.repository
-          .removeUserRole(action.id, action.role)
-          .pipe(
-            mergeMap(roles => [new RemoveUserRole(action.id, action.role), new RemoveUserRolesSuccess(action.id)]),
-            catchError(err => of(new RemoveUserRolesFailure(action.id, err || 'Failed removing user roles'))),
-          ),
+  remove$ = this.actions$.pipe(
+    ofType<RemoveUserRolesRequest>(RemovingUserRolesActionTypes.RemoveRequest),
+    mergeMap(action =>
+      this.repository.removeUserRole(action.id, action.role).pipe(
+        mergeMap(roles => [new RemoveUserRole(action.id, action.role), new RemoveUserRolesSuccess(action.id)]),
+        catchError(err => of(new RemoveUserRolesFailure(action.id, err || 'Failed removing user roles'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

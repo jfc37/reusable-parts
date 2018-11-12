@@ -61,6 +61,9 @@
       ],
       "@undefined/welcome": [
         "libs/welcome/src/index.ts"
+      ],
+      "@app/libname": [
+        "libs/libname/src/index.ts"
       ]
     }
   },

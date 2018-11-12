@@ -3,45 +3,75 @@ import { DOCUMENT } from '@angular/common';
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
 import { NavigationEnd, Router } from '@angular/router';
 
-@Injectable()
+import { filter, take } from 'rxjs/operators';
+
+@Injectable({
+    providedIn: 'root'
+})
 export class FuseSplashScreenService
 {
-    splashScreenEl;
-    public player: AnimationPlayer;
+    splashScreenEl: any;
+    player: AnimationPlayer;
 
+    /**
+     * Constructor
+     *
+     * @param {AnimationBuilder} _animationBuilder
+     * @param _document
+     * @param {Router} _router
+     */
     constructor(
-        private animationBuilder: AnimationBuilder,
-        @Inject(DOCUMENT) private document: any,
-        private router: Router
+        private _animationBuilder: AnimationBuilder,
+        @Inject(DOCUMENT) private _document: any,
+        private _router: Router
     )
     {
+        // Initialize
+        this._init();
+    }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Private methods
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Initialize
+     *
+     * @private
+     */
+    private _init(): void
+    {
         // Get the splash screen element
-        this.splashScreenEl = this.document.body.querySelector('#fuse-splash-screen');
+        this.splashScreenEl = this._document.body.querySelector('#fuse-splash-screen');
 
         // If the splash screen element exists...
         if ( this.splashScreenEl )
         {
             // Hide it on the first NavigationEnd event
-            const hideOnLoad = this.router.events.subscribe((event) => {
-                    if ( event instanceof NavigationEnd )
-                    {
-                        setTimeout(() => {
-                            this.hide();
-
-                            // Unsubscribe from this event so it
-                            // won't get triggered again
-                            hideOnLoad.unsubscribe();
-                        }, 0);
-                    }
-                }
-            );
+            this._router.events
+                .pipe(
+                    filter((event => event instanceof NavigationEnd)),
+                    take(1)
+                )
+                .subscribe(() => {
+                    setTimeout(() => {
+                        this.hide();
+                    });
+                });
         }
     }
 
-    show()
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Show the splash screen
+     */
+    show(): void
     {
         this.player =
-            this.animationBuilder
+            this._animationBuilder
                 .build([
                     style({
                         opacity: '0',
@@ -55,10 +85,13 @@ export class FuseSplashScreenService
         }, 0);
     }
 
-    hide()
+    /**
+     * Hide the splash screen
+     */
+    hide(): void
     {
         this.player =
-            this.animationBuilder
+            this._animationBuilder
                 .build([
                     style({opacity: '1'}),
                     animate('400ms ease', style({

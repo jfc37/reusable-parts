@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { BlockFormModel } from '../components/block-form/block-form.component';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
 import { AttemptCreateBlock, ResetCreateBlock } from '../../../state/block-state/creating-block/creating-block.actions';
 import {
@@ -49,23 +49,31 @@ export class NewBlockPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetCreateBlock());
     this.store.dispatch(new GetUserRolesByRole(FullSwingRoleTypes.Teacher));
     this.store
-      .select(teacherIdsSelector)
-      .pipe(takeUntil(this.onDestroy$), mergeMap(a => a), tap(id => this.store.dispatch(new GetUser(id))))
+      .pipe(
+        select(teacherIdsSelector),
+        takeUntil(this.onDestroy$),
+        mergeMap(a => a),
+        tap(id => this.store.dispatch(new GetUser(id))),
+      )
       .subscribe();
 
     this.saveButtonText$ = of('Create');
-    this.disabled$ = this.store.select(isCreatingBlockSelector);
-    this.teachers$ = this.store.select(teacherOptionsSelector);
+    this.disabled$ = this.store.pipe(select(isCreatingBlockSelector));
+    this.teachers$ = this.store.pipe(select(teacherOptionsSelector));
 
-    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.warningMessages$ = this.store.pipe(select(warningMessagesSelector));
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
-    this.loading$ = this.store.select(loadingSelector);
-    this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
+    this.loading$ = this.store.pipe(select(loadingSelector));
+    this.errorMessages$ = this.store.pipe(select(fatalErrorMessagesSelector));
     this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
     this.store
-      .select(hasCreatedBlockSelector)
-      .pipe(takeUntil(this.onDestroy$), filter(Boolean), tap(() => this.router.navigateByUrl('/app/admin/blocks')))
+      .pipe(
+        select(hasCreatedBlockSelector),
+        takeUntil(this.onDestroy$),
+        filter(Boolean),
+        tap(() => this.router.navigateByUrl('/app/admin/blocks')),
+      )
       .subscribe();
   }
 

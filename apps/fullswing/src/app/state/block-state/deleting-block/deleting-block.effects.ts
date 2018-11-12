@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { addWeeks, format } from 'date-fns';
 import { of } from 'rxjs/observable/of';
 import { catchError, filter, map, mergeMap, withLatestFrom, delay } from 'rxjs/operators';
@@ -24,34 +24,31 @@ import { allDeletingBlockIdsSelector } from './deleting-block.selectors';
 @Injectable()
 export class DeletingBlockEffects {
   @Effect()
-  attempt$ = this.actions$
-    .ofType<AttemptDeleteBlock>(DeletingBlockActionTypes.Attempt)
-    .pipe(
-      filter(action => Boolean(action.id)),
-      withLatestFrom(this.store.select(allDeletingBlockIdsSelector)),
-      filter(([action, deletingIds]) => !deletingIds.includes(action.id)),
-      map(([action]) => new DeleteBlockRequest(action.id)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptDeleteBlock>(DeletingBlockActionTypes.Attempt),
+    filter(action => Boolean(action.id)),
+    withLatestFrom(this.store.pipe(select(allDeletingBlockIdsSelector))),
+    filter(([action, deletingIds]) => !deletingIds.includes(action.id)),
+    map(([action]) => new DeleteBlockRequest(action.id)),
+  );
 
   @Effect()
-  delete$ = this.actions$
-    .ofType<DeleteBlockRequest>(DeletingBlockActionTypes.DeleteRequest)
-    .pipe(
-      withLatestFrom(this.store.select(blockEntitiesSelector), (action, blocks) => blocks[action.id]),
-      mergeMap(block =>
-        this.repository
-          .delete(block)
-          .pipe(
-            mergeMap(() => [new RemoveBlock(block.id), new DeleteBlockSuccess(block.id)]),
-            catchError(err => of(new DeleteBlockFailure(block.id, err || 'Failed deleting block'))),
-          ),
+  delete$ = this.actions$.pipe(
+    ofType<DeleteBlockRequest>(DeletingBlockActionTypes.DeleteRequest),
+    withLatestFrom(this.store.pipe(select(blockEntitiesSelector)), (action, blocks) => blocks[action.id]),
+    mergeMap(block =>
+      this.repository.delete(block).pipe(
+        mergeMap(() => [new RemoveBlock(block.id), new DeleteBlockSuccess(block.id)]),
+        catchError(err => of(new DeleteBlockFailure(block.id, err || 'Failed deleting block'))),
       ),
-    );
+    ),
+  );
 
   @Effect()
-  deleteSuccessReset$ = this.actions$
-    .ofType<DeleteBlockSuccess>(DeletingBlockActionTypes.DeleteSuccess)
-    .pipe(map(() => new ResetDeleteBlock()));
+  deleteSuccessReset$ = this.actions$.pipe(
+    ofType<DeleteBlockSuccess>(DeletingBlockActionTypes.DeleteSuccess),
+    map(() => new ResetDeleteBlock()),
+  );
 
   constructor(
     private actions$: Actions,

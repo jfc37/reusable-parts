@@ -8,12 +8,17 @@ import { format } from 'date-fns';
   styleUrls: ['./block-form.component.scss'],
 })
 export class BlockFormComponent implements OnInit, OnChanges {
-  @Input() public block: BlockFormModel;
-  @Input() public teachers: TeacherModel[];
-  @Input() public disabled: boolean;
-  @Input() public saveButtonText: string;
+  @Input()
+  public block: BlockFormModel;
+  @Input()
+  public teachers: TeacherModel[];
+  @Input()
+  public disabled: boolean;
+  @Input()
+  public saveButtonText: string;
 
-  @Output() public save = new EventEmitter<BlockFormModel>();
+  @Output()
+  public save = new EventEmitter<BlockFormModel>();
 
   public form: FormGroup;
   public ngOnInit(): void {

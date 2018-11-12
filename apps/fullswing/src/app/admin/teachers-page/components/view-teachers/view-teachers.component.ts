@@ -7,9 +7,11 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewTeachersComponent {
-  @Input() public teachers: TeacherModel[];
+  @Input()
+  public teachers: TeacherModel[];
 
-  @Output() public remove = new EventEmitter<string>();
+  @Output()
+  public remove = new EventEmitter<string>();
 
   public displayedColumns = ['name', 'actions'];
 }

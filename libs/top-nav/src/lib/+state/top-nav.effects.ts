@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import {
   ResetCurrentUser,
@@ -13,25 +13,31 @@ import { Authenticated, LoggedOut, TopNavActionTypes, UnAuthenticated } from './
 @Injectable()
 export class TopNavEffects {
   @Effect()
-  getUser$: Observable<Action> = this.actions$
-    .ofType(TopNavActionTypes.GetUser)
-    .pipe(
-      switchMap(() => this.firebaseUser.getUser()),
-      filter(Boolean),
-      map(user => (user ? new Authenticated(user.displayName, user.avatarUrl, user.id) : new UnAuthenticated())),
-    );
+  getUser$: Observable<Action> = this.actions$.pipe(
+    ofType(TopNavActionTypes.GetUser),
+    switchMap(() => this.firebaseUser.getUser()),
+    filter(Boolean),
+    map(user => (user ? new Authenticated(user.displayName, user.avatarUrl, user.id) : new UnAuthenticated())),
+  );
 
   @Effect()
-  authenticated$: Observable<Action> = this.actions$
-    .ofType<Authenticated>(TopNavActionTypes.Authenticated)
-    .pipe(map(action => new SetCurrentUser(action.userId)));
+  authenticated$: Observable<Action> = this.actions$.pipe(
+    ofType<Authenticated>(TopNavActionTypes.Authenticated),
+    map(action => new SetCurrentUser(action.userId)),
+  );
 
   @Effect()
-  logOut$ = this.actions$
-    .ofType(TopNavActionTypes.LoggingOut)
-    .pipe(switchMap(() => this.firebaseUser.logout()), mapTo(new LoggedOut()));
+  logOut$ = this.actions$.pipe(
+    ofType(TopNavActionTypes.LoggingOut),
+    switchMap(() => this.firebaseUser.logout()),
+    mapTo(new LoggedOut()),
+  );
 
-  @Effect() loggedOut$ = this.actions$.ofType(TopNavActionTypes.LoggingOut).pipe(map(() => new ResetCurrentUser()));
+  @Effect()
+  loggedOut$ = this.actions$.pipe(
+    ofType(TopNavActionTypes.LoggingOut),
+    map(() => new ResetCurrentUser()),
+  );
 
   constructor(private actions$: Actions, private firebaseUser: FirebaseUserService) {}
 }

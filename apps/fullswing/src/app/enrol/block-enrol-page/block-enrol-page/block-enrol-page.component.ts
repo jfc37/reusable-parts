@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { BlockFeatureState } from '../../../state/block-state/block-feature.reducer';
 import { ResetBlockPages } from '../../../state/block-state/block-pages/block-pages.actions';
 import {
@@ -48,14 +48,14 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
   constructor(private store: Store<BlockFeatureState>) {}
 
   public ngOnInit() {
-    this.loading$ = this.store.select(isLoadingSelector);
-    this.errorMessages$ = this.store.select(fatalErrorMessagesSelector);
+    this.loading$ = this.store.pipe(select(isLoadingSelector));
+    this.errorMessages$ = this.store.pipe(select(fatalErrorMessagesSelector));
     this.hasError$ = this.errorMessages$.pipe(map(isArrayNotEmpty));
 
-    this.warningMessages$ = this.store.select(warningMessagesSelector);
+    this.warningMessages$ = this.store.pipe(select(warningMessagesSelector));
     this.hasWarnings$ = this.warningMessages$.pipe(map(isArrayNotEmpty));
 
-    this.cards$ = this.store.select(modelSelector);
+    this.cards$ = this.store.pipe(select(modelSelector));
     this.noAvailableBlocks$ = this.cards$.pipe(map(isArrayEmpty));
 
     this.store.dispatch(new ResetBlockPages());
@@ -65,8 +65,8 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetLoadStudentEnrolments());
     this.store.dispatch(new ResetUpdateStudentEnrolments());
     this.store
-      .select(currentUserIdSelector)
       .pipe(
+        select(currentUserIdSelector),
         takeUntil(this.onDestroy$),
         filter(Boolean),
         distinctUntilChanged(),
@@ -82,8 +82,8 @@ export class BlockEnrolPageComponent implements OnInit, OnDestroy {
 
   public enrol(blockId: string): void {
     this.store
-      .select(currentUserIdSelector)
       .pipe(
+        select(currentUserIdSelector),
         takeUntil(this.onDestroy$),
         filter(Boolean),
         take(1),

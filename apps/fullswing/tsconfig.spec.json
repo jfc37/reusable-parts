@@ -2,18 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/apps/fullswing",
-    "types": [
-      "jasmine",
-      "node"
-    ],
+    "module": "commonjs",
+    "types": ["jest", "node"],
     "module": "commonjs"
   },
-  "files": [
-    "src/test.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  "files": ["src/test-setup.ts", "src/polyfills.ts"],
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

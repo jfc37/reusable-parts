@@ -17,10 +17,13 @@ import { groupBy } from '@reusable-parts/common-functions/src';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlockGroupComponent implements OnChanges {
-  @Input() public title: string;
-  @Input() public blockCards: BlockCardModel[];
+  @Input()
+  public title: string;
+  @Input()
+  public blockCards: BlockCardModel[];
 
-  @Output() public enrol = new EventEmitter<string>();
+  @Output()
+  public enrol = new EventEmitter<string>();
 
   public groupedByTime: Array<BlockCardModel[]>;
 

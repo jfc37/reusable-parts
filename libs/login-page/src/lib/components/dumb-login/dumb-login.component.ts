@@ -14,48 +14,57 @@ export class DumbLoginComponent implements OnInit, OnChanges {
    * Name of the website
    * Included in the welcome message
    */
-  @Input() public name: string;
+  @Input()
+  public name: string;
 
   /**
    * Description of the website
    * Displayed to the user if provided
    */
-  @Input() public description: string;
+  @Input()
+  public description: string;
 
   /**
    * Logo url
    */
-  @Input() public logoUrl: string;
+  @Input()
+  public logoUrl: string;
 
   /**
    * Is logging in currently occuring?
    */
-  @Input() public loggingIn: boolean;
+  @Input()
+  public loggingIn: boolean;
 
   /**
    * Did login succeed?
    */
-  @Input() public loginSucceeded: boolean;
+  @Input()
+  public loginSucceeded: boolean;
 
   /**
    * Error message to display as a result of login failure
    */
-  @Input() public loginError: string;
+  @Input()
+  public loginError: string;
 
   /**
    * Route for account registration
    */
-  @Input() public registerRoute: string;
+  @Input()
+  public registerRoute: string;
 
   /**
    * Route for forgot password
    */
-  @Input() public forgotPasswordRoute: string;
+  @Input()
+  public forgotPasswordRoute: string;
 
   /**
    * Emitted when user attempts to login with email and password
    */
-  @Output() public loginAttempt = new EventEmitter<LoginAttempt>();
+  @Output()
+  public loginAttempt = new EventEmitter<LoginAttempt>();
 
   public loginForm: FormGroup;
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { FirebaseUsersService } from '@reusable-parts/user-state/src/lib/services/firebase-users.service';
 import { UserFeatureState } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 import { of } from 'rxjs/observable/of';
@@ -18,27 +18,23 @@ import { AddUserRole } from '@reusable-parts/user-state/src/lib/user-roles/user-
 @Injectable()
 export class UpdatingUserRolesEffects {
   @Effect()
-  attempt$ = this.actions$
-    .ofType<AttemptToUpdateUserRoles>(UpdatingUserRolesActionTypes.UpdateAttempt)
-    .pipe(
-      withLatestFrom(this.store.select(allUserRoleIdsUpdating)),
-      filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
-      map(([action]) => new UpdateUserRolesRequest(action.id, action.role)),
-    );
+  attempt$ = this.actions$.pipe(
+    ofType<AttemptToUpdateUserRoles>(UpdatingUserRolesActionTypes.UpdateAttempt),
+    withLatestFrom(this.store.pipe(select(allUserRoleIdsUpdating))),
+    filter(([action, updatingIds]) => !updatingIds.includes(action.id)),
+    map(([action]) => new UpdateUserRolesRequest(action.id, action.role)),
+  );
 
   @Effect()
-  update$ = this.actions$
-    .ofType<UpdateUserRolesRequest>(UpdatingUserRolesActionTypes.UpdateRequest)
-    .pipe(
-      exhaustMap(action =>
-        this.repository
-          .addUserRole(action.id, action.role)
-          .pipe(
-            mergeMap(roles => [new AddUserRole(action.id, action.role), new UpdateUserRolesSuccess(action.id)]),
-            catchError(err => of(new UpdateUserRolesFailure(action.id, err || 'Failed updating user roles'))),
-          ),
+  update$ = this.actions$.pipe(
+    ofType<UpdateUserRolesRequest>(UpdatingUserRolesActionTypes.UpdateRequest),
+    exhaustMap(action =>
+      this.repository.addUserRole(action.id, action.role).pipe(
+        mergeMap(roles => [new AddUserRole(action.id, action.role), new UpdateUserRolesSuccess(action.id)]),
+        catchError(err => of(new UpdateUserRolesFailure(action.id, err || 'Failed updating user roles'))),
       ),
-    );
+    ),
+  );
 
   constructor(
     private actions$: Actions,

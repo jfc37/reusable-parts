@@ -11,15 +11,18 @@ export class WelcomeComponent {
   /**
    * Name of the application being welcomed to
    */
-  @Input() public name: string;
+  @Input()
+  public name: string;
 
   /**
    * Description of the application
    */
-  @Input() public description: string;
+  @Input()
+  public description: string;
 
   /**
    * Logo url
    */
-  @Input() public logoUrl: string;
+  @Input()
+  public logoUrl: string;
 }

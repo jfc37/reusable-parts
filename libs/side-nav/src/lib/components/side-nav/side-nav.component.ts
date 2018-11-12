@@ -11,9 +11,12 @@ import { MenuItem } from '@reusable-parts/side-nav/src/lib/components/side-nav/s
   encapsulation: ViewEncapsulation.None,
 })
 export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() public menuItems: MenuItem[] = [];
-  @Input() public name: string;
-  @Input() public logoUrl: string;
+  @Input()
+  public menuItems: MenuItem[] = [];
+  @Input()
+  public name: string;
+  @Input()
+  public logoUrl: string;
 
   public folded: boolean;
   public sideBarClasses: any;
@@ -24,7 +27,7 @@ export class SideNavComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private fuseConfig: FuseConfigService) {}
 
   public ngOnInit(): void {
-    this.fuseConfig.onConfigChanged.pipe(takeUntil(this.onDestroy$)).subscribe(newSettings => {
+    this.fuseConfig.config.pipe(takeUntil(this.onDestroy$)).subscribe(newSettings => {
       this.folded = newSettings.layout.navigationFolded;
       this.sideBarClasses = newSettings.colorClasses.navbar;
     });

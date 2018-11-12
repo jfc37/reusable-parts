@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { catchError, filter, mapTo, switchMap, withLatestFrom, exhaustMap } from 'rxjs/operators';
 import { ResetActionTypes, ResetFailure, ResetRequest, ResetSuccess } from './reset.actions';
 import { ResetState } from './reset.reducer';
@@ -16,7 +16,7 @@ export class ResetEffects {
   @Effect()
   resetAttempt$ = this.actions$.pipe(
     ofType(ResetActionTypes.AttemptReset),
-    withLatestFrom(this.store.select(isResettingSelector)),
+    withLatestFrom(this.store.pipe(select(isResettingSelector))),
     filter(([action, isResetting]) => !isResetting),
     mapTo(new ResetRequest()),
   );
@@ -24,9 +24,12 @@ export class ResetEffects {
   @Effect()
   resetRequest$ = this.actions$.pipe(
     ofType(ResetActionTypes.ResetRequest),
-    withLatestFrom(this.store.select(emailResetSelector), (action, email) => email),
+    withLatestFrom(this.store.pipe(select(emailResetSelector)), (action, email) => email),
     exhaustMap(email =>
-      this.resetService.reset(email).pipe(mapTo(new ResetSuccess()), catchError(error => of(new ResetFailure(error)))),
+      this.resetService.reset(email).pipe(
+        mapTo(new ResetSuccess()),
+        catchError(error => of(new ResetFailure(error))),
+      ),
     ),
   );
 
