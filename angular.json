@@ -515,7 +515,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/vallum/truepic-poc/tsconfig.app.json", "apps/vallum/truepic-poc/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         },
         "test": {
@@ -524,33 +524,6 @@
             "jestConfig": "apps/vallum/truepic-poc/jest.config.js",
             "tsConfig": "apps/vallum/truepic-poc/tsconfig.spec.json",
             "setupFile": "apps/vallum/truepic-poc/src/test-setup.ts"
-          }
-        }
-      }
-    },
-    "vallum-truepic-poc-e2e": {
-      "root": "apps/vallum/truepic-poc-e2e",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/builders:cypress",
-          "options": {
-            "cypressConfig": "apps/vallum/truepic-poc-e2e/cypress.json",
-            "tsConfig": "apps/vallum/truepic-poc-e2e/tsconfig.e2e.json",
-            "devServerTarget": "vallum-truepic-poc:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "vallum-truepic-poc:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
