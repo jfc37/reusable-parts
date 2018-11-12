@@ -443,9 +443,120 @@
           }
         }
       }
+    },
+    "vallum-truepic-poc": {
+      "root": "apps/vallum/truepic-poc/",
+      "sourceRoot": "apps/vallum/truepic-poc/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/vallum/truepic-poc",
+            "index": "apps/vallum/truepic-poc/src/index.html",
+            "main": "apps/vallum/truepic-poc/src/main.ts",
+            "polyfills": "apps/vallum/truepic-poc/src/polyfills.ts",
+            "tsConfig": "apps/vallum/truepic-poc/tsconfig.app.json",
+            "assets": ["apps/vallum/truepic-poc/src/favicon.ico", "apps/vallum/truepic-poc/src/assets"],
+            "styles": ["apps/vallum/truepic-poc/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/vallum/truepic-poc/src/environments/environment.ts",
+                  "with": "apps/vallum/truepic-poc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "vallum-truepic-poc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "vallum-truepic-poc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "vallum-truepic-poc:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/vallum/truepic-poc/tsconfig.app.json", "apps/vallum/truepic-poc/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/vallum/truepic-poc/jest.config.js",
+            "tsConfig": "apps/vallum/truepic-poc/tsconfig.spec.json",
+            "setupFile": "apps/vallum/truepic-poc/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "vallum-truepic-poc-e2e": {
+      "root": "apps/vallum/truepic-poc-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/vallum/truepic-poc-e2e/cypress.json",
+            "tsConfig": "apps/vallum/truepic-poc-e2e/tsconfig.e2e.json",
+            "devServerTarget": "vallum-truepic-poc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "vallum-truepic-poc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "fullswing",
+  "defaultProject": "vallum-truepic-poc",
   "cli": {
     "warnings": {
       "typescriptMismatch": false
