@@ -11,4 +11,8 @@ export class HomeComponent {
   public login(): void {
     this.auth0.login();
   }
+
+  public logout(): void {
+    this.auth0.logout();
+  }
 }

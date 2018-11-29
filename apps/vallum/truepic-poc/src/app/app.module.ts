@@ -13,9 +13,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Auth0Module, AUTH0_CONFIG } from '@reusable-parts/auth0';
 import { environment } from '../environments/environment';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PictureDetailsComponent],
+  declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -26,6 +27,7 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(
       [
         { path: 'home', component: HomeComponent },
+        { path: 'callback', component: CallbackComponent },
         { path: 'picture-details', component: PictureDetailsComponent },
         { path: '', pathMatch: 'full', redirectTo: 'home' },
       ],
