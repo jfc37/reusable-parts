@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 
 @Component({
@@ -7,4 +7,6 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
   styleUrls: ['./simple-layout.component.scss'],
   animations: fuseAnimations,
 })
-export class SimpleLayoutComponent {}
+export class SimpleLayoutComponent {
+  @Input() public logoUrl;
+}

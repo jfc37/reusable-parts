@@ -1,3 +1,6 @@
+Deployed to:
+https://vallum-truepic.firebaseapp.com
+
 1. Open dummy vallum site
 2. Click on "use truepic"
 3. Tries to launch app or user installs it

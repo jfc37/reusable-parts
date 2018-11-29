@@ -1,11 +1,8 @@
 <div id="maintenance" fxLayout="column">
   <div id="maintenance-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
     <div id="maintenance-form" [@animate]="{ value: '*', params: { duration: '300ms', y: '100px' } }">
-      <div class="logo"><img src="assets/images/logos/vallum.png" /></div>
-
-      <div class="title"><ng-content select=".title"></ng-content></div>
-
-      <ng-content select=".main"></ng-content>
+      <div *ngIf="logoUrl" class="logo"><img [src]="logoUrl" /></div>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>
