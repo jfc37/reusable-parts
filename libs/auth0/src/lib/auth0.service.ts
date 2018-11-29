@@ -9,6 +9,7 @@ import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
   providedIn: 'root',
 })
 export class Auth0Service {
+  public userProfile: any;
   private auth0: auth0.WebAuth;
 
   constructor(@Inject(AUTH0_CONFIG) config: Auth0Config, private router: Router) {
@@ -51,6 +52,21 @@ export class Auth0Service {
     // access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
+  }
+
+  public getProfile(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 
   private setSession(authResult): void {
