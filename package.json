@@ -63,6 +63,7 @@
     "angular-calendar": "0.26.4",
     "angular-in-memory-web-api": "0.7.0",
     "angularfire2": "5.1.0",
+    "auth0-js": "9.8.2",
     "chart.js": "2.7.3",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.7",
