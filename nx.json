@@ -54,6 +54,9 @@
     },
     "vallum-truepic-poc": {
       "tags": []
+    },
+    "auth0": {
+      "tags": []
     }
   }
 }

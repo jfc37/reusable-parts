@@ -11,6 +11,8 @@ import { FuseSharedModule, FuseModule } from '@reusable-parts/@fuse';
 import { PictureDetailsComponent } from './picture-details/picture-details.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Auth0Module, AUTH0_CONFIG } from '@reusable-parts/auth0';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PictureDetailsComponent],
@@ -35,8 +37,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
     FuseModule.forRoot({}),
     FuseSharedModule,
+    Auth0Module,
   ],
-  providers: [],
+  providers: [{ provide: AUTH0_CONFIG, useValue: environment.auth0 }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

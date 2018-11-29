@@ -64,6 +64,9 @@
       ],
       "@app/libname": [
         "libs/libname/src/index.ts"
+      ],
+      "@app/auth0": [
+        "libs/auth0/src/index.ts"
       ]
     }
   },
