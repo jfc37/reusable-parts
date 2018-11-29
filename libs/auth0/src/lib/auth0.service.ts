@@ -37,13 +37,13 @@ export class Auth0Service {
     });
   }
 
-  public logout(): void {
+  public logout(redirectRoute: string): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/']);
+    this.router.navigate([redirectRoute]);
   }
 
   public isAuthenticated(): boolean {

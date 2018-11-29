@@ -14,9 +14,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Auth0Module, AUTH0_CONFIG } from '@reusable-parts/auth0';
 import { environment } from '../environments/environment';
 import { CallbackComponent } from './callback/callback.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent],
+  declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent, WelcomeComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -26,6 +27,7 @@ import { CallbackComponent } from './callback/callback.component';
     NxModule.forRoot(),
     RouterModule.forRoot(
       [
+        { path: 'welcome', component: WelcomeComponent },
         { path: 'home', component: HomeComponent },
         { path: 'callback', component: CallbackComponent },
         { path: 'picture-details', component: PictureDetailsComponent },
