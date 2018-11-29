@@ -11,7 +11,7 @@ import { FuseSharedModule, FuseModule } from '@reusable-parts/@fuse';
 import { PictureDetailsComponent } from './picture-details/picture-details.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Auth0Module, AUTH0_CONFIG } from '@reusable-parts/auth0';
+import { Auth0Module, AUTH0_CONFIG, AuthGuard } from '@reusable-parts/auth0';
 import { environment } from '../environments/environment';
 import { CallbackComponent } from './callback/callback.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -28,9 +28,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     RouterModule.forRoot(
       [
         { path: 'welcome', component: WelcomeComponent },
-        { path: 'home', component: HomeComponent },
+        { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
         { path: 'callback', component: CallbackComponent },
-        { path: 'picture-details', component: PictureDetailsComponent },
+        { path: 'picture-details', component: PictureDetailsComponent, canActivate: [AuthGuard] },
         { path: '', pathMatch: 'full', redirectTo: 'home' },
       ],
       { initialNavigation: 'enabled' },

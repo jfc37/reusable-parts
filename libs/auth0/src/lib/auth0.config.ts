@@ -5,6 +5,7 @@ export interface Auth0Config {
   clientId: string;
   domain: string;
   redirectUri: string;
+  unauthorisedRoute: string;
 }
 
 export const AUTH0_CONFIG = 'AUTH0_CONFIG';
