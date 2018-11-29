@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
 import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 (window as any).global = window;
 
@@ -10,6 +11,7 @@ import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
 })
 export class Auth0Service {
   public userProfile: any;
+  public userProfile$ = new ReplaySubject();
   private auth0: auth0.WebAuth;
 
   constructor(@Inject(AUTH0_CONFIG) config: Auth0Config, private router: Router) {
@@ -18,6 +20,7 @@ export class Auth0Service {
       domain: config.domain,
       responseType: 'token id_token',
       redirectUri: config.redirectUri,
+      scope: 'openid profile',
     });
   }
 
@@ -35,6 +38,7 @@ export class Auth0Service {
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
+      this.getProfile();
     });
   }
 
@@ -43,6 +47,8 @@ export class Auth0Service {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+
+    this.userProfile$.next(null);
     // Go back to the home route
     this.router.navigate([redirectRoute]);
   }
@@ -54,7 +60,8 @@ export class Auth0Service {
     return new Date().getTime() < expiresAt;
   }
 
-  public getProfile(cb): void {
+  private getProfile(): void {
+    console.error('getProfile');
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access token must exist to fetch profile');
@@ -62,10 +69,13 @@ export class Auth0Service {
 
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        self.userProfile = profile;
+      console.error('getProfile callback', err, profile);
+      if (err) {
+        throw new Error('Failed getting user info');
       }
-      cb(err, profile);
+      if (profile) {
+        self.userProfile$.next(profile);
+      }
     });
   }
 

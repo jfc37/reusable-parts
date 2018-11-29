@@ -1,4 +1,4 @@
 <jfc-simple-layout logoUrl="assets/images/logos/vallum.png">
-  <pre>{{ profile | json }}</pre>
+  <pre>{{ profile$ | async | json }}</pre>
   <router-outlet></router-outlet>
 </jfc-simple-layout>

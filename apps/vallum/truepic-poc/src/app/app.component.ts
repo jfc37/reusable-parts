@@ -7,18 +7,12 @@ import { Auth0Service } from '@reusable-parts/auth0';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public profile: any;
+  public profile$: any;
   constructor(private auth: Auth0Service) {}
 
   public ngOnInit(): void {
     this.auth.handleAuthentication('/home');
 
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
+    this.profile$ = this.auth.userProfile$;
   }
 }
