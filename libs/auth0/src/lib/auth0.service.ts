@@ -24,13 +24,13 @@ export class Auth0Service {
     this.auth0.authorize();
   }
 
-  public handleAuthentication(): void {
+  public handleAuthentication(redirectRoute: string): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.router.navigate(['/home']);
+        this.router.navigate([redirectRoute]);
       } else if (err) {
-        this.router.navigate(['/home']);
+        this.router.navigate([redirectRoute]);
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
