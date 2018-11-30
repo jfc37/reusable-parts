@@ -57,6 +57,9 @@
     },
     "auth0": {
       "tags": []
+    },
+    "serverless-snippets": {
+      "tags": []
     }
   }
 }

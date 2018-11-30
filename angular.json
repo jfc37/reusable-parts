@@ -672,6 +672,33 @@
           }
         }
       }
+    },
+    "serverless-snippets": {
+      "root": "libs/serverless-snippets",
+      "sourceRoot": "libs/serverless-snippets/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/serverless-snippets/tsconfig.lib.json",
+              "libs/serverless-snippets/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/serverless-snippets/jest.config.js",
+            "tsConfig": "libs/serverless-snippets/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",

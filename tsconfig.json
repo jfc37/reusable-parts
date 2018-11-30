@@ -67,6 +67,9 @@
       ],
       "@app/auth0": [
         "libs/auth0/src/index.ts"
+      ],
+      "@app/serverless-snippets": [
+        "libs/serverless-snippets/src/index.ts"
       ]
     }
   },
