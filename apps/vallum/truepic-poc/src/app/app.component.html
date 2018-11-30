@@ -1,4 +1,4 @@
 <jfc-simple-layout logoUrl="assets/images/logos/vallum.png">
-  <pre>{{ profile$ | async | json }}</pre>
+  <p *ngIf="(loggedInAs$ | async) as loggedInAs">Logged in as {{ loggedInAs }}</p>
   <router-outlet></router-outlet>
 </jfc-simple-layout>
