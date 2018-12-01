@@ -19,4 +19,8 @@ export class AppComponent implements OnInit {
       map(profile => profile && profile.name),
     );
   }
+
+  public logout(): void {
+    this.auth.logout('/welcome');
+  }
 }

@@ -1,4 +1,7 @@
 <jfc-simple-layout logoUrl="assets/images/logos/vallum.png">
-  <p *ngIf="(loggedInAs$ | async) as loggedInAs">Logged in as {{ loggedInAs }}</p>
+  <div *ngIf="(loggedInAs$ | async) as loggedInAs">
+    <span>Hello {{ loggedInAs }}</span>
+    <button mat-raised-button color="primary" aria-label="Logout" (click)="logout()">Log out</button>
+  </div>
   <router-outlet></router-outlet>
 </jfc-simple-layout>
