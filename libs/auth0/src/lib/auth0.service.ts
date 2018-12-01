@@ -3,6 +3,7 @@ import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
 import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Auth0Profile } from './models/profile';
 
 (window as any).global = window;
 
@@ -10,8 +11,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
   providedIn: 'root',
 })
 export class Auth0Service {
-  public userProfile: any;
-  public userProfile$ = new ReplaySubject();
+  public userProfile$ = new ReplaySubject<Auth0Profile>();
   private auth0: auth0.WebAuth;
 
   constructor(@Inject(AUTH0_CONFIG) config: Auth0Config, private router: Router) {
@@ -61,7 +61,6 @@ export class Auth0Service {
   }
 
   private getProfile(): void {
-    console.error('getProfile');
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access token must exist to fetch profile');
@@ -69,7 +68,6 @@ export class Auth0Service {
 
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
-      console.error('getProfile callback', err, profile);
       if (err) {
         throw new Error('Failed getting user info');
       }

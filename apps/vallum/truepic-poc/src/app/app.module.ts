@@ -15,6 +15,7 @@ import { Auth0Module, AUTH0_CONFIG, AuthGuard } from '@reusable-parts/auth0';
 import { environment } from '../environments/environment';
 import { CallbackComponent } from './callback/callback.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SearchCompaniesEntityModule } from '@reusable-parts/search-companies-entity';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent, WelcomeComponent],
@@ -42,6 +43,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FuseModule.forRoot({}),
     FuseSharedModule,
     Auth0Module,
+    SearchCompaniesEntityModule,
   ],
   providers: [{ provide: AUTH0_CONFIG, useValue: environment.auth0 }],
   bootstrap: [AppComponent],

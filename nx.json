@@ -60,6 +60,9 @@
     },
     "serverless-snippets": {
       "tags": []
+    },
+    "search-companies-entity": {
+      "tags": []
     }
   }
 }

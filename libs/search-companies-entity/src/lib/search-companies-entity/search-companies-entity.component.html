@@ -1,0 +1,31 @@
+<form name="searchForm" (submit)="search()" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="Director / Shareholder" [formControl]="searchFormControl" autocomplete="off" />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="accent"
+    class="submit-button"
+    type="submit"
+    aria-label="Search"
+    [disabled]="searchFormControl.invalid || (isSearching$ | async)"
+  >
+    Search
+  </button>
+
+  <table *ngIf="(results$ | async) as results">
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>NZBN</th>
+      <th>Entity Number</th>
+    </tr>
+    <tr *ngFor="let result of results">
+      <td><button (click)="selected(result)">Select</button></td>
+      <td>{{ result.name }}</td>
+      <td>{{ result.nzbn }}</td>
+      <td>{{ result.entityNumber }}</td>
+    </tr>
+  </table>
+</form>

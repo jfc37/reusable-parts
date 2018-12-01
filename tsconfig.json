@@ -70,6 +70,9 @@
       ],
       "@app/serverless-snippets": [
         "libs/serverless-snippets/src/index.ts"
+      ],
+      "@app/search-companies-entity": [
+        "libs/search-companies-entity/src/index.ts"
       ]
     }
   },

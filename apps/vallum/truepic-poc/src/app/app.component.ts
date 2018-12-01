@@ -14,10 +14,7 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.auth.handleAuthentication('/home');
 
-    this.loggedInAs$ = this.auth.userProfile$.pipe(
-      tap(console.error),
-      map(profile => profile && profile.name),
-    );
+    this.loggedInAs$ = this.auth.userProfile$.pipe(map(profile => profile && profile.name));
   }
 
   public logout(): void {
