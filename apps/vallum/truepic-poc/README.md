@@ -21,7 +21,7 @@ https://vallum-truepic.firebaseapp.com
 3. create Auth0 account
 4. create hook to create user in Copper on registration
    a. browse to Auth0 Hooks
-   b. create new Post User Registration hook
+   b. create new Pre User Registration hook
    c. add axios@0.18.0 NPM module
    d. copy everything in `create-user-in-copper.js`, replacing `X-PW-AccessToken` and `X-PW-UserEmail` values
 5. create (MBIE API account)['https://api.business.govt.nz/api/welcome']
