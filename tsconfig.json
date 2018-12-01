@@ -73,6 +73,9 @@
       ],
       "@app/search-companies-entity": [
         "libs/search-companies-entity/src/index.ts"
+      ],
+      "@app/nz-business-api": [
+        "libs/nz-business-api/src/index.ts"
       ]
     }
   },

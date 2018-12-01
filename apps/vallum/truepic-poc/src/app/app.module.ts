@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { CallbackComponent } from './callback/callback.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SearchCompaniesEntityModule } from '@reusable-parts/search-companies-entity';
+import { NZ_BUSINESS_API_CONFIG } from '@reusable-parts/nz-business-api';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent, WelcomeComponent],
@@ -45,7 +46,10 @@ import { SearchCompaniesEntityModule } from '@reusable-parts/search-companies-en
     Auth0Module,
     SearchCompaniesEntityModule,
   ],
-  providers: [{ provide: AUTH0_CONFIG, useValue: environment.auth0 }],
+  providers: [
+    { provide: AUTH0_CONFIG, useValue: environment.auth0 },
+    { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

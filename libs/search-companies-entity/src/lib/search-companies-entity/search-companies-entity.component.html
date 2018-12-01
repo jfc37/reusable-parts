@@ -1,3 +1,4 @@
+<jfc-alert *ngIf="(errorMessage$ | async) as error" type="error">{{ error }}</jfc-alert>
 <form name="searchForm" (submit)="search()" novalidate>
   <mat-form-field>
     <input matInput placeholder="Director / Shareholder" [formControl]="searchFormControl" autocomplete="off" />

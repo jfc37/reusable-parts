@@ -1,35 +1,34 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { CompaniesService } from '@reusable-parts/nz-business-api';
+import { CompanyEntity } from '../models/company-entity.model';
+import { SearchCompaniesFacade } from '../facades/search-companies.facade';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-search-companies-entity',
   templateUrl: './search-companies-entity.component.html',
   styleUrls: ['./search-companies-entity.component.css'],
 })
-export class SearchCompaniesEntityComponent {
-  @Output() public entitySelected = new EventEmitter<CompaniesEntity>();
-  public results$ = new ReplaySubject<CompaniesEntity[]>();
-  public isSearching$ = new ReplaySubject<boolean>();
+export class SearchCompaniesEntityComponent implements OnInit {
+  constructor(private facade: SearchCompaniesFacade) {}
+  @Output() public entitySelected = new EventEmitter<CompanyEntity>();
+  public results$: Observable<CompanyEntity[]>;
+  public isSearching$: Observable<boolean>;
+  public errorMessage$: Observable<string>;
   public searchFormControl = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+  public ngOnInit(): void {
+    this.results$ = this.facade.results$;
+    this.isSearching$ = this.facade.loading$;
+    this.errorMessage$ = this.facade.errorMessage$;
+  }
 
   public search(): void {
-    this.results$.next([
-      {
-        name: this.searchFormControl.value,
-        nzbn: 'ABC123',
-        entityNumber: 133552,
-      },
-    ]);
+    this.facade.search(this.searchFormControl.value);
   }
 
-  public selected(entity: CompaniesEntity): void {
+  public selected(entity: CompanyEntity): void {
     return this.entitySelected.emit(entity);
   }
-}
-
-export interface CompaniesEntity {
-  name: string;
-  nzbn: string;
-  entityNumber: number;
 }

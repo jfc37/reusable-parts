@@ -727,6 +727,34 @@
           }
         }
       }
+    },
+    "nz-business-api": {
+      "root": "libs/nz-business-api",
+      "sourceRoot": "libs/nz-business-api/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/nz-business-api/tsconfig.lib.json",
+              "libs/nz-business-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/nz-business-api/jest.config.js",
+            "tsConfig": "libs/nz-business-api/tsconfig.spec.json",
+            "setupFile": "libs/nz-business-api/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",
