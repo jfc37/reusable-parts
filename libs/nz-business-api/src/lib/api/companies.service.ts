@@ -3,7 +3,6 @@ import { CompaniesEntityRoleRequest } from '../models/companies-entity-role-requ
 import { CompaniesEntityRoleResponse } from '../models/companies-entity-role-response';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { delay } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NzBusinessApiConfig, NZ_BUSINESS_API_CONFIG } from '../nz-business-api.config';
 
@@ -18,11 +17,25 @@ export class CompaniesService {
    * https://api.business.govt.nz/api/apis/info?name=Companies-Entity-Role-Search&version=v2&provider=mbiecreator
    */
   public CompaniesEntityRoleSearch(request: CompaniesEntityRoleRequest): Observable<CompaniesEntityRoleResponse> {
-    return this.http.get<CompaniesEntityRoleResponse>(
-      `${this.config.host}/services/v2/companies-office/entity-roles/search?name=${request.name}`,
-      {
-        headers: new HttpHeaders().set('Authorization', `Bearer ${this.config.accessToken}`),
-      },
-    );
+    return of({
+      roles: [
+        {
+          name: 'John Brown',
+          entityNumber: 652452,
+          nzbn: 885432,
+        },
+        {
+          name: 'John Red',
+          entityNumber: 88743,
+          nzbn: 214355,
+        },
+      ],
+    } as CompaniesEntityRoleResponse);
+    // return this.http.get<CompaniesEntityRoleResponse>(
+    //   `${this.config.host}/services/v2/companies-office/entity-roles/search?name=${request.name}`,
+    //   {
+    //     headers: new HttpHeaders().set('Authorization', `Bearer ${this.config.accessToken}`),
+    //   },
+    // );
   }
 }
