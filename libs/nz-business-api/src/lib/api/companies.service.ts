@@ -23,11 +23,25 @@ export class CompaniesService {
           name: 'John Brown',
           entityNumber: 652452,
           nzbn: 885432,
+          firstName: 'John',
+          lastName: 'Brown',
+          middleName: 'Fraser',
+          physicalAddress: {
+            addressLines: ['50 Goldings street', 'Te Aro', 'Wellington'],
+            postCode: '6010',
+          },
         },
         {
           name: 'John Red',
           entityNumber: 88743,
           nzbn: 214355,
+          firstName: 'John',
+          lastName: 'Brown',
+          middleName: 'Red',
+          physicalAddress: {
+            addressLines: ['50 Goldings street', 'Te Aro', 'Wellington'],
+            postCode: '6010',
+          },
         },
       ],
     } as CompaniesEntityRoleResponse);

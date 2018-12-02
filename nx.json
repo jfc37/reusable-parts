@@ -66,6 +66,9 @@
     },
     "nz-business-api": {
       "tags": []
+    },
+    "copper-crm": {
+      "tags": []
     }
   }
 }

@@ -1,8 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { CompaniesService } from '@reusable-parts/nz-business-api';
-import { CompanyEntity } from '../models/company-entity.model';
+import { CompaniesService, CompanyEntityRole } from '@reusable-parts/nz-business-api';
 import { SearchCompaniesFacade } from '../facades/search-companies.facade';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,8 +12,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SearchCompaniesEntityComponent implements OnInit {
   constructor(private facade: SearchCompaniesFacade) {}
-  @Output() public entitySelected = new EventEmitter<CompanyEntity>();
-  public results$: Observable<CompanyEntity[]>;
+  @Output() public entitySelected = new EventEmitter<CompanyEntityRole>();
+  public results$: Observable<CompanyEntityRole[]>;
   public isSearching$: Observable<boolean>;
   public errorMessage$: Observable<string>;
   public searchFormControl = new FormControl(null, [Validators.required, Validators.minLength(2)]);
@@ -28,7 +27,7 @@ export class SearchCompaniesEntityComponent implements OnInit {
     this.facade.search(this.searchFormControl.value);
   }
 
-  public selected(entity: CompanyEntity): void {
+  public selected(entity: CompanyEntityRole): void {
     return this.entitySelected.emit(entity);
   }
 }

@@ -1,10 +1,10 @@
 import { PagedResponse } from './paged-response';
 
 export interface CompaniesEntityRoleResponse extends PagedResponse {
-  roles: Role[];
+  roles: CompanyEntityRole[];
 }
 
-interface Role {
+export interface CompanyEntityRole {
   middleName: string;
   lastName: string;
   appointmentDate: string;

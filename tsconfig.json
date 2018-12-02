@@ -76,6 +76,9 @@
       ],
       "@app/nz-business-api": [
         "libs/nz-business-api/src/index.ts"
+      ],
+      "@app/copper-crm": [
+        "libs/copper-crm/src/index.ts"
       ]
     }
   },

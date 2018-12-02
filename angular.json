@@ -755,6 +755,34 @@
           }
         }
       }
+    },
+    "copper-crm": {
+      "root": "libs/copper-crm",
+      "sourceRoot": "libs/copper-crm/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/copper-crm/tsconfig.lib.json",
+              "libs/copper-crm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/copper-crm/jest.config.js",
+            "tsConfig": "libs/copper-crm/tsconfig.spec.json",
+            "setupFile": "libs/copper-crm/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",

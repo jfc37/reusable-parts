@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { of } from 'rxjs/observable/of';
 import { delay, tap, map, catchError, take, finalize } from 'rxjs/operators';
-import { CompanyEntity } from '../models/company-entity.model';
-import { CompaniesService } from '@reusable-parts/nz-business-api';
-import { CompaniesEntityRoleResponse } from '@reusable-parts/nz-business-api/src/lib/models/companies-entity-role-response';
+import { CompaniesEntityRoleResponse, CompanyEntityRole, CompaniesService } from '@reusable-parts/nz-business-api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchCompaniesFacade {
   public loading$ = new ReplaySubject<boolean>();
-  public results$ = new ReplaySubject<CompanyEntity[]>();
+  public results$ = new ReplaySubject<CompanyEntityRole[]>();
   public errorMessage$ = new ReplaySubject<string>();
 
   constructor(private api: CompaniesService) {}
@@ -28,8 +26,7 @@ export class SearchCompaniesFacade {
       .CompaniesEntityRoleSearch({ name })
       .pipe(
         take(1),
-        map(responseToCompanyEntities),
-        tap(entities => this.results$.next(entities)),
+        tap(response => this.results$.next(response.roles)),
         catchError(err => {
           console.error('API failed', err);
           this.errorMessage$.next('Company register unavailable, please try again later');
@@ -45,15 +42,4 @@ export class SearchCompaniesFacade {
     this.results$.next(null);
     this.errorMessage$.next(null);
   }
-}
-
-function responseToCompanyEntities(response: CompaniesEntityRoleResponse): CompanyEntity[] {
-  return response.roles.map(
-    role =>
-      ({
-        entityNumber: role.entityNumber,
-        name: role.name,
-        nzbn: role.nzbn,
-      } as CompanyEntity),
-  );
 }

@@ -17,6 +17,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SearchCompaniesEntityModule } from '@reusable-parts/search-companies-entity';
 import { NZ_BUSINESS_API_CONFIG } from '@reusable-parts/nz-business-api';
+import { CopperCrmModule } from '@reusable-parts/copper-crm';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PictureDetailsComponent, CallbackComponent, WelcomeComponent],
@@ -45,6 +46,7 @@ import { NZ_BUSINESS_API_CONFIG } from '@reusable-parts/nz-business-api';
     FuseSharedModule,
     Auth0Module,
     SearchCompaniesEntityModule,
+    CopperCrmModule,
   ],
   providers: [
     { provide: AUTH0_CONFIG, useValue: environment.auth0 },
