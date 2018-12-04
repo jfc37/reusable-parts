@@ -20,7 +20,7 @@ export class Auth0Service {
       domain: config.domain,
       responseType: 'token id_token',
       redirectUri: config.redirectUri,
-      scope: 'openid profile',
+      scope: 'openid profile app_metadata',
     });
   }
 
@@ -68,6 +68,7 @@ export class Auth0Service {
 
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
+      console.error('xxx PROFILE', err, profile);
       if (err) {
         throw new Error('Failed getting user info');
       }
