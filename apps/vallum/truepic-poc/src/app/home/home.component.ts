@@ -36,4 +36,9 @@ export class HomeComponent implements OnInit {
       )
       .subscribe();
   }
+
+  public reset(): void {
+    this.selectedPerson = null;
+    this.personFacade.reset();
+  }
 }

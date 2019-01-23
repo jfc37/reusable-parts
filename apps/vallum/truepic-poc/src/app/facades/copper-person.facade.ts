@@ -20,7 +20,7 @@ export class CopperPersonFacade {
     }
 
     this.updating$.next(true);
-    this.clearPreviousAttempt();
+    this.reset();
 
     this.api
       .update(companyEntityToCopperPerson(copperId, person))
@@ -36,7 +36,7 @@ export class CopperPersonFacade {
       .subscribe();
   }
 
-  private clearPreviousAttempt() {
+  public reset(): void {
     this.updateSucceeded$.next(null);
     this.errorMessage$.next(null);
   }
