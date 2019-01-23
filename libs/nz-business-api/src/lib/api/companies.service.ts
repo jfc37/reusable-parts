@@ -18,7 +18,7 @@ export class CompaniesService {
    */
   public CompaniesEntityRoleSearch(request: CompaniesEntityRoleRequest): Observable<CompaniesEntityRoleResponse> {
     return this.http.get<CompaniesEntityRoleResponse>(
-      `${this.config.host}/services/v2/companies-office/entity-roles/search?page=0&page-size=1&name=${
+      `${this.config.host}/services/v2/companies-office/entity-roles/search?page=0&page-size=10&name=${
         request.name
       }&registered-only=false&role-type=DIR`,
       {

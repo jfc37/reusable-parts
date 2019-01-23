@@ -6,7 +6,7 @@
 
   <button
     mat-raised-button
-    color="accent"
+    color="primary"
     class="submit-button"
     type="submit"
     aria-label="Search"
@@ -25,7 +25,7 @@
       <th>Address</th>
     </tr>
     <tr *ngFor="let result of results">
-      <td><button (click)="selected(result)">Select</button></td>
+      <td><button (click)="selected(result)" mat-raised-button>Select</button></td>
       <td>{{ [result.firstName, result.middleName, result.lastName].join(' ') }}</td>
       <td>{{ result.associatedCompanyName }}</td>
       <td>{{ result.physicalAddress.addressLines.join(', ') }}</td>
