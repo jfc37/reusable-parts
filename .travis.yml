@@ -17,4 +17,4 @@ script:
   - nohup http-server ./dist/apps/vallum/truepic-poc -p 8080 &
 
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN_VALLUM_TRUEPIC
+  - firebase deploy --only hosting --token $FIREBASE_TOKEN_VALLUM_TRUEPIC
