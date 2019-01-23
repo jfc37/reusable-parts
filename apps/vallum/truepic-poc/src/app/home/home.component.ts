@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyEntityRole } from '@reusable-parts/nz-business-api';
 import { Observable } from 'rxjs/Observable';
 import { CopperPersonFacade } from '../facades/copper-person.facade';
+import { Auth0Service } from '@reusable-parts/auth0';
+import { environment } from '../../environments/environment';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +16,7 @@ export class HomeComponent implements OnInit {
   public updateError$: Observable<string>;
   public updateSucceed$: Observable<boolean>;
 
-  constructor(private personFacade: CopperPersonFacade) {}
+  constructor(private authService: Auth0Service, private personFacade: CopperPersonFacade) {}
   public ngOnInit(): void {
     this.isUpdating$ = this.personFacade.updating$;
     this.updateSucceed$ = this.personFacade.updateSucceeded$;
@@ -25,6 +28,12 @@ export class HomeComponent implements OnInit {
   }
 
   public update(): void {
-    this.personFacade.update(this.selectedPerson);
+    this.authService
+      .getAppData<number>(environment.domain, 'copperId')
+      .pipe(
+        take(1),
+        tap(copperId => this.personFacade.update(copperId, this.selectedPerson)),
+      )
+      .subscribe();
   }
 }

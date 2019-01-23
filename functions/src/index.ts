@@ -1,3 +1,5 @@
+// To deploy run: firebase deploy --only functions
+
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 import functions = require('firebase-functions');
 
@@ -5,7 +7,7 @@ import express = require('express');
 import cors = require('cors');
 
 import axios = require('axios');
-const URL = 'https://api.prosperworks.com/developer_api/v1/people/70198435';
+const URL = 'https://api.prosperworks.com/developer_api/v1/people/';
 const headers = getHeaders();
 
 // Start writing Firebase Functions
@@ -14,20 +16,20 @@ const headers = getHeaders();
 const put = (request, response) => {
   const copperUser = request.body;
   axios.default
-    .put(URL, copperUser, { headers })
+    .put(`${URL}${copperUser.id}`, copperUser, { headers })
     .then(res => {
       console.error('SUCCESS', res.data);
-      response.send(200);
+      response.send(200, {});
     })
     .catch(error => {
       console.error('FAILURE', error);
-      response.send(500);
+      response.send(500, error);
     });
 };
 
 function getHeaders() {
   return {
-    ['X-PW-AccessToken']: '3150a263724e1acaf24b651f7b68c661',
+    ['X-PW-AccessToken']: 'bc8a156103aa52f9fa85fa68b8a8cae5',
     ['X-PW-UserEmail']: 'joe.chapman3737@gmail.com',
     ['X-PW-Application']: 'developer_api',
   };

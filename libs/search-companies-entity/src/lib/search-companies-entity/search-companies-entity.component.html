@@ -14,19 +14,23 @@
   >
     Search
   </button>
+</form>
 
-  <table *ngIf="(results$ | async) as results">
+<div *ngIf="(results$ | async) as results">
+  <table *ngIf="results.length; else: noResults">
     <tr>
       <th></th>
       <th>Name</th>
-      <th>NZBN</th>
-      <th>Entity Number</th>
+      <th>Company</th>
+      <th>Address</th>
     </tr>
     <tr *ngFor="let result of results">
       <td><button (click)="selected(result)">Select</button></td>
-      <td>{{ result.name }}</td>
-      <td>{{ result.nzbn }}</td>
-      <td>{{ result.entityNumber }}</td>
+      <td>{{ [result.firstName, result.middleName, result.lastName].join(' ') }}</td>
+      <td>{{ result.associatedCompanyName }}</td>
+      <td>{{ result.physicalAddress.addressLines.join(', ') }}</td>
     </tr>
   </table>
-</form>
+
+  <ng-template #noResults> No results found </ng-template>
+</div>

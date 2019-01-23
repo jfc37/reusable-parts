@@ -17,39 +17,15 @@ export class CompaniesService {
    * https://api.business.govt.nz/api/apis/info?name=Companies-Entity-Role-Search&version=v2&provider=mbiecreator
    */
   public CompaniesEntityRoleSearch(request: CompaniesEntityRoleRequest): Observable<CompaniesEntityRoleResponse> {
-    return of({
-      roles: [
-        {
-          name: 'John Brown',
-          entityNumber: 652452,
-          nzbn: 885432,
-          firstName: 'John',
-          lastName: 'Brown',
-          middleName: 'Fraser',
-          physicalAddress: {
-            addressLines: ['50 Goldings street', 'Te Aro', 'Wellington'],
-            postCode: '6010',
-          },
-        },
-        {
-          name: 'John Red',
-          entityNumber: 88743,
-          nzbn: 214355,
-          firstName: 'John',
-          lastName: 'Brown',
-          middleName: 'Red',
-          physicalAddress: {
-            addressLines: ['50 Goldings street', 'Te Aro', 'Wellington'],
-            postCode: '6010',
-          },
-        },
-      ],
-    } as CompaniesEntityRoleResponse);
-    // return this.http.get<CompaniesEntityRoleResponse>(
-    //   `${this.config.host}/services/v2/companies-office/entity-roles/search?name=${request.name}`,
-    //   {
-    //     headers: new HttpHeaders().set('Authorization', `Bearer ${this.config.accessToken}`),
-    //   },
-    // );
+    return this.http.get<CompaniesEntityRoleResponse>(
+      `${this.config.host}/services/v2/companies-office/entity-roles/search?page=0&page-size=1&name=${
+        request.name
+      }&registered-only=false&role-type=DIR`,
+      {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${this.config.accessToken}`)
+          .set('Accept', 'application/json'),
+      },
+    );
   }
 }

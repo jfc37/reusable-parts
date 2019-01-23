@@ -24,10 +24,12 @@ export class SearchCompaniesEntityComponent implements OnInit {
   }
 
   public search(): void {
+    console.error('xxx SEARCH CLICKED');
     this.facade.search(this.searchFormControl.value);
   }
 
   public selected(entity: CompanyEntityRole): void {
+    console.error('xxx SELECTED CLICKED');
     return this.entitySelected.emit(entity);
   }
 }

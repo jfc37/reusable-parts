@@ -57,7 +57,7 @@ function getCopperUser(user) {
 
 function getHeaders() {
   return {
-    ['X-PW-AccessToken']: '3150a263724e1acaf24b651f7b68c661',
+    ['X-PW-AccessToken']: 'bc8a156103aa52f9fa85fa68b8a8cae5',
     ['X-PW-UserEmail']: 'joe.chapman3737@gmail.com',
     ['X-PW-Application']: 'developer_api',
   };

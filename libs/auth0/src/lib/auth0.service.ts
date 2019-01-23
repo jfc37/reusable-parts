@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Auth0Profile } from './models/profile';
+import { Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 
 (window as any).global = window;
 
@@ -22,6 +24,14 @@ export class Auth0Service {
       redirectUri: config.redirectUri,
       scope: 'openid profile app_metadata',
     });
+  }
+
+  public getAppData<T>(namespace: string, prop: string): Observable<T> {
+    return this.userProfile$.pipe(
+      tap(console.error.bind(null, 'xxx')),
+      filter(Boolean),
+      map(profile => profile[`${namespace}app_metadata`][prop]),
+    );
   }
 
   public login(): void {
@@ -68,11 +78,11 @@ export class Auth0Service {
 
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
-      console.error('xxx PROFILE', err, profile);
       if (err) {
         throw new Error('Failed getting user info');
       }
       if (profile) {
+        console.error('PROFILE', profile);
         self.userProfile$.next(profile);
       }
     });

@@ -14,7 +14,7 @@ export class CopperPersonFacade {
   public updateSucceeded$ = new ReplaySubject<any>();
   public errorMessage$ = new ReplaySubject<string>();
 
-  public update(person: CompanyEntityRole): void {
+  public update(copperId: number, person: CompanyEntityRole): void {
     if (!person) {
       return;
     }
@@ -23,7 +23,7 @@ export class CopperPersonFacade {
     this.clearPreviousAttempt();
 
     this.api
-      .update(companyEntityToCopperPerson(person))
+      .update(companyEntityToCopperPerson(copperId, person))
       .pipe(
         tap(() => this.updateSucceeded$.next(true)),
         catchError(err => {
@@ -42,12 +42,17 @@ export class CopperPersonFacade {
   }
 }
 
-function companyEntityToCopperPerson(entity: CompanyEntityRole): Partial<CopperPerson> {
+function companyEntityToCopperPerson(id: number, entity: CompanyEntityRole): Partial<CopperPerson> {
   return {
-    name: entity.name,
+    id,
+    first_name: entity.firstName,
+    middle_name: entity.middleName,
+    last_name: entity.lastName,
+    company_name: entity.associatedCompanyName,
     address: {
-      street: entity.physicalAddress.addressLines[0],
+      street: entity.physicalAddress.addressLines.join(', '),
       postal_code: entity.physicalAddress.postCode,
+      country: entity.physicalAddress.countryCode,
     } as CopperAddress,
   };
 }

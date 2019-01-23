@@ -5,23 +5,22 @@ export interface CompaniesEntityRoleResponse extends PagedResponse {
 }
 
 export interface CompanyEntityRole {
+  firstName: string;
   middleName: string;
   lastName: string;
-  appointmentDate: string;
+  roleType: string;
+  status: string;
+  associatedCompanyName: string;
   associatedCompanyNumber: string;
   associatedCompanyNzbn: number;
   associatedCompanyStatusCode: string;
-  status: string;
+  appointmentDate: string;
   resignationDate: string;
-  name: string;
   nzbn: number;
   entityNumber: number;
   historicNames: string[];
   shareholdings: Shareholding[];
-  roleType: string;
   physicalAddress: Address;
-  firstName: string;
-  associatedCompanyName: string;
 }
 
 interface Shareholding {

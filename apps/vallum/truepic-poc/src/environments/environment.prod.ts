@@ -2,6 +2,7 @@ import { IEnvironment } from './environment.interface';
 
 export const environment: IEnvironment = {
   production: true,
+  domain: 'http://localhost:4200/',
 
   auth0: {
     clientId: '9hW9Hc2RJqT2RL1QWyI-IUvuTeayrYS2',
@@ -11,7 +12,7 @@ export const environment: IEnvironment = {
   },
 
   nzBusinessApi: {
-    accessToken: '11a3aff7b0366c3f60d321a1ea1f86a9',
+    accessToken: '37f5e6f118ae84d804f198959b29e450',
     host: 'https://sandbox.api.business.govt.nz',
   },
 };

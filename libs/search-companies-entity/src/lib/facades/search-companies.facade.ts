@@ -26,6 +26,7 @@ export class SearchCompaniesFacade {
       .CompaniesEntityRoleSearch({ name })
       .pipe(
         take(1),
+        tap(console.error.bind(null, 'xxx RESPONSE')),
         tap(response => this.results$.next(response.roles)),
         catchError(err => {
           console.error('API failed', err);
