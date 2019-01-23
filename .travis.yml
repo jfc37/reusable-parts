@@ -1,25 +1,20 @@
 language: node_js
 node_js:
-  - "8"
+  - '8'
 dist: trusty
 sudo: false
 
 addons:
   apt:
     sources:
-    - google-chrome
+      - google-chrome
     packages:
-    - google-chrome-stable
+      - google-chrome-stable
 
 branches:
   only:
     - master
     - feature/truepic-poc
-
-cache:
-  directories:
-    - ~/.npm
-    - node_modules
 
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
