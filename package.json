@@ -96,7 +96,7 @@
     "@bahmutov/add-typescript-to-cypress": "2.0.0",
     "@ngrx/schematics": "6.1.2",
     "@nrwl/builders": "7.0.2",
-    "@nrwl/schematics": "7.0.2",
+    "@nrwl/schematics": "7.5.0",
     "@types/auth0-js": "^8.11.7",
     "@types/chai": "4.1.7",
     "@types/chai-jquery": "1.1.38",
