@@ -16,13 +16,8 @@
             "main": "apps/fullswing/src/main.ts",
             "tsConfig": "apps/fullswing/tsconfig.app.json",
             "polyfills": "apps/fullswing/src/polyfills.ts",
-            "assets": [
-              "apps/fullswing/src/assets",
-              "apps/fullswing/src/favicon.ico"
-            ],
-            "styles": [
-              "apps/fullswing/src/styles.scss"
-            ],
+            "assets": ["apps/fullswing/src/assets", "apps/fullswing/src/favicon.ico"],
+            "styles": ["apps/fullswing/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -74,14 +69,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/fullswing/tsconfig.app.json",
-              "apps/fullswing/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["apps/fullswing/tsconfig.app.json", "apps/fullswing/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -103,14 +92,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common-config/tsconfig.lib.json",
-              "libs/common-config/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/common-config/tsconfig.lib.json", "libs/common-config/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -132,14 +115,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common-functions/tsconfig.lib.json",
-              "libs/common-functions/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/common-functions/tsconfig.lib.json", "libs/common-functions/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -161,14 +138,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common-ngrx-patterns/tsconfig.lib.json",
-              "libs/common-ngrx-patterns/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/common-ngrx-patterns/tsconfig.lib.json", "libs/common-ngrx-patterns/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -190,14 +161,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common-pwa-parts/tsconfig.lib.json",
-              "libs/common-pwa-parts/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/common-pwa-parts/tsconfig.lib.json", "libs/common-pwa-parts/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -219,14 +184,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common-ui-components/tsconfig.lib.json",
-              "libs/common-ui-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/common-ui-components/tsconfig.lib.json", "libs/common-ui-components/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -248,14 +207,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/forgot-password-page/tsconfig.lib.json",
-              "libs/forgot-password-page/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/forgot-password-page/tsconfig.lib.json", "libs/forgot-password-page/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -277,14 +230,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/guards/tsconfig.lib.json",
-              "libs/guards/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/guards/tsconfig.lib.json", "libs/guards/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -306,14 +253,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/login-page/tsconfig.lib.json",
-              "libs/login-page/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/login-page/tsconfig.lib.json", "libs/login-page/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -335,14 +276,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/main-content/tsconfig.lib.json",
-              "libs/main-content/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/main-content/tsconfig.lib.json", "libs/main-content/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -364,14 +299,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/register/tsconfig.lib.json",
-              "libs/register/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/register/tsconfig.lib.json", "libs/register/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -393,14 +322,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/register-page/tsconfig.lib.json",
-              "libs/register-page/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/register-page/tsconfig.lib.json", "libs/register-page/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -422,14 +345,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/side-nav/tsconfig.lib.json",
-              "libs/side-nav/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/side-nav/tsconfig.lib.json", "libs/side-nav/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -451,14 +368,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/top-nav/tsconfig.lib.json",
-              "libs/top-nav/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/top-nav/tsconfig.lib.json", "libs/top-nav/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -480,14 +391,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/user-state/tsconfig.lib.json",
-              "libs/user-state/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/user-state/tsconfig.lib.json", "libs/user-state/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -509,14 +414,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/welcome/tsconfig.lib.json",
-              "libs/welcome/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["libs/welcome/tsconfig.lib.json", "libs/welcome/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         }
       },
@@ -531,13 +430,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/libname/tsconfig.lib.json",
-              "libs/libname/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/libname/tsconfig.lib.json", "libs/libname/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -569,13 +463,8 @@
             "main": "apps/vallum/truepic-poc/src/main.ts",
             "polyfills": "apps/vallum/truepic-poc/src/polyfills.ts",
             "tsConfig": "apps/vallum/truepic-poc/tsconfig.app.json",
-            "assets": [
-              "apps/vallum/truepic-poc/src/favicon.ico",
-              "apps/vallum/truepic-poc/src/assets"
-            ],
-            "styles": [
-              "apps/vallum/truepic-poc/src/styles.scss"
-            ],
+            "assets": ["apps/vallum/truepic-poc/src/favicon.ico", "apps/vallum/truepic-poc/src/assets"],
+            "styles": ["apps/vallum/truepic-poc/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -625,14 +514,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/vallum/truepic-poc/tsconfig.app.json",
-              "apps/vallum/truepic-poc/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/@fuse/**"
-            ]
+            "tsConfig": ["apps/vallum/truepic-poc/tsconfig.app.json", "apps/vallum/truepic-poc/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         },
         "test": {
@@ -654,13 +537,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/auth0/tsconfig.lib.json",
-              "libs/auth0/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/auth0/tsconfig.lib.json", "libs/auth0/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -682,13 +560,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/serverless-snippets/tsconfig.lib.json",
-              "libs/serverless-snippets/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/serverless-snippets/tsconfig.lib.json", "libs/serverless-snippets/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -713,9 +586,7 @@
               "libs/search-companies-entity/tsconfig.lib.json",
               "libs/search-companies-entity/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         },
         "test": {
@@ -737,13 +608,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/nz-business-api/tsconfig.lib.json",
-              "libs/nz-business-api/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/nz-business-api/tsconfig.lib.json", "libs/nz-business-api/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -765,13 +631,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/copper-crm/tsconfig.lib.json",
-              "libs/copper-crm/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/copper-crm/tsconfig.lib.json", "libs/copper-crm/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
