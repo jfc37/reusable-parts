@@ -16,7 +16,7 @@ export class Auth0Service {
   public userProfile$ = new ReplaySubject<Auth0Profile>();
   private auth0: auth0.WebAuth;
 
-  constructor(@Inject(AUTH0_CONFIG) config: Auth0Config, private router: Router) {
+  constructor(@Inject(AUTH0_CONFIG) private config: Auth0Config, private router: Router) {
     this.auth0 = new auth0.WebAuth({
       clientID: config.clientId,
       domain: config.domain,
@@ -52,15 +52,15 @@ export class Auth0Service {
     });
   }
 
-  public logout(redirectRoute: string): void {
+  public logout(): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
 
     this.userProfile$.next(null);
-    // Go back to the home route
-    this.router.navigate([redirectRoute]);
+
+    this.auth0.logout({ returnTo: this.config.logoutRedirectUri });
   }
 
   public isAuthenticated(): boolean {

@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   public logout(): void {
-    this.auth.logout('/welcome');
+    this.auth.logout();
   }
 }

@@ -5,6 +5,7 @@ export interface Auth0Config {
   clientId: string;
   domain: string;
   redirectUri: string;
+  logoutRedirectUri: string;
   unauthorisedRoute: string;
 }
 
