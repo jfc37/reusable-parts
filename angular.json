@@ -644,6 +644,41 @@
           }
         }
       }
+    },
+    "chat-components": {
+      "root": "libs/chat-components",
+      "sourceRoot": "libs/chat-components/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/chat-components/tsconfig.lib.json",
+            "project": "libs/chat-components/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/chat-components/tsconfig.lib.json", "libs/chat-components/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/chat-components/jest.config.js",
+            "tsConfig": "libs/chat-components/tsconfig.spec.json",
+            "setupFile": "libs/chat-components/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "sass"
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",
