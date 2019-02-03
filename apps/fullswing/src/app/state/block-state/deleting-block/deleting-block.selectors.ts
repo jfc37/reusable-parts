@@ -2,7 +2,10 @@ import { createSelector } from '@ngrx/store';
 import { allDeletingIdsSelectorFn, hasAnyDeleteErroredSelectorFn } from '@reusable-parts/common-ngrx-patterns/src';
 import { blockFeatureSelector } from '../block-feature.reducer';
 
-const selector = createSelector(blockFeatureSelector, state => state.deletingBlocks);
+const selector = createSelector(
+  blockFeatureSelector,
+  state => state.deletingBlocks,
+);
 
 export const allDeletingBlockIdsSelector = allDeletingIdsSelectorFn(selector);
 

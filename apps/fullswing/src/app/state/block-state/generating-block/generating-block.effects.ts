@@ -51,10 +51,12 @@ export class GeneratingBlockEffects {
   generateSuccess$ = this.actions$.pipe(
     ofType<GenerateBlockSuccess>(GeneratingBlockActionTypes.GenerateSuccess),
     withLatestFrom(this.store.pipe(select(allBlockPagesSelector)), (action, pages) =>
-      pages.filter(page => page.ids.includes(action.id)).map(page => ({
-        ...page,
-        ids: [...page.ids, action.newBlockId],
-      })),
+      pages
+        .filter(page => page.ids.includes(action.id))
+        .map(page => ({
+          ...page,
+          ids: [...page.ids, action.newBlockId],
+        })),
     ),
     map(updatedPages => new SetBlockPage(...updatedPages)),
   );

@@ -3,10 +3,22 @@ import { ResetData } from '@reusable-parts/forgot-password-page/src/lib/+state/r
 
 const resetFeatureSelector = createFeatureSelector<ResetData>('forgotPassword');
 
-export const isResettingSelector = createSelector(resetFeatureSelector, state => state.isResetting);
+export const isResettingSelector = createSelector(
+  resetFeatureSelector,
+  state => state.isResetting,
+);
 
-export const hasResetSelector = createSelector(resetFeatureSelector, state => state.hasReset);
+export const hasResetSelector = createSelector(
+  resetFeatureSelector,
+  state => state.hasReset,
+);
 
-export const emailResetSelector = createSelector(resetFeatureSelector, state => state.email);
+export const emailResetSelector = createSelector(
+  resetFeatureSelector,
+  state => state.email,
+);
 
-export const resetErrorMessageSelector = createSelector(resetFeatureSelector, state => state.resetErrorMessage);
+export const resetErrorMessageSelector = createSelector(
+  resetFeatureSelector,
+  state => state.resetErrorMessage,
+);

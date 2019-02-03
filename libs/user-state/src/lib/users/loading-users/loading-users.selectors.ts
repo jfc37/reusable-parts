@@ -13,7 +13,10 @@ import {
 } from '@reusable-parts/common-ngrx-patterns/src';
 import { userFeatureSelector } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 
-const selector = createSelector(userFeatureSelector, state => state.loadingUsers);
+const selector = createSelector(
+  userFeatureSelector,
+  state => state.loadingUsers,
+);
 
 export const isLoadingAnyUsersSelector = isAnyLoadingSelectorFn(selector);
 export const hasAnyUserLoadErroredSelector = hasAnyLoadErroredSelectorFn(selector);

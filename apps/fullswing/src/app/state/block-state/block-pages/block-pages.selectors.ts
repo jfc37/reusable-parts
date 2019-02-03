@@ -10,7 +10,10 @@ import {
   allPagesSelectorFn,
 } from '@reusable-parts/common-ngrx-patterns/src';
 
-const selector = createSelector(blockFeatureSelector, state => state.blockPages);
+const selector = createSelector(
+  blockFeatureSelector,
+  state => state.blockPages,
+);
 
 export const allBlockPagesSelector = allPagesSelectorFn(selector);
 

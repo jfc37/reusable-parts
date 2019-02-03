@@ -5,10 +5,12 @@ import { MatProgressSpinnerModule, MatIconModule } from '@angular/material';
 import { FuseSharedModule } from '@reusable-parts/@fuse';
 import { AlertComponent } from './components/alert/alert.component';
 import { ElevateOnHoverDirective } from './directives/elevate-on-hover.directive';
+import { SimpleLayoutComponent } from './components/simple-layout/simple-layout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule, FuseSharedModule],
-  declarations: [LoaderComponent, AlertComponent, ElevateOnHoverDirective],
-  exports: [LoaderComponent, AlertComponent, ElevateOnHoverDirective],
+  imports: [CommonModule, BrowserAnimationsModule, MatProgressSpinnerModule, MatIconModule, FuseSharedModule],
+  declarations: [LoaderComponent, AlertComponent, ElevateOnHoverDirective, SimpleLayoutComponent],
+  exports: [LoaderComponent, AlertComponent, ElevateOnHoverDirective, SimpleLayoutComponent],
 })
 export class CommonUiComponentsModule {}

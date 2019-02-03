@@ -16,8 +16,9 @@ export const nonTeachersSelector = allUsersWithoutRoleFactory(FullSwingRoleTypes
 
 export const teacherIdsSelector = userIdsWithRoleSelectorFactory(FullSwingRoleTypes.Teacher);
 
-export const teacherOptionsSelector = createSelector(teachersSelector, teachers =>
-  teachers.map(teacher => ({ label: teacher.name, value: teacher.id })),
+export const teacherOptionsSelector = createSelector(
+  teachersSelector,
+  teachers => teachers.map(teacher => ({ label: teacher.name, value: teacher.id })),
 );
 
 export const isLoadingTeachersSelector = isLoadingUserRolesSelectorFn(FullSwingRoleTypes.Teacher);

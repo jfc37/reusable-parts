@@ -1,0 +1,27 @@
+<jfc-simple-layout>
+  <div class="title">Picture analysis</div>
+
+  <div class="main">
+    <jfc-alert *ngIf="(errorMessage$ | async) as error" type="error">{{ error }}</jfc-alert>
+    <form>
+      <mat-form-field>
+        <input matInput type="text" autocomplete="off" placeholder="Truepic ID" [formControl]="pictureId" />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        aria-label="Retrieve photo"
+        [disabled]="loading$ | async"
+        (click)="submit()"
+      >
+        Retrieve photo
+      </button>
+    </form>
+
+    <ng-container *ngIf="(results$ | async) as results">
+      <p>Here's the results of your photo:</p>
+      <pre>{{ results | json }}</pre>
+    </ng-container>
+  </div>
+</jfc-simple-layout>

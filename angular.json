@@ -443,9 +443,210 @@
           }
         }
       }
+    },
+    "vallum-truepic-poc": {
+      "root": "apps/vallum/truepic-poc/",
+      "sourceRoot": "apps/vallum/truepic-poc/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/vallum/truepic-poc",
+            "index": "apps/vallum/truepic-poc/src/index.html",
+            "main": "apps/vallum/truepic-poc/src/main.ts",
+            "polyfills": "apps/vallum/truepic-poc/src/polyfills.ts",
+            "tsConfig": "apps/vallum/truepic-poc/tsconfig.app.json",
+            "assets": ["apps/vallum/truepic-poc/src/favicon.ico", "apps/vallum/truepic-poc/src/assets"],
+            "styles": ["apps/vallum/truepic-poc/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/vallum/truepic-poc/src/environments/environment.ts",
+                  "with": "apps/vallum/truepic-poc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "vallum-truepic-poc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "vallum-truepic-poc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "vallum-truepic-poc:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/vallum/truepic-poc/tsconfig.app.json", "apps/vallum/truepic-poc/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/vallum/truepic-poc/jest.config.js",
+            "tsConfig": "apps/vallum/truepic-poc/tsconfig.spec.json",
+            "setupFile": "apps/vallum/truepic-poc/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "auth0": {
+      "root": "libs/auth0",
+      "sourceRoot": "libs/auth0/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/auth0/tsconfig.lib.json", "libs/auth0/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/auth0/jest.config.js",
+            "tsConfig": "libs/auth0/tsconfig.spec.json",
+            "setupFile": "libs/auth0/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "serverless-snippets": {
+      "root": "libs/serverless-snippets",
+      "sourceRoot": "libs/serverless-snippets/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/serverless-snippets/tsconfig.lib.json", "libs/serverless-snippets/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/serverless-snippets/jest.config.js",
+            "tsConfig": "libs/serverless-snippets/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "search-companies-entity": {
+      "root": "libs/search-companies-entity",
+      "sourceRoot": "libs/search-companies-entity/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/search-companies-entity/tsconfig.lib.json",
+              "libs/search-companies-entity/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/search-companies-entity/jest.config.js",
+            "tsConfig": "libs/search-companies-entity/tsconfig.spec.json",
+            "setupFile": "libs/search-companies-entity/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "nz-business-api": {
+      "root": "libs/nz-business-api",
+      "sourceRoot": "libs/nz-business-api/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/nz-business-api/tsconfig.lib.json", "libs/nz-business-api/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/nz-business-api/jest.config.js",
+            "tsConfig": "libs/nz-business-api/tsconfig.spec.json",
+            "setupFile": "libs/nz-business-api/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "copper-crm": {
+      "root": "libs/copper-crm",
+      "sourceRoot": "libs/copper-crm/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/copper-crm/tsconfig.lib.json", "libs/copper-crm/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/copper-crm/jest.config.js",
+            "tsConfig": "libs/copper-crm/tsconfig.spec.json",
+            "setupFile": "libs/copper-crm/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
-  "defaultProject": "fullswing",
+  "defaultProject": "vallum-truepic-poc",
   "cli": {
     "warnings": {
       "typescriptMismatch": false

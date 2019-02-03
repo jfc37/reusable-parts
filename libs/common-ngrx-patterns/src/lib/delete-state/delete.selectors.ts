@@ -3,33 +3,57 @@ import { createSelector } from '@ngrx/store';
 import { isArrayNotEmpty } from '@reusable-parts/common-functions/src';
 
 function allFn(selector) {
-  return createSelector(selector, deleteAdapter.getSelectors().selectAll);
+  return createSelector(
+    selector,
+    deleteAdapter.getSelectors().selectAll,
+  );
 }
 
 export function allDeletingSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.deleting));
+  return createSelector(
+    allFn(selector),
+    deletes => deletes.filter(_delete => _delete.deleting),
+  );
 }
 
 export function allDeletedSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.deleted));
+  return createSelector(
+    allFn(selector),
+    deletes => deletes.filter(_delete => _delete.deleted),
+  );
 }
 
 export function allDeleteErroredSelectorFn(selector) {
-  return createSelector(allFn(selector), deletes => deletes.filter(_delete => _delete.error));
+  return createSelector(
+    allFn(selector),
+    deletes => deletes.filter(_delete => _delete.error),
+  );
 }
 
 export function allDeletingIdsSelectorFn(selector) {
-  return createSelector(allDeletingSelectorFn(selector), deletes => deletes.map(_delete => _delete.id));
+  return createSelector(
+    allDeletingSelectorFn(selector),
+    deletes => deletes.map(_delete => _delete.id),
+  );
 }
 
 export function isAnyDeletingSelectorFn(selector) {
-  return createSelector(allDeletingSelectorFn(selector), isArrayNotEmpty);
+  return createSelector(
+    allDeletingSelectorFn(selector),
+    isArrayNotEmpty,
+  );
 }
 
 export function hasAnyDeletedSelectorFn(selector) {
-  return createSelector(allDeletedSelectorFn(selector), isArrayNotEmpty);
+  return createSelector(
+    allDeletedSelectorFn(selector),
+    isArrayNotEmpty,
+  );
 }
 
 export function hasAnyDeleteErroredSelectorFn(selector) {
-  return createSelector(allDeleteErroredSelectorFn(selector), isArrayNotEmpty);
+  return createSelector(
+    allDeleteErroredSelectorFn(selector),
+    isArrayNotEmpty,
+  );
 }

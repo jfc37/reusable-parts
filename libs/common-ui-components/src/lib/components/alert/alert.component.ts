@@ -22,25 +22,25 @@ export class AlertComponent implements OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     switch (this.type) {
       case AlertType.error: {
-        this.colourClass = 'mat-warn-100-bg';
+        this.colourClass = 'error';
         this.icon = 'error_outline';
         break;
       }
 
       case AlertType.warning: {
-        this.colourClass = 'mat-orange-100-bg';
+        this.colourClass = 'warning';
         this.icon = 'warning';
         break;
       }
 
       case AlertType.info: {
-        this.colourClass = 'mat-accent-100-bg';
+        this.colourClass = 'info';
         this.icon = 'info_outline';
         break;
       }
 
       case AlertType.success: {
-        this.colourClass = 'mat-green-100-bg';
+        this.colourClass = 'success';
         this.icon = 'check';
         break;
       }

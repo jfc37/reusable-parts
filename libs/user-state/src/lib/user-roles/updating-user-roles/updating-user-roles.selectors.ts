@@ -8,7 +8,10 @@ import {
 } from '@reusable-parts/common-ngrx-patterns/src';
 import { userFeatureSelector } from '@reusable-parts/user-state/src/lib/user-feature.reducer';
 
-const selector = createSelector(userFeatureSelector, state => state.updatingUserRoles);
+const selector = createSelector(
+  userFeatureSelector,
+  state => state.updatingUserRoles,
+);
 
 export const isUpdatingAnyUserRolesSelector = isAnyUpdatingSelectorFn(selector);
 export const hasAnyUserRoleUpdateErroredSelector = hasAnyUpdateErroredSelectorFn(selector);

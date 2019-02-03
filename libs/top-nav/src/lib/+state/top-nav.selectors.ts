@@ -3,12 +3,27 @@ import { TopNavData } from '@reusable-parts/top-nav/src/lib/+state/top-nav.reduc
 
 const topNavSelector = createFeatureSelector<TopNavData>('topNav');
 
-export const isLoadingSelector = createSelector(topNavSelector, state => state.loading);
+export const isLoadingSelector = createSelector(
+  topNavSelector,
+  state => state.loading,
+);
 
-export const isAuthenticatedSelector = createSelector(topNavSelector, state => state.authenticated);
+export const isAuthenticatedSelector = createSelector(
+  topNavSelector,
+  state => state.authenticated,
+);
 
-export const displayNameSelector = createSelector(topNavSelector, state => state.displayName);
+export const displayNameSelector = createSelector(
+  topNavSelector,
+  state => state.displayName,
+);
 
-export const avatarUrlSelector = createSelector(topNavSelector, state => state.avatarUrl);
+export const avatarUrlSelector = createSelector(
+  topNavSelector,
+  state => state.avatarUrl,
+);
 
-export const hasLoggedOutSelector = createSelector(topNavSelector, state => state.loggedOut);
+export const hasLoggedOutSelector = createSelector(
+  topNavSelector,
+  state => state.loggedOut,
+);

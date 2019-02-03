@@ -20,8 +20,9 @@ export const updateErrorMessageSelector = createSelector(
   hasError => hasError && 'Problem enrolling in block. Please try again.',
 );
 
-export const warningMessagesSelector = createSelector(updateErrorMessageSelector, (...messages) =>
-  messages.filter(Boolean),
+export const warningMessagesSelector = createSelector(
+  updateErrorMessageSelector,
+  (...messages) => messages.filter(Boolean),
 );
 
 export const enrolmentsLoadErrorMessageSelector = createSelector(
@@ -29,8 +30,9 @@ export const enrolmentsLoadErrorMessageSelector = createSelector(
   hasErrored => hasErrored && 'Problem getting enrolment',
 );
 
-export const fatalErrorMessagesSelector = createSelector(enrolmentsLoadErrorMessageSelector, (...messages) =>
-  messages.filter(Boolean),
+export const fatalErrorMessagesSelector = createSelector(
+  enrolmentsLoadErrorMessageSelector,
+  (...messages) => messages.filter(Boolean),
 );
 
 export const isLoadingSelector = createSelector(

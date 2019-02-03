@@ -51,6 +51,24 @@
     },
     "libname": {
       "tags": []
+    },
+    "vallum-truepic-poc": {
+      "tags": []
+    },
+    "auth0": {
+      "tags": []
+    },
+    "serverless-snippets": {
+      "tags": []
+    },
+    "search-companies-entity": {
+      "tags": []
+    },
+    "nz-business-api": {
+      "tags": []
+    },
+    "copper-crm": {
+      "tags": []
     }
   }
 }

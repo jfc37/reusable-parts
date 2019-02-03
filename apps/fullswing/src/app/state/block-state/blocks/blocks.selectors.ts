@@ -5,13 +5,25 @@ import { blockIdsForCurrentPagesSelector } from '../block-pages/block-pages.sele
 import { isArrayEmpty } from '@reusable-parts/common-functions/src';
 import { getISOWeek } from 'date-fns';
 
-const selector = createSelector(blockFeatureSelector, state => state.blocks);
+const selector = createSelector(
+  blockFeatureSelector,
+  state => state.blocks,
+);
 
-export const blockEntitiesSelector = createSelector(selector, blockAdapter.getSelectors().selectEntities);
+export const blockEntitiesSelector = createSelector(
+  selector,
+  blockAdapter.getSelectors().selectEntities,
+);
 
-const blocksSelector = createSelector(selector, blockAdapter.getSelectors().selectAll);
+const blocksSelector = createSelector(
+  selector,
+  blockAdapter.getSelectors().selectAll,
+);
 
-export const blocksDictionarySelector = createSelector(selector, blockAdapter.getSelectors().selectEntities);
+export const blocksDictionarySelector = createSelector(
+  selector,
+  blockAdapter.getSelectors().selectEntities,
+);
 
 export const blocksForCurrentPagesSelector = createSelector(
   blocksSelector,
@@ -19,8 +31,12 @@ export const blocksForCurrentPagesSelector = createSelector(
   (allBlocks, ids) => allBlocks.filter(block => ids.includes(block.id)),
 );
 
-export const hasNoBlocksSelector = createSelector(blocksSelector, isArrayEmpty);
+export const hasNoBlocksSelector = createSelector(
+  blocksSelector,
+  isArrayEmpty,
+);
 
-export const upcomingBlocksSelector = createSelector(blocksSelector, blocks =>
-  blocks.filter(block => getISOWeek(block.startDate) >= getISOWeek(new Date())),
+export const upcomingBlocksSelector = createSelector(
+  blocksSelector,
+  blocks => blocks.filter(block => getISOWeek(block.startDate) >= getISOWeek(new Date())),
 );

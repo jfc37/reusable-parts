@@ -10,12 +10,17 @@ export const createErrorMessageSelector = createSelector(
   hasError => hasError && 'Problem creating block. Please try again.',
 );
 
-export const warningMessagesSelector = createSelector(createErrorMessageSelector, (...messages) =>
-  messages.filter(Boolean),
+export const warningMessagesSelector = createSelector(
+  createErrorMessageSelector,
+  (...messages) => messages.filter(Boolean),
 );
 
-export const loadingSelector = createSelector(isLoadingTeachersSelector, Boolean);
+export const loadingSelector = createSelector(
+  isLoadingTeachersSelector,
+  Boolean,
+);
 
-export const fatalErrorMessagesSelector = createSelector(loadingTeachersErrorMessageSelector, (...messages) =>
-  messages.filter(Boolean),
+export const fatalErrorMessagesSelector = createSelector(
+  loadingTeachersErrorMessageSelector,
+  (...messages) => messages.filter(Boolean),
 );
