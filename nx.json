@@ -72,6 +72,9 @@
     },
     "chat-components": {
       "tags": []
+    },
+    "demos-chat-app": {
+      "tags": []
     }
   }
 }
