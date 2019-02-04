@@ -1,43 +1,52 @@
 <div id="chat" class="page-layout carded fullwidth inner-scroll">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
+  <!-- CENTER -->
+  <div class="center">
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <mat-sidenav-container>
+        <!-- LEFT SIDENAV -->
 
-    <!-- CENTER -->
-    <div class="center">
+        <mat-sidenav
+          class="sidenav"
+          position="start"
+          opened="true"
+          mode="side"
+          fuseMatSidenavHelper="chat-left-sidenav"
+          matIsLockedOpen="gt-md"
+        >
+          <chat-left-sidenav></chat-left-sidenav>
+        </mat-sidenav>
 
-        <!-- CONTENT CARD -->
-        <div class="content-card">
+        <!-- / LEFT SIDENAV -->
 
-            <mat-sidenav-container>
+        <!-- CONTENT -->
 
-                <!-- LEFT SIDENAV -->
-                <mat-sidenav class="sidenav" position="start" opened="true" mode="side"
-                             fuseMatSidenavHelper="chat-left-sidenav" matIsLockedOpen="gt-md">
-                    <chat-left-sidenav></chat-left-sidenav>
-                </mat-sidenav>
-                <!-- / LEFT SIDENAV -->
+        <chat-start *ngIf="!selectedChat"></chat-start>
 
-                <!-- CONTENT -->
-                <chat-start *ngIf="!selectedChat"></chat-start>
+        <chat-view *ngIf="selectedChat"></chat-view>
 
-                <chat-view *ngIf="selectedChat"></chat-view>
-                <!-- / CONTENT -->
+        <!-- / CONTENT -->
 
-                <!-- RIGHT SIDENAV -->
-                <mat-sidenav class="sidenav" position="end" opened="false" mode="over"
-                             fuseMatSidenavHelper="chat-right-sidenav">
-                    <chat-right-sidenav></chat-right-sidenav>
-                </mat-sidenav>
-                <!-- / RIGHT SIDENAV -->
+        <!-- RIGHT SIDENAV -->
 
-            </mat-sidenav-container>
+        <mat-sidenav
+          class="sidenav"
+          position="end"
+          opened="false"
+          mode="over"
+          fuseMatSidenavHelper="chat-right-sidenav"
+        >
+          <chat-right-sidenav></chat-right-sidenav>
+        </mat-sidenav>
 
-        </div>
-        <!-- / CONTENT CARD -->
-
+        <!-- / RIGHT SIDENAV -->
+      </mat-sidenav-container>
     </div>
-    <!-- / CENTER -->
-
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
 </div>

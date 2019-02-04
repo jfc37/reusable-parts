@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat.component';
 import { ChatViewComponent } from './chat-view/chat-view.component';
 import { ChatStartComponent } from './chat-start/chat-start.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
@@ -14,12 +15,42 @@ import {
   MatSidenavModule,
   MatToolbarModule,
 } from '@angular/material';
-import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule, FuseModule } from '@reusable-parts/@fuse';
 import { ChatService } from './chat.service';
+import { ChatChatsSidenavComponent } from './sidenavs/left/chats/chats.component';
+import { ChatUserSidenavComponent } from './sidenavs/left/user/user.component';
+import { ChatLeftSidenavComponent } from './sidenavs/left/left.component';
+import { ChatRightSidenavComponent } from './sidenavs/right/right.component';
+import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.component';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [ChatComponent, ChatViewComponent, ChatStartComponent],
+  declarations: [
+    ChatComponent,
+    ChatViewComponent,
+    ChatStartComponent,
+    ChatChatsSidenavComponent,
+    ChatUserSidenavComponent,
+    ChatLeftSidenavComponent,
+    ChatRightSidenavComponent,
+    ChatContactSidenavComponent,
+  ],
+  exports: [
+    ChatComponent,
+    ChatViewComponent,
+    ChatStartComponent,
+    ChatChatsSidenavComponent,
+    ChatUserSidenavComponent,
+    ChatLeftSidenavComponent,
+    ChatRightSidenavComponent,
+    ChatContactSidenavComponent,
+  ],
   imports: [
+    BrowserAnimationsModule,
+    RouterModule.forRoot([]),
+    HttpClientModule,
+
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -32,6 +63,7 @@ import { ChatService } from './chat.service';
     MatToolbarModule,
 
     FuseSharedModule,
+    FuseModule.forRoot({}),
   ],
   providers: [ChatService],
 })

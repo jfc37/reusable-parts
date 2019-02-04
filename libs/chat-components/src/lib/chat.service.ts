@@ -7,9 +7,9 @@ import { FuseUtils } from '@reusable-parts/@fuse';
 
 @Injectable()
 export class ChatService implements Resolve<any> {
-  contacts: any[];
-  chats: any[];
-  user: any;
+  contacts: any[] = [];
+  chats: any[] = [];
+  user: any = { chatList: [] };
   onChatSelected: BehaviorSubject<any>;
   onContactSelected: BehaviorSubject<any>;
   onChatsUpdated: Subject<any>;
@@ -40,14 +40,14 @@ export class ChatService implements Resolve<any> {
    * @returns {Observable<any> | Promise<any> | any}
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return new Promise((resolve, reject) => {
-      Promise.all([this.getContacts(), this.getChats(), this.getUser()]).then(([contacts, chats, user]) => {
-        this.contacts = contacts;
-        this.chats = chats;
-        this.user = user;
-        resolve();
-      }, reject);
-    });
+    // return new Promise((resolve, reject) => {
+    //   Promise.all([this.getContacts(), this.getChats(), this.getUser()]).then(([contacts, chats, user]) => {
+    //     this.contacts = contacts;
+    //     this.chats = chats;
+    //     this.user = user;
+    //     resolve();
+    //   }, reject);
+    // });
   }
 
   /**
@@ -188,9 +188,11 @@ export class ChatService implements Resolve<any> {
    */
   getContacts(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get('api/chat-contacts').subscribe((response: any) => {
-        resolve(response);
-      }, reject);
+      // TODO JOE
+      resolve([]);
+      // this._httpClient.get('api/chat-contacts').subscribe((response: any) => {
+      //   resolve(response);
+      // }, reject);
     });
   }
 
@@ -201,9 +203,11 @@ export class ChatService implements Resolve<any> {
    */
   getChats(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get('api/chat-chats').subscribe((response: any) => {
-        resolve(response);
-      }, reject);
+      // TODO JOE
+      resolve([]);
+      // this._httpClient.get('api/chat-chats').subscribe((response: any) => {
+      //   resolve(response);
+      // }, reject);
     });
   }
 
@@ -214,9 +218,11 @@ export class ChatService implements Resolve<any> {
    */
   getUser(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get('api/chat-user').subscribe((response: any) => {
-        resolve(response[0]);
-      }, reject);
+      // TODO JOE
+      resolve({});
+      // this._httpClient.get('api/chat-user').subscribe((response: any) => {
+      //   resolve(response[0]);
+      // }, reject);
     });
   }
 }
