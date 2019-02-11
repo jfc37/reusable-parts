@@ -1,45 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, ReplaySubject } from 'rxjs';
 
 import { FuseUtils } from '@reusable-parts/@fuse';
-
-export interface Chat {
-  id: string;
-  dialog: ChatDialog[];
-}
-
-export interface ChatDialog {
-  message: string;
-  time: Date;
-  who: string;
-}
-
-export interface ChatUser {
-  id: string;
-  status: string;
-  avatar: string;
-  name: string;
-  chatList: ChatSummary[];
-}
-
-export interface ChatContact {
-  id: string;
-  avatar: string;
-  name: string;
-  status: string;
-  mood: string;
-}
-
-export interface ChatSummary {
-  id: string;
-  contactId: string;
-  name: string;
-  lastMessage?: string;
-  lastMessageTime: Date;
-  unread: number;
-}
+import { IChatFacade, CHAT_FACADE } from './chat.facade';
 
 @Injectable()
 export class ChatService implements Resolve<any> {
@@ -59,7 +24,7 @@ export class ChatService implements Resolve<any> {
    *
    * @param {HttpClient} _httpClient
    */
-  constructor(private _httpClient: HttpClient) {
+  constructor(@Inject(CHAT_FACADE) private facade: IChatFacade, private _httpClient: HttpClient) {
     // Set the defaults
     this.onChatSelected = new BehaviorSubject(null);
     this.onContactSelected = new BehaviorSubject(null);
