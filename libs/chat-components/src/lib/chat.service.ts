@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { BehaviorSubject, Observable, Subject, ReplaySubject, combineLatest, concat, of } from 'rxjs';
+import { Observable, Subject, ReplaySubject, concat, of } from 'rxjs';
 
 import { FuseUtils } from '@reusable-parts/@fuse';
 import { IChatFacade, CHAT_FACADE, ChatContact, ChatUser, Chat, ChatSummary } from './chat.facade';
-import { tap, map, switchMap, filter, take, withLatestFrom, takeUntil, takeWhile, concatMap } from 'rxjs/operators';
+import { tap, map, switchMap, filter, take, withLatestFrom, takeWhile, concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class ChatService implements Resolve<any> {
@@ -17,7 +16,7 @@ export class ChatService implements Resolve<any> {
   onLeftSidenavViewChanged: Subject<any>;
   onRightSidenavViewChanged: Subject<any>;
 
-  constructor(@Inject(CHAT_FACADE) private facade: IChatFacade, private _httpClient: HttpClient) {
+  constructor(@Inject(CHAT_FACADE) private facade: IChatFacade) {
     // Set the defaults
     this.onLeftSidenavViewChanged = new Subject();
     this.onRightSidenavViewChanged = new Subject();
@@ -27,7 +26,7 @@ export class ChatService implements Resolve<any> {
     this.user$ = this.facade.user$;
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+  resolve(): Observable<any> {
     return this.facade.loadAllData();
   }
 
@@ -49,7 +48,7 @@ export class ChatService implements Resolve<any> {
           ({
             contactId: contactId,
             id: newChatId,
-            lastMessageTime: new Date('2017-02-18T10:30:18.931Z'),
+            lastMessageTime: new Date(),
             name: contact.name,
             unread: null,
           } as ChatSummary),
@@ -93,16 +92,17 @@ export class ChatService implements Resolve<any> {
     // });
   }
 
-  updateDialog(chatId, dialog): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const newData = {
-        id: chatId,
-        dialog: dialog,
-      };
+  updateDialog(chatId, dialog): Observable<any> {
+    return null;
+    // return new Promise((resolve, reject) => {
+    //   const newData = {
+    //     id: chatId,
+    //     dialog: dialog,
+    //   };
 
-      this._httpClient.post('api/chat-chats/' + chatId, newData).subscribe(updatedChat => {
-        resolve(updatedChat);
-      }, reject);
-    });
+    //   this._httpClient.post('api/chat-chats/' + chatId, newData).subscribe(updatedChat => {
+    //     resolve(updatedChat);
+    //   }, reject);
+    // });
   }
 }

@@ -23,9 +23,6 @@ import { ChatLeftSidenavComponent } from './sidenavs/left/left.component';
 import { ChatRightSidenavComponent } from './sidenavs/right/right.component';
 import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { FakeDbService } from './fake-db.service';
 
 const routes: Routes = [
   {
@@ -63,12 +60,6 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     RouterModule.forChild(routes),
-    HttpClientModule,
-
-    InMemoryWebApiModule.forRoot(FakeDbService, {
-      delay: 0,
-      passThruUnknownUrl: true,
-    }),
 
     MatButtonModule,
     MatCardModule,

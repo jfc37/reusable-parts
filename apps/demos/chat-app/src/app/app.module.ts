@@ -10,12 +10,12 @@ import {
   ChatContact,
   ChatUser,
   CHAT_FACADE,
-  ChatDialog,
-  ChatSummary,
 } from '@reusable-parts/chat-components';
-import { Observable, ReplaySubject, from, combineLatest } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, ReplaySubject, combineLatest } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { map, switchMap, tap, mapTo } from 'rxjs/operators';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FakeDbService } from './fake-db.service';
 
 @Injectable()
 export class ChatFacade implements IChatFacade {
@@ -67,7 +67,17 @@ export class ChatFacade implements IChatFacade {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, NxModule.forRoot(), ChatComponentsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    NxModule.forRoot(),
+
+    InMemoryWebApiModule.forRoot(FakeDbService, {
+      delay: 0,
+      passThruUnknownUrl: true,
+    }),
+    ChatComponentsModule,
+  ],
   providers: [{ provide: CHAT_FACADE, useClass: ChatFacade }],
   bootstrap: [AppComponent],
 })
