@@ -3,7 +3,16 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable, Subject, ReplaySubject, concat, of } from 'rxjs';
 
 import { FuseUtils } from '@reusable-parts/@fuse';
-import { IChatFacade, CHAT_FACADE, ChatContact, ChatUser, Chat, ChatSummary } from './chat.facade';
+import {
+  IChatFacade,
+  CHAT_FACADE,
+  ChatContact,
+  ChatUser,
+  Chat,
+  ChatSummary,
+  UserStatus,
+  ChatDialog,
+} from './chat.facade';
 import { tap, map, switchMap, filter, take, withLatestFrom, takeWhile, concatMap } from 'rxjs/operators';
 
 @Injectable()
@@ -76,33 +85,35 @@ export class ChatService implements Resolve<any> {
     concat(createNewChat$, setChat$, setContact$).subscribe();
   }
 
-  selectContact(contact): void {
+  selectContact(contact: ChatContact): void {
     this.selectedContact$.next(contact);
   }
 
-  setUserStatus(status): void {
-    // TODO UPDATE HERE
-    // this.user.status = status;
+  setUserStatus(status: UserStatus): void {
+    this.user$
+      .pipe(
+        map(user => ({
+          ...user,
+          status,
+        })),
+        switchMap(user => this.facade.updateUser(user)),
+      )
+      .subscribe();
   }
 
-  updateUserData(userData): void {
-    // TODO UPDATE HERE
-    // this._httpClient.post('api/chat-user/' + this.user.id, userData).subscribe((response: any) => {
-    //   this.user = userData;
-    // });
+  updateUserData(user: ChatUser): void {
+    this.facade.updateUser(user).subscribe();
   }
 
-  updateDialog(chatId, dialog): Observable<any> {
-    return null;
-    // return new Promise((resolve, reject) => {
-    //   const newData = {
-    //     id: chatId,
-    //     dialog: dialog,
-    //   };
-
-    //   this._httpClient.post('api/chat-chats/' + chatId, newData).subscribe(updatedChat => {
-    //     resolve(updatedChat);
-    //   }, reject);
-    // });
+  updateDialog(chatId: string, dialog: ChatDialog[]): Observable<any> {
+    return this.chats$.pipe(
+      map(chats => chats.find(chat => chat.id === chatId)),
+      map(chat => ({
+        ...chat,
+        dialog,
+      })),
+      take(1),
+      switchMap(updatedChat => this.facade.updateChat(updatedChat)),
+    );
   }
 }

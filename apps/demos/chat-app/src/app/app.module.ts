@@ -36,6 +36,14 @@ export class ChatFacade implements IChatFacade {
     );
   }
 
+  public updateChat(chat: Chat): Observable<void> {
+    return this._httpClient.post(`api/chat-chats/${chat.id}`, chat).pipe(
+      switchMap(() => this.loadChats()),
+      switchMap(() => this.loadUser()),
+      mapTo(null),
+    );
+  }
+
   public updateUser(user: ChatUser): Observable<void> {
     return this._httpClient.post('api/chat-user/' + user.id, user).pipe(
       switchMap(() => this.loadUser()),

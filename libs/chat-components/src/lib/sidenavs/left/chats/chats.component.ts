@@ -5,7 +5,7 @@ import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from '../../../chat.service';
 import { FuseMatSidenavHelperService } from '@reusable-parts/@fuse';
 import { MediaService } from '@angular/flex-layout';
-import { ChatUser, Chat, ChatContact } from '../../../chat.facade';
+import { ChatUser, Chat, ChatContact, UserStatus } from '../../../chat.facade';
 
 @Component({
   selector: 'chat-chats-sidenav',
@@ -81,7 +81,7 @@ export class ChatChatsSidenavComponent implements OnDestroy {
    *
    * @param status
    */
-  setUserStatus(status): void {
+  setUserStatus(status: UserStatus): void {
     this._chatService.setUserStatus(status);
   }
 

@@ -9,6 +9,7 @@ export interface IChatFacade {
 
   loadAllData(): Observable<any>;
   createChat(contactId: string): Observable<void>;
+  updateChat(chat: Chat): Observable<void>;
   updateUser(user: ChatUser): Observable<void>;
 }
 
@@ -26,11 +27,18 @@ export interface ChatDialog {
 
 export interface ChatUser {
   id: string;
-  status: string;
+  status: UserStatus;
   avatar: string;
   name: string;
   mood: string;
   chatList: ChatSummary[];
+}
+
+export enum UserStatus {
+  Online = 'online',
+  DoNotDisturb = 'do-not-disturb',
+  Away = 'away',
+  Offline = 'offline',
 }
 
 export interface ChatContact {

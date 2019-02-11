@@ -10,11 +10,11 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 
 import { ChatService } from '../chat.service';
 import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse';
-import { ChatUser } from '../chat.facade';
+import { ChatUser, ChatContact, Chat } from '../chat.facade';
 
 @Component({
   selector: 'chat-view',
@@ -26,9 +26,9 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() public user: ChatUser;
   chat: any;
   dialog: any;
-  contact: any;
+  contact: ChatContact;
   replyInput: any;
-  selectedChat: any;
+  selectedChat: Chat;
 
   @ViewChild(FusePerfectScrollbarDirective)
   directiveScroll: FusePerfectScrollbarDirective;
@@ -199,8 +199,6 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.replyForm.reset();
 
     // Update the server
-    this._chatService.updateDialog(this.selectedChat.chatId, this.dialog).then(response => {
-      this.readyToReply();
-    });
+    this._chatService.updateDialog(this.selectedChat.id, this.dialog).subscribe(() => this.readyToReply());
   }
 }
