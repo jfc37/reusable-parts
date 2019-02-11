@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from './chat.service';
@@ -13,6 +13,7 @@ import { ChatService } from './chat.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   selectedChat: any;
+  loaded$: Observable<boolean>;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -35,6 +36,7 @@ export class ChatComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    this.loaded$ = this._chatService.loaded$;
     this._chatService.onChatSelected.pipe(takeUntil(this._unsubscribeAll)).subscribe(chatData => {
       this.selectedChat = chatData;
     });

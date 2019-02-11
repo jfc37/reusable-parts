@@ -22,8 +22,21 @@ import { ChatUserSidenavComponent } from './sidenavs/left/user/user.component';
 import { ChatLeftSidenavComponent } from './sidenavs/left/left.component';
 import { ChatRightSidenavComponent } from './sidenavs/right/right.component';
 import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FakeDbService } from './fake-db.service';
+
+const routes: Routes = [
+  {
+    path: '**',
+    component: ChatComponent,
+    children: [],
+    resolve: {
+      chat: ChatService,
+    },
+  },
+];
 
 @NgModule({
   declarations: [
@@ -49,7 +62,13 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
+    RouterModule.forChild(routes),
     HttpClientModule,
+
+    InMemoryWebApiModule.forRoot(FakeDbService, {
+      delay: 0,
+      passThruUnknownUrl: true,
+    }),
 
     MatButtonModule,
     MatCardModule,

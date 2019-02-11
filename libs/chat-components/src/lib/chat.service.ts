@@ -1,15 +1,52 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, ReplaySubject } from 'rxjs';
 
 import { FuseUtils } from '@reusable-parts/@fuse';
 
+export interface Chat {
+  id: string;
+  dialog: ChatDialog[];
+}
+
+export interface ChatDialog {
+  message: string;
+  time: Date;
+  who: string;
+}
+
+export interface ChatUser {
+  id: string;
+  status: string;
+  avatar: string;
+  name: string;
+  chatList: ChatSummary[];
+}
+
+export interface ChatContact {
+  id: string;
+  avatar: string;
+  name: string;
+  status: string;
+  mood: string;
+}
+
+export interface ChatSummary {
+  id: string;
+  contactId: string;
+  name: string;
+  lastMessage?: string;
+  lastMessageTime: Date;
+  unread: number;
+}
+
 @Injectable()
 export class ChatService implements Resolve<any> {
-  contacts: any[] = [];
-  chats: any[] = [];
-  user: any = { chatList: [] };
+  contacts: any[];
+  chats: any[];
+  user: any;
+  loaded$ = new ReplaySubject<boolean>();
   onChatSelected: BehaviorSubject<any>;
   onContactSelected: BehaviorSubject<any>;
   onChatsUpdated: Subject<any>;
@@ -40,14 +77,15 @@ export class ChatService implements Resolve<any> {
    * @returns {Observable<any> | Promise<any> | any}
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    // return new Promise((resolve, reject) => {
-    //   Promise.all([this.getContacts(), this.getChats(), this.getUser()]).then(([contacts, chats, user]) => {
-    //     this.contacts = contacts;
-    //     this.chats = chats;
-    //     this.user = user;
-    //     resolve();
-    //   }, reject);
-    // });
+    return new Promise((resolve, reject) => {
+      Promise.all([this.getContacts(), this.getChats(), this.getUser()]).then(([contacts, chats, user]) => {
+        this.contacts = contacts;
+        this.chats = chats;
+        this.user = user;
+        this.loaded$.next(true);
+        resolve();
+      }, reject);
+    });
   }
 
   /**
@@ -188,11 +226,9 @@ export class ChatService implements Resolve<any> {
    */
   getContacts(): Promise<any> {
     return new Promise((resolve, reject) => {
-      // TODO JOE
-      resolve([]);
-      // this._httpClient.get('api/chat-contacts').subscribe((response: any) => {
-      //   resolve(response);
-      // }, reject);
+      this._httpClient.get('api/chat-contacts').subscribe((response: any) => {
+        resolve(response);
+      }, reject);
     });
   }
 
@@ -203,11 +239,9 @@ export class ChatService implements Resolve<any> {
    */
   getChats(): Promise<any> {
     return new Promise((resolve, reject) => {
-      // TODO JOE
-      resolve([]);
-      // this._httpClient.get('api/chat-chats').subscribe((response: any) => {
-      //   resolve(response);
-      // }, reject);
+      this._httpClient.get('api/chat-chats').subscribe((response: any) => {
+        resolve(response);
+      }, reject);
     });
   }
 
@@ -218,11 +252,9 @@ export class ChatService implements Resolve<any> {
    */
   getUser(): Promise<any> {
     return new Promise((resolve, reject) => {
-      // TODO JOE
-      resolve({});
-      // this._httpClient.get('api/chat-user').subscribe((response: any) => {
-      //   resolve(response[0]);
-      // }, reject);
+      this._httpClient.get('api/chat-user').subscribe((response: any) => {
+        resolve(response[0]);
+      }, reject);
     });
   }
 }
