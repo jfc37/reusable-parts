@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from '../../../chat.service';
 import { FuseMatSidenavHelperService } from '@reusable-parts/@fuse';
 import { MediaService } from '@angular/flex-layout';
+import { ChatUser, Chat, ChatContact } from '../../../chat.facade';
 
 @Component({
   selector: 'chat-chats-sidenav',
@@ -13,12 +14,12 @@ import { MediaService } from '@angular/flex-layout';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
 })
-export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
-  chats: any[];
+export class ChatChatsSidenavComponent implements OnDestroy {
+  @Input() public chats: Chat[];
   chatSearch: any;
-  contacts: any[];
+  @Input() public contacts: ChatContact[];
   searchText: string;
-  user: any;
+  @Input() public user: ChatUser;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -50,23 +51,6 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   // -----------------------------------------------------------------------------------------------------
 
   /**
-   * On init
-   */
-  ngOnInit(): void {
-    this.user = this._chatService.user;
-    this.chats = this._chatService.chats;
-    this.contacts = this._chatService.contacts;
-
-    this._chatService.onChatsUpdated.pipe(takeUntil(this._unsubscribeAll)).subscribe(updatedChats => {
-      this.chats = updatedChats;
-    });
-
-    this._chatService.onUserUpdated.pipe(takeUntil(this._unsubscribeAll)).subscribe(updatedUser => {
-      this.user = updatedUser;
-    });
-  }
-
-  /**
    * On destroy
    */
   ngOnDestroy(): void {
@@ -85,7 +69,7 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
    * @param contact
    */
   getChat(contact): void {
-    this._chatService.getChat(contact);
+    this._chatService.selectChat(contact);
 
     if (!this._mediaService.isActive('gt-md')) {
       this._fuseMatSidenavHelperService.getSidenav('chat-left-sidenav').toggle();

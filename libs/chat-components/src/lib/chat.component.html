@@ -1,4 +1,4 @@
-<div *ngIf="(loaded$ | async)" id="chat" class="page-layout carded fullwidth inner-scroll">
+<div *ngIf="(user$ | async) as user" id="chat" class="page-layout carded fullwidth inner-scroll">
   <!-- TOP BACKGROUND -->
   <div class="top-bg accent"></div>
   <!-- / TOP BACKGROUND -->
@@ -18,7 +18,7 @@
           fuseMatSidenavHelper="chat-left-sidenav"
           matIsLockedOpen="gt-md"
         >
-          <chat-left-sidenav></chat-left-sidenav>
+          <chat-left-sidenav [user]="user" [chats]="chats$ | async" [contacts]="contacts$ | async"></chat-left-sidenav>
         </mat-sidenav>
 
         <!-- / LEFT SIDENAV -->
@@ -27,7 +27,7 @@
 
         <chat-start *ngIf="!selectedChat"></chat-start>
 
-        <chat-view *ngIf="selectedChat"></chat-view>
+        <chat-view *ngIf="selectedChat" [user]="user"></chat-view>
 
         <!-- / CONTENT -->
 

@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { ChatService } from '../../../chat.service';
+import { ChatUser } from '../../../chat.facade';
 
 @Component({
   selector: 'chat-user-sidenav',
@@ -11,7 +12,7 @@ import { ChatService } from '../../../chat.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatUserSidenavComponent implements OnInit, OnDestroy {
-  user: any;
+  @Input() public user: ChatUser;
   userForm: FormGroup;
 
   // Private
@@ -35,8 +36,6 @@ export class ChatUserSidenavComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    this.user = this._chatService.user;
-
     this.userForm = new FormGroup({
       mood: new FormControl(this.user.mood),
       status: new FormControl(this.user.status),

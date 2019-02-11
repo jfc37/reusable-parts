@@ -3,6 +3,7 @@ import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from './chat.service';
+import { ChatUser, Chat, ChatContact } from './chat.facade';
 
 @Component({
   selector: 'chat',
@@ -14,6 +15,9 @@ import { ChatService } from './chat.service';
 export class ChatComponent implements OnInit, OnDestroy {
   selectedChat: any;
   loaded$: Observable<boolean>;
+  user$: Observable<ChatUser>;
+  chats$: Observable<Chat[]>;
+  contacts$: Observable<ChatContact[]>;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -36,8 +40,10 @@ export class ChatComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    this.loaded$ = this._chatService.loaded$;
-    this._chatService.onChatSelected.pipe(takeUntil(this._unsubscribeAll)).subscribe(chatData => {
+    this.user$ = this._chatService.user$;
+    this.chats$ = this._chatService.chats$;
+    this.contacts$ = this._chatService.contacts$;
+    this._chatService.selectedChat$.pipe(takeUntil(this._unsubscribeAll)).subscribe(chatData => {
       this.selectedChat = chatData;
     });
   }

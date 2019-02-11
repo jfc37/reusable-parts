@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from '../../chat.service';
+import { ChatUser, Chat, ChatContact } from '../../chat.facade';
 
 @Component({
   selector: 'chat-left-sidenav',
@@ -13,6 +14,9 @@ import { ChatService } from '../../chat.service';
 })
 export class ChatLeftSidenavComponent implements OnInit, OnDestroy {
   view: string;
+  @Input() public user: ChatUser;
+  @Input() public chats: Chat[];
+  @Input() public contacts: ChatContact[];
 
   // Private
   private _unsubscribeAll: Subject<any>;

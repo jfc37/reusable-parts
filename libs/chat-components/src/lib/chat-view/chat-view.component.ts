@@ -1,10 +1,20 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation,
+  Input,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ChatService } from '../chat.service';
 import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse';
+import { ChatUser } from '../chat.facade';
 
 @Component({
   selector: 'chat-view',
@@ -13,7 +23,7 @@ import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
-  user: any;
+  @Input() public user: ChatUser;
   chat: any;
   dialog: any;
   contact: any;
@@ -50,12 +60,17 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
    * On init
    */
   ngOnInit(): void {
-    this.user = this._chatService.user;
-    this._chatService.onChatSelected.pipe(takeUntil(this._unsubscribeAll)).subscribe(chatData => {
+    this._chatService.selectedChat$.pipe(takeUntil(this._unsubscribeAll)).subscribe(chatData => {
       if (chatData) {
         this.selectedChat = chatData;
-        this.contact = chatData.contact;
         this.dialog = chatData.dialog;
+        this.readyToReply();
+      }
+    });
+
+    this._chatService.selectedContact$.pipe(takeUntil(this._unsubscribeAll)).subscribe(contact => {
+      if (contact) {
+        this.contact = contact;
         this.readyToReply();
       }
     });

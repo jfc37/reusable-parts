@@ -33,7 +33,7 @@ export class ChatContactSidenavComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    this._chatService.onContactSelected.pipe(takeUntil(this._unsubscribeAll)).subscribe(contact => {
+    this._chatService.selectedContact$.pipe(takeUntil(this._unsubscribeAll)).subscribe(contact => {
       this.contact = contact;
     });
   }

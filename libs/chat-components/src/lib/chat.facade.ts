@@ -6,10 +6,15 @@ export interface IChatFacade {
   contacts$: Observable<ChatContact[]>;
   chats$: Observable<Chat[]>;
   user$: Observable<ChatUser>;
+
+  loadAllData(): Observable<any>;
+  createChat(contactId: string): Observable<void>;
+  updateUser(user: ChatUser): Observable<void>;
 }
 
 export interface Chat {
   id: string;
+  name: string;
   dialog: ChatDialog[];
 }
 
@@ -24,6 +29,7 @@ export interface ChatUser {
   status: string;
   avatar: string;
   name: string;
+  mood: string;
   chatList: ChatSummary[];
 }
 
