@@ -1,21 +1,8 @@
-// Import material theme
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 // Import Fuse core library
 @import 'libs/@fuse/scss/core';
 
-@import 'libs/@fuse/scss/fuse';
-
-// :host {
-//   display: flex;
-// }
-
-// #chat-wrapper {
-//   display: flex;
-//   flex: 1 0 auto;
-//   width: 100%;
-//   min-width: 100%;
-// }
+// Import app.theme.scss
+@import './app.theme';
 
 #chat {
   .center {

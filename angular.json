@@ -690,7 +690,7 @@
           "spec": false
         },
         "@nrwl/schematics:component": {
-          "styleext": "sass",
+          "styleext": "scss",
           "spec": false
         },
         "@nrwl/schematics:directive": {
@@ -719,7 +719,7 @@
             "polyfills": "apps/demos/chat-app/src/polyfills.ts",
             "tsConfig": "apps/demos/chat-app/tsconfig.app.json",
             "assets": ["apps/demos/chat-app/src/favicon.ico", "apps/demos/chat-app/src/assets"],
-            "styles": ["apps/demos/chat-app/src/styles.sass"],
+            "styles": ["apps/demos/chat-app/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
