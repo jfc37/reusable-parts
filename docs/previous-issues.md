@@ -7,3 +7,9 @@
 Remove initial state from `Store.fromFeature(..)`
 Replace with provider:
 `{ provide: INITIAL_STATE, useFactory: someFunctionReturningInitialState> },`
+
+## After deploying to firebase, app doesn't appear
+
+### Solution
+
+add `/index.html` at the end and browse
