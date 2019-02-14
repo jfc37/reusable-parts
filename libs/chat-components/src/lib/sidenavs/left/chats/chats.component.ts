@@ -81,8 +81,8 @@ export class ChatChatsSidenavComponent implements OnDestroy {
    *
    * @param status
    */
-  setUserStatus(status: UserStatus): void {
-    this._chatService.setUserStatus(status);
+  setUserStatus(status: string): void {
+    this._chatService.setUserStatus(status as UserStatus);
   }
 
   /**
