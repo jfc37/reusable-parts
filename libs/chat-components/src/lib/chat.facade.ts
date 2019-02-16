@@ -6,6 +6,7 @@ export interface IChatFacade {
   contacts$: Observable<ChatContact[]>;
   chats$: Observable<Chat[]>;
   user$: Observable<ChatUser>;
+  allUsers$: Observable<ChatUser[]>;
 
   loadAllData(): Observable<any>;
   createChat(contactId: string): Observable<string>;

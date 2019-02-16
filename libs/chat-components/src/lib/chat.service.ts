@@ -83,19 +83,7 @@ export class ChatService implements Resolve<any> {
       takeWhile(exists => !Boolean(exists)),
       take(1),
       switchMap(() => this.facade.createChat(contactId)),
-      map(
-        chatId =>
-          ({
-            contactId: contactId,
-            id: chatId,
-            unread: null,
-          } as ChatSummary),
-      ),
-      withLatestFrom(this.user$, (summary, user) => ({
-        ...user,
-        chatList: [...user.chatList, summary],
-      })),
-      switchMap(user => this.facade.updateUser(user)),
+      tap(console.error.bind(null, 'createNewChat 111')),
       take(1),
     );
 
