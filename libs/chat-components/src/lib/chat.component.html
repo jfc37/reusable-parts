@@ -1,52 +1,56 @@
-<div *ngIf="(user$ | async) as user" id="chat" class="page-layout carded fullwidth inner-scroll">
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg accent"></div>
-  <!-- / TOP BACKGROUND -->
+<ng-container *ngIf="(contacts$ | async) as contacts">
+  <div *ngIf="(user$ | async) as user" id="chat" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-  <!-- CENTER -->
-  <div class="center">
-    <!-- CONTENT CARD -->
-    <div class="content-card">
-      <mat-sidenav-container>
-        <!-- LEFT SIDENAV -->
+    <!-- CENTER -->
+    <div class="center">
+      <!-- CONTENT CARD -->
+      <div class="content-card">
+        <mat-sidenav-container>
+          <!-- LEFT SIDENAV -->
 
-        <mat-sidenav
-          class="sidenav"
-          position="start"
-          opened="true"
-          mode="side"
-          fuseMatSidenavHelper="chat-left-sidenav"
-          matIsLockedOpen="gt-md"
-        >
-          <chat-left-sidenav [user]="user" [chats]="chats$ | async" [contacts]="contacts$ | async"></chat-left-sidenav>
-        </mat-sidenav>
+          <mat-sidenav
+            class="sidenav"
+            position="start"
+            opened="true"
+            mode="side"
+            fuseMatSidenavHelper="chat-left-sidenav"
+            matIsLockedOpen="gt-md"
+          >
+            <chat-left-sidenav [user]="user" [chats]="chats$ | async" [contacts]="contacts"></chat-left-sidenav>
+          </mat-sidenav>
 
-        <!-- / LEFT SIDENAV -->
+          <!-- / LEFT SIDENAV -->
 
-        <!-- CONTENT -->
+          <!-- CONTENT -->
 
-        <chat-start *ngIf="!selectedChat"></chat-start>
+          <chat-start *ngIf="!selectedChat"></chat-start>
 
-        <chat-view *ngIf="selectedChat" [user]="user"></chat-view>
+          <chat-view *ngIf="selectedChat" [user]="user"></chat-view>
 
-        <!-- / CONTENT -->
+          <!-- / CONTENT -->
 
-        <!-- RIGHT SIDENAV -->
+          <!-- RIGHT SIDENAV -->
 
-        <mat-sidenav
-          class="sidenav"
-          position="end"
-          opened="false"
-          mode="over"
-          fuseMatSidenavHelper="chat-right-sidenav"
-        >
-          <chat-right-sidenav></chat-right-sidenav>
-        </mat-sidenav>
+          <mat-sidenav
+            class="sidenav"
+            position="end"
+            opened="false"
+            mode="over"
+            fuseMatSidenavHelper="chat-right-sidenav"
+          >
+            <chat-right-sidenav></chat-right-sidenav>
+          </mat-sidenav>
 
-        <!-- / RIGHT SIDENAV -->
-      </mat-sidenav-container>
+          <!-- / RIGHT SIDENAV -->
+        </mat-sidenav-container>
+      </div>
+      <!-- / CONTENT CARD -->
     </div>
-    <!-- / CONTENT CARD -->
+    <!-- / CENTER -->
   </div>
-  <!-- / CENTER -->
-</div>
+</ng-container>
+<pre>{{ user$ | async | json }}</pre>
+<pre>{{ chats$ | async | json }}</pre>

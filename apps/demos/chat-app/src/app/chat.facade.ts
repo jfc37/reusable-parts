@@ -1,61 +1,83 @@
 import { Injectable } from '@angular/core';
 import { IChatFacade, ChatContact, Chat, ChatUser } from '@reusable-parts/chat-components';
-import { ReplaySubject, Observable, combineLatest } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { switchMap, mapTo, tap, map } from 'rxjs/operators';
+import { Observable, combineLatest, ReplaySubject } from 'rxjs';
+import { mapTo, map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+
+const USERID = '7wQms0Ow1Spn50Q18mjr';
 
 @Injectable()
 export class ChatFacade implements IChatFacade {
-  contacts$ = new ReplaySubject<ChatContact[]>();
-  chats$ = new ReplaySubject<Chat[]>();
-  user$ = new ReplaySubject<ChatUser>();
+  contacts$: ReplaySubject<ChatContact[]>;
+  chats$: ReplaySubject<Chat[]>;
+  user$: ReplaySubject<ChatUser>;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private af: AngularFirestore) {
+    this.contacts$ = new ReplaySubject(1);
+    this.af
+      .collection<ChatContact>('contacts/')
+      .snapshotChanges()
+      .pipe(
+        map(collection =>
+          collection.map(
+            a =>
+              ({
+                ...a.payload.doc.data(),
+                id: a.payload.doc.id,
+              } as ChatContact),
+          ),
+        ),
+      )
+      .subscribe(this.contacts$);
 
-  public loadAllData(): Observable<any> {
-    return combineLatest(this.loadContacts(), this.loadChats(), this.loadUser());
+    this.chats$ = new ReplaySubject(1);
+    this.af
+      .collection<Chat>('chats/')
+      .snapshotChanges()
+      .pipe(
+        map(collection =>
+          collection.map(
+            a =>
+              ({
+                ...a.payload.doc.data(),
+                id: a.payload.doc.id,
+              } as Chat),
+          ),
+        ),
+      )
+      .subscribe(this.chats$);
+
+    this.user$ = new ReplaySubject(1);
+    this.af
+      .doc<ChatUser>(`users/${USERID}`)
+      .snapshotChanges()
+      .pipe(
+        map(
+          a =>
+            ({
+              ...a.payload.data(),
+              id: a.payload.id,
+            } as ChatUser),
+        ),
+      )
+      .subscribe(this.user$);
   }
 
-  public createChat(contactId: string): Observable<void> {
-    return this._httpClient.post('api/chat-chats', { id: contactId, dialog: [] }).pipe(
-      switchMap(() => this.loadChats()),
-      mapTo(null),
-    );
+  public loadAllData(): Observable<any> {
+    return combineLatest(this.contacts$, this.chats$, this.user$);
+  }
+
+  public createChat(contactId: string): Observable<string> {
+    const newChat = { id: contactId, dialog: [] };
+    return fromPromise(this.af.collection('chats').add(newChat)).pipe(map(x => x.id));
   }
 
   public updateChat(chat: Chat): Observable<void> {
-    return this._httpClient.post(`api/chat-chats/${chat.id}`, chat).pipe(
-      switchMap(() => this.loadChats()),
-      switchMap(() => this.loadUser()),
-      mapTo(null),
-    );
+    return fromPromise(this.af.doc(`chats/${chat.id}`).update(chat)).pipe(mapTo(null));
   }
 
   public updateUser(user: ChatUser): Observable<void> {
-    return this._httpClient.post('api/chat-user/' + user.id, user).pipe(
-      switchMap(() => this.loadUser()),
-      mapTo(null),
-    );
-  }
-
-  private loadContacts(): Observable<void> {
-    return this._httpClient.get<ChatContact[]>('api/chat-contacts').pipe(
-      tap(contacts => this.contacts$.next(contacts)),
-      map(() => null),
-    );
-  }
-
-  private loadChats(): Observable<void> {
-    return this._httpClient.get<Chat[]>('api/chat-chats').pipe(
-      tap(chats => this.chats$.next(chats)),
-      map(() => null),
-    );
-  }
-
-  private loadUser(): Observable<void> {
-    return this._httpClient.get<ChatUser[]>('api/chat-user').pipe(
-      tap(users => this.user$.next(users[0])),
-      map(() => null),
-    );
+    return fromPromise(this.af.doc(`users/${user.id}`).update(user)).pipe(mapTo(null));
   }
 }

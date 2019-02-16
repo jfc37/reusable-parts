@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { NxModule } from '@nrwl/nx';
 import { ChatComponentsModule, CHAT_FACADE } from '@reusable-parts/chat-components';
 import { HttpClientModule } from '@angular/common/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { FakeDbService } from './fake-db.service';
 import { ChatFacade } from './chat.facade';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,11 +16,9 @@ import { ChatFacade } from './chat.facade';
     BrowserModule,
     HttpClientModule,
     NxModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
 
-    InMemoryWebApiModule.forRoot(FakeDbService, {
-      delay: 0,
-      passThruUnknownUrl: true,
-    }),
     ChatComponentsModule,
   ],
   providers: [{ provide: CHAT_FACADE, useClass: ChatFacade }],

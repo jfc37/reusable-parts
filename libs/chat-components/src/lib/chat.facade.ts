@@ -8,14 +8,13 @@ export interface IChatFacade {
   user$: Observable<ChatUser>;
 
   loadAllData(): Observable<any>;
-  createChat(contactId: string): Observable<void>;
+  createChat(contactId: string): Observable<string>;
   updateChat(chat: Chat): Observable<void>;
   updateUser(user: ChatUser): Observable<void>;
 }
 
 export interface Chat {
   id: string;
-  name: string;
   dialog: ChatDialog[];
 }
 

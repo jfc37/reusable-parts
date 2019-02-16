@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from '../../../chat.service';
 import { FuseMatSidenavHelperService } from '@reusable-parts/@fuse';
@@ -14,7 +13,7 @@ import { ChatUser, Chat, ChatContact, UserStatus } from '../../../chat.facade';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
 })
-export class ChatChatsSidenavComponent implements OnDestroy {
+export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   @Input() public chats: Chat[];
   chatSearch: any;
   @Input() public contacts: ChatContact[];
@@ -35,7 +34,15 @@ export class ChatChatsSidenavComponent implements OnDestroy {
     private _chatService: ChatService,
     private _fuseMatSidenavHelperService: FuseMatSidenavHelperService,
     public _mediaService: MediaService,
-  ) {
+  ) {}
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
+
+  ngOnInit(): void {
+    console.error('xxxx CHATS COMPONENT INIT');
+
     // Set the defaults
     this.chatSearch = {
       name: '',
@@ -45,10 +52,6 @@ export class ChatChatsSidenavComponent implements OnDestroy {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
-
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
 
   /**
    * On destroy

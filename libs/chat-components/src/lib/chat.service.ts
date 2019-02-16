@@ -1,8 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Resolve } from '@angular/router';
 import { Observable, Subject, ReplaySubject, concat, of } from 'rxjs';
 
-import { FuseUtils } from '@reusable-parts/@fuse';
 import {
   IChatFacade,
   CHAT_FACADE,
@@ -40,24 +39,24 @@ export class ChatService implements Resolve<any> {
   }
 
   selectChat(contactId: string): void {
-    const newChatId = FuseUtils.generateGUID();
-    const contact$ = this.contacts$.pipe(map(contacts => contacts.find(contact => contact.id === contactId)));
-
     const doesChatExist$ = this.user$.pipe(
       map(user => Boolean(user.chatList.find(item => item.contactId === contactId))),
     );
 
+    const contact$ = this.contacts$.pipe(map(contacts => contacts.find(contact => contact.id === contactId)));
+
     const createNewChat$ = doesChatExist$.pipe(
       takeWhile(exists => !Boolean(exists)),
       concatMap(() => of(null)),
-      switchMap(() => this.facade.createChat(newChatId)),
       switchMap(() => contact$),
-      map(
-        contact =>
+      switchMap(() => this.facade.createChat(contactId)),
+      withLatestFrom(
+        contact$,
+        (chatId, contact) =>
           ({
             contactId: contactId,
-            id: newChatId,
-            lastMessageTime: new Date(),
+            id: chatId,
+            lastMessageTime: new Date().toISOString() as any,
             name: contact.name,
             unread: null,
           } as ChatSummary),
@@ -71,6 +70,7 @@ export class ChatService implements Resolve<any> {
     );
 
     const setChat$ = this.user$.pipe(
+      withLatestFrom(this.user$, (_, user) => user),
       map(user => user.chatList.find(item => item.contactId === contactId)),
       filter(Boolean),
       withLatestFrom(this.chats$, (chatSummary, chats) => chats.find(chat => chat.id === chatSummary.id)),
