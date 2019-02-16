@@ -51,7 +51,6 @@ export interface ChatContact {
 export interface ChatSummary {
   id: string;
   contactId: string;
-  name: string;
   lastMessage?: string;
   lastMessageTime: Date;
   unread: number;
