@@ -12,7 +12,7 @@ import {
   UserStatus,
   ChatDialog,
 } from './chat.facade';
-import { tap, map, switchMap, filter, take, withLatestFrom, takeWhile, concatMap, combineLatest } from 'rxjs/operators';
+import { tap, map, switchMap, filter, take, takeWhile, combineLatest } from 'rxjs/operators';
 
 @Injectable()
 export class ChatService implements Resolve<any> {
@@ -83,7 +83,6 @@ export class ChatService implements Resolve<any> {
       takeWhile(exists => !Boolean(exists)),
       take(1),
       switchMap(() => this.facade.createChat(contactId)),
-      tap(console.error.bind(null, 'createNewChat 111')),
       take(1),
     );
 

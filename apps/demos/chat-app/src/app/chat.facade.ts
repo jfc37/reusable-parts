@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IChatFacade, ChatContact, Chat, ChatUser, ChatSummary } from '@reusable-parts/chat-components';
 import { Observable, combineLatest, ReplaySubject } from 'rxjs';
-import { mapTo, map, combineLatest as combineLatestOp, tap, switchMap, withLatestFrom, take } from 'rxjs/operators';
+import { mapTo, map, switchMap, withLatestFrom, take, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { Router, ActivatedRoute } from '@angular/router';
+import { chatUsers, chatContacts } from './fake-db.service';
 
 @Injectable()
 export class ChatFacade implements IChatFacade {
@@ -72,6 +72,42 @@ export class ChatFacade implements IChatFacade {
     );
   }
 
+  public reset(): void {
+    const deleteUsers$ = fromPromise(this.af.collection('users').ref.get()).pipe(
+      tap(docs => {
+        const batch = this.af.firestore.batch();
+        docs.forEach(doc => batch.delete(doc.ref));
+        batch.commit();
+      }),
+    );
+
+    const deleteContacts$ = fromPromise(this.af.collection('contacts').ref.get()).pipe(
+      tap(docs => {
+        const batch = this.af.firestore.batch();
+        docs.forEach(doc => batch.delete(doc.ref));
+        batch.commit();
+      }),
+    );
+
+    const deleteChats$ = fromPromise(this.af.collection('chats').ref.get()).pipe(
+      tap(docs => {
+        const batch = this.af.firestore.batch();
+        docs.forEach(doc => batch.delete(doc.ref));
+        batch.commit();
+      }),
+    );
+
+    combineLatest(deleteUsers$, deleteContacts$, deleteChats$).subscribe(() => {
+      chatContacts.forEach(contact => {
+        this.af.doc(`contacts/${contact.id}`).set(contact);
+      });
+
+      chatUsers.forEach(user => {
+        this.af.doc(`users/${user.id}`).set(user);
+      });
+    });
+  }
+
   public loadAllData(): Observable<any> {
     return combineLatest(this.contacts$, this.chats$, this.user$);
   }
@@ -94,30 +130,28 @@ export class ChatFacade implements IChatFacade {
 
   private addChatToUsers(chatId: string, contactId: string): Observable<any> {
     const addToCurrentUser$ = this.user$.pipe(
-      tap(console.error.bind(null, 'CURRENT 111')),
       map(user => ({
         ...user,
         chatList: [...user.chatList, this.getChatSummary(contactId, chatId)],
       })),
-      tap(console.error.bind(null, 'CURRENT 222')),
+
       take(1),
       switchMap(user => this.updateUser(user)),
-      tap(console.error.bind(null, 'CURRENT 333')),
+
       take(1),
     );
 
     const addToOtherUser$ = this.allUsers$.pipe(
-      tap(console.error.bind(null, 'OTHER 111')),
       map(users => users.find(user => user.id === contactId)),
-      tap(console.error.bind(null, 'OTHER 222')),
+
       withLatestFrom(this.currentUserIdReplay, (user, currentUserId) => ({
         ...user,
         chatList: [...user.chatList, this.getChatSummary(currentUserId, chatId)],
       })),
-      tap(console.error.bind(null, 'OTHER 333')),
+
       take(1),
       switchMap(user => this.updateUser(user)),
-      tap(console.error.bind(null, 'OTHER 444')),
+
       take(1),
     );
 

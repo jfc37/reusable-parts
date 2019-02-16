@@ -11,9 +11,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
-  declarations: [AppComponent, ChatComponent],
+  declarations: [AppComponent, ChatComponent, ResetComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -23,7 +24,8 @@ import { ChatComponent } from './chat/chat.component';
 
     RouterModule.forRoot([
       { path: 'chat/:userId', component: ChatComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'chat/7wQms0Ow1Spn50Q18mjr' },
+      { path: 'reset', component: ResetComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'chat/aaa' },
     ]),
 
     ChatComponentsModule,
