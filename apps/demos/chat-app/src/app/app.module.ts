@@ -9,15 +9,22 @@ import { ChatFacade } from './chat.facade';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ChatComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+
+    RouterModule.forRoot([
+      { path: 'chat/:userId', component: ChatComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'chat/7wQms0Ow1Spn50Q18mjr' },
+    ]),
 
     ChatComponentsModule,
   ],

@@ -58,8 +58,6 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot([]),
-    RouterModule.forChild(routes),
 
     MatButtonModule,
     MatCardModule,

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { IChatFacade, ChatContact, Chat, ChatUser } from '@reusable-parts/chat-components';
 import { Observable, combineLatest, ReplaySubject } from 'rxjs';
-import { mapTo, map } from 'rxjs/operators';
+import { mapTo, map, combineLatest as combineLatestOp, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-
-const USERID = '7wQms0Ow1Spn50Q18mjr';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class ChatFacade implements IChatFacade {
   contacts$: ReplaySubject<ChatContact[]>;
   chats$: ReplaySubject<Chat[]>;
-  user$: ReplaySubject<ChatUser>;
+  user$: Observable<ChatUser>;
+  allUsers$: ReplaySubject<ChatUser[]>;
+
+  public currentUserIdReplay = new ReplaySubject<string>();
 
   constructor(private af: AngularFirestore) {
     this.contacts$ = new ReplaySubject(1);
@@ -48,20 +50,26 @@ export class ChatFacade implements IChatFacade {
       )
       .subscribe(this.chats$);
 
-    this.user$ = new ReplaySubject(1);
+    this.allUsers$ = new ReplaySubject(1);
     this.af
-      .doc<ChatUser>(`users/${USERID}`)
+      .collection<ChatUser>(`users/`)
       .snapshotChanges()
       .pipe(
-        map(
-          a =>
-            ({
-              ...a.payload.data(),
-              id: a.payload.id,
-            } as ChatUser),
+        map(collection =>
+          collection.map(
+            a =>
+              ({
+                ...a.payload.doc.data(),
+                id: a.payload.doc.id,
+              } as ChatUser),
+          ),
         ),
       )
-      .subscribe(this.user$);
+      .subscribe(this.allUsers$);
+
+    this.user$ = combineLatest(this.allUsers$, this.currentUserIdReplay, (users, id) =>
+      users.find(user => user.id === id),
+    );
   }
 
   public loadAllData(): Observable<any> {
