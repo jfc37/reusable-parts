@@ -4,11 +4,11 @@ import { Observable, combineLatest, ReplaySubject } from 'rxjs';
 import { mapTo, map, switchMap, withLatestFrom, take, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { chatUsers, chatContacts } from './fake-db.service';
+import { chatUsers } from './fake-db.service';
 
 @Injectable()
 export class ChatFacade implements IChatFacade {
-  contacts$: ReplaySubject<ChatContact[]>;
+  contacts$: Observable<ChatContact[]>;
   chats$: ReplaySubject<Chat[]>;
   user$: Observable<ChatUser>;
   allUsers$: ReplaySubject<ChatUser[]>;
@@ -16,23 +16,6 @@ export class ChatFacade implements IChatFacade {
   public currentUserIdReplay = new ReplaySubject<string>();
 
   constructor(private af: AngularFirestore) {
-    this.contacts$ = new ReplaySubject(1);
-    this.af
-      .collection<ChatContact>('contacts/')
-      .snapshotChanges()
-      .pipe(
-        map(collection =>
-          collection.map(
-            a =>
-              ({
-                ...a.payload.doc.data(),
-                id: a.payload.doc.id,
-              } as ChatContact),
-          ),
-        ),
-      )
-      .subscribe(this.contacts$);
-
     this.chats$ = new ReplaySubject(1);
     this.af
       .collection<Chat>('chats/')
@@ -67,6 +50,8 @@ export class ChatFacade implements IChatFacade {
       )
       .subscribe(this.allUsers$);
 
+    this.contacts$ = this.allUsers$;
+
     this.user$ = combineLatest(this.allUsers$, this.currentUserIdReplay, (users, id) =>
       users.find(user => user.id === id),
     );
@@ -74,14 +59,6 @@ export class ChatFacade implements IChatFacade {
 
   public reset(): void {
     const deleteUsers$ = fromPromise(this.af.collection('users').ref.get()).pipe(
-      tap(docs => {
-        const batch = this.af.firestore.batch();
-        docs.forEach(doc => batch.delete(doc.ref));
-        batch.commit();
-      }),
-    );
-
-    const deleteContacts$ = fromPromise(this.af.collection('contacts').ref.get()).pipe(
       tap(docs => {
         const batch = this.af.firestore.batch();
         docs.forEach(doc => batch.delete(doc.ref));
@@ -97,11 +74,7 @@ export class ChatFacade implements IChatFacade {
       }),
     );
 
-    combineLatest(deleteUsers$, deleteContacts$, deleteChats$).subscribe(() => {
-      chatContacts.forEach(contact => {
-        this.af.doc(`contacts/${contact.id}`).set(contact);
-      });
-
+    combineLatest(deleteUsers$, deleteChats$).subscribe(() => {
       chatUsers.forEach(user => {
         this.af.doc(`users/${user.id}`).set(user);
       });
