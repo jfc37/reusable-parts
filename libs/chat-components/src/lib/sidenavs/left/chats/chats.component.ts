@@ -41,8 +41,6 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   // -----------------------------------------------------------------------------------------------------
 
   ngOnInit(): void {
-    console.error('xxxx CHATS COMPONENT INIT');
-
     // Set the defaults
     this.chatSearch = {
       name: '',
@@ -95,12 +93,5 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
    */
   changeLeftSidenavView(view): void {
     this._chatService.onLeftSidenavViewChanged.next(view);
-  }
-
-  /**
-   * Logout
-   */
-  logout(): void {
-    console.log('logout triggered');
   }
 }
