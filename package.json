@@ -116,7 +116,7 @@
     "jasmine-spec-reporter": "4.2.1",
     "jest": "23.6.0",
     "jest-preset-angular": "6.0.1",
-    "ng-packagr": "^4.2.0",
+    "ng-packagr": "^4.7.1",
     "prettier": "1.15.2",
     "protractor": "5.4.1",
     "ts-node": "7.0.1",
