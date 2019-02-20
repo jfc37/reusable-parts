@@ -662,7 +662,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["libs/chat-components/tsconfig.lib.json", "libs/chat-components/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "**/@fuse/**"]
           }
         },
         "test": {
