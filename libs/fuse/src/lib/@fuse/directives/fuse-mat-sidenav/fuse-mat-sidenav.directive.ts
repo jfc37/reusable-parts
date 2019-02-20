@@ -27,10 +27,10 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {FuseMatchMediaService} _fuseMatchMediaService
-     * @param {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
-     * @param {MatSidenav} _matSidenav
-     * @param {MediaObserver} _mediaObserver
+     *  {FuseMatchMediaService} _fuseMatchMediaService
+     *  {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
+     *  {MatSidenav} _matSidenav
+     *  {MediaObserver} _mediaObserver
      */
     constructor(
         private _fuseMatchMediaService: FuseMatchMediaService,
@@ -111,7 +111,7 @@ export class FuseMatSidenavTogglerDirective
     /**
      * Constructor
      *
-     * @param {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
+     *  {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
      */
     constructor(
         private _fuseMatSidenavHelperService: FuseMatSidenavHelperService)

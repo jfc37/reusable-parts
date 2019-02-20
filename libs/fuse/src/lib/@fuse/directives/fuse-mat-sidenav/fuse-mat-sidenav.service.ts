@@ -23,8 +23,8 @@ export class FuseMatSidenavHelperService
     /**
      * Set sidenav
      *
-     * @param id
-     * @param instance
+     *  id
+     *  instance
      */
     setSidenav(id, instance): void
     {
@@ -34,8 +34,8 @@ export class FuseMatSidenavHelperService
     /**
      * Get sidenav
      *
-     * @param id
-     * @returns {any}
+     *  id
+     *  {any}
      */
     getSidenav(id): any
     {

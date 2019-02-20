@@ -49,7 +49,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationChanged
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationChanged(): Observable<any>
     {
@@ -59,7 +59,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationRegistered
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationRegistered(): Observable<any>
     {
@@ -69,7 +69,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationUnregistered
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationUnregistered(): Observable<any>
     {
@@ -79,7 +79,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationItemAdded
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationItemAdded(): Observable<any>
     {
@@ -89,7 +89,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationItemUpdated
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationItemUpdated(): Observable<any>
     {
@@ -99,7 +99,7 @@ export class FuseNavigationService
     /**
      * Get onNavigationItemRemoved
      *
-     * @returns {Observable<any>}
+     *  {Observable<any>}
      */
     get onNavigationItemRemoved(): Observable<any>
     {
@@ -114,8 +114,8 @@ export class FuseNavigationService
      * Register the given navigation
      * with the given key
      *
-     * @param key
-     * @param navigation
+     *  key
+     *  navigation
      */
     register(key, navigation): void
     {
@@ -136,7 +136,7 @@ export class FuseNavigationService
 
     /**
      * Unregister the navigation from the registry
-     * @param key
+     *  key
      */
     unregister(key): void
     {
@@ -156,8 +156,8 @@ export class FuseNavigationService
     /**
      * Get navigation from registry by key
      *
-     * @param key
-     * @returns {any}
+     *  key
+     *  {any}
      */
     getNavigation(key): any
     {
@@ -176,9 +176,9 @@ export class FuseNavigationService
     /**
      * Get flattened navigation array
      *
-     * @param navigation
-     * @param flatNavigation
-     * @returns {any[]}
+     *  navigation
+     *  flatNavigation
+     *  {any[]}
      */
     getFlatNavigation(navigation, flatNavigation: FuseNavigationItem[] = []): any
     {
@@ -206,7 +206,7 @@ export class FuseNavigationService
     /**
      * Get the current navigation
      *
-     * @returns {any}
+     *  {any}
      */
     getCurrentNavigation(): any
     {
@@ -224,7 +224,7 @@ export class FuseNavigationService
      * Set the navigation with the key
      * as the current navigation
      *
-     * @param key
+     *  key
      */
     setCurrentNavigation(key): void
     {
@@ -247,9 +247,9 @@ export class FuseNavigationService
      * Get navigation item by id from the
      * current navigation
      *
-     * @param id
-     * @param {any} navigation
-     * @returns {any | boolean}
+     *  id
+     *  {any} navigation
+     *  {any | boolean}
      */
     getNavigationItem(id, navigation = null): any | boolean
     {
@@ -283,9 +283,9 @@ export class FuseNavigationService
      * Get the parent of the navigation item
      * with the id
      *
-     * @param id
-     * @param {any} navigation
-     * @param parent
+     *  id
+     *  {any} navigation
+     *  parent
      */
     getNavigationItemParent(id, navigation = null, parent = null): any
     {
@@ -319,8 +319,8 @@ export class FuseNavigationService
     /**
      * Add a navigation item to the specified location
      *
-     * @param item
-     * @param id
+     *  item
+     *  id
      */
     addNavigationItem(item, id): void
     {
@@ -372,8 +372,8 @@ export class FuseNavigationService
     /**
      * Update navigation item with the given id
      *
-     * @param id
-     * @param properties
+     *  id
+     *  properties
      */
     updateNavigationItem(id, properties): void
     {
@@ -396,7 +396,7 @@ export class FuseNavigationService
     /**
      * Remove navigation item with the given id
      *
-     * @param id
+     *  id
      */
     removeNavigationItem(id): void
     {

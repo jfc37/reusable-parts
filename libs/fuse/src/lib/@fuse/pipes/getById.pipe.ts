@@ -9,10 +9,10 @@ export class GetByIdPipe implements PipeTransform
     /**
      * Transform
      *
-     * @param {any[]} value
-     * @param {number} id
-     * @param {string} property
-     * @returns {any}
+     *  {any[]} value
+     *  {number} id
+     *  {string} property
+     *  {any}
      */
     transform(value: any[], id: number, property: string): any
     {

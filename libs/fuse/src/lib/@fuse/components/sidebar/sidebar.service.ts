@@ -21,8 +21,8 @@ export class FuseSidebarService
     /**
      * Add the sidebar to the registry
      *
-     * @param key
-     * @param sidebar
+     *  key
+     *  sidebar
      */
     register(key, sidebar): void
     {
@@ -41,7 +41,7 @@ export class FuseSidebarService
     /**
      * Remove the sidebar from the registry
      *
-     * @param key
+     *  key
      */
     unregister(key): void
     {
@@ -58,8 +58,8 @@ export class FuseSidebarService
     /**
      * Return the sidebar with the given key
      *
-     * @param key
-     * @returns {FuseSidebarComponent}
+     *  key
+     *  {FuseSidebarComponent}
      */
     getSidebar(key): FuseSidebarComponent
     {

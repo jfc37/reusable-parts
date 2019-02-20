@@ -19,8 +19,8 @@ export class FuseWidgetComponent implements AfterContentInit
     /**
      * Constructor
      *
-     * @param {ElementRef} _elementRef
-     * @param {Renderer2} _renderer
+     *  {ElementRef} _elementRef
+     *  {Renderer2} _renderer
      */
     constructor(
         private _elementRef: ElementRef,

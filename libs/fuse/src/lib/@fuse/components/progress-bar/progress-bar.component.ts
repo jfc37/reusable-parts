@@ -23,7 +23,7 @@ export class FuseProgressBarComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {FuseProgressBarService} _fuseProgressBarService
+     *  {FuseProgressBarService} _fuseProgressBarService
      */
     constructor(
         private _fuseProgressBarService: FuseProgressBarService

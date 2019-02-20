@@ -3,9 +3,9 @@ export class FuseUtils {
   /**
    * Filter array by string
    *
-   * @param mainArr
-   * @param searchText
-   * @returns {any}
+   *  mainArr
+   *  searchText
+   *  {any}
    */
   public static filterArrayByString(mainArr, searchText): any {
     if (searchText === '') {
@@ -22,9 +22,9 @@ export class FuseUtils {
   /**
    * Search in object
    *
-   * @param itemObj
-   * @param searchText
-   * @returns {boolean}
+   *  itemObj
+   *  searchText
+   *  {boolean}
    */
   public static searchInObj(itemObj, searchText): boolean {
     for (const prop in itemObj) {
@@ -55,9 +55,9 @@ export class FuseUtils {
   /**
    * Search in array
    *
-   * @param arr
-   * @param searchText
-   * @returns {boolean}
+   *  arr
+   *  searchText
+   *  {boolean}
    */
   public static searchInArray(arr, searchText): boolean {
     for (const value of arr) {
@@ -78,9 +78,9 @@ export class FuseUtils {
   /**
    * Search in string
    *
-   * @param value
-   * @param searchText
-   * @returns {any}
+   *  value
+   *  searchText
+   *  {any}
    */
   public static searchInString(value, searchText): any {
     return value.toLowerCase().includes(searchText);
@@ -89,7 +89,7 @@ export class FuseUtils {
   /**
    * Generate a unique GUID
    *
-   * @returns {string}
+   *  {string}
    */
   public static generateGUID(): string {
     function S4(): string {
@@ -104,8 +104,8 @@ export class FuseUtils {
   /**
    * Toggle in array
    *
-   * @param item
-   * @param array
+   *  item
+   *  array
    */
   public static toggleInArray(item, array): void {
     if (array.indexOf(item) === -1) {
@@ -118,8 +118,8 @@ export class FuseUtils {
   /**
    * Handleize
    *
-   * @param text
-   * @returns {string}
+   *  text
+   *  {string}
    */
   public static handleize(text): string {
     return text
