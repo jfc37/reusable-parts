@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
 import { HomeComponent } from './home/home.component';
 import { MatButtonModule, MatInputModule, MatFormFieldModule } from '@angular/material';
-import { FuseSharedModule, FuseModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule, FuseModule } from '@reusable-parts/fuse/src/lib/@fuse';
 import { PictureDetailsComponent } from './picture-details/picture-details.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';

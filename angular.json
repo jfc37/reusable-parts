@@ -645,6 +645,34 @@
         }
       }
     },
+    "fuse": {
+      "root": "libs/fuse",
+      "sourceRoot": "libs/fuse/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/fuse/tsconfig.lib.json",
+            "project": "libs/fuse/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/fuse/jest.config.js",
+            "tsConfig": "libs/fuse/tsconfig.spec.json",
+            "setupFile": "libs/fuse/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
     "chat-components": {
       "root": "libs/chat-components",
       "sourceRoot": "libs/chat-components/src",

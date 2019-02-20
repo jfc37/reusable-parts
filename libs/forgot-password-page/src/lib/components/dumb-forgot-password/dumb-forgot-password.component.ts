@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { fuseAnimations } from '@reusable-parts/@fuse/animations';
+import { fuseAnimations } from '@reusable-parts/fuse/src/lib/@fuse/animations';
 
 @Component({
   selector: 'jfc-dumb-forgot-password',

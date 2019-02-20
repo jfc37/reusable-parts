@@ -33,7 +33,8 @@
       "@app/search-companies-entity": ["libs/search-companies-entity/src/index.ts"],
       "@app/nz-business-api": ["libs/nz-business-api/src/index.ts"],
       "@app/copper-crm": ["libs/copper-crm/src/index.ts"],
-      "@app/chat-components": ["libs/chat-components/src/index.ts"]
+      "@app/chat-components": ["libs/chat-components/src/index.ts"],
+      "@app/fuse": ["libs/fuse/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

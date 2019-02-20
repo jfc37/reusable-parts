@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { fuseAnimations } from '@reusable-parts/@fuse/animations';
+import { fuseAnimations } from '@reusable-parts/fuse/src/lib/@fuse/animations';
 
 @Component({
   selector: 'jfc-welcome',

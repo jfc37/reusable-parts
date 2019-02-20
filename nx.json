@@ -75,6 +75,9 @@
     },
     "demos-chat-app": {
       "tags": []
+    },
+    "fuse": {
+      "tags": []
     }
   }
 }

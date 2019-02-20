@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatDividerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
 import { MainContentModule } from '@reusable-parts/main-content/src';
 import { BlockStateModule } from '../../state/block-state/block-state.module';
