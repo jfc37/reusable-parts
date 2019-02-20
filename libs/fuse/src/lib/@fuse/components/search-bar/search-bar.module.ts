@@ -7,20 +7,8 @@ import { MatButtonModule, MatIconModule } from '@angular/material';
 import { FuseSearchBarComponent } from './search-bar.component';
 
 @NgModule({
-    declarations: [
-        FuseSearchBarComponent
-    ],
-    imports     : [
-        CommonModule,
-        RouterModule,
-
-        MatButtonModule,
-        MatIconModule
-    ],
-    exports     : [
-        FuseSearchBarComponent
-    ]
+  declarations: [FuseSearchBarComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
+  exports: [FuseSearchBarComponent],
 })
-export class FuseSearchBarModule
-{
-}
+export class FuseSearchBarModule {}

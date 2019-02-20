@@ -6,68 +6,61 @@ import { FuseNavigationItem } from '@reusable-parts/fuse/src/lib/@fuse/types';
 import { FuseNavigationService } from '@reusable-parts/fuse/src/lib/@fuse/components/navigation/navigation.service';
 
 @Component({
-    selector   : 'fuse-nav-vertical-item',
-    templateUrl: './item.component.html',
-    styleUrls  : ['./item.component.scss']
+  selector: 'fuse-nav-vertical-item',
+  templateUrl: './item.component.html',
+  styleUrls: ['./item.component.scss'],
 })
-export class FuseNavVerticalItemComponent implements OnInit, OnDestroy
-{
-    @HostBinding('class')
-    classes = 'nav-item';
+export class FuseNavVerticalItemComponent implements OnInit, OnDestroy {
+  @HostBinding('class')
+  classes = 'nav-item';
 
-    @Input()
-    item: FuseNavigationItem;
+  @Input()
+  item: FuseNavigationItem;
 
-    // Private
-    private _unsubscribeAll: Subject<any>;
+  // Private
+  private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     */
+  /**
+   * Constructor
+   */
 
-    /**
-     *
-     *  {ChangeDetectorRef} _changeDetectorRef
-     *  {FuseNavigationService} _fuseNavigationService
-     */
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _fuseNavigationService: FuseNavigationService
+  /**
+   *
+   *  {ChangeDetectorRef} _changeDetectorRef
+   *  {FuseNavigationService} _fuseNavigationService
+   */
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private _fuseNavigationService: FuseNavigationService) {
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    // Subscribe to navigation item
+    merge(
+      this._fuseNavigationService.onNavigationItemAdded,
+      this._fuseNavigationService.onNavigationItemUpdated,
+      this._fuseNavigationService.onNavigationItemRemoved,
     )
-    {
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
-    }
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        // Mark for check
+        this._changeDetectorRef.markForCheck();
+      });
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Subscribe to navigation item
-        merge(
-            this._fuseNavigationService.onNavigationItemAdded,
-            this._fuseNavigationService.onNavigationItemUpdated,
-            this._fuseNavigationService.onNavigationItemRemoved
-        ).pipe(takeUntil(this._unsubscribeAll))
-         .subscribe(() => {
-
-             // Mark for check
-             this._changeDetectorRef.markForCheck();
-         });
-    }
-
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
-    }
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
 }

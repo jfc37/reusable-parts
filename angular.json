@@ -658,13 +658,6 @@
             "project": "libs/fuse/ng-package.json"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/fuse/tsconfig.lib.json", "libs/fuse/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {

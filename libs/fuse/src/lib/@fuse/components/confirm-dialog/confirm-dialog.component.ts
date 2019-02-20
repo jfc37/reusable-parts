@@ -2,23 +2,17 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-    selector   : 'fuse-confirm-dialog',
-    templateUrl: './confirm-dialog.component.html',
-    styleUrls  : ['./confirm-dialog.component.scss']
+  selector: 'fuse-confirm-dialog',
+  templateUrl: './confirm-dialog.component.html',
+  styleUrls: ['./confirm-dialog.component.scss'],
 })
-export class FuseConfirmDialogComponent
-{
-    public confirmMessage: string;
+export class FuseConfirmDialogComponent {
+  public confirmMessage: string;
 
-    /**
-     * Constructor
-     *
-     *  {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
-     */
-    constructor(
-        public dialogRef: MatDialogRef<FuseConfirmDialogComponent>
-    )
-    {
-    }
-
+  /**
+   * Constructor
+   *
+   *  {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
+   */
+  constructor(public dialogRef: MatDialogRef<FuseConfirmDialogComponent>) {}
 }

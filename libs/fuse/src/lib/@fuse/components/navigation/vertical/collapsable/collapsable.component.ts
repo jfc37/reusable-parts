@@ -8,252 +8,216 @@ import { fuseAnimations } from '@reusable-parts/fuse/src/lib/@fuse/animations';
 import { FuseNavigationService } from '@reusable-parts/fuse/src/lib/@fuse/components/navigation/navigation.service';
 
 @Component({
-    selector   : 'fuse-nav-vertical-collapsable',
-    templateUrl: './collapsable.component.html',
-    styleUrls  : ['./collapsable.component.scss'],
-    animations : fuseAnimations
+  selector: 'fuse-nav-vertical-collapsable',
+  templateUrl: './collapsable.component.html',
+  styleUrls: ['./collapsable.component.scss'],
+  animations: fuseAnimations,
 })
-export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy
-{
-    @Input()
-    item: FuseNavigationItem;
+export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy {
+  @Input()
+  item: FuseNavigationItem;
 
-    @HostBinding('class')
-    classes = 'nav-collapsable nav-item';
+  @HostBinding('class')
+  classes = 'nav-collapsable nav-item';
 
-    @HostBinding('class.open')
-    public isOpen = false;
+  @HostBinding('class.open')
+  public isOpen = false;
 
-    // Private
-    private _unsubscribeAll: Subject<any>;
+  // Private
+  private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     *  {ChangeDetectorRef} _changeDetectorRef
-     *  {FuseNavigationService} _fuseNavigationService
-     *  {Router} _router
-     */
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _fuseNavigationService: FuseNavigationService,
-        private _router: Router
-    )
-    {
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
-    }
+  /**
+   * Constructor
+   *
+   *  {ChangeDetectorRef} _changeDetectorRef
+   *  {FuseNavigationService} _fuseNavigationService
+   *  {Router} _router
+   */
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _fuseNavigationService: FuseNavigationService,
+    private _router: Router,
+  ) {
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Listen for router events
-        this._router.events
-            .pipe(
-                filter(event => event instanceof NavigationEnd),
-                takeUntil(this._unsubscribeAll)
-            )
-            .subscribe((event: NavigationEnd) => {
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    // Listen for router events
+    this._router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this._unsubscribeAll),
+      )
+      .subscribe((event: NavigationEnd) => {
+        // Check if the url can be found in
+        // one of the children of this item
+        if (this.isUrlInChildren(this.item, event.urlAfterRedirects)) {
+          this.expand();
+        } else {
+          this.collapse();
+        }
+      });
 
-                // Check if the url can be found in
-                // one of the children of this item
-                if ( this.isUrlInChildren(this.item, event.urlAfterRedirects) )
-                {
-                    this.expand();
-                }
-                else
-                {
-                    this.collapse();
-                }
-            });
-
-        // Listen for collapsing of any navigation item
-        this._fuseNavigationService.onItemCollapsed
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(
-                (clickedItem) => {
-                    if ( clickedItem && clickedItem.children )
-                    {
-                        // Check if the clicked item is one
-                        // of the children of this item
-                        if ( this.isChildrenOf(this.item, clickedItem) )
-                        {
-                            return;
-                        }
-
-                        // Check if the url can be found in
-                        // one of the children of this item
-                        if ( this.isUrlInChildren(this.item, this._router.url) )
-                        {
-                            return;
-                        }
-
-                        // If the clicked item is not this item, collapse...
-                        if ( this.item !== clickedItem )
-                        {
-                            this.collapse();
-                        }
-                    }
-                }
-            );
+    // Listen for collapsing of any navigation item
+    this._fuseNavigationService.onItemCollapsed.pipe(takeUntil(this._unsubscribeAll)).subscribe(clickedItem => {
+      if (clickedItem && clickedItem.children) {
+        // Check if the clicked item is one
+        // of the children of this item
+        if (this.isChildrenOf(this.item, clickedItem)) {
+          return;
+        }
 
         // Check if the url can be found in
         // one of the children of this item
-        if ( this.isUrlInChildren(this.item, this._router.url) )
-        {
-            this.expand();
-        }
-        else
-        {
-            this.collapse();
+        if (this.isUrlInChildren(this.item, this._router.url)) {
+          return;
         }
 
-        // Subscribe to navigation item
-        merge(
-            this._fuseNavigationService.onNavigationItemAdded,
-            this._fuseNavigationService.onNavigationItemUpdated,
-            this._fuseNavigationService.onNavigationItemRemoved
-        ).pipe(takeUntil(this._unsubscribeAll))
-         .subscribe(() => {
-
-             // Mark for check
-             this._changeDetectorRef.markForCheck();
-         });
-    }
-
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Toggle collapse
-     *
-     *  ev
-     */
-    toggleOpen(ev): void
-    {
-        ev.preventDefault();
-
-        this.isOpen = !this.isOpen;
-
-        // Navigation collapse toggled...
-        this._fuseNavigationService.onItemCollapsed.next(this.item);
-        this._fuseNavigationService.onItemCollapseToggled.next();
-    }
-
-    /**
-     * Expand the collapsable navigation
-     */
-    expand(): void
-    {
-        if ( this.isOpen )
-        {
-            return;
+        // If the clicked item is not this item, collapse...
+        if (this.item !== clickedItem) {
+          this.collapse();
         }
+      }
+    });
 
-        this.isOpen = true;
+    // Check if the url can be found in
+    // one of the children of this item
+    if (this.isUrlInChildren(this.item, this._router.url)) {
+      this.expand();
+    } else {
+      this.collapse();
+    }
 
+    // Subscribe to navigation item
+    merge(
+      this._fuseNavigationService.onNavigationItemAdded,
+      this._fuseNavigationService.onNavigationItemUpdated,
+      this._fuseNavigationService.onNavigationItemRemoved,
+    )
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
         // Mark for check
         this._changeDetectorRef.markForCheck();
+      });
+  }
 
-        this._fuseNavigationService.onItemCollapseToggled.next();
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Toggle collapse
+   *
+   *  ev
+   */
+  toggleOpen(ev): void {
+    ev.preventDefault();
+
+    this.isOpen = !this.isOpen;
+
+    // Navigation collapse toggled...
+    this._fuseNavigationService.onItemCollapsed.next(this.item);
+    this._fuseNavigationService.onItemCollapseToggled.next();
+  }
+
+  /**
+   * Expand the collapsable navigation
+   */
+  expand(): void {
+    if (this.isOpen) {
+      return;
     }
 
-    /**
-     * Collapse the collapsable navigation
-     */
-    collapse(): void
-    {
-        if ( !this.isOpen )
-        {
-            return;
-        }
+    this.isOpen = true;
 
-        this.isOpen = false;
+    // Mark for check
+    this._changeDetectorRef.markForCheck();
 
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
+    this._fuseNavigationService.onItemCollapseToggled.next();
+  }
 
-        this._fuseNavigationService.onItemCollapseToggled.next();
+  /**
+   * Collapse the collapsable navigation
+   */
+  collapse(): void {
+    if (!this.isOpen) {
+      return;
     }
 
-    /**
-     * Check if the given parent has the
-     * given item in one of its children
-     *
-     *  parent
-     *  item
-     *  {boolean}
-     */
-    isChildrenOf(parent, item): boolean
-    {
-        if ( !parent.children )
-        {
-            return false;
-        }
+    this.isOpen = false;
 
-        if ( parent.children.indexOf(item) !== -1 )
-        {
-            return true;
-        }
+    // Mark for check
+    this._changeDetectorRef.markForCheck();
 
-        for ( const children of parent.children )
-        {
-            if ( children.children )
-            {
-                return this.isChildrenOf(children, item);
-            }
-        }
+    this._fuseNavigationService.onItemCollapseToggled.next();
+  }
+
+  /**
+   * Check if the given parent has the
+   * given item in one of its children
+   *
+   *  parent
+   *  item
+   *  {boolean}
+   */
+  isChildrenOf(parent, item): boolean {
+    if (!parent.children) {
+      return false;
     }
 
-    /**
-     * Check if the given url can be found
-     * in one of the given parent's children
-     *
-     *  parent
-     *  url
-     *  {boolean}
-     */
-    isUrlInChildren(parent, url): boolean
-    {
-        if ( !parent.children )
-        {
-            return false;
-        }
-
-        for ( let i = 0; i < parent.children.length; i++ )
-        {
-            if ( parent.children[i].children )
-            {
-                if ( this.isUrlInChildren(parent.children[i], url) )
-                {
-                    return true;
-                }
-            }
-
-            if ( parent.children[i].url === url || url.includes(parent.children[i].url) )
-            {
-                return true;
-            }
-        }
-
-        return false;
+    if (parent.children.indexOf(item) !== -1) {
+      return true;
     }
 
+    for (const children of parent.children) {
+      if (children.children) {
+        return this.isChildrenOf(children, item);
+      }
+    }
+  }
+
+  /**
+   * Check if the given url can be found
+   * in one of the given parent's children
+   *
+   *  parent
+   *  url
+   *  {boolean}
+   */
+  isUrlInChildren(parent, url): boolean {
+    if (!parent.children) {
+      return false;
+    }
+
+    for (let i = 0; i < parent.children.length; i++) {
+      if (parent.children[i].children) {
+        if (this.isUrlInChildren(parent.children[i], url)) {
+          return true;
+        }
+      }
+
+      if (parent.children[i].url === url || url.includes(parent.children[i].url)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

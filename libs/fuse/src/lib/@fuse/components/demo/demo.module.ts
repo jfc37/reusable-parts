@@ -7,21 +7,8 @@ import { FuseDemoContentComponent } from './demo-content/demo-content.component'
 import { FuseDemoSidebarComponent } from './demo-sidebar/demo-sidebar.component';
 
 @NgModule({
-    declarations: [
-        FuseDemoContentComponent,
-        FuseDemoSidebarComponent
-    ],
-    imports     : [
-        RouterModule,
-
-        MatDividerModule,
-        MatListModule
-    ],
-    exports     : [
-        FuseDemoContentComponent,
-        FuseDemoSidebarComponent
-    ]
+  declarations: [FuseDemoContentComponent, FuseDemoSidebarComponent],
+  imports: [RouterModule, MatDividerModule, MatListModule],
+  exports: [FuseDemoContentComponent, FuseDemoSidebarComponent],
 })
-export class FuseDemoModule
-{
-}
+export class FuseDemoModule {}

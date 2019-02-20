@@ -13,27 +13,15 @@ import { FuseNavHorizontalItemComponent } from './horizontal/item/item.component
 import { FuseNavHorizontalCollapsableComponent } from './horizontal/collapsable/collapsable.component';
 
 @NgModule({
-    imports     : [
-        CommonModule,
-        RouterModule,
-
-        MatIconModule,
-        MatRippleModule,
-
-        TranslateModule.forChild()
-    ],
-    exports     : [
-        FuseNavigationComponent
-    ],
-    declarations: [
-        FuseNavigationComponent,
-        FuseNavVerticalGroupComponent,
-        FuseNavVerticalItemComponent,
-        FuseNavVerticalCollapsableComponent,
-        FuseNavHorizontalItemComponent,
-        FuseNavHorizontalCollapsableComponent
-    ]
+  imports: [CommonModule, RouterModule, MatIconModule, MatRippleModule, TranslateModule.forChild()],
+  exports: [FuseNavigationComponent],
+  declarations: [
+    FuseNavigationComponent,
+    FuseNavVerticalGroupComponent,
+    FuseNavVerticalItemComponent,
+    FuseNavVerticalCollapsableComponent,
+    FuseNavHorizontalItemComponent,
+    FuseNavHorizontalCollapsableComponent,
+  ],
 })
-export class FuseNavigationModule
-{
-}
+export class FuseNavigationModule {}

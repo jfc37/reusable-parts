@@ -1,18 +1,13 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-    selector: '[fuseWidgetToggle]'
+  selector: '[fuseWidgetToggle]',
 })
-export class FuseWidgetToggleDirective
-{
-    /**
-     * Constructor
-     *
-     *  {ElementRef} elementRef
-     */
-    constructor(
-        public elementRef: ElementRef
-    )
-    {
-    }
+export class FuseWidgetToggleDirective {
+  /**
+   * Constructor
+   *
+   *  {ElementRef} elementRef
+   */
+  constructor(public elementRef: ElementRef) {}
 }

@@ -7,21 +7,8 @@ import { MatButtonModule, MatIconModule, MatProgressBarModule } from '@angular/m
 import { FuseProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
-    declarations: [
-        FuseProgressBarComponent
-    ],
-    imports     : [
-        CommonModule,
-        RouterModule,
-
-        MatButtonModule,
-        MatIconModule,
-        MatProgressBarModule
-    ],
-    exports     : [
-        FuseProgressBarComponent
-    ]
+  declarations: [FuseProgressBarComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatProgressBarModule],
+  exports: [FuseProgressBarComponent],
 })
-export class FuseProgressBarModule
-{
-}
+export class FuseProgressBarModule {}
