@@ -15,7 +15,7 @@ import {
   MatSidenavModule,
   MatToolbarModule,
 } from '@angular/material';
-import { FuseSharedModule, FuseModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule, FuseModule } from '@reusable-parts/fuse';
 import { ChatService } from './chat.service';
 import { ChatChatsSidenavComponent } from './sidenavs/left/chats/chats.component';
 import { ChatUserSidenavComponent } from './sidenavs/left/user/user.component';

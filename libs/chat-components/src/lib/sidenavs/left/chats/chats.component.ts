@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { fuseAnimations } from '@reusable-parts/@fuse/animations';
+import { fuseAnimations } from '@reusable-parts/fuse';
 import { ChatService } from '../../../chat.service';
-import { FuseMatSidenavHelperService } from '@reusable-parts/@fuse';
+import { FuseMatSidenavHelperService } from '@reusable-parts/fuse';
 import { MediaObserver } from '@angular/flex-layout';
 import { ChatUser, Chat, ChatContact, UserStatus } from '../../../chat.facade';
 

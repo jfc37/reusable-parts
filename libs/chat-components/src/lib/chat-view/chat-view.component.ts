@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 
 import { ChatService } from '../chat.service';
-import { FusePerfectScrollbarDirective } from '@reusable-parts/@fuse';
+import { FusePerfectScrollbarDirective } from '@reusable-parts/fuse';
 import { ChatUser, ChatContact, Chat } from '../chat.facade';
 
 @Component({

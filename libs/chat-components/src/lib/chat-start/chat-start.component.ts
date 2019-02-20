@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { fuseAnimations } from '@reusable-parts/@fuse/animations';
+import { fuseAnimations } from '@reusable-parts/fuse';
 
 @Component({
   selector: 'chat-start',
