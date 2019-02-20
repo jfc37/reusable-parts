@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { fuseAnimations } from '@reusable-parts/@fuse/animations';
 import { ChatService } from '../../../chat.service';
 import { FuseMatSidenavHelperService } from '@reusable-parts/@fuse';
-import { MediaService } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 import { ChatUser, Chat, ChatContact, UserStatus } from '../../../chat.facade';
 
 @Component({
@@ -33,7 +33,7 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   constructor(
     private _chatService: ChatService,
     private _fuseMatSidenavHelperService: FuseMatSidenavHelperService,
-    public _mediaService: MediaService,
+    public _mediaService: MediaObserver,
   ) {}
 
   // -----------------------------------------------------------------------------------------------------
