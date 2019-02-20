@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { FuseConfigService } from '@reusable-parts/@fuse/services/config.service';
+import { FuseConfigService } from '@reusable-parts/fuse/src/lib/@fuse/services/config.service';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
 import { MenuItem } from '@reusable-parts/side-nav/src/lib/components/side-nav/side-nav.component.model';

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainContentComponent } from './main-content/main-content.component';
-import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 
 @NgModule({
   imports: [CommonModule, FuseSharedModule],

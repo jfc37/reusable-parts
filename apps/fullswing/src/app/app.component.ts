@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { MenuItem, MenuItemType } from '@reusable-parts/side-nav/src';
 import { TranslateService } from '@ngx-translate/core';
-import { FuseTranslationLoaderService } from '@reusable-parts/@fuse/services/translation-loader.service';
+import { FuseTranslationLoaderService } from '@reusable-parts/fuse/src/lib/@fuse/services/translation-loader.service';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { switchMap } from 'rxjs/operators';
 import { interval } from 'rxjs/observable/interval';

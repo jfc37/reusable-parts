@@ -1,14 +1,14 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FuseIfOnDomDirective } from '@reusable-parts/@fuse/directives/fuse-if-on-dom/fuse-if-on-dom.directive';
+import { FuseIfOnDomDirective } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-if-on-dom/fuse-if-on-dom.directive';
 import { getElement } from '../../../../../unit-test-utils/html-queries';
 import { LoginComponent } from './dumb-login.component';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseModule, FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

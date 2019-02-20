@@ -12,7 +12,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
-import { FuseSidebarService } from '@reusable-parts/@fuse/components/sidebar/sidebar.service';
+import { FuseSidebarService } from '@reusable-parts/fuse/src/lib/@fuse/components/sidebar/sidebar.service';
 
 @Component({
   selector: 'jfc-top-nav',

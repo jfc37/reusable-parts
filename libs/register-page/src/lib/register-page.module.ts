@@ -9,7 +9,7 @@ import { RegisterEffects } from './+state/register.effects';
 import { FirebaseRegistrationService } from '@reusable-parts/register-page/src/lib/service/firebase-registration.service';
 import { WelcomeModule } from '@reusable-parts/welcome/src';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 import { DumbRegisterComponent } from '@reusable-parts/register-page/src/lib/components/dumb-register/dumb-register.component';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
 

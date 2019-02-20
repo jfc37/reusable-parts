@@ -5,7 +5,7 @@ import { ForgotPasswordPageComponent } from './components/forgot-password-page/f
 import { WelcomeModule } from '@reusable-parts/welcome/src';
 import { CommonUiComponentsModule } from '@reusable-parts/common-ui-components/src';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 import { DumbForgotPasswordComponent } from './components/dumb-forgot-password/dumb-forgot-password.component';
 import { StoreModule } from '@ngrx/store';
 import { resetReducer, resetInitialState } from '@reusable-parts/forgot-password-page/src/lib/+state/reset.reducer';

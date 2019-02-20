@@ -10,7 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule } from '@ngx-translate/core';
 import { NxModule } from '@nrwl/nx';
-import { FuseModule, FuseSharedModule } from '@reusable-parts/@fuse';
+import { FuseModule, FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 import { CustomRouterStateSerializer, logger } from '@reusable-parts/common-ngrx-patterns/src';
 import { CommonPwaPartsModule } from '@reusable-parts/common-pwa-parts/src';
 import { AuthenticatedGuard, GuardsModule } from '@reusable-parts/guards/src';

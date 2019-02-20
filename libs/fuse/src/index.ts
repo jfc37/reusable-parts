@@ -1,1 +1,1 @@
-export * from './lib/fuse.module';
+export * from './lib/@fuse';
