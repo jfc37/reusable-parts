@@ -332,6 +332,9 @@ export class FuseNavigationService
         {
             navigation.push(item);
 
+            // Trigger the observable
+            this._onNavigationItemAdded.next(true);
+
             return;
         }
 
@@ -339,6 +342,11 @@ export class FuseNavigationService
         if ( id === 'start' )
         {
             navigation.unshift(item);
+
+            // Trigger the observable
+            this._onNavigationItemAdded.next(true);
+
+            return;
         }
 
         // Add it to a specific location
