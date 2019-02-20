@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
    *  {string} property
    *  {any}
    */
-  transform(mainArr: any[], searchText: string, property: string): any {
+  transform(mainArr: any[], searchText: string): any {
     return FuseUtils.filterArrayByString(mainArr, searchText);
   }
 }
