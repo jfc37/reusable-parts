@@ -26,9 +26,9 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   * @param {ChatService} _chatService
-   * @param {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
-   * @param {MediaObserver} _mediaService
+   *  {ChatService} _chatService
+   *  {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
+   *  {MediaObserver} _mediaService
    */
   constructor(
     private _chatService: ChatService,
@@ -67,7 +67,7 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   /**
    * Get chat
    *
-   * @param contact
+   *  contact
    */
   getChat(contact): void {
     this._chatService.selectChat(contact);
@@ -80,7 +80,7 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   /**
    * Set user status
    *
-   * @param status
+   *  status
    */
   setUserStatus(status: string): void {
     this._chatService.setUserStatus(status as UserStatus);
@@ -89,7 +89,7 @@ export class ChatChatsSidenavComponent implements OnInit, OnDestroy {
   /**
    * Change left sidenav view
    *
-   * @param view
+   *  view
    */
   changeLeftSidenavView(view): void {
     this._chatService.onLeftSidenavViewChanged.next(view);

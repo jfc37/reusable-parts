@@ -10,9 +10,9 @@ export class FuseIfOnDomDirective implements AfterContentChecked
     /**
      * Constructor
      *
-     * @param {ElementRef} _elementRef
-     * @param {TemplateRef<any>} _templateRef
-     * @param {ViewContainerRef} _viewContainerRef
+     *  {ElementRef} _elementRef
+     *  {TemplateRef<any>} _templateRef
+     *  {ViewContainerRef} _viewContainerRef
      */
     constructor(
         private _elementRef: ElementRef,

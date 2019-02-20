@@ -14,7 +14,7 @@ export class FuseMatchMediaService
     /**
      * Constructor
      *
-     * @param {MediaObserver} _mediaObserver
+     *  {MediaObserver} _mediaObserver
      */
     constructor(
         private _mediaObserver: MediaObserver
@@ -35,7 +35,7 @@ export class FuseMatchMediaService
     /**
      * Initialize
      *
-     * @private
+     *
      */
     private _init(): void
     {

@@ -13,7 +13,7 @@ export class FuseConfirmDialogComponent
     /**
      * Constructor
      *
-     * @param {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
+     *  {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
      */
     constructor(
         public dialogRef: MatDialogRef<FuseConfirmDialogComponent>

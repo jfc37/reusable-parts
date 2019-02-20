@@ -20,9 +20,9 @@ export class FuseConfigService
     /**
      * Constructor
      *
-     * @param {Platform} _platform
-     * @param {Router} _router
-     * @param _config
+     *  {Platform} _platform
+     *  {Router} _router
+     *  _config
      */
     constructor(
         private _platform: Platform,
@@ -64,7 +64,7 @@ export class FuseConfigService
     /**
      * Get default config
      *
-     * @returns {any}
+     * s {any}
      */
     get defaultConfig(): any
     {
@@ -78,7 +78,7 @@ export class FuseConfigService
     /**
      * Initialize
      *
-     * @private
+     *
      */
     private _init(): void
     {
@@ -119,8 +119,8 @@ export class FuseConfigService
     /**
      * Set config
      *
-     * @param value
-     * @param {{emitEvent: boolean}} opts
+     *  value
+     *  {{emitEvent: boolean}} opts
      */
     setConfig(value, opts = {emitEvent: true}): void
     {
@@ -141,7 +141,7 @@ export class FuseConfigService
     /**
      * Get config
      *
-     * @returns {Observable<any>}
+     * s {Observable<any>}
      */
     getConfig(): Observable<any>
     {

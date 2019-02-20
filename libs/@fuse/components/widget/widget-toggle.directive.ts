@@ -8,7 +8,7 @@ export class FuseWidgetToggleDirective
     /**
      * Constructor
      *
-     * @param {ElementRef} elementRef
+     *  {ElementRef} elementRef
      */
     constructor(
         public elementRef: ElementRef

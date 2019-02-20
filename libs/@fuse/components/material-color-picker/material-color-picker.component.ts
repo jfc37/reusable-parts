@@ -63,7 +63,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Selected class
      *
-     * @param value
+     *  value
      */
     @Input()
     set color(value)
@@ -101,7 +101,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Register on change function
      *
-     * @param fn
+     *  fn
      */
     registerOnChange(fn: any): void
     {
@@ -111,7 +111,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Register on touched function
      *
-     * @param fn
+     *  fn
      */
     registerOnTouched(fn: any): void
     {
@@ -121,7 +121,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Write value to the view from model
      *
-     * @param color
+     *  color
      */
     writeValue(color: any): void
     {
@@ -145,8 +145,8 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Select palette
      *
-     * @param event
-     * @param palette
+     *  event
+     *  palette
      */
     selectPalette(event, palette): void
     {
@@ -166,8 +166,8 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Select hue
      *
-     * @param event
-     * @param hue
+     *  event
+     *  hue
      */
     selectHue(event, hue): void
     {
@@ -184,7 +184,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Remove color
      *
-     * @param event
+     *  event
      */
     removeColor(event): void
     {
@@ -234,7 +234,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
     /**
      * Go to palettes view
      *
-     * @param event
+     *  event
      */
     goToPalettesView(event): void
     {

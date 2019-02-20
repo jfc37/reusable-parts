@@ -4,9 +4,9 @@ export class FuseUtils
     /**
      * Filter array by string
      *
-     * @param mainArr
-     * @param searchText
-     * @returns {any}
+     *  mainArr
+     *  searchText
+     * s {any}
      */
     public static filterArrayByString(mainArr, searchText): any
     {
@@ -25,9 +25,9 @@ export class FuseUtils
     /**
      * Search in object
      *
-     * @param itemObj
-     * @param searchText
-     * @returns {boolean}
+     *  itemObj
+     *  searchText
+     * s {boolean}
      */
     public static searchInObj(itemObj, searchText): boolean
     {
@@ -69,9 +69,9 @@ export class FuseUtils
     /**
      * Search in array
      *
-     * @param arr
-     * @param searchText
-     * @returns {boolean}
+     *  arr
+     *  searchText
+     * s {boolean}
      */
     public static searchInArray(arr, searchText): boolean
     {
@@ -98,9 +98,9 @@ export class FuseUtils
     /**
      * Search in string
      *
-     * @param value
-     * @param searchText
-     * @returns {any}
+     *  value
+     *  searchText
+     * s {any}
      */
     public static searchInString(value, searchText): any
     {
@@ -110,7 +110,7 @@ export class FuseUtils
     /**
      * Generate a unique GUID
      *
-     * @returns {string}
+     * s {string}
      */
     public static generateGUID(): string
     {
@@ -127,8 +127,8 @@ export class FuseUtils
     /**
      * Toggle in array
      *
-     * @param item
-     * @param array
+     *  item
+     *  array
      */
     public static toggleInArray(item, array): void
     {
@@ -145,8 +145,8 @@ export class FuseUtils
     /**
      * Handleize
      *
-     * @param text
-     * @returns {string}
+     *  text
+     * s {string}
      */
     public static handleize(text): string
     {

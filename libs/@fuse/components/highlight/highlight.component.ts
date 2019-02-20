@@ -30,8 +30,8 @@ export class FuseHighlightComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ElementRef} _elementRef
-     * @param {HttpClient} _httpClient
+     *  {ElementRef} _elementRef
+     *  {HttpClient} _httpClient
      */
     constructor(
         private _elementRef: ElementRef,
@@ -95,7 +95,7 @@ export class FuseHighlightComponent implements OnInit, OnDestroy
     /**
      * Highlight the given source code
      *
-     * @param sourceCode
+     *  sourceCode
      */
     highlight(sourceCode): void
     {

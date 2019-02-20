@@ -15,7 +15,7 @@ export class FuseTranslationLoaderService
     /**
      * Constructor
      *
-     * @param {TranslateService} _translateService
+     *  {TranslateService} _translateService
      */
     constructor(
         private _translateService: TranslateService
@@ -30,7 +30,7 @@ export class FuseTranslationLoaderService
     /**
      * Load translations
      *
-     * @param {Locale} args
+     *  {Locale} args
      */
     loadTranslations(...args: Locale[]): void
     {

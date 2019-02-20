@@ -24,7 +24,7 @@ export class ChatLeftSidenavComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   * @param {ChatService} _chatService
+   *  {ChatService} _chatService
    */
   constructor(private _chatService: ChatService) {
     // Set the defaults

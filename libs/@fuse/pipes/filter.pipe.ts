@@ -7,10 +7,10 @@ export class FilterPipe implements PipeTransform
     /**
      * Transform
      *
-     * @param {any[]} mainArr
-     * @param {string} searchText
-     * @param {string} property
-     * @returns {any}
+     *  {any[]} mainArr
+     *  {string} searchText
+     *  {string} property
+     * s {any}
      */
     transform(mainArr: any[], searchText: string): any
     {

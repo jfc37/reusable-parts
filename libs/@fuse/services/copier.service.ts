@@ -17,8 +17,8 @@ export class FuseCopierService
     /**
      * Copy the text value to the clipboard
      *
-     * @param {string} text
-     * @returns {boolean}
+     *  {string} text
+     * s {boolean}
      */
     copyText(text: string): boolean
     {
@@ -34,7 +34,7 @@ export class FuseCopierService
      * Creates a hidden textarea element, sets its value from `text` property,
      * and makes a selection on it.
      *
-     * @param {string} text
+     *  {string} text
      */
     private createTextareaAndSelect(text: string): void
     {
@@ -63,7 +63,7 @@ export class FuseCopierService
     /**
      * Remove the text area from the DOM
      *
-     * @private
+     *
      */
     private _removeFake(): void
     {

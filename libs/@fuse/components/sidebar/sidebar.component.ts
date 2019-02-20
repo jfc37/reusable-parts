@@ -81,14 +81,14 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {AnimationBuilder} _animationBuilder
-     * @param {ChangeDetectorRef} _changeDetectorRef
-     * @param {ElementRef} _elementRef
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {FuseMatchMediaService} _fuseMatchMediaService
-     * @param {FuseSidebarService} _fuseSidebarService
-     * @param {MediaObserver} _mediaObserver
-     * @param {Renderer2} _renderer
+     *  {AnimationBuilder} _animationBuilder
+     *  {ChangeDetectorRef} _changeDetectorRef
+     *  {ElementRef} _elementRef
+     *  {FuseConfigService} _fuseConfigService
+     *  {FuseMatchMediaService} _fuseMatchMediaService
+     *  {FuseSidebarService} _fuseSidebarService
+     *  {MediaObserver} _mediaObserver
+     *  {Renderer2} _renderer
      */
     constructor(
         private _animationBuilder: AnimationBuilder,
@@ -123,7 +123,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Folded
      *
-     * @param {boolean} value
+     *  {boolean} value
      */
     @Input()
     set folded(value: boolean)
@@ -260,7 +260,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Setup the visibility of the sidebar
      *
-     * @private
+     *
      */
     private _setupVisibility(): void
     {
@@ -274,7 +274,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Setup the sidebar position
      *
-     * @private
+     *
      */
     private _setupPosition(): void
     {
@@ -293,7 +293,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Setup the lockedOpen handler
      *
-     * @private
+     *
      */
     private _setupLockedOpen(): void
     {
@@ -385,7 +385,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Setup the initial folded status
      *
-     * @private
+     *
      */
     private _setupFolded(): void
     {
@@ -442,7 +442,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Show the backdrop
      *
-     * @private
+     *
      */
     private _showBackdrop(): void
     {
@@ -484,7 +484,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Hide the backdrop
      *
-     * @private
+     *
      */
     private _hideBackdrop(): void
     {
@@ -523,7 +523,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
      * Change some properties of the sidebar
      * and make it visible
      *
-     * @private
+     *
      */
     private _showSidebar(): void
     {
@@ -541,7 +541,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
      * Change some properties of the sidebar
      * and make it invisible
      *
-     * @private
+     *
      */
     private _hideSidebar(delay = true): void
     {
@@ -564,7 +564,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
     /**
      * Enable the animations
      *
-     * @private
+     *
      */
     private _enableAnimations(): void
     {

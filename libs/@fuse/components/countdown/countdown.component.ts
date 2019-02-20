@@ -92,8 +92,8 @@ export class FuseCountdownComponent implements OnInit, OnDestroy
     /**
      * Converts given seconds to a remaining time
      *
-     * @param seconds
-     * @private
+     *  seconds
+     *
      */
     private _secondsToRemaining(seconds): any
     {

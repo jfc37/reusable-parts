@@ -17,9 +17,9 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ElementRef} _elementRef
-     * @param {FuseMatchMediaService} _fuseMediaMatchService
-     * @param {Renderer2} _renderer
+     *  {ElementRef} _elementRef
+     *  {FuseMatchMediaService} _fuseMediaMatchService
+     *  {Renderer2} _renderer
      */
     constructor(
         private _elementRef: ElementRef,
@@ -94,7 +94,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy
     /**
      * Add the class name
      *
-     * @private
+     *
      */
     private _addClass(): void
     {
@@ -104,7 +104,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy
 
     /**
      * Remove the class name
-     * @private
+     *
      */
     private _removeClass(): void
     {

@@ -45,7 +45,7 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Constructor
    *
-   * @param {ChatService} _chatService
+   *  {ChatService} _chatService
    */
   constructor(private _chatService: ChatService) {
     // Set the private defaults
@@ -100,9 +100,9 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Decide whether to show or not the contact's avatar in the message row
    *
-   * @param message
-   * @param i
-   * @returns {boolean}
+   *  message
+   *  i
+   * s {boolean}
    */
   shouldShowContactAvatar(message, i): boolean {
     return (
@@ -114,9 +114,9 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Check if the given message is the first message of a group
    *
-   * @param message
-   * @param i
-   * @returns {boolean}
+   *  message
+   *  i
+   * s {boolean}
    */
   isFirstMessageOfGroup(message, i): boolean {
     return i === 0 || (this.dialog[i - 1] && this.dialog[i - 1].who !== message.who);
@@ -125,9 +125,9 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Check if the given message is the last message of a group
    *
-   * @param message
-   * @param i
-   * @returns {boolean}
+   *  message
+   *  i
+   * s {boolean}
    */
   isLastMessageOfGroup(message, i): boolean {
     return i === this.dialog.length - 1 || (this.dialog[i + 1] && this.dialog[i + 1].who !== message.who);
@@ -162,7 +162,7 @@ export class ChatViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Scroll to the bottom
    *
-   * @param {number} speed
+   *  {number} speed
    */
   scrollToBottom(speed?: number): void {
     speed = speed || 400;

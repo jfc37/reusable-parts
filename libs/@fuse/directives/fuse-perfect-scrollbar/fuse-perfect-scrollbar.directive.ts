@@ -26,10 +26,10 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ElementRef} elementRef
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {Platform} _platform
-     * @param {Router} _router
+     *  {ElementRef} elementRef
+     *  {FuseConfigService} _fuseConfigService
+     *  {Platform} _platform
+     *  {Router} _router
      */
     constructor(
         public elementRef: ElementRef,
@@ -58,7 +58,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Perfect Scrollbar options
      *
-     * @param value
+     *  value
      */
     @Input()
     set fusePerfectScrollbarOptions(value)
@@ -76,7 +76,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Is enabled
      *
-     * @param {boolean | ""} value
+     *  {boolean | ""} value
      */
     @Input('fusePerfectScrollbar')
     set enabled(value: boolean | '')
@@ -170,7 +170,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Initialize
      *
-     * @private
+     *
      */
     _init(): void
     {
@@ -218,7 +218,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Destroy
      *
-     * @private
+     *
      */
     _destroy(): void
     {
@@ -238,7 +238,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Update scrollbars on window resize
      *
-     * @private
+     *
      */
     @HostListener('window:resize')
     _updateOnResize(): void
@@ -253,7 +253,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Document click
      *
-     * @param {Event} event
+     *  {Event} event
      */
     @HostListener('document:click', ['$event'])
     documentClick(event: Event): void
@@ -295,8 +295,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to X
      *
-     * @param {number} x
-     * @param {number} speed
+     *  {number} x
+     *  {number} speed
      */
     scrollToX(x: number, speed?: number): void
     {
@@ -306,8 +306,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to Y
      *
-     * @param {number} y
-     * @param {number} speed
+     *  {number} y
+     *  {number} speed
      */
     scrollToY(y: number, speed?: number): void
     {
@@ -317,8 +317,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to top
      *
-     * @param {number} offset
-     * @param {number} speed
+     *  {number} offset
+     *  {number} speed
      */
     scrollToTop(offset?: number, speed?: number): void
     {
@@ -328,8 +328,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to left
      *
-     * @param {number} offset
-     * @param {number} speed
+     *  {number} offset
+     *  {number} speed
      */
     scrollToLeft(offset?: number, speed?: number): void
     {
@@ -339,8 +339,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to right
      *
-     * @param {number} offset
-     * @param {number} speed
+     *  {number} offset
+     *  {number} speed
      */
     scrollToRight(offset?: number, speed?: number): void
     {
@@ -352,8 +352,8 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Scroll to bottom
      *
-     * @param {number} offset
-     * @param {number} speed
+     *  {number} offset
+     *  {number} speed
      */
     scrollToBottom(offset?: number, speed?: number): void
     {
@@ -365,9 +365,9 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     /**
      * Animate scrolling
      *
-     * @param {string} target
-     * @param {number} value
-     * @param {number} speed
+     *  {string} target
+     *  {number} value
+     *  {number} speed
      */
     animateScrolling(target: string, value: number, speed?: number): void
     {

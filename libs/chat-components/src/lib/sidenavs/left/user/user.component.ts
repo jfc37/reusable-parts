@@ -21,7 +21,7 @@ export class ChatUserSidenavComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   * @param {ChatService} _chatService
+   *  {ChatService} _chatService
    */
   constructor(private _chatService: ChatService) {
     // Set the private defaults
@@ -70,7 +70,7 @@ export class ChatUserSidenavComponent implements OnInit, OnDestroy {
   /**
    * Change left sidenav view
    *
-   * @param view
+   *  view
    */
   changeLeftSidenavView(view): void {
     this._chatService.onLeftSidenavViewChanged.next(view);

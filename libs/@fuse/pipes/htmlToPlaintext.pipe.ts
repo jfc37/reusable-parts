@@ -6,9 +6,9 @@ export class HtmlToPlaintextPipe implements PipeTransform
     /**
      * Transform
      *
-     * @param {string} value
-     * @param {any[]} args
-     * @returns {string}
+     *  {string} value
+     *  {any[]} args
+     * s {string}
      */
     transform(value: string, args: any[] = []): string
     {

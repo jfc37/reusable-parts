@@ -17,7 +17,7 @@ export class FuseProgressBarService
     /**
      * Constructor
      *
-     * @param {Router} _router
+     *  {Router} _router
      */
     constructor(
         private _router: Router
@@ -85,7 +85,7 @@ export class FuseProgressBarService
     /**
      * Initialize
      *
-     * @private
+     *
      */
     private _init(): void
     {

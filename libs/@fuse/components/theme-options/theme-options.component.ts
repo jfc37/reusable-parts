@@ -30,12 +30,12 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {DOCUMENT} document
-     * @param {FormBuilder} _formBuilder
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {FuseNavigationService} _fuseNavigationService
-     * @param {FuseSidebarService} _fuseSidebarService
-     * @param {Renderer2} _renderer
+     *  {DOCUMENT} document
+     *  {FormBuilder} _formBuilder
+     *  {FuseConfigService} _fuseConfigService
+     *  {FuseNavigationService} _fuseNavigationService
+     *  {FuseSidebarService} _fuseSidebarService
+     *  {Renderer2} _renderer
      */
     constructor(
         @Inject(DOCUMENT) private document: any,
@@ -172,8 +172,8 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
      * Reset the form values based on the
      * selected layout style
      *
-     * @param value
-     * @private
+     *  value
+     *
      */
     private _resetFormValues(value): void
     {
@@ -332,7 +332,7 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
     /**
      * Toggle sidebar open
      *
-     * @param key
+     *  key
      */
     toggleSidebarOpen(key): void
     {

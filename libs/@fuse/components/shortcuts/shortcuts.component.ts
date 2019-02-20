@@ -35,11 +35,11 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {CookieService} _cookieService
-     * @param {FuseMatchMediaService} _fuseMatchMediaService
-     * @param {FuseNavigationService} _fuseNavigationService
-     * @param {MediaObserver} _mediaObserver
-     * @param {Renderer2} _renderer
+     *  {CookieService} _cookieService
+     *  {FuseMatchMediaService} _fuseMatchMediaService
+     *  {FuseNavigationService} _fuseNavigationService
+     *  {MediaObserver} _mediaObserver
+     *  {Renderer2} _renderer
      */
     constructor(
         private _cookieService: CookieService,
@@ -133,7 +133,7 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
     /**
      * Search
      *
-     * @param event
+     *  event
      */
     search(event): void
     {
@@ -157,8 +157,8 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
     /**
      * Toggle shortcut
      *
-     * @param event
-     * @param itemToToggle
+     *  event
+     *  itemToToggle
      */
     toggleShortcut(event, itemToToggle): void
     {
@@ -186,8 +186,8 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
     /**
      * Is in shortcuts?
      *
-     * @param navigationItem
-     * @returns {any}
+     *  navigationItem
+     * s {any}
      */
     isInShortcuts(navigationItem): any
     {

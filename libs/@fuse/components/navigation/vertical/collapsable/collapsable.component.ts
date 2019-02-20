@@ -30,9 +30,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ChangeDetectorRef} _changeDetectorRef
-     * @param {FuseNavigationService} _fuseNavigationService
-     * @param {Router} _router
+     *  {ChangeDetectorRef} _changeDetectorRef
+     *  {FuseNavigationService} _fuseNavigationService
+     *  {Router} _router
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
@@ -144,7 +144,7 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy
     /**
      * Toggle collapse
      *
-     * @param ev
+     *  ev
      */
     toggleOpen(ev): void
     {
@@ -197,9 +197,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy
      * Check if the given parent has the
      * given item in one of its children
      *
-     * @param parent
-     * @param item
-     * @returns {boolean}
+     *  parent
+     *  item
+     * s {boolean}
      */
     isChildrenOf(parent, item): boolean
     {
@@ -226,9 +226,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy
      * Check if the given url can be found
      * in one of the given parent's children
      *
-     * @param parent
-     * @param url
-     * @returns {boolean}
+     *  parent
+     *  url
+     * s {boolean}
      */
     isUrlInChildren(parent, url): boolean
     {

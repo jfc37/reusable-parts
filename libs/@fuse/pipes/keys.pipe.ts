@@ -6,9 +6,9 @@ export class KeysPipe implements PipeTransform
     /**
      * Transform
      *
-     * @param value
-     * @param {string[]} args
-     * @returns {any}
+     *  value
+     *  {string[]} args
+     * s {any}
      */
     transform(value: any, args: string[]): any
     {

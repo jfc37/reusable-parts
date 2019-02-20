@@ -23,7 +23,7 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {FuseConfigService} _fuseConfigService
+     *  {FuseConfigService} _fuseConfigService
      */
     constructor(
         private _fuseConfigService: FuseConfigService
@@ -89,7 +89,7 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy
     /**
      * Search
      *
-     * @param event
+     *  event
      */
     search(event): void
     {
