@@ -644,6 +644,41 @@
           }
         }
       }
+    },
+    "fuse": {
+      "root": "libs/fuse",
+      "sourceRoot": "libs/fuse/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/fuse/tsconfig.lib.json",
+            "project": "libs/fuse/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/fuse/tsconfig.lib.json", "libs/fuse/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/fuse/jest.config.js",
+            "tsConfig": "libs/fuse/tsconfig.spec.json",
+            "setupFile": "libs/fuse/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",
