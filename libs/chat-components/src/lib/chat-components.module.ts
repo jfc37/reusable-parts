@@ -22,18 +22,6 @@ import { ChatUserSidenavComponent } from './sidenavs/left/user/user.component';
 import { ChatLeftSidenavComponent } from './sidenavs/left/left.component';
 import { ChatRightSidenavComponent } from './sidenavs/right/right.component';
 import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.component';
-import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [
-  {
-    path: '**',
-    component: ChatComponent,
-    children: [],
-    resolve: {
-      chat: ChatService,
-    },
-  },
-];
 
 @NgModule({
   declarations: [
