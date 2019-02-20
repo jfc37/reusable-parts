@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform
      * @param {string} property
      * @returns {any}
      */
-    transform(mainArr: any[], searchText: string, property: string): any
+    transform(mainArr: any[], searchText: string): any
     {
         return FuseUtils.filterArrayByString(mainArr, searchText);
     }
