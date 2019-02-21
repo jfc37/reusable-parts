@@ -13,3 +13,11 @@ Replace with provider:
 ### Solution
 
 add `/index.html` at the end and browse
+
+## Building a library that depends on another library
+
+### Solution
+
+Build the dependent library (`ng build fuse`)
+Copy built folder from `dist` and copy to `node_modules`, renaming to `fuse`
+Change all `import` paths to `fuse`
