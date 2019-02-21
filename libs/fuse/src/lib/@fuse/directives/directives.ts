@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-
-import { FuseIfOnDomDirective } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-if-on-dom/fuse-if-on-dom.directive';
-import { FuseInnerScrollDirective } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-inner-scroll/fuse-inner-scroll.directive';
-import { FusePerfectScrollbarDirective } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
+import { FuseIfOnDomDirective } from './fuse-if-on-dom/fuse-if-on-dom.directive';
+import { FuseInnerScrollDirective } from './fuse-inner-scroll/fuse-inner-scroll.directive';
 import {
   FuseMatSidenavHelperDirective,
   FuseMatSidenavTogglerDirective,
-} from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-mat-sidenav/fuse-mat-sidenav.directive';
+} from './fuse-mat-sidenav/fuse-mat-sidenav.directive';
+import { FusePerfectScrollbarDirective } from './fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 
 @NgModule({
   declarations: [

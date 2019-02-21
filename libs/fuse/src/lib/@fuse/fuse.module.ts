@@ -1,6 +1,5 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-
-import { FUSE_CONFIG } from '@reusable-parts/fuse/src/lib/@fuse/services/config.service';
+import { FUSE_CONFIG } from './services/config.service';
 
 @NgModule()
 export class FuseModule {

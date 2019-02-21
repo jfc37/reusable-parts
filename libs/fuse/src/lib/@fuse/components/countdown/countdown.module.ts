@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-
-import { FuseCountdownComponent } from '@reusable-parts/fuse/src/lib/@fuse/components/countdown/countdown.component';
+import { FuseCountdownComponent } from './countdown.component';
 
 @NgModule({
   declarations: [FuseCountdownComponent],

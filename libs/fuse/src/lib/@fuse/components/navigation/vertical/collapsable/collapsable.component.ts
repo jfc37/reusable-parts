@@ -2,10 +2,9 @@ import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } f
 import { NavigationEnd, Router } from '@angular/router';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-
-import { FuseNavigationItem } from '@reusable-parts/fuse/src/lib/@fuse/types';
-import { fuseAnimations } from '@reusable-parts/fuse/src/lib/@fuse/animations';
-import { FuseNavigationService } from '@reusable-parts/fuse/src/lib/@fuse/components/navigation/navigation.service';
+import { FuseNavigationService } from '../../navigation.service';
+import { fuseAnimations } from '../../../../animations';
+import { FuseNavigationItem } from '../../../../types/fuse-navigation';
 
 @Component({
   selector: 'fuse-nav-vertical-collapsable',

@@ -13,12 +13,10 @@ import {
   MatSelectModule,
   MatSlideToggleModule,
 } from '@angular/material';
-
-import { FuseDirectivesModule } from '@reusable-parts/fuse/src/lib/@fuse/directives/directives';
-import { FuseMaterialColorPickerModule } from '@reusable-parts/fuse/src/lib/@fuse/components/material-color-picker/material-color-picker.module';
-import { FuseSidebarModule } from '@reusable-parts/fuse/src/lib/@fuse/components/sidebar/sidebar.module';
-
-import { FuseThemeOptionsComponent } from '@reusable-parts/fuse/src/lib/@fuse/components/theme-options/theme-options.component';
+import { FuseThemeOptionsComponent } from './theme-options.component';
+import { FuseDirectivesModule } from '../../directives/directives';
+import { FuseMaterialColorPickerModule } from '../material-color-picker/material-color-picker.module';
+import { FuseSidebarModule } from '../sidebar/sidebar.module';
 
 @NgModule({
   declarations: [FuseThemeOptionsComponent],

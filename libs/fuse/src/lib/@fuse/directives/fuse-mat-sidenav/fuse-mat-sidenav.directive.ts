@@ -3,9 +3,8 @@ import { MatSidenav } from '@angular/material';
 import { MediaObserver } from '@angular/flex-layout';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-import { FuseMatchMediaService } from '@reusable-parts/fuse/src/lib/@fuse/services/match-media.service';
-import { FuseMatSidenavHelperService } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-mat-sidenav/fuse-mat-sidenav.service';
+import { FuseMatchMediaService } from '../../services/match-media.service';
+import { FuseMatSidenavHelperService } from './fuse-mat-sidenav.service';
 
 @Directive({
   selector: '[fuseMatSidenavHelper]',

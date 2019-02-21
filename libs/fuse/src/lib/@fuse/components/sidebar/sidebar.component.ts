@@ -18,8 +18,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseSidebarService } from './sidebar.service';
-import { FuseMatchMediaService } from '@reusable-parts/fuse/src/lib/@fuse/services/match-media.service';
-import { FuseConfigService } from '@reusable-parts/fuse/src/lib/@fuse/services/config.service';
+import { FuseConfigService } from '../../services/config.service';
+import { FuseMatchMediaService } from '../../services/match-media.service';
 
 @Component({
   selector: 'fuse-sidebar',

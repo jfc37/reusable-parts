@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import * as _ from 'lodash';
-
-import { FuseNavigationItem } from '@reusable-parts/fuse/src/lib/@fuse/types';
+import { FuseNavigationItem } from '../../types/fuse-navigation';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,7 @@ export class FuseNavigationService {
   private _onNavigationItemRemoved: BehaviorSubject<any>;
 
   private _currentNavigationKey: string;
-  private _registry: { [key: string]: any } = {};
+  private _registry: { []: any } = {};
 
   /**
    * Constructor
