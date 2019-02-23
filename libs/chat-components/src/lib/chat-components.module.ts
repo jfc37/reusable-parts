@@ -22,6 +22,7 @@ import { ChatUserSidenavComponent } from './sidenavs/left/user/user.component';
 import { ChatLeftSidenavComponent } from './sidenavs/left/left.component';
 import { ChatRightSidenavComponent } from './sidenavs/right/right.component';
 import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ChatContactSidenavComponent } from './sidenavs/right/contact/contact.co
   ],
   imports: [
     BrowserAnimationsModule,
+    RouterModule.forRoot([]),
 
     MatButtonModule,
     MatCardModule,

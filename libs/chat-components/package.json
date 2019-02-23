@@ -1,8 +1,15 @@
 {
-  "name": "@app/chat-components",
+  "name": "jfc-chat",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0"
+  },
+  "dependencies": {
+    "@angular/material": "^7.0.0",
+    "@angular/flex-layout": "7.0.0-beta.23",
+    "@angular/cdk": "^7.0.0",
+    "perfect-scrollbar": "^1.4.0",
+    "material-icons": "^0.3.0"
   }
 }

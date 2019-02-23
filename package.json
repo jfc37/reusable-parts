@@ -75,6 +75,7 @@
     "firebase-functions": "2.2.0",
     "hammerjs": "2.0.8",
     "lodash": "4.17.11",
+    "material-icons": "^0.3.0",
     "moment": "2.23.0",
     "ng2-charts": "1.6.0",
     "ngrx-store-freeze": "0.2.4",

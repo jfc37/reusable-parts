@@ -60,6 +60,7 @@ $custom_palettes: (
 // -----------------------------------------------------------------------------------------------------
 // @ Typography
 // -----------------------------------------------------------------------------------------------------
+@import '~material-icons/iconfont/material-icons.css';
 
 // Angular Material typography
 $typography: mat-typography-config(
@@ -100,7 +101,7 @@ $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $defa
 
 // Add ".theme-default" class to the body to activate this theme.
 // Class name must start with "theme-" !!!
-body.theme-default {
+body {
   // Create an Angular Material theme from the $theme map
   @include angular-material-theme($theme);
 
