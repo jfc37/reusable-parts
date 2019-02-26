@@ -1,5 +1,13 @@
 # Chat components
 
+## How to build
+
+- find and replace under `chat-components/**`
+  `'@reusable-parts/fuse` with `'jfc-fuse`
+- `npm run build:chat`
+- `cd dist/chat-components`
+- `npm publish`
+
 ## Prerequest
 
 - implement IChatFacade

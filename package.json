@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "boom": "ng build fuse && rm -rf node_modules/jfc-fuse/ && cp -r libs/fuse node_modules/jfc-fuse/ && ng build chat-components",
+    "build:chat": "ng build fuse && rm -rf node_modules/jfc-fuse/ && cp -r libs/fuse node_modules/jfc-fuse/ && ng build chat-components",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "e2e": "ng e2e",
