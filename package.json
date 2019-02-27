@@ -96,7 +96,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.3",
     "@angular-devkit/build-ng-packagr": "0.13.3",
-    "@angular/cli": "7.3.3",
+    "@angular/cli": "^7.3.1",
     "@angular/compiler-cli": "7.2.6",
     "@angular/language-service": "7.2.1",
     "@angularclass/hmr": "2.1.3",
