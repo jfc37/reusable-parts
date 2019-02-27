@@ -19,3 +19,7 @@
 
 - Need the following packages
   `"@angular/material": "7.2.1", "@angular/flex-layout": "7.0.0-beta.23", "@angular/cdk": "7.2.1", "perfect-scrollbar": "1.4.0",`
+
+## How to package up for other libraries to use
+
+`npm run package:chat`

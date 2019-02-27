@@ -21,3 +21,7 @@ Replace `src/@fuse/scss` with `libs/fuse/src/lib/@fuse/scss`
 Replace `src/@fuse/components` with `libs/fuse/src/lib/@fuse/components`
 
 ### Done!
+
+## How to package up for other libraries to use
+
+`npm run package:fuse`

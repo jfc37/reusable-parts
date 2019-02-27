@@ -12,6 +12,9 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
+    "paths": {
+      "@reusable-parts/fuse": ["node_modules/@reusable-parts/fuse"]
+    },
     "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {
