@@ -60,7 +60,7 @@ $custom_palettes: (
 // -----------------------------------------------------------------------------------------------------
 // @ Typography
 // -----------------------------------------------------------------------------------------------------
-@import '~material-icons/iconfont/material-icons.css';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 // Angular Material typography
 $typography: mat-typography-config(
