@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/fuse';
 import { ChatService } from './chat.service';
-import { ChatUser, Chat, ChatContact } from './chat.facade';
+import { ChatUser, Chat, ChatContact, IChatFacade } from './chat.facade';
 
 @Component({
   selector: 'chat',
@@ -13,6 +13,7 @@ import { ChatUser, Chat, ChatContact } from './chat.facade';
   animations: fuseAnimations,
 })
 export class ChatComponent implements OnInit, OnDestroy {
+  @Input() service: IChatFacade;
   selectedChat: any;
   loaded$: Observable<boolean>;
   user$: Observable<ChatUser>;
@@ -40,6 +41,8 @@ export class ChatComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    this._chatService.setupService(this.service);
+
     this.user$ = this._chatService.user$;
     this.chats$ = this._chatService.chats$;
     this.contacts$ = this._chatService.contacts$;

@@ -9,7 +9,7 @@ import { CHAT_FACADE } from '@reusable-parts/chat-components';
   templateUrl: './chat.component.html',
 })
 export class ChatComponent implements OnInit {
-  constructor(private route: ActivatedRoute, @Inject(CHAT_FACADE) private facade: ChatFacade) {}
+  constructor(private route: ActivatedRoute, public facade: ChatFacade) {}
   ngOnInit(): void {
     this.route.paramMap
       .pipe(

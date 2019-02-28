@@ -5,13 +5,13 @@ import { AppComponent } from './app.component';
 import { NxModule } from '@nrwl/nx';
 import { ChatComponentsModule, CHAT_FACADE } from '@reusable-parts/chat-components';
 import { HttpClientModule } from '@angular/common/http';
-import { ChatFacade } from './chat.facade';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { ResetComponent } from './reset/reset.component';
+import { ChatFacade } from './chat.facade';
 
 @NgModule({
   declarations: [AppComponent, ChatComponent, ResetComponent],
@@ -30,7 +30,7 @@ import { ResetComponent } from './reset/reset.component';
 
     ChatComponentsModule,
   ],
-  providers: [{ provide: CHAT_FACADE, useClass: ChatFacade }],
+  providers: [ChatFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { Resolve } from '@angular/router';
 import { Observable, Subject, ReplaySubject, concat } from 'rxjs';
 
 import {
@@ -15,7 +14,8 @@ import {
 import { tap, map, switchMap, filter, take, takeWhile, combineLatest } from 'rxjs/operators';
 
 @Injectable()
-export class ChatService implements Resolve<any> {
+export class ChatService {
+  facade: IChatFacade;
   contacts$: Observable<ChatContact[]>;
   chats$: Observable<Chat[]>;
   user$: Observable<ChatUser>;
@@ -27,7 +27,11 @@ export class ChatService implements Resolve<any> {
   private selectedContactId$ = new ReplaySubject<string>();
   private selectedChatId$ = new ReplaySubject<string>();
 
-  constructor(@Inject(CHAT_FACADE) private facade: IChatFacade) {
+  setupService(facade: IChatFacade) {
+    this.facade = facade;
+
+    this.facade.loadAllData();
+
     // Set the defaults
     this.onLeftSidenavViewChanged = new Subject();
     this.onRightSidenavViewChanged = new Subject();
@@ -68,10 +72,6 @@ export class ChatService implements Resolve<any> {
         lastMessageTime: matchingChat.dialog.length ? matchingChat.dialog.reverse()[0].time : null,
       };
     });
-  }
-
-  resolve(): Observable<any> {
-    return this.facade.loadAllData();
   }
 
   selectChat(contactId: string): void {

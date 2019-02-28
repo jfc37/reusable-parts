@@ -853,8 +853,8 @@
             "main": "apps/web-components/web-chat/src/main.ts",
             "polyfills": "apps/web-components/web-chat/src/polyfills.ts",
             "tsConfig": "apps/web-components/web-chat/tsconfig.app.json",
-            "assets": ["apps/web-components/web-chat/src/favicon.ico", "apps/web-components/web-chat/src/assets"],
-            "styles": ["apps/web-components/web-chat/src/styles.scss"],
+            "assets": [],
+            "styles": [],
             "scripts": [
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
