@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'web-components-web-chat',
+  name: 'web-chat',
   preset: '../../../jest.config.js',
   coverageDirectory: '../../../coverage/apps/web-components/web-chat/',
   snapshotSerializers: [

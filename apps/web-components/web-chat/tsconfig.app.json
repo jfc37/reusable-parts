@@ -2,6 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../dist/out-tsc/apps/web-components/web-chat",
+    // "paths": {
+    //   "@reusable-parts/chat-components": ["node_modules/@reusable-parts/chat-components"]
+    // },
     "types": []
   },
   "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
