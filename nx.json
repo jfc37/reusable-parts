@@ -78,6 +78,12 @@
     },
     "fuse": {
       "tags": []
+    },
+    "web-components-web-chat": {
+      "tags": []
+    },
+    "web-components-web-chat-e2e": {
+      "tags": []
     }
   }
 }
