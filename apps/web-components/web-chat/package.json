@@ -1,0 +1,17 @@
+{
+  "name": "jfc-web-chat",
+  "description": "Check if the package is being installed by another package",
+  "version": "1.0.0",
+  "author": "Joe Chapman <joe.chapman3737@gmail.com>",
+  "bugs": "https://github.com/jfc37/reusable-parts/issues",
+  "homepage": "https://github.com/jfc37/reusable-parts#readme",
+  "license": "MIT",
+  "main": "web-chat-element.js",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfc37/reusable-parts.git"
+  }
+}
