@@ -1,7 +1,5 @@
 import { Observable } from 'rxjs';
 
-export const CHAT_FACADE = 'CHAT_FACADE';
-
 export interface IChatFacade {
   contacts$: Observable<ChatContact[]>;
   chats$: Observable<Chat[]>;

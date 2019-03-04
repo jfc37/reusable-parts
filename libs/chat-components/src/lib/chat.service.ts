@@ -1,16 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject, ReplaySubject, concat } from 'rxjs';
 
-import {
-  IChatFacade,
-  CHAT_FACADE,
-  ChatContact,
-  ChatUser,
-  Chat,
-  ChatSummary,
-  UserStatus,
-  ChatDialog,
-} from './chat.facade';
+import { IChatFacade, ChatContact, ChatUser, Chat, ChatSummary, UserStatus, ChatDialog } from './chat.facade';
 import { tap, map, switchMap, filter, take, takeWhile, combineLatest } from 'rxjs/operators';
 
 @Injectable()

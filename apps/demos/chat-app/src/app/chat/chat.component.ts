@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatFacade } from '../chat.facade';
 import { tap, map } from 'rxjs/operators';
-import { CHAT_FACADE } from '@reusable-parts/chat-components';
 
 @Component({
   selector: 'app-chat',

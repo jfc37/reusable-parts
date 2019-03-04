@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NxModule } from '@nrwl/nx';
-import { ChatComponentsModule, CHAT_FACADE } from '@reusable-parts/chat-components';
+import { ChatComponentsModule } from '@reusable-parts/chat-components';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
