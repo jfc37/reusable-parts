@@ -6,7 +6,7 @@
   "bugs": "https://github.com/jfc37/reusable-parts/issues",
   "homepage": "https://github.com/jfc37/reusable-parts#readme",
   "license": "MIT",
-  "main": "web-chat-element.js",
+  "main": "index.js",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
