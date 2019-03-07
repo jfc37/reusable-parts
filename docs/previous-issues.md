@@ -20,4 +20,5 @@ add `/index.html` at the end and browse
 
 Build the dependent library (`ng build fuse`)
 Copy built folder from `dist` and copy to `node_modules`, renaming to `fuse`
-Change all `import` paths to `fuse`
+Add path reference in main library's tsconfig.lib.json
+`"paths": { "@reusable-parts/fuse": ["node_modules/@reusable-parts/fuse"] },`

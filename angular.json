@@ -287,29 +287,6 @@
       },
       "prefix": "jfc"
     },
-    "register": {
-      "root": "libs/register",
-      "sourceRoot": "libs/register/src",
-      "projectType": "library",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/register/jest.config.js",
-            "tsConfig": "libs/register/tsconfig.spec.json",
-            "setupFile": "libs/register/src/test-setup.ts"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/register/tsconfig.lib.json", "libs/register/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "**/@fuse/**"]
-          }
-        }
-      },
-      "prefix": "jfc"
-    },
     "register-page": {
       "root": "libs/register-page",
       "sourceRoot": "libs/register-page/src",
@@ -424,29 +401,6 @@
         }
       },
       "prefix": "jfc"
-    },
-    "libname": {
-      "root": "libs/libname",
-      "sourceRoot": "libs/libname/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/libname/tsconfig.lib.json", "libs/libname/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "**/@fuse/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/libname/jest.config.js",
-            "tsConfig": "libs/libname/tsconfig.spec.json",
-            "setupFile": "libs/libname/src/test-setup.ts"
-          }
-        }
-      }
     },
     "vallum-truepic-poc": {
       "root": "apps/vallum/truepic-poc/",
@@ -681,7 +635,7 @@
       "root": "libs/chat-components",
       "sourceRoot": "libs/chat-components/src",
       "projectType": "library",
-      "prefix": "app",
+      "prefix": "chat",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
