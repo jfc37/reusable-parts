@@ -1,0 +1,49 @@
+<mat-toolbar class="p-0 mat-elevation-z1">
+  <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
+
+  <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+      <button
+        mat-button
+        data-test-id="toggle-hamburger-button"
+        class="toggle-button-navbar mat-icon-button"
+        *ngIf="showHamburger"
+        (click)="hamburgerClicked.emit()"
+        fxHide.gt-md
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="toolbar-separator" fxHide.gt-md></div>
+    </div>
+
+    <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+      <div class="toolbar-separator" fxHide.gt-md></div>
+      <mat-spinner
+        *ngIf="loadingProfile; else profile"
+        class="loading-profile-spinner"
+        diameter="60"
+        color="accent"
+      ></mat-spinner>
+      <ng-template #profile>
+        <button mat-button data-test-id="user-menu-button" [matMenuTriggerFor]="userMenu" class="user-button">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img *ngIf="avatarUrl; else defaultAvatar" class="avatar" [src]="avatarUrl" />
+            <ng-template #defaultAvatar>
+              <mat-icon>person</mat-icon>
+            </ng-template>
+            <span class="username mr-12" fxHide fxShow.gt-sm>{{ displayName }}</span>
+            <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+          </div>
+        </button>
+      </ng-template>
+
+      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item data-test-id="log-out-button" (click)="logoutClicked.emit()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

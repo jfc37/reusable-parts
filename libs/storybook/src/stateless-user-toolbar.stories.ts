@@ -1,5 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { DumbTopNavComponent } from '@reusable-parts/top-nav';
+import { StatelessUserToolbarComponent } from '@reusable-parts/stateless/user-toolbar';
+import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatIconModule,
@@ -8,56 +9,57 @@ import {
   MatProgressSpinnerModule,
   MatToolbarModule,
 } from '@angular/material';
-import { FuseSharedModule } from '@reusable-parts/fuse';
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
 
-storiesOf('Top Nav', module)
+storiesOf('Stateless User Toolbar', module)
   .addDecorator(
     moduleMetadata({
+      // TODO: JOE StoryBook
+      // imports: [StatelessUserToolbarModule],
       imports: [
         CommonModule,
-        BrowserAnimationsModule,
+
         MatButtonModule,
         MatIconModule,
         MatMenuModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
+
         FuseSharedModule,
       ],
-      declarations: [DumbTopNavComponent],
+      declarations: [StatelessUserToolbarComponent],
     }),
   )
   .add('Default', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
   }))
   .add('with hamburger', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
     props: {
       showHamburger: true,
     },
   }))
   .add('with loading bar', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
     props: {
       showLoadingBar: true,
     },
   }))
   .add('with loading profile', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
     props: {
       loadingProfile: true,
     },
   }))
   .add('with display name', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
     props: {
       displayName: 'Lance Armstrong',
     },
   }))
   .add('with avatar', () => ({
-    component: DumbTopNavComponent,
+    component: StatelessUserToolbarComponent,
     props: {
       avatarUrl: 'https://avatars.dicebear.com/v2/avataaars/sdf.svg',
     },
