@@ -81,6 +81,9 @@
     },
     "web-chat": {
       "tags": []
+    },
+    "storybook": {
+      "tags": []
     }
   }
 }

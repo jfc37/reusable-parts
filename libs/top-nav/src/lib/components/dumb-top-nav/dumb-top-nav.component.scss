@@ -1,54 +1,56 @@
-@import "libs/fuse/src/lib/@fuse/scss/fuse";
+@import 'libs/fuse/src/lib/@fuse/scss/core';
+@import 'libs/fuse/src/lib/@fuse/scss/fuse';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 :host {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  z-index: 4;
+
+  &.below {
+    z-index: 2;
+  }
+
+  .mat-toolbar {
+    background: inherit;
+    color: inherit;
     position: relative;
-    display: flex;
-    flex: 0 0 auto;
-    z-index: 4;
 
-    &.below {
-        z-index: 2;
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
     }
+  }
 
-    .mat-toolbar {
-        background: inherit;
-        color: inherit;
-        position: relative;
+  .user-button {
+    min-width: 64px;
+    height: 64px;
 
-        .loading-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-        }
+    @include media-breakpoint('xs') {
+      height: 56px;
     }
+  }
 
-    .user-button, {
-        min-width: 64px;
-        height: 64px;
+  .toggle-button-navbar {
+    min-width: 56px;
+    height: 56px;
+  }
 
-        @include media-breakpoint('xs') {
-            height: 56px;
-        }
+  .toolbar-separator {
+    height: 64px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+
+    @include media-breakpoint('xs') {
+      height: 56px;
     }
+  }
 
-    .toggle-button-navbar {
-        min-width: 56px;
-        height: 56px;
-    }
-
-    .toolbar-separator {
-        height: 64px;
-        width: 1px;
-        background: rgba(0, 0, 0, .12);
-
-        @include media-breakpoint('xs') {
-            height: 56px;
-        }
-    }
-
-    .loading-profile-spinner {
-      margin-right: 30px;
-    }
+  .loading-profile-spinner {
+    margin-right: 30px;
+  }
 }
