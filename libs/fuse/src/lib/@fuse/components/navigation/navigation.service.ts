@@ -19,7 +19,7 @@ export class FuseNavigationService {
   private _onNavigationItemRemoved: BehaviorSubject<any>;
 
   private _currentNavigationKey: string;
-  private _registry: { []: any } = {};
+  private _registry: {} = {};
 
   /**
    * Constructor
