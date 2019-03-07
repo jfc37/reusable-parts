@@ -87,6 +87,9 @@
     },
     "stateless-user-toolbar": {
       "tags": []
+    },
+    "stateless-welcome": {
+      "tags": []
     }
   }
 }
