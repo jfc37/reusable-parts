@@ -37,7 +37,8 @@
       "@reusable-parts/fuse": ["libs/fuse/index.ts"],
       "@app/storybook": ["libs/storybook/src/index.ts"],
       "@app/stateless/user-toolbar": ["libs/stateless/user-toolbar/src/index.ts"],
-      "@app/stateless/welcome": ["libs/stateless/welcome/src/index.ts"]
+      "@app/stateless/welcome": ["libs/stateless/welcome/src/index.ts"],
+      "@app/stateless/alert": ["libs/stateless/alert/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

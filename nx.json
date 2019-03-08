@@ -90,6 +90,9 @@
     },
     "stateless-welcome": {
       "tags": []
+    },
+    "stateless-alert": {
+      "tags": []
     }
   }
 }
