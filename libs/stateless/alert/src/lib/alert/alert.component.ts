@@ -33,12 +33,6 @@ export class StatelessAlertComponent implements OnInit, OnChanges {
 
   private setValues(): void {
     switch (this.type) {
-      case AlertType.Error: {
-        this.colourClass = 'error';
-        this.icon = 'error_outline';
-        break;
-      }
-
       case AlertType.Warning: {
         this.colourClass = 'warning';
         this.icon = 'warning';
@@ -54,6 +48,12 @@ export class StatelessAlertComponent implements OnInit, OnChanges {
       case AlertType.Success: {
         this.colourClass = 'success';
         this.icon = 'check';
+        break;
+      }
+
+      default: {
+        this.colourClass = 'error';
+        this.icon = 'error_outline';
         break;
       }
     }

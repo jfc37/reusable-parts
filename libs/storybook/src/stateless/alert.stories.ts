@@ -1,5 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { StatelessAlertModule } from '@reusable-parts/stateless/alert';
+import { StatelessAlertModule, AlertType } from '@reusable-parts/stateless/alert';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 storiesOf('Stateless Alert', module)
   .addDecorator(
@@ -7,15 +8,28 @@ storiesOf('Stateless Alert', module)
       imports: [StatelessAlertModule],
     }),
   )
-  .add('Default', () => ({
-    template: `<stateless-alert></stateless-alert>`,
-  }))
-  .add('with short content', () => ({
-    template: `
-      <stateless-alert type="success" [contentTemplate]="alertContentTemplate"></stateless-alert>
-      <ng-template #alertContentTemplate>You're all good to go!</ng-template>
-    `,
-  }))
+  .addDecorator(withKnobs)
+  .add('All knobs', () => {
+    const type = select('type', {
+      [AlertType.Success]: AlertType.Success,
+      [AlertType.Error]: AlertType.Error,
+      [AlertType.Warning]: AlertType.Warning,
+      [AlertType.Info]: AlertType.Info,
+    });
+    const message = text('message', 'Some very important information here...');
+    return {
+      template: `
+      <stateless-alert
+        [type]="type"
+        [contentTemplate]="alertContentTemplate">
+      </stateless-alert>
+      <ng-template #alertContentTemplate>{{message}}</ng-template>`,
+      props: {
+        type,
+        message,
+      },
+    };
+  })
   .add('with multiple lined content', () => ({
     template: `
       <stateless-alert type="error" [contentTemplate]="alertContentTemplate"></stateless-alert>
@@ -31,16 +45,4 @@ storiesOf('Stateless Alert', module)
         </div>
       </ng-template>
     `,
-  }))
-  .add('with success type', () => ({
-    template: `<stateless-alert type="success"></stateless-alert>`,
-  }))
-  .add('with error type', () => ({
-    template: `<stateless-alert type="error"></stateless-alert>`,
-  }))
-  .add('with warning type', () => ({
-    template: `<stateless-alert type="warning"></stateless-alert>`,
-  }))
-  .add('with info type', () => ({
-    template: `<stateless-alert type="info"></stateless-alert>`,
   }));
