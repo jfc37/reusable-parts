@@ -1,5 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { StatelessUserToolbarModule } from '@reusable-parts/stateless/user-toolbar';
 
 storiesOf('Stateless User Toolbar', module)
@@ -10,7 +11,7 @@ storiesOf('Stateless User Toolbar', module)
   )
   .addDecorator(withKnobs)
   .add('All knobs', () => {
-    const showHamburger = boolean('showHamburger', false);
+    const showHamburger = boolean('showHamburger', true);
     const showLoadingBar = boolean('showLoadingBar', false);
     const loadingProfile = boolean('loadingProfile', false);
     const displayName = text('displayName', 'Kevin Durant');
@@ -22,7 +23,9 @@ storiesOf('Stateless User Toolbar', module)
         [showLoadingBar]="showLoadingBar"
         [loadingProfile]="loadingProfile"
         [displayName]="displayName"
-        [avatarUrl]="avatarUrl">
+        [avatarUrl]="avatarUrl"
+        (hamburgerClicked)="hamburgerClicked($event)"
+        (logoutClicked)="logoutClicked($event)">
       </stateless-user-toolbar>`,
       props: {
         showHamburger,
@@ -30,6 +33,8 @@ storiesOf('Stateless User Toolbar', module)
         loadingProfile,
         displayName,
         avatarUrl,
+        hamburgerClicked: action('hamburgerClicked'),
+        logoutClicked: action('logoutClicked'),
       },
     };
   });
