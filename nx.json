@@ -93,6 +93,9 @@
     },
     "stateless-alert": {
       "tags": []
+    },
+    "stateless-loader": {
+      "tags": ["stateless"]
     }
   }
 }

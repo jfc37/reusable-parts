@@ -33,7 +33,7 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "affected:dep-graph": "./node_modules/.bin/nx affected:dep-graph",
     "help": "./node_modules/.bin/nx help",
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "serve:storybook": "start-storybook -p 9001 -c .storybook",
     "build:storybook": "build-storybook -c .storybook -o ./dist/storybook",
     "deploy:storybook": "npm run build:storybook && netlify deploy --dir=./dist/storybook --prod",
     "affected:test": "./node_modules/.bin/nx affected:test"
