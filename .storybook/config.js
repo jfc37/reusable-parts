@@ -1,4 +1,11 @@
-import { configure } from '@storybook/angular';
+import { configure, addParameters } from '@storybook/angular';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
+});
 
 function loadStories() {
   // load all from  /src/stories/*.stories.ts files
