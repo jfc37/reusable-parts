@@ -1,66 +1,27 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { StatelessUserToolbarComponent } from '@reusable-parts/stateless/user-toolbar';
-import { CommonModule } from '@angular/common';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatMenuModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule,
-} from '@angular/material';
-import { FuseSharedModule } from '@reusable-parts/fuse/src/lib/@fuse';
+import { StatelessUserToolbarModule } from '@reusable-parts/stateless/user-toolbar';
 
 storiesOf('Stateless User Toolbar', module)
   .addDecorator(
     moduleMetadata({
-      // TODO: JOE StoryBook
-      // imports: [StatelessUserToolbarModule],
-      imports: [
-        CommonModule,
-
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatProgressBarModule,
-        MatProgressSpinnerModule,
-        MatToolbarModule,
-
-        FuseSharedModule,
-      ],
-      declarations: [StatelessUserToolbarComponent],
+      imports: [StatelessUserToolbarModule],
     }),
   )
   .add('Default', () => ({
-    component: StatelessUserToolbarComponent,
+    template: `<stateless-user-toolbar></stateless-user-toolbar>`,
   }))
   .add('with hamburger', () => ({
-    component: StatelessUserToolbarComponent,
-    props: {
-      showHamburger: true,
-    },
+    template: `<stateless-user-toolbar showHamburger="true"></stateless-user-toolbar>`,
   }))
   .add('with loading bar', () => ({
-    component: StatelessUserToolbarComponent,
-    props: {
-      showLoadingBar: true,
-    },
+    template: `<stateless-user-toolbar showLoadingBar="true"></stateless-user-toolbar>`,
   }))
   .add('with loading profile', () => ({
-    component: StatelessUserToolbarComponent,
-    props: {
-      loadingProfile: true,
-    },
+    template: `<stateless-user-toolbar loadingProfile="true"></stateless-user-toolbar>`,
   }))
   .add('with display name', () => ({
-    component: StatelessUserToolbarComponent,
-    props: {
-      displayName: 'Lance Armstrong',
-    },
+    template: `<stateless-user-toolbar displayName="Steph Curry"></stateless-user-toolbar>`,
   }))
   .add('with avatar', () => ({
-    component: StatelessUserToolbarComponent,
-    props: {
-      avatarUrl: 'https://avatars.dicebear.com/v2/avataaars/sdf.svg',
-    },
+    template: `<stateless-user-toolbar avatarUrl="https://avatars.dicebear.com/v2/avataaars/sdf.svg"></stateless-user-toolbar>`,
   }));

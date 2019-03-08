@@ -1,36 +1,21 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { StatelessWelcomeComponent } from '@reusable-parts/stateless/welcome';
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FuseSharedModule } from '@reusable-parts/fuse';
+import { StatelessWelcomeModule } from '@reusable-parts/stateless/welcome';
 
 storiesOf('Stateless Welcome', module)
   .addDecorator(
     moduleMetadata({
-      // TODO: JOE StoryBook
-      // imports: [StatelessWelcomeModule],
-      imports: [CommonModule, BrowserAnimationsModule, FuseSharedModule],
-      declarations: [StatelessWelcomeComponent],
+      imports: [StatelessWelcomeModule],
     }),
   )
   .add('Default', () => ({
-    component: StatelessWelcomeComponent,
+    template: `<stateless-welcome></stateless-welcome>`,
   }))
   .add('with name', () => ({
-    component: StatelessWelcomeComponent,
-    props: {
-      name: 'FishServe',
-    },
+    template: `<stateless-welcome name="FishServe"></stateless-welcome>`,
   }))
   .add('with description', () => ({
-    component: StatelessWelcomeComponent,
-    props: {
-      description: 'Come join us',
-    },
+    template: `<stateless-welcome description="Come join us"></stateless-welcome>`,
   }))
   .add('with logo url', () => ({
-    component: StatelessWelcomeComponent,
-    props: {
-      logoUrl: 'http://angular-material.fusetheme.com/assets/images/logos/fuse.svg',
-    },
+    template: `<stateless-welcome logoUrl="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg"></stateless-welcome>`,
   }));

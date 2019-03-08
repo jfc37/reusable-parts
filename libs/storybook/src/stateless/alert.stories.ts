@@ -1,75 +1,46 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { StatelessAlertComponent, AlertType } from '@reusable-parts/stateless/alert';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { Component } from '@angular/core';
+import { StatelessAlertModule } from '@reusable-parts/stateless/alert';
 
 storiesOf('Stateless Alert', module)
   .addDecorator(
     moduleMetadata({
-      imports: [CommonModule, MatIconModule, FlexLayoutModule],
-      declarations: [StatelessAlertComponent],
+      imports: [StatelessAlertModule],
     }),
   )
   .add('Default', () => ({
-    component: StatelessAlertComponent,
+    template: `<stateless-alert></stateless-alert>`,
   }))
   .add('with short content', () => ({
-    component: ShortContentDemoComponent,
+    template: `
+      <stateless-alert type="success" [contentTemplate]="alertContentTemplate"></stateless-alert>
+      <ng-template #alertContentTemplate>You're all good to go!</ng-template>
+    `,
   }))
   .add('with multiple lined content', () => ({
-    component: MultiLinedContentDemoComponent,
+    template: `
+      <stateless-alert type="error" [contentTemplate]="alertContentTemplate"></stateless-alert>
+      <ng-template #alertContentTemplate>
+        <div>
+          Some custom content...
+        </div>
+        <div>
+          If you want to see some more....
+        </div>
+        <div>
+          Why don't you come back tomorrow?
+        </div>
+      </ng-template>
+    `,
   }))
   .add('with success type', () => ({
-    component: StatelessAlertComponent,
-    props: {
-      type: AlertType.Success,
-    },
+    template: `<stateless-alert type="success"></stateless-alert>`,
   }))
   .add('with error type', () => ({
-    component: StatelessAlertComponent,
-    props: {
-      type: AlertType.Error,
-    },
+    template: `<stateless-alert type="error"></stateless-alert>`,
   }))
   .add('with warning type', () => ({
-    component: StatelessAlertComponent,
-    props: {
-      type: AlertType.Warning,
-    },
+    template: `<stateless-alert type="warning"></stateless-alert>`,
   }))
   .add('with info type', () => ({
-    component: StatelessAlertComponent,
-    props: {
-      type: AlertType.Info,
-    },
+    template: `<stateless-alert type="info"></stateless-alert>`,
   }));
-
-@Component({
-  selector: 'demo',
-  template: `
-    <stateless-alert type="error" [contentTemplate]="alertContentTemplate"></stateless-alert>
-    <ng-template #alertContentTemplate>Some custom content...</ng-template>
-  `,
-})
-class ShortContentDemoComponent {}
-
-@Component({
-  selector: 'demo',
-  template: `
-    <stateless-alert type="error" [contentTemplate]="alertContentTemplate"></stateless-alert>
-    <ng-template #alertContentTemplate>
-      <div>
-        Some custom content...
-      </div>
-      <div>
-        If you want to see some more....
-      </div>
-      <div>
-        Why don't you come back tomorrow?
-      </div>
-    </ng-template>
-  `,
-})
-class MultiLinedContentDemoComponent {}
