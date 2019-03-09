@@ -1,0 +1,16 @@
+<ng-container *ngIf="!item.hidden">
+  <div class="group-title" [ngClass]="item.classes">
+    <span class="hint-text" [translate]="item.translate">{{ item.title }}</span>
+  </div>
+
+  <div class="group-items">
+    <ng-container *ngFor="let item of item.children">
+      <stateless-nav-vertical-group *ngIf="item.type == 'group'" [item]="item"></stateless-nav-vertical-group>
+      <stateless-nav-vertical-collapsable
+        *ngIf="item.type == 'collapsable'"
+        [item]="item"
+      ></stateless-nav-vertical-collapsable>
+      <stateless-nav-vertical-item *ngIf="item.type == 'item'" [item]="item"></stateless-nav-vertical-item>
+    </ng-container>
+  </div>
+</ng-container>

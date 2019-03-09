@@ -96,6 +96,9 @@
     },
     "stateless-loader": {
       "tags": ["stateless"]
+    },
+    "stateless-sidebar": {
+      "tags": ["stateless"]
     }
   }
 }

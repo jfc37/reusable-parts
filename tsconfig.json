@@ -39,7 +39,8 @@
       "@app/stateless/user-toolbar": ["libs/stateless/user-toolbar/src/index.ts"],
       "@app/stateless/welcome": ["libs/stateless/welcome/src/index.ts"],
       "@app/stateless/alert": ["libs/stateless/alert/src/index.ts"],
-      "@reusable-parts/stateless/loader": ["libs/stateless/loader/src/index.ts"]
+      "@reusable-parts/stateless/loader": ["libs/stateless/loader/src/index.ts"],
+      "@reusable-parts/stateless/sidebar": ["libs/stateless/sidebar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
