@@ -2,10 +2,6 @@ export interface MenuItem {
   id: string;
   title: string;
 
-  /**
-   * Key to look up in translation config
-   */
-  translateKey?: string;
   type: MenuItemType;
 
   /**
@@ -31,7 +27,6 @@ export enum MenuItemType {
 
 export interface MenuItemBadge {
   title: string;
-  translateKey: string;
   backgroundColour: string;
   textColour: string;
 }

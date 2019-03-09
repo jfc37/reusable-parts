@@ -3,7 +3,7 @@ import { SidebarModule, MenuItemType } from '@reusable-parts/stateless/sidebar';
 import { APP_BASE_HREF } from '@angular/common';
 import { FuseModule } from '@reusable-parts/fuse';
 import { RouterModule } from '@angular/router';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 
@@ -25,26 +25,25 @@ storiesOf('Stateless Sidebar', module)
     const logoUrl = text('logoUrl', 'http://angular-material.fusetheme.com/assets/images/logos/fuse.svg');
     const menuItems = [
       {
-        id: 'admin',
-        title: 'Admin',
-        icon: 'lock',
-        type: MenuItemType.Collapse,
-        children: [
-          {
-            id: 'teachers',
-            title: 'Teachers',
-            icon: 'people',
-            type: MenuItemType.Item,
-            url: 'admin/teachers',
-          },
-          {
-            id: 'blocks',
-            title: 'Blocks',
-            icon: 'view_module',
-            type: MenuItemType.Item,
-            url: 'admin/blocks',
-          },
-        ],
+        id: 'books',
+        title: 'Books',
+        icon: 'book',
+        type: MenuItemType.Item,
+        url: 'category/books',
+      },
+      {
+        id: 'videos',
+        title: 'Videos',
+        icon: 'ondemand_video',
+        type: MenuItemType.Item,
+        url: 'category/videos',
+      },
+      {
+        id: 'papers',
+        title: 'Paper',
+        icon: 'library_books',
+        type: MenuItemType.Item,
+        url: 'category/paper',
       },
     ];
     return {
@@ -62,6 +61,224 @@ storiesOf('Stateless Sidebar', module)
         logoUrl,
         menuItems,
         toggleFolded: action('toggleFolded'),
+      },
+    };
+  })
+  .add('with collapsable menu items', () => {
+    const menuItems = [
+      {
+        id: 'favourites',
+        title: 'Favourites',
+        icon: 'favorite',
+        type: MenuItemType.Collapse,
+        children: [
+          {
+            id: 'books',
+            title: 'Books',
+            icon: 'book',
+            type: MenuItemType.Item,
+            url: 'category/books',
+          },
+          {
+            id: 'videos',
+            title: 'Videos',
+            icon: 'ondemand_video',
+            type: MenuItemType.Item,
+            url: 'category/videos',
+          },
+          {
+            id: 'papers',
+            title: 'Paper',
+            icon: 'library_books',
+            type: MenuItemType.Item,
+            url: 'category/paper',
+          },
+        ],
+      },
+      {
+        id: 'categories',
+        title: 'Categories',
+        icon: 'category',
+        type: MenuItemType.Collapse,
+        children: [
+          {
+            id: 'books',
+            title: 'Books',
+            icon: 'book',
+            type: MenuItemType.Item,
+            url: 'category/books',
+          },
+          {
+            id: 'videos',
+            title: 'Videos',
+            icon: 'ondemand_video',
+            type: MenuItemType.Item,
+            url: 'category/videos',
+          },
+          {
+            id: 'papers',
+            title: 'Paper',
+            icon: 'library_books',
+            type: MenuItemType.Item,
+            url: 'category/paper',
+          },
+        ],
+      },
+    ];
+
+    return {
+      template: `
+      <stateless-sidebar
+        name="Uphill Ltd"
+        [menuItems]="menuItems">
+      </stateless-sidebar>`,
+      props: {
+        menuItems,
+      },
+    };
+  })
+  .add('with grouped menu items', () => {
+    const menuItems = [
+      {
+        id: 'group-a',
+        title: 'Group A',
+        type: MenuItemType.Group,
+        children: [
+          {
+            id: 'favourites',
+            title: 'Favourites',
+            icon: 'favorite',
+            type: MenuItemType.Collapse,
+            children: [
+              {
+                id: 'books',
+                title: 'Books',
+                icon: 'book',
+                type: MenuItemType.Item,
+                url: 'category/books',
+              },
+              {
+                id: 'videos',
+                title: 'Videos',
+                icon: 'ondemand_video',
+                type: MenuItemType.Item,
+                url: 'category/videos',
+              },
+              {
+                id: 'papers',
+                title: 'Paper',
+                icon: 'library_books',
+                type: MenuItemType.Item,
+                url: 'category/paper',
+              },
+            ],
+          },
+          {
+            id: 'categories',
+            title: 'Categories',
+            icon: 'category',
+            type: MenuItemType.Collapse,
+            children: [
+              {
+                id: 'books',
+                title: 'Books',
+                icon: 'book',
+                type: MenuItemType.Item,
+                url: 'category/books',
+              },
+              {
+                id: 'videos',
+                title: 'Videos',
+                icon: 'ondemand_video',
+                type: MenuItemType.Item,
+                url: 'category/videos',
+              },
+              {
+                id: 'papers',
+                title: 'Paper',
+                icon: 'library_books',
+                type: MenuItemType.Item,
+                url: 'category/paper',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'group-b',
+        title: 'Group B',
+        type: MenuItemType.Group,
+        children: [
+          {
+            id: 'favourites',
+            title: 'Favourites',
+            icon: 'favorite',
+            type: MenuItemType.Collapse,
+            children: [
+              {
+                id: 'books',
+                title: 'Books',
+                icon: 'book',
+                type: MenuItemType.Item,
+                url: 'category/books',
+              },
+              {
+                id: 'videos',
+                title: 'Videos',
+                icon: 'ondemand_video',
+                type: MenuItemType.Item,
+                url: 'category/videos',
+              },
+              {
+                id: 'papers',
+                title: 'Paper',
+                icon: 'library_books',
+                type: MenuItemType.Item,
+                url: 'category/paper',
+              },
+            ],
+          },
+          {
+            id: 'categories',
+            title: 'Categories',
+            icon: 'category',
+            type: MenuItemType.Collapse,
+            children: [
+              {
+                id: 'books',
+                title: 'Books',
+                icon: 'book',
+                type: MenuItemType.Item,
+                url: 'category/books',
+              },
+              {
+                id: 'videos',
+                title: 'Videos',
+                icon: 'ondemand_video',
+                type: MenuItemType.Item,
+                url: 'category/videos',
+              },
+              {
+                id: 'papers',
+                title: 'Paper',
+                icon: 'library_books',
+                type: MenuItemType.Item,
+                url: 'category/paper',
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    return {
+      template: `
+      <stateless-sidebar
+        name="Uphill Ltd"
+        [menuItems]="menuItems">
+      </stateless-sidebar>`,
+      props: {
+        menuItems,
       },
     };
   });
