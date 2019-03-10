@@ -281,4 +281,44 @@ storiesOf('Stateless Sidebar', module)
         menuItems,
       },
     };
+  })
+  .add('with lots of menu items', () => {
+    const item = {
+      id: 'books',
+      title: 'Books',
+      icon: 'book',
+      type: MenuItemType.Item,
+      url: 'category/books',
+    };
+    const menuItems = [
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+      item,
+    ];
+
+    return {
+      template: `
+      <stateless-sidebar
+        name="Uphill Ltd"
+        [menuItems]="menuItems">
+      </stateless-sidebar>`,
+      props: {
+        menuItems,
+      },
+    };
   });
