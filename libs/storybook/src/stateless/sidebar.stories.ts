@@ -1,20 +1,15 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { SidebarModule, MenuItemType } from '@reusable-parts/stateless/sidebar';
 import { APP_BASE_HREF } from '@angular/common';
-import { FuseModule } from '@reusable-parts/fuse';
 import { RouterModule } from '@angular/router';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 
 storiesOf('Stateless Sidebar', module)
   .addDecorator(
     moduleMetadata({
-      imports: [
-        RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]),
-        SidebarModule,
-        FuseModule.forRoot({}),
-      ],
+      imports: [RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]), SidebarModule],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
   )
