@@ -1108,6 +1108,41 @@
           "styleext": "scss"
         }
       }
+    },
+    "stateless-theme": {
+      "root": "libs/stateless/theme",
+      "sourceRoot": "libs/stateless/theme/src",
+      "projectType": "library",
+      "prefix": "stateless",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/stateless/theme/tsconfig.lib.json",
+            "project": "libs/stateless/theme/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/stateless/theme/tsconfig.lib.json", "libs/stateless/theme/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/stateless/theme/jest.config.js",
+            "tsConfig": "libs/stateless/theme/tsconfig.spec.json",
+            "setupFile": "libs/stateless/theme/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",

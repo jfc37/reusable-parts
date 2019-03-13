@@ -1,6 +1,6 @@
-<fuse-sidebar name="navbar" class="left-navbar" lockedOpen="gt-md" [folded]="folded" [ngClass]="sideBarClasses">
+<fuse-sidebar name="navbar" class="left-navbar" lockedOpen="gt-md" [folded]="folded">
   <div class="navbar-vertical">
-    <div class="navbar-header">
+    <div class="navbar-header fuse-navy-900">
       <div class="logo">
         <img *ngIf="logoUrl" class="logo-icon" [src]="logoUrl" />
         <span class="logo-text">{{ name }}</span>
@@ -15,7 +15,7 @@
       </button>
     </div>
 
-    <div class="navbar-content" fusePerfectScrollbar>
+    <div class="navbar-content fuse-navy-700" fusePerfectScrollbar>
       <stateless-navigation [navigation]="menuItems" layout="vertical"></stateless-navigation>
     </div>
   </div>

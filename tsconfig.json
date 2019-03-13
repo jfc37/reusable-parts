@@ -41,7 +41,8 @@
       "@app/stateless/alert": ["libs/stateless/alert/src/index.ts"],
       "@reusable-parts/stateless/loader": ["libs/stateless/loader/src/index.ts"],
       "@reusable-parts/stateless/sidebar": ["libs/stateless/sidebar/src/index.ts"],
-      "@reusable-parts/stateless/layouts/layout-with-nav": ["libs/stateless/layouts/layout-with-nav/src/index.ts"]
+      "@reusable-parts/stateless/layouts/layout-with-nav": ["libs/stateless/layouts/layout-with-nav/src/index.ts"],
+      "@reusable-parts/stateless/theme": ["libs/stateless/theme/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
