@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { fuseAnimations } from '@reusable-parts/fuse';
 
 @Component({
   selector: 'stateless-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: fuseAnimations,
 })
 export class StatelessWelcomeComponent implements OnChanges {

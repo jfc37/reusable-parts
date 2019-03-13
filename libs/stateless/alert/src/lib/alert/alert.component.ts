@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  TemplateRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 export enum AlertType {
   Error = 'error',
@@ -11,6 +19,7 @@ export enum AlertType {
   selector: 'stateless-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatelessAlertComponent implements OnInit, OnChanges {
   /**

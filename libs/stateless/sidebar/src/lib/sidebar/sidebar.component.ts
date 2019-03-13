@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FuseNavigationService } from '@reusable-parts/fuse/src/lib/@fuse/components/navigation/navigation.service';
 import { FusePerfectScrollbarDirective } from '@reusable-parts/fuse/src/lib/@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -11,6 +11,7 @@ import { MenuItem } from './sidebar.component.model';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   animations: fuseAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent implements OnDestroy {
   @Input() name: string;
