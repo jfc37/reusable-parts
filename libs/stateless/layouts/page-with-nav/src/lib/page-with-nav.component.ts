@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef, HostBinding } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  TemplateRef,
+  HostBinding,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { MenuItem } from '@reusable-parts/stateless/sidebar';
 
 @Component({
@@ -19,6 +27,7 @@ import { MenuItem } from '@reusable-parts/stateless/sidebar';
           [loadingProfile]="userToolbar.loadingProfile"
           [displayName]="userToolbar.displayName"
           [avatarUrl]="userToolbar.avatarUrl"
+          (logoutClicked)="logoutClicked.emit()"
         ></stateless-user-toolbar>
         <stateless-page [headerTemplate]="headerTemplate" [contentTemplate]="contentTemplate"></stateless-page>
       </div>
@@ -42,6 +51,8 @@ export class PageWithNavComponent {
   @Input() public contentTemplate: TemplateRef<any>;
   @Input() public sidebar: Partial<SidebarModel> = {};
   @Input() public userToolbar: UserToolbarModel;
+
+  @Output() public logoutClicked = new EventEmitter<void>();
 
   @HostBinding('class.folded-sidebar') public hideSidebar = false;
 

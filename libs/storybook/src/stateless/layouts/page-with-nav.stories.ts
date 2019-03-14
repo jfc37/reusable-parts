@@ -1,6 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
+import { action } from '@storybook/addon-actions';
 import {
   PageWithNavModule,
   PageWithNavComponent,
@@ -52,7 +53,13 @@ storiesOf('Page With Navigation', module)
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-        <stateless-page-with-nav [userToolbar]="userToolbarModel" [sidebar]="sidebarModel" [headerTemplate]="headerTemplate" [contentTemplate]="contentTemplate"></stateless-page-with-nav>
+        <stateless-page-with-nav
+          [userToolbar]="userToolbarModel"
+          [sidebar]="sidebarModel"
+          [headerTemplate]="headerTemplate"
+          [contentTemplate]="contentTemplate"
+          (logoutClicked)="logoutClicked($event)"
+          ></stateless-page-with-nav>
       </ng-template>
       <ng-template #headerTemplate>
         {{headerText}}
@@ -69,6 +76,7 @@ storiesOf('Page With Navigation', module)
         sidebarLogoUrl,
         sidebarModel,
         userToolbarModel,
+        logoutClicked: action('logoutClicked'),
       },
     };
   })
