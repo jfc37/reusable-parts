@@ -43,7 +43,8 @@
       "@reusable-parts/stateless/sidebar": ["libs/stateless/sidebar/src/index.ts"],
       "@reusable-parts/stateless/layouts/layout-with-nav": ["libs/stateless/layouts/layout-with-nav/src/index.ts"],
       "@reusable-parts/stateless/theme": ["libs/stateless/theme/src/index.ts"],
-      "@reusable-parts/stateless/layouts/header": ["libs/stateless/layouts/header/src/index.ts"]
+      "@reusable-parts/stateless/layouts/header": ["libs/stateless/layouts/header/src/index.ts"],
+      "@reusable-parts/stateless/layouts/page": ["libs/stateless/layouts/page/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

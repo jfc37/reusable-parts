@@ -1,17 +1,20 @@
 import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'stateless-header',
+  selector: 'stateless-page',
   template: `
-    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
-      <h2>
+    <div class="page-layout simple fullwidth">
+      <stateless-header [contentTemplate]="headerTemplate"></stateless-header>
+
+      <div class="content p-24">
         <ng-container *ngTemplateOutlet="contentTemplate ? contentTemplate : defaultContent"> </ng-container>
-      </h2>
+      </div>
     </div>
-    <ng-template #defaultContent></ng-template>
+    <ng-template #defaultContent>Hello</ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class PageComponent {
+  @Input() public headerTemplate: TemplateRef<any>;
   @Input() public contentTemplate: TemplateRef<any>;
 }

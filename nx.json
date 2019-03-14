@@ -108,6 +108,9 @@
     },
     "stateless-layouts-header": {
       "tags": ["stateless"]
+    },
+    "stateless-layouts-page": {
+      "tags": ["stateless"]
     }
   }
 }
