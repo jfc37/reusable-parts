@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 import { ThemeModule, Theme } from '@reusable-parts/stateless/theme';
+import { LoaderModule } from '@reusable-parts/stateless/loader';
 
 storiesOf('Theme', module)
   .addDecorator(
@@ -13,6 +14,7 @@ storiesOf('Theme', module)
         RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]),
         ThemeModule,
         SidebarModule,
+        LoaderModule,
       ],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
@@ -27,62 +29,25 @@ storiesOf('Theme', module)
     });
     const menuItems = [
       {
-        id: 'favourites',
-        title: 'Favourites',
-        icon: 'favorite',
-        type: MenuItemType.Collapse,
-        children: [
-          {
-            id: 'books',
-            title: 'Books',
-            icon: 'book',
-            type: MenuItemType.Item,
-            url: '/iframe.html',
-          },
-          {
-            id: 'videos',
-            title: 'Videos',
-            icon: 'ondemand_video',
-            type: MenuItemType.Item,
-            url: 'category/videos',
-          },
-          {
-            id: 'papers',
-            title: 'Paper',
-            icon: 'library_books',
-            type: MenuItemType.Item,
-            url: 'category/paper',
-          },
-        ],
+        id: 'books',
+        title: 'Books',
+        icon: 'book',
+        type: MenuItemType.Item,
+        url: 'category/books',
       },
       {
-        id: 'categories',
-        title: 'Categories',
-        icon: 'category',
-        type: MenuItemType.Collapse,
-        children: [
-          {
-            id: 'books',
-            title: 'Books',
-            icon: 'book',
-            type: MenuItemType.Item,
-            url: 'category/books',
-          },
-          {
-            id: 'videos',
-            title: 'Videos',
-            icon: 'ondemand_video',
-            type: MenuItemType.Item,
-            url: 'category/videos',
-          },
-          {
-            id: 'papers',
-            title: 'Paper',
-            icon: 'library_books',
-            type: MenuItemType.Item,
-            url: 'category/paper',
-          },
-        ],
+        id: 'videos',
+        title: 'Videos',
+        icon: 'ondemand_video',
+        type: MenuItemType.Item,
+        url: 'category/videos',
+      },
+      {
+        id: 'papers',
+        title: 'Paper',
+        icon: 'library_books',
+        type: MenuItemType.Item,
+        url: 'category/paper',
       },
     ];
 
@@ -90,10 +55,11 @@ storiesOf('Theme', module)
       template: `
       <theme [theme]="type" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-      <stateless-sidebar
+      <!--<stateless-sidebar
         name="Uphill Ltd"
         [menuItems]="menuItems">
-      </stateless-sidebar>
+      </stateless-sidebar>-->
+      <stateless-loader></stateless-loader>
       </ng-template>`,
       props: {
         type,
