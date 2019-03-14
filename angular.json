@@ -1071,44 +1071,6 @@
         }
       }
     },
-    "stateless-layouts-layout-with-nav": {
-      "root": "libs/stateless/layouts/layout-with-nav",
-      "sourceRoot": "libs/stateless/layouts/layout-with-nav/src",
-      "projectType": "library",
-      "prefix": "layout",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/stateless/layouts/layout-with-nav/tsconfig.lib.json",
-            "project": "libs/stateless/layouts/layout-with-nav/ng-package.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/stateless/layouts/layout-with-nav/tsconfig.lib.json",
-              "libs/stateless/layouts/layout-with-nav/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/stateless/layouts/layout-with-nav/jest.config.js",
-            "tsConfig": "libs/stateless/layouts/layout-with-nav/tsconfig.spec.json",
-            "setupFile": "libs/stateless/layouts/layout-with-nav/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "stateless-theme": {
       "root": "libs/stateless/theme",
       "sourceRoot": "libs/stateless/theme/src",

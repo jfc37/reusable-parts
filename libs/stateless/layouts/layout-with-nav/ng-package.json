@@ -1,7 +1,0 @@
-{
-  "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../dist/libs/stateless/layouts/layout-with-nav",
-  "lib": {
-    "entryFile": "src/index.ts"
-  }
-}

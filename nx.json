@@ -100,9 +100,6 @@
     "stateless-sidebar": {
       "tags": ["stateless"]
     },
-    "stateless-layouts-layout-with-nav": {
-      "tags": ["stateless"]
-    },
     "stateless-theme": {
       "tags": ["stateless"]
     },
