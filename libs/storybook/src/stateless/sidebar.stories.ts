@@ -5,16 +5,23 @@ import { RouterModule } from '@angular/router';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
+import { ThemeModule } from '@reusable-parts/stateless/theme';
+import { getThemeKnob } from '../knobs';
 
 storiesOf('Stateless Sidebar', module)
   .addDecorator(
     moduleMetadata({
-      imports: [RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]), SidebarModule],
+      imports: [
+        RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]),
+        ThemeModule,
+        SidebarModule,
+      ],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
   )
   .addDecorator(withKnobs)
   .add('All knobs', () => {
+    const theme = getThemeKnob();
     const name = text('name', 'Full Swing');
     const folded = boolean('folded', false);
     const logoUrl = text('logoUrl', 'http://angular-material.fusetheme.com/assets/images/logos/fuse.svg');
@@ -43,14 +50,19 @@ storiesOf('Stateless Sidebar', module)
     ];
     return {
       template: `
-      <stateless-sidebar
-        [name]="name"
-        [folded]="folded"
-        [menuItems]="menuItems"
-        [logoUrl]="logoUrl"
-        (toggleFolded)="toggleFolded($event)">
-      </stateless-sidebar>`,
+      <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
+      <ng-template #mainContentTemplate>
+        <stateless-sidebar
+          [name]="name"
+          [folded]="folded"
+          [menuItems]="menuItems"
+          [logoUrl]="logoUrl"
+          (toggleFolded)="toggleFolded($event)">
+        </stateless-sidebar>
+      </ng-template>
+      `,
       props: {
+        theme,
         name,
         folded,
         logoUrl,
@@ -60,6 +72,8 @@ storiesOf('Stateless Sidebar', module)
     };
   })
   .add('with collapsable menu items', () => {
+    const theme = getThemeKnob();
+    const folded = boolean('folded', false);
     const menuItems = [
       {
         id: 'favourites',
@@ -123,16 +137,25 @@ storiesOf('Stateless Sidebar', module)
 
     return {
       template: `
-      <stateless-sidebar
-        name="Uphill Ltd"
-        [menuItems]="menuItems">
-      </stateless-sidebar>`,
+      <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
+      <ng-template #mainContentTemplate>
+        <stateless-sidebar
+          name="Uphill Ltd"
+          [folded]="folded"
+          [menuItems]="menuItems">
+        </stateless-sidebar>
+      </ng-template>
+      `,
       props: {
         menuItems,
+        theme,
+        folded,
       },
     };
   })
   .add('with grouped menu items', () => {
+    const theme = getThemeKnob();
+    const folded = boolean('folded', false);
     const menuItems = [
       {
         id: 'group-a',
@@ -268,16 +291,24 @@ storiesOf('Stateless Sidebar', module)
 
     return {
       template: `
-      <stateless-sidebar
-        name="Uphill Ltd"
-        [menuItems]="menuItems">
-      </stateless-sidebar>`,
+      <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
+      <ng-template #mainContentTemplate>
+        <stateless-sidebar
+          name="Uphill Ltd"
+          [folded]="folded"
+          [menuItems]="menuItems">
+        </stateless-sidebar>
+      </ng-template>`,
       props: {
         menuItems,
+        theme,
+        folded,
       },
     };
   })
   .add('with lots of menu items', () => {
+    const theme = getThemeKnob();
+    const folded = boolean('folded', false);
     const item = {
       id: 'books',
       title: 'Books',
@@ -308,12 +339,18 @@ storiesOf('Stateless Sidebar', module)
 
     return {
       template: `
-      <stateless-sidebar
-        name="Uphill Ltd"
-        [menuItems]="menuItems">
-      </stateless-sidebar>`,
+      <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
+      <ng-template #mainContentTemplate>
+        <stateless-sidebar
+          name="Uphill Ltd"
+          [folded]="folded"
+          [menuItems]="menuItems">
+        </stateless-sidebar>
+      </ng-template>`,
       props: {
         menuItems,
+        theme,
+        folded,
       },
     };
   });
