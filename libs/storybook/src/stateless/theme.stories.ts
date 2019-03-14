@@ -6,6 +6,7 @@ import { withKnobs, select } from '@storybook/addon-knobs';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 import { ThemeModule, Theme } from '@reusable-parts/stateless/theme';
 import { LoaderModule } from '@reusable-parts/stateless/loader';
+import { getThemeKnob } from '../knobs';
 
 storiesOf('Theme', module)
   .addDecorator(
@@ -21,12 +22,7 @@ storiesOf('Theme', module)
   )
   .addDecorator(withKnobs)
   .add('with Knobs', () => {
-    const type = select('type', {
-      [Theme.BlueLight]: Theme.BlueLight,
-      [Theme.YellowLight]: Theme.YellowLight,
-      [Theme.BlueGreyDark]: Theme.BlueGreyDark,
-      [Theme.PinkDark]: Theme.PinkDark,
-    });
+    const theme = getThemeKnob();
     const menuItems = [
       {
         id: 'books',
@@ -53,7 +49,7 @@ storiesOf('Theme', module)
 
     return {
       template: `
-      <theme [theme]="type" [contentTemplate]="mainContentTemplate"></theme>
+      <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
       <!--<stateless-sidebar
         name="Uphill Ltd"
@@ -62,7 +58,7 @@ storiesOf('Theme', module)
       <stateless-loader></stateless-loader>
       </ng-template>`,
       props: {
-        type,
+        theme,
         menuItems,
       },
     };

@@ -1,13 +1,13 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { LoaderModule } from '@reusable-parts/stateless/loader';
-import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { withKnobs } from '@storybook/addon-knobs';
-import { getThemeKnob } from '../knobs';
+import { ThemeModule } from '@reusable-parts/stateless/theme';
+import { HeaderModule } from '@reusable-parts/stateless/layouts/header';
+import { getThemeKnob } from '../../knobs';
 
-storiesOf('Stateless Loader', module)
+storiesOf('Header', module)
   .addDecorator(
     moduleMetadata({
-      imports: [ThemeModule, LoaderModule],
+      imports: [ThemeModule, HeaderModule],
     }),
   )
   .addDecorator(withKnobs)
@@ -18,7 +18,7 @@ storiesOf('Stateless Loader', module)
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-        <stateless-loader></stateless-loader>
+        <stateless-header>Good morning, sir</stateless-header>
       </ng-template>`,
       props: {
         theme,

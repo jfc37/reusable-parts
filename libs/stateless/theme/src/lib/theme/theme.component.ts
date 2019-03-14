@@ -14,7 +14,7 @@ import { Component, Input, TemplateRef, ChangeDetectionStrategy, ViewEncapsulati
 })
 export class ThemeComponent {
   @Input() public contentTemplate: TemplateRef<any>;
-  @Input() public theme: Theme;
+  @Input() public theme: Theme = Theme.BlueLight;
 }
 
 export enum Theme {
