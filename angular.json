@@ -1181,6 +1181,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "stateless-layouts-page-with-nav": {
+      "root": "libs/stateless/layouts/page-with-nav",
+      "sourceRoot": "libs/stateless/layouts/page-with-nav/src",
+      "projectType": "library",
+      "prefix": "stateless",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/stateless/layouts/page-with-nav/tsconfig.lib.json",
+            "project": "libs/stateless/layouts/page-with-nav/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stateless/layouts/page-with-nav/tsconfig.lib.json",
+              "libs/stateless/layouts/page-with-nav/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/stateless/layouts/page-with-nav/jest.config.js",
+            "tsConfig": "libs/stateless/layouts/page-with-nav/tsconfig.spec.json",
+            "setupFile": "libs/stateless/layouts/page-with-nav/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",

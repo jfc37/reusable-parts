@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../../dist/libs/stateless/layouts/page-with-nav",
+  "lib": {
+    "entryFile": "src/index.ts"
+  }
+}

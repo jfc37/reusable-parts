@@ -6,7 +6,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { getThemeKnob } from '../knobs';
+import { getThemeKnob, getExampleMenuItems } from '../knobs';
 
 storiesOf('Stateless Sidebar', module)
   .addDecorator(
@@ -156,138 +156,7 @@ storiesOf('Stateless Sidebar', module)
   .add('with grouped menu items', () => {
     const theme = getThemeKnob();
     const folded = boolean('folded', false);
-    const menuItems = [
-      {
-        id: 'group-a',
-        title: 'Group A',
-        type: MenuItemType.Group,
-        children: [
-          {
-            id: 'favourites',
-            title: 'Favourites',
-            icon: 'favorite',
-            type: MenuItemType.Collapse,
-            children: [
-              {
-                id: 'books',
-                title: 'Books',
-                icon: 'book',
-                type: MenuItemType.Item,
-                url: 'category/books',
-              },
-              {
-                id: 'videos',
-                title: 'Videos',
-                icon: 'ondemand_video',
-                type: MenuItemType.Item,
-                url: 'category/videos',
-              },
-              {
-                id: 'papers',
-                title: 'Paper',
-                icon: 'library_books',
-                type: MenuItemType.Item,
-                url: 'category/paper',
-              },
-            ],
-          },
-          {
-            id: 'categories',
-            title: 'Categories',
-            icon: 'category',
-            type: MenuItemType.Collapse,
-            children: [
-              {
-                id: 'books',
-                title: 'Books',
-                icon: 'book',
-                type: MenuItemType.Item,
-                url: 'category/books',
-              },
-              {
-                id: 'videos',
-                title: 'Videos',
-                icon: 'ondemand_video',
-                type: MenuItemType.Item,
-                url: 'category/videos',
-              },
-              {
-                id: 'papers',
-                title: 'Paper',
-                icon: 'library_books',
-                type: MenuItemType.Item,
-                url: 'category/paper',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'group-b',
-        title: 'Group B',
-        type: MenuItemType.Group,
-        children: [
-          {
-            id: 'favourites',
-            title: 'Favourites',
-            icon: 'favorite',
-            type: MenuItemType.Collapse,
-            children: [
-              {
-                id: 'books',
-                title: 'Books',
-                icon: 'book',
-                type: MenuItemType.Item,
-                url: 'category/books',
-              },
-              {
-                id: 'videos',
-                title: 'Videos',
-                icon: 'ondemand_video',
-                type: MenuItemType.Item,
-                url: 'category/videos',
-              },
-              {
-                id: 'papers',
-                title: 'Paper',
-                icon: 'library_books',
-                type: MenuItemType.Item,
-                url: 'category/paper',
-              },
-            ],
-          },
-          {
-            id: 'categories',
-            title: 'Categories',
-            icon: 'category',
-            type: MenuItemType.Collapse,
-            children: [
-              {
-                id: 'books',
-                title: 'Books',
-                icon: 'book',
-                type: MenuItemType.Item,
-                url: 'category/books',
-              },
-              {
-                id: 'videos',
-                title: 'Videos',
-                icon: 'ondemand_video',
-                type: MenuItemType.Item,
-                url: 'category/videos',
-              },
-              {
-                id: 'papers',
-                title: 'Paper',
-                icon: 'library_books',
-                type: MenuItemType.Item,
-                url: 'category/paper',
-              },
-            ],
-          },
-        ],
-      },
-    ];
+    const menuItems = getExampleMenuItems();
 
     return {
       template: `

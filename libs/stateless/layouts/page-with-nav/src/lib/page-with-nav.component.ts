@@ -1,0 +1,64 @@
+import { Component, ChangeDetectionStrategy, Input, TemplateRef, HostBinding } from '@angular/core';
+import { MenuItem } from '@reusable-parts/stateless/sidebar';
+
+@Component({
+  selector: 'stateless-page-with-nav',
+  template: `
+    <div fxLayout="row" fxLayoutAlign=" none">
+      <stateless-sidebar
+        [logoUrl]="sidebar.logoUrl"
+        [menuItems]="sidebar.menuItems"
+        [name]="sidebar.name"
+        [folded]="hideSidebar"
+        (toggleFolded)="toggleSidebar()"
+      ></stateless-sidebar>
+      <div class="container">
+        <stateless-user-toolbar
+          *ngIf="userToolbar"
+          [showLoadingBar]="userToolbar.showLoadingBar"
+          [loadingProfile]="userToolbar.loadingProfile"
+          [displayName]="userToolbar.displayName"
+          [avatarUrl]="userToolbar.avatarUrl"
+        ></stateless-user-toolbar>
+        <stateless-page [headerTemplate]="headerTemplate" [contentTemplate]="contentTemplate"></stateless-page>
+      </div>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      :host.folded-sidebar .container {
+        padding-left: 64px;
+      }
+
+      .container {
+        width: 100%;
+      }
+    `,
+  ],
+})
+export class PageWithNavComponent {
+  @Input() public headerTemplate: TemplateRef<any>;
+  @Input() public contentTemplate: TemplateRef<any>;
+  @Input() public sidebar: Partial<SidebarModel> = {};
+  @Input() public userToolbar: UserToolbarModel;
+
+  @HostBinding('class.folded-sidebar') public hideSidebar = false;
+
+  public toggleSidebar(): void {
+    this.hideSidebar = !this.hideSidebar;
+  }
+}
+
+export class SidebarModel {
+  name: string;
+  logoUrl: string;
+  menuItems: MenuItem[];
+}
+
+export class UserToolbarModel {
+  showLoadingBar: boolean;
+  loadingProfile: boolean;
+  displayName: string;
+  avatarUrl: string;
+}
