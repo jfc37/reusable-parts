@@ -3,7 +3,7 @@ import { Component, Input, TemplateRef, ChangeDetectionStrategy, ViewEncapsulati
 @Component({
   selector: 'theme',
   template: `
-    <div [ngClass]="'theme-' + theme">
+    <div [ngClass]="'theme-' + theme" class="theme-light">
       <ng-container *ngTemplateOutlet="contentTemplate ? contentTemplate : defaultContent"> </ng-container>
     </div>
     <ng-template #defaultContent></ng-template>

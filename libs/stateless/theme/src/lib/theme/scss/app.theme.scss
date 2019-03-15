@@ -78,15 +78,13 @@ $typography: mat-typography-config(
 // -----------------------------------------------------------------------------------------------------
 
 // Import app and page component themes here to enable theming for them
-// @import "src/app/layout/components/chat-panel/chat-panel.theme";
-// @import "src/app/layout/components/toolbar/toolbar.theme";
+@import 'libs/stateless/pages/login/src/lib/login.theme';
 
 // Define a mixin for easier access
-// @mixin components-theme($theme) {
-//   // Layout components
-//   @include chat-panel-theme($theme);
-//   @include toolbar-theme($theme);
-// }
+@mixin components-theme($theme) {
+  // Layout components
+  @include login-theme($theme);
+}
 
 // -----------------------------------------------------------------------------------------------------
 // @ Define the default theme
@@ -110,7 +108,7 @@ $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $defa
   @include fuse-core-theme($theme);
 
   // Apply the theme to the user components
-  // @include components-theme($theme);
+  @include components-theme($theme);
 
   // Generate Fuse color classes for primary, accent and warn colors
   $palettes: (
@@ -148,7 +146,7 @@ $yellow-light-theme: mat-light-theme(
   @include fuse-core-theme($yellow-light-theme);
 
   // Apply the theme to the user components
-  // @include components-theme($yellow-light-theme);
+  @include components-theme($yellow-light-theme);
 
   // Generate Fuse color classes for primary, accent and warn colors
   $palettes: (
@@ -186,7 +184,7 @@ $blue-gray-dark-theme: mat-dark-theme(
   @include fuse-core-theme($blue-gray-dark-theme);
 
   // Apply the theme to the user components
-  // @include components-theme($blue-gray-dark-theme);
+  @include components-theme($blue-gray-dark-theme);
 
   // Generate Fuse color classes for primary, accent and warn colors
   $palettes: (
@@ -224,7 +222,7 @@ $pink-dark-theme: mat-dark-theme(
   @include fuse-core-theme($pink-dark-theme);
 
   // Apply the theme to the user components
-  // @include components-theme($pink-dark-theme);
+  @include components-theme($pink-dark-theme);
 
   // Generate Fuse color classes for primary, accent and warn colors
   $palettes: (

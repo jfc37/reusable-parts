@@ -111,6 +111,9 @@
     },
     "stateless-layouts-page-with-nav": {
       "tags": ["stateless"]
+    },
+    "stateless-pages-login": {
+      "tags": ["stateless"]
     }
   }
 }
