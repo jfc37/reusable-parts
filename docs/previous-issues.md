@@ -22,3 +22,9 @@ Build the dependent library (`ng build fuse`)
 Copy built folder from `dist` and copy to `node_modules`, renaming to `fuse`
 Add path reference in main library's tsconfig.lib.json
 `"paths": { "@reusable-parts/fuse": ["node_modules/@reusable-parts/fuse"] },`
+
+## Scrolling of child not appearing / child height exceeding parent height
+
+### Solution
+
+Add style `height: 100%; max-height: 100%; min-height: 100%;` to a bunch of elements...
