@@ -12,13 +12,7 @@ import { MenuItem } from '@reusable-parts/stateless/sidebar';
 @Component({
   selector: 'stateless-page-with-nav',
   template: `
-    <div
-      fxLayout="row"
-      fxLayoutAlign="none"
-      style="height: 100%;
-    max-height: 100%;
-    min-height: 100%;"
-    >
+    <div fxLayout="row" fxLayoutAlign="start stretch" style="height: 100%;">
       <stateless-sidebar
         [logoUrl]="sidebar.logoUrl"
         [menuItems]="sidebar.menuItems"

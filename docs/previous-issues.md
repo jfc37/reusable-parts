@@ -27,4 +27,5 @@ Add path reference in main library's tsconfig.lib.json
 
 ### Solution
 
-Add style `height: 100%; max-height: 100%; min-height: 100%;` to a bunch of elements...
+Use stretch: fxLayoutAlign="start stretch"
+Add style `height: 100%;`
