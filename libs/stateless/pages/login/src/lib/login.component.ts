@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnChanges {
   @Input() public registerUrl: string;
   @Input() public forgotPasswordUrl: string;
   @Input() public disabled: boolean;
-  @Input() public errorMessage: string = 'Password / Email combination incorrect';
+  @Input() public errorMessage: string;
   @Input() public titleTemplate: TemplateRef<any>;
   @Input() public descriptionTemplate: TemplateRef<any>;
 

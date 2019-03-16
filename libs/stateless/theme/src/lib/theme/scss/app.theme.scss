@@ -79,11 +79,13 @@ $typography: mat-typography-config(
 
 // Import app and page component themes here to enable theming for them
 @import 'libs/stateless/pages/login/src/lib/login.theme';
+@import 'libs/stateless/pages/register/src/lib/register.theme';
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
   // Layout components
   @include login-theme($theme);
+  @include register-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------
