@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/chat-components",
+    "outDir": "../../../../dist/out-tsc/libs/containers/pages/chat",
     "module": "commonjs",
     "types": ["jest", "node"]
   },

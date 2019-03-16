@@ -35,16 +35,7 @@ import { RouterModule } from '@angular/router';
     ChatRightSidenavComponent,
     ChatContactSidenavComponent,
   ],
-  exports: [
-    ChatComponent,
-    ChatViewComponent,
-    ChatStartComponent,
-    ChatChatsSidenavComponent,
-    ChatUserSidenavComponent,
-    ChatLeftSidenavComponent,
-    ChatRightSidenavComponent,
-    ChatContactSidenavComponent,
-  ],
+  exports: [ChatComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
@@ -65,4 +56,4 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [ChatService],
 })
-export class ChatComponentsModule {}
+export class ChatModule {}

@@ -6,7 +6,7 @@ import { ChatService } from './chat.service';
 import { ChatUser, Chat, ChatContact, IChatFacade } from './chat.facade';
 
 @Component({
-  selector: 'chat',
+  selector: 'container-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   encapsulation: ViewEncapsulation.None,

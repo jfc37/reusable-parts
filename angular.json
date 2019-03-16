@@ -232,41 +232,6 @@
         }
       }
     },
-    "chat-components": {
-      "root": "libs/chat-components",
-      "sourceRoot": "libs/chat-components/src",
-      "projectType": "library",
-      "prefix": "chat",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/chat-components/tsconfig.lib.json",
-            "project": "libs/chat-components/ng-package.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/chat-components/tsconfig.lib.json", "libs/chat-components/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "**/@fuse/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/chat-components/jest.config.js",
-            "tsConfig": "libs/chat-components/tsconfig.spec.json",
-            "setupFile": "libs/chat-components/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "sass"
-        }
-      }
-    },
     "demos-chat-app": {
       "root": "apps/demos/chat-app/",
       "sourceRoot": "apps/demos/chat-app/src",
@@ -907,6 +872,44 @@
             "jestConfig": "libs/stateless/pages/forgot-password/jest.config.js",
             "tsConfig": "libs/stateless/pages/forgot-password/tsconfig.spec.json",
             "setupFile": "libs/stateless/pages/forgot-password/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "containers-pages-chat": {
+      "root": "libs/containers/pages/chat",
+      "sourceRoot": "libs/containers/pages/chat/src",
+      "projectType": "library",
+      "prefix": "container",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/containers/pages/chat/tsconfig.lib.json",
+            "project": "libs/containers/pages/chat/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/containers/pages/chat/tsconfig.lib.json",
+              "libs/containers/pages/chat/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/containers/pages/chat/jest.config.js",
+            "tsConfig": "libs/containers/pages/chat/tsconfig.spec.json",
+            "setupFile": "libs/containers/pages/chat/src/test-setup.ts"
           }
         }
       },

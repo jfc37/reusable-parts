@@ -47,7 +47,8 @@
       "@reusable-parts/stateless/layouts/page-with-nav": ["libs/stateless/layouts/page-with-nav/src/index.ts"],
       "@reusable-parts/stateless/pages/login": ["libs/stateless/pages/login/src/index.ts"],
       "@reusable-parts/stateless/pages/register": ["libs/stateless/pages/register/src/index.ts"],
-      "@reusable-parts/stateless/pages/forgot-password": ["libs/stateless/pages/forgot-password/src/index.ts"]
+      "@reusable-parts/stateless/pages/forgot-password": ["libs/stateless/pages/forgot-password/src/index.ts"],
+      "@reusable-parts/containers/pages/chat": ["libs/containers/pages/chat/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

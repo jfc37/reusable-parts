@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/chat-components",
+    "outDir": "../../../../dist/out-tsc/libs/containers/pages/chat",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
@@ -12,9 +12,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
-    "paths": {
-      "@reusable-parts/fuse": ["node_modules/@reusable-parts/fuse"]
-    },
     "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {

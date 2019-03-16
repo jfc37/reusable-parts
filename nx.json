@@ -120,6 +120,9 @@
     },
     "stateless-pages-forgot-password": {
       "tags": ["stateless"]
+    },
+    "containers-pages-chat": {
+      "tags": ["container"]
     }
   }
 }
