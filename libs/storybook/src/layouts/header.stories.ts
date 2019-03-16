@@ -1,27 +1,33 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { LoaderModule } from '@reusable-parts/stateless/loader';
+import { withKnobs, text } from '@storybook/addon-knobs';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { withKnobs } from '@storybook/addon-knobs';
+import { HeaderModule } from '@reusable-parts/stateless/layouts/header';
 import { getThemeKnob } from '../knobs';
 
-storiesOf('Stateless Loader', module)
+storiesOf('Layouts/Header', module)
   .addDecorator(
     moduleMetadata({
-      imports: [ThemeModule, LoaderModule],
+      imports: [ThemeModule, HeaderModule],
     }),
   )
   .addDecorator(withKnobs)
   .add('with themes', () => {
     const theme = getThemeKnob();
+    const headerText = text('headerText', 'Good morning, sir');
 
     return {
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-        <stateless-loader></stateless-loader>
-      </ng-template>`,
+        <stateless-header [contentTemplate]="headerTemplate"></stateless-header>
+      </ng-template>
+      <ng-template #headerTemplate>
+        {{headerText}}
+      </ng-template>
+      `,
       props: {
         theme,
+        headerText,
       },
     };
   });

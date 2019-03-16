@@ -8,7 +8,7 @@ import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { getThemeKnob, getExampleMenuItems } from '../knobs';
 
-storiesOf('Stateless Sidebar', module)
+storiesOf('Components/Sidebar', module)
   .addDecorator(
     moduleMetadata({
       imports: [

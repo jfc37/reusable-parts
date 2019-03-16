@@ -3,7 +3,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { StatelessUserToolbarModule } from '@reusable-parts/stateless/user-toolbar';
 
-storiesOf('Stateless User Toolbar', module)
+storiesOf('Components/User Toolbar', module)
   .addDecorator(
     moduleMetadata({
       imports: [StatelessUserToolbarModule],

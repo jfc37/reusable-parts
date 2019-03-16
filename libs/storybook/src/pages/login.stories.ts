@@ -3,11 +3,11 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { StatelessLoginPageModule, LoginComponent } from '@reusable-parts/stateless/pages/login';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { getThemeKnob } from '../../knobs';
+import { getThemeKnob } from '../knobs';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
-storiesOf('Stateless Login Page', module)
+storiesOf('Pages/Login', module)
   .addDecorator(
     moduleMetadata({
       imports: [

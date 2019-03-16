@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { StatelessAlertModule, AlertType } from '@reusable-parts/stateless/alert';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 
-storiesOf('Stateless Alert', module)
+storiesOf('Components/Alert', module)
   .addDecorator(
     moduleMetadata({
       imports: [StatelessAlertModule],

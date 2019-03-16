@@ -8,11 +8,11 @@ import {
   SidebarModel,
   UserToolbarModel,
 } from '@reusable-parts/stateless/layouts/page-with-nav';
-import { getThemeKnob, getExampleMenuItems } from '../../knobs';
+import { getThemeKnob, getExampleMenuItems } from '../knobs';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
-storiesOf('Page With Navigation', module)
+storiesOf('Layouts/Page With Navigation', module)
   .addDecorator(
     moduleMetadata({
       imports: [
