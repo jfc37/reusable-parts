@@ -17,7 +17,18 @@ export enum AlertType {
 
 @Component({
   selector: 'stateless-alert',
-  templateUrl: './alert.component.html',
+  template: `
+    <div class="p-16 mb-16 font-size-16 message-box" [ngClass]="colourClass">
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <mat-icon>{{ icon }}</mat-icon>
+        <div>
+          <ng-container *ngTemplateOutlet="contentTemplate ? contentTemplate : defaultContent"> </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #defaultContent></ng-template>
+  `,
   styleUrls: ['./alert.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

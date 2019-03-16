@@ -1,5 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { StatelessLoginPageModule, LoginComponent } from '@reusable-parts/stateless/pages/login';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { getThemeKnob } from '../../knobs';
@@ -20,26 +21,49 @@ storiesOf('Stateless Login Page', module)
   .addDecorator(withKnobs)
   .add('All knobs', () => {
     const theme = getThemeKnob();
-    const headerText = text('headerText', 'Good morning, sir');
-    const contentText = text('contentText', 'Some content here...');
+    const logoUrl = text('logoUrl', 'assets/images/logos/fuse.svg');
+    const registerUrl = text('registerUrl', '/register');
+    const forgotPasswordUrl = text('forgotPasswordUrl', '/reset-password');
+    const titleText = text('titleText', 'Welcome to the FUSE!');
+    const descriptionText = text(
+      'descriptionText',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.',
+    );
+    const disabled = boolean('disabled', false);
+    const errorMessage = text('errorMessage', '');
 
     return {
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-        <stateless-login-page></stateless-login-page>
+        <stateless-login-page
+          [logoUrl]="logoUrl"
+          [registerUrl]="registerUrl"
+          [forgotPasswordUrl]="forgotPasswordUrl"
+          [titleTemplate]="titleTemplate"
+          [descriptionTemplate]="descriptionTemplate"
+          [disabled]="disabled"
+          [errorMessage]="errorMessage"
+          (loginClicked)="loginClicked($event)"
+        ></stateless-login-page>
       </ng-template>
-      <ng-template #headerTemplate>
-        {{headerText}}
+      <ng-template #titleTemplate>
+        {{titleText}}
       </ng-template>
-      <ng-template #contentTemplate>
-        {{contentText}}
+      <ng-template #descriptionTemplate>
+        {{descriptionText}}
       </ng-template>
       `,
       props: {
         theme,
-        headerText,
-        contentText,
+        titleText,
+        descriptionText,
+        logoUrl,
+        registerUrl,
+        forgotPasswordUrl,
+        disabled,
+        errorMessage,
+        loginClicked: action('loginClicked'),
       },
     };
   });
