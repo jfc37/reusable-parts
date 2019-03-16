@@ -3,7 +3,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { RegisterModule, RegisterComponent } from '@reusable-parts/stateless/pages/register';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { getThemeKnob } from '../knobs';
+import { getThemeKnob } from '../../../../../knobs';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -21,7 +21,10 @@ storiesOf('Pages/Register', module)
   .addDecorator(withKnobs)
   .add('All knobs', () => {
     const theme = getThemeKnob();
-    const logoUrl = text('logoUrl', 'assets/images/logos/fuse.svg');
+    const logoUrl = text(
+      'logoUrl',
+      'https://sdvg.org/wp-content/uploads/2016/06/SDVG-San-Diego-Venture-Group-Cool-Companies-2016-Logo-Icon-Underground-Elephant.png',
+    );
     const loginUrl = text('loginUrl', '/register');
     const forgotPasswordUrl = text('forgotPasswordUrl', '/reset-password');
     const titleText = text('titleText', 'Welcome to the FUSE!');

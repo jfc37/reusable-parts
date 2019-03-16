@@ -9,7 +9,7 @@ addParameters({
 
 function loadStories() {
   // load all from  /src/stories/*.stories.ts files
-  const req = require.context('../libs/storybook', true, /\.stories\.ts$/);
+  const req = require.context('../libs', true, /\.stories\.ts$/);
   req.keys().forEach(filename => req(filename));
 }
 

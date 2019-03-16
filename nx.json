@@ -10,17 +10,14 @@
     "web-chat": {
       "tags": []
     },
-    "storybook": {
-      "tags": []
-    },
     "stateless-user-toolbar": {
-      "tags": []
+      "tags": ["stateless"]
     },
     "stateless-welcome": {
-      "tags": []
+      "tags": ["stateless"]
     },
     "stateless-alert": {
-      "tags": []
+      "tags": ["stateless"]
     },
     "stateless-loader": {
       "tags": ["stateless"]

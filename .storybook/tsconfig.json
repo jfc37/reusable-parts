@@ -3,5 +3,6 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["../libs/storybook/**/*"]
+  "include": ["../libs/**/*"],
+  "exclude": ["../libs/**/*.spec.ts"]
 }

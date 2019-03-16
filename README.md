@@ -2,21 +2,21 @@
 
 A workspace containing reusable parts of applications leveraging nrwl/nx
 
-## Creating a new page lib
+## Storybook
 
-`ng generate lib mymodule --routing --lazy --parentModule=apps/myapp/src/myapp.module.ts`
+Storybook showing components
 
-## Creating a new component
+### Run locally
 
-`ng generate component component/my-component --app=my-app`
+Run `npm run storybook`
 
-## Creating ngrx feature state
+### Deploy
 
-`ng generate ngrx myFeature --module=libs/my-module/src/my-module.module.ts`
+Run `npm run deploy:storybook`
 
-## Creating service
+### Website
 
-`ng generate service services/my-service --app=my-app`
+https://jfc-storybook.netlify.com
 
 ## Deploy to TravisCI / Firebase
 
@@ -47,28 +47,28 @@ after_success:
 
 ### Configure Travis website
 
-* Flick switch for new repo: https://travis-ci.org/profile/jfc37
-* Go to settings for repo in travis
-* Tick "Build only if .travis.yml is present
-* Generate new token in github, selecting all checkboxes under "repo": https://github.com/settings/tokens
-* Back in Travis, add environment variable key/value: `GIT HUB_TOKEN`/`<generated token>`
+- Flick switch for new repo: https://travis-ci.org/profile/jfc37
+- Go to settings for repo in travis
+- Tick "Build only if .travis.yml is present
+- Generate new token in github, selecting all checkboxes under "repo": https://github.com/settings/tokens
+- Back in Travis, add environment variable key/value: `GIT HUB_TOKEN`/`<generated token>`
 
 ### Configure Firebase
 
-* `npm install -g firebase-tools`
-* `firebase login`
-* `firebase init`. public directory - dist
+- `npm install -g firebase-tools`
+- `firebase login`
+- `firebase init`. public directory - dist
 
 #### Test deployment
 
-* `ng build --prod`
-* `firebase deploy`
+- `ng build --prod`
+- `firebase deploy`
 
 #### Link Firebase with TravisCI
 
-* `firebase login:ci`
-* Copy token
-* Under travis repo, add environment variable key/value: `FIREBASE_TOKEN`/`<generated token>`
+- `firebase login:ci`
+- Copy token
+- Under travis repo, add environment variable key/value: `FIREBASE_TOKEN`/`<generated token>`
 
 ## Setting up service worker
 

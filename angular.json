@@ -245,33 +245,6 @@
         }
       }
     },
-    "storybook": {
-      "root": "libs/storybook",
-      "sourceRoot": "libs/storybook/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/storybook/tsconfig.lib.json", "libs/storybook/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/storybook/jest.config.js",
-            "tsConfig": "libs/storybook/tsconfig.spec.json"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "stateless-user-toolbar": {
       "root": "libs/stateless/components/user-toolbar",
       "sourceRoot": "libs/stateless/components/user-toolbar/src",

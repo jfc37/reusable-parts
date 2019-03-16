@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { LoaderModule } from '@reusable-parts/stateless/components/loader';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { withKnobs } from '@storybook/addon-knobs';
-import { getThemeKnob } from '../knobs';
+import { getThemeKnob } from '../../../../../../knobs';
 
 storiesOf('Components/Loader', module)
   .addDecorator(

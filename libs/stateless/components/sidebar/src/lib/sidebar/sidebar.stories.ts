@@ -6,7 +6,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { getThemeKnob, getExampleMenuItems } from '../knobs';
+import { getThemeKnob, getExampleMenuItems } from '../../../../../../knobs';
 
 storiesOf('Components/Sidebar', module)
   .addDecorator(
