@@ -1,6 +1,6 @@
 import { select } from '@storybook/addon-knobs';
 import { Theme } from '@reusable-parts/stateless/theme';
-import { MenuItemType, MenuItem } from '@reusable-parts/stateless/sidebar';
+import { MenuItemType, MenuItem } from '@reusable-parts/stateless/components/sidebar';
 
 export function getThemeKnob() {
   return select(

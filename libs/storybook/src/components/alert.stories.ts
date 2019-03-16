@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { StatelessAlertModule, AlertType } from '@reusable-parts/stateless/alert';
+import { StatelessAlertModule, AlertType } from '@reusable-parts/stateless/components/alert';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 storiesOf('Components/Alert', module)

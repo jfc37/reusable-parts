@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/stateless/alert",
+    "outDir": "../../../dist/out-tsc/libs/stateless/components/sidebar",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",

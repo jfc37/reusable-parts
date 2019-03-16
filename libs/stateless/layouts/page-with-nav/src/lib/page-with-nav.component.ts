@@ -7,7 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { MenuItem } from '@reusable-parts/stateless/sidebar';
+import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
 
 @Component({
   selector: 'stateless-page-with-nav',

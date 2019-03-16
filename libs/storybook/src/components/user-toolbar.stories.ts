@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { StatelessUserToolbarModule } from '@reusable-parts/stateless/user-toolbar';
+import { StatelessUserToolbarModule } from '@reusable-parts/stateless/components/user-toolbar';
 
 storiesOf('Components/User Toolbar', module)
   .addDecorator(

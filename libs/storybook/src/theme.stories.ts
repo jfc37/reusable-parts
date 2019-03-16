@@ -1,11 +1,11 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { SidebarModule, MenuItemType } from '@reusable-parts/stateless/sidebar';
+import { SidebarModule, MenuItemType } from '@reusable-parts/stateless/components/sidebar';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { withKnobs, select } from '@storybook/addon-knobs';
-import { SidebarComponent } from '@reusable-parts/stateless/sidebar';
+import { SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
 import { ThemeModule, Theme } from '@reusable-parts/stateless/theme';
-import { LoaderModule } from '@reusable-parts/stateless/loader';
+import { LoaderModule } from '@reusable-parts/stateless/components/loader';
 import { getThemeKnob } from './knobs';
 
 storiesOf('Theme', module)

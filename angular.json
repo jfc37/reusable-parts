@@ -908,8 +908,8 @@
       }
     },
     "stateless-user-toolbar": {
-      "root": "libs/stateless/user-toolbar",
-      "sourceRoot": "libs/stateless/user-toolbar/src",
+      "root": "libs/stateless/components/user-toolbar",
+      "sourceRoot": "libs/stateless/components/user-toolbar/src",
       "projectType": "library",
       "prefix": "stateless",
       "architect": {
@@ -917,8 +917,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/stateless/user-toolbar/tsconfig.lib.json",
-              "libs/stateless/user-toolbar/tsconfig.spec.json"
+              "libs/stateless/components/user-toolbar/tsconfig.lib.json",
+              "libs/stateless/components/user-toolbar/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -926,9 +926,9 @@
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "jestConfig": "libs/stateless/user-toolbar/jest.config.js",
-            "tsConfig": "libs/stateless/user-toolbar/tsconfig.spec.json",
-            "setupFile": "libs/stateless/user-toolbar/src/test-setup.ts"
+            "jestConfig": "libs/stateless/components/user-toolbar/jest.config.js",
+            "tsConfig": "libs/stateless/components/user-toolbar/tsconfig.spec.json",
+            "setupFile": "libs/stateless/components/user-toolbar/src/test-setup.ts"
           }
         }
       },
@@ -939,31 +939,31 @@
       }
     },
     "stateless-alert": {
-      "root": "libs/stateless/alert",
-      "sourceRoot": "libs/stateless/alert/src",
+      "root": "libs/stateless/components/alert",
+      "sourceRoot": "libs/stateless/components/alert/src",
       "projectType": "library",
       "prefix": "stateless",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/stateless/alert/tsconfig.lib.json",
-            "project": "libs/stateless/alert/ng-package.json"
+            "tsConfig": "libs/stateless/components/alert/tsconfig.lib.json",
+            "project": "libs/stateless/components/alert/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/stateless/alert/tsconfig.lib.json", "libs/stateless/alert/tsconfig.spec.json"],
+            "tsConfig": ["libs/stateless/components/alert/tsconfig.lib.json", "libs/stateless/components/alert/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "jestConfig": "libs/stateless/alert/jest.config.js",
-            "tsConfig": "libs/stateless/alert/tsconfig.spec.json",
-            "setupFile": "libs/stateless/alert/src/test-setup.ts"
+            "jestConfig": "libs/stateless/components/alert/jest.config.js",
+            "tsConfig": "libs/stateless/components/alert/tsconfig.spec.json",
+            "setupFile": "libs/stateless/components/alert/src/test-setup.ts"
           }
         }
       },
@@ -974,31 +974,31 @@
       }
     },
     "stateless-loader": {
-      "root": "libs/stateless/loader",
-      "sourceRoot": "libs/stateless/loader/src",
+      "root": "libs/stateless/components/loader",
+      "sourceRoot": "libs/stateless/components/loader/src",
       "projectType": "library",
       "prefix": "stateless",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/stateless/loader/tsconfig.lib.json",
-            "project": "libs/stateless/loader/ng-package.json"
+            "tsConfig": "libs/stateless/components/loader/tsconfig.lib.json",
+            "project": "libs/stateless/components/loader/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/stateless/loader/tsconfig.lib.json", "libs/stateless/loader/tsconfig.spec.json"],
+            "tsConfig": ["libs/stateless/components/loader/tsconfig.lib.json", "libs/stateless/components/loader/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "jestConfig": "libs/stateless/loader/jest.config.js",
-            "tsConfig": "libs/stateless/loader/tsconfig.spec.json",
-            "setupFile": "libs/stateless/loader/src/test-setup.ts"
+            "jestConfig": "libs/stateless/components/loader/jest.config.js",
+            "tsConfig": "libs/stateless/components/loader/tsconfig.spec.json",
+            "setupFile": "libs/stateless/components/loader/src/test-setup.ts"
           }
         }
       },
@@ -1009,31 +1009,31 @@
       }
     },
     "stateless-sidebar": {
-      "root": "libs/stateless/sidebar",
-      "sourceRoot": "libs/stateless/sidebar/src",
+      "root": "libs/stateless/components/sidebar",
+      "sourceRoot": "libs/stateless/components/sidebar/src",
       "projectType": "library",
       "prefix": "stateless",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/stateless/sidebar/tsconfig.lib.json",
-            "project": "libs/stateless/sidebar/ng-package.json"
+            "tsConfig": "libs/stateless/components/sidebar/tsconfig.lib.json",
+            "project": "libs/stateless/components/sidebar/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/stateless/sidebar/tsconfig.lib.json", "libs/stateless/sidebar/tsconfig.spec.json"],
+            "tsConfig": ["libs/stateless/components/sidebar/tsconfig.lib.json", "libs/stateless/components/sidebar/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "jestConfig": "libs/stateless/sidebar/jest.config.js",
-            "tsConfig": "libs/stateless/sidebar/tsconfig.spec.json",
-            "setupFile": "libs/stateless/sidebar/src/test-setup.ts"
+            "jestConfig": "libs/stateless/components/sidebar/jest.config.js",
+            "tsConfig": "libs/stateless/components/sidebar/tsconfig.spec.json",
+            "setupFile": "libs/stateless/components/sidebar/src/test-setup.ts"
           }
         }
       },
