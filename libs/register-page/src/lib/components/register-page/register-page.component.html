@@ -1,9 +1,0 @@
-<jfc-dumb-register data-test-id="register-page"
-  [name]="config.name"
-  [description]="config.description"
-  [logoUrl]="config.logoUrl"
-  [registering]="registering$ | async"
-  [registrationSucceeded]="registrationSucceeded$ | async"
-  [registrationError]="registrationError$ | async"
-  [loginRoute]="config.loginRoute"
-  (registrationAttempt)="registrationAttempt($event)"></jfc-dumb-register>
