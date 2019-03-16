@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/stateless/components/alert",
+    "outDir": "../../../../dist/out-tsc/libs/stateless/components/alert",
     "module": "commonjs",
     "types": ["jest", "node"]
   },

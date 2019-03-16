@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/stateless/components/sidebar",
+    "outDir": "../../../../dist/out-tsc/libs/stateless/components/sidebar",
     "module": "commonjs",
     "types": ["jest", "node"]
   },
