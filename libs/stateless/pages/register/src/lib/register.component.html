@@ -19,8 +19,8 @@
     [@animate]="{ value: '*', params: { delay: '300ms', x: '100%' } }"
   >
     <div id="register-form">
-      <div class="logo" fxHide.gt-xs>
-        <img src="assets/images/logos/fuse.svg" />
+      <div *ngIf="logoUrl" class="logo" fxHide.gt-xs>
+        <img [src]="logoUrl" />
       </div>
 
       <div class="title">CREATE AN ACCOUNT</div>

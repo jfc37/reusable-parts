@@ -1276,6 +1276,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "stateless-pages-forgot-password": {
+      "root": "libs/stateless/pages/forgot-password",
+      "sourceRoot": "libs/stateless/pages/forgot-password/src",
+      "projectType": "library",
+      "prefix": "stateless",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/stateless/pages/forgot-password/tsconfig.lib.json",
+            "project": "libs/stateless/pages/forgot-password/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stateless/pages/forgot-password/tsconfig.lib.json",
+              "libs/stateless/pages/forgot-password/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/stateless/pages/forgot-password/jest.config.js",
+            "tsConfig": "libs/stateless/pages/forgot-password/tsconfig.spec.json",
+            "setupFile": "libs/stateless/pages/forgot-password/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "vallum-truepic-poc",

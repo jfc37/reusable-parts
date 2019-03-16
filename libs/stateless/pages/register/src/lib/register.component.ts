@@ -9,6 +9,7 @@ import {
   SimpleChanges,
   EventEmitter,
   Output,
+  OnChanges,
 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -23,7 +24,7 @@ import { fuseAnimations } from '@reusable-parts/fuse';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: fuseAnimations,
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public logoUrl: string;
   @Input() public titleTemplate: TemplateRef<any>;
   @Input() public descriptionTemplate: TemplateRef<any>;

@@ -117,6 +117,9 @@
     },
     "stateless-pages-register": {
       "tags": ["stateless"]
+    },
+    "stateless-pages-forgot-password": {
+      "tags": ["stateless"]
     }
   }
 }
