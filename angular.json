@@ -797,44 +797,6 @@
         }
       }
     },
-    "containers-pages-auth0-login": {
-      "root": "libs/containers/pages/auth0-login",
-      "sourceRoot": "libs/containers/pages/auth0-login/src",
-      "projectType": "library",
-      "prefix": "container",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/containers/pages/auth0-login/tsconfig.lib.json",
-            "project": "libs/containers/pages/auth0-login/ng-package.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/containers/pages/auth0-login/tsconfig.lib.json",
-              "libs/containers/pages/auth0-login/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/containers/pages/auth0-login/jest.config.js",
-            "tsConfig": "libs/containers/pages/auth0-login/tsconfig.spec.json",
-            "setupFile": "libs/containers/pages/auth0-login/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "logic-integration-auth0": {
       "root": "libs/logic/integration/auth0",
       "sourceRoot": "libs/logic/integration/auth0/src",

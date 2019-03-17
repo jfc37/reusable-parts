@@ -6,14 +6,12 @@ import { AppComponent } from './app.component';
 import { RouterModule, Route } from '@angular/router';
 import { FuseModule } from '@reusable-parts/fuse';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
-import { AUTH0_CONFIG } from '@reusable-parts/logic/integration/auth0';
-import { environment } from '../environments/environment';
 
 const routes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   {
-    path: 'login',
-    loadChildren: './pages/login/login.module#LoginModule',
+    path: 'dashboard',
+    loadChildren: './pages/dashboard/dashboard.module#DashboardModule',
   },
 ];
 
@@ -27,7 +25,6 @@ const routes: Route[] = [
 
     ThemeModule,
   ],
-  providers: [{ provide: AUTH0_CONFIG, useValue: environment.auth0 }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
