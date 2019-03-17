@@ -834,6 +834,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "logic-integration-auth0": {
+      "root": "libs/logic/integration/auth0",
+      "sourceRoot": "libs/logic/integration/auth0/src",
+      "projectType": "library",
+      "prefix": "logic",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/logic/integration/auth0/tsconfig.lib.json",
+            "project": "libs/logic/integration/auth0/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logic/integration/auth0/tsconfig.lib.json",
+              "libs/logic/integration/auth0/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/logic/integration/auth0/jest.config.js",
+            "tsConfig": "libs/logic/integration/auth0/tsconfig.spec.json",
+            "setupFile": "libs/logic/integration/auth0/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "demos-vallum",

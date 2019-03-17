@@ -54,6 +54,9 @@
     },
     "containers-pages-auth0-login": {
       "tags": ["container"]
+    },
+    "logic-integration-auth0": {
+      "tags": ["logic"]
     }
   }
 }
