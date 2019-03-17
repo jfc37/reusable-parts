@@ -51,6 +51,9 @@
     },
     "demos-vallum": {
       "tags": ["app"]
+    },
+    "containers-pages-auth0-login": {
+      "tags": ["container"]
     }
   }
 }

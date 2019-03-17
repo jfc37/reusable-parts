@@ -6,12 +6,16 @@ import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { getThemeKnob } from '../../../../../knobs';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FuseModule } from '@reusable-parts/fuse';
 
 storiesOf('Pages/Login', module)
   .addDecorator(
     moduleMetadata({
       imports: [
         RouterModule.forRoot([{ path: 'iframe.html', component: LoginComponent }]),
+        BrowserAnimationsModule,
+        FuseModule.forRoot({ customScrollbars: true }),
         ThemeModule,
         StatelessLoginPageModule,
       ],

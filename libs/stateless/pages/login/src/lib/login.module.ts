@@ -11,8 +11,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FuseModule, FuseDirectivesModule } from '@reusable-parts/fuse';
+import { FuseDirectivesModule } from '@reusable-parts/fuse';
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import { FuseModule, FuseDirectivesModule } from '@reusable-parts/fuse';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
 
     FlexLayoutModule,
 
@@ -30,7 +28,6 @@ import { FuseModule, FuseDirectivesModule } from '@reusable-parts/fuse';
     MatIconModule,
     MatInputModule,
 
-    FuseModule.forRoot({ customScrollbars: true }),
     FuseDirectivesModule,
   ],
   declarations: [LoginComponent],

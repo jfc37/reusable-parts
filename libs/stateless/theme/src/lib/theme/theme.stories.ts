@@ -51,10 +51,6 @@ storiesOf('Theme', module)
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-      <!--<stateless-sidebar
-        name="Uphill Ltd"
-        [menuItems]="menuItems">
-      </stateless-sidebar>-->
       <stateless-loader></stateless-loader>
       </ng-template>`,
       props: {
