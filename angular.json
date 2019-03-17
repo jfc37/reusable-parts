@@ -690,9 +690,115 @@
           "styleext": "scss"
         }
       }
+    },
+    "demos-vallum": {
+      "root": "apps/demos/vallum/",
+      "sourceRoot": "apps/demos/vallum/src",
+      "projectType": "application",
+      "prefix": "vallum",
+      "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/demos/vallum",
+            "index": "apps/demos/vallum/src/index.html",
+            "main": "apps/demos/vallum/src/main.ts",
+            "polyfills": "apps/demos/vallum/src/polyfills.ts",
+            "tsConfig": "apps/demos/vallum/tsconfig.app.json",
+            "assets": ["apps/demos/vallum/src/favicon.ico", "apps/demos/vallum/src/assets"],
+            "styles": ["apps/demos/vallum/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/demos/vallum/src/environments/environment.ts",
+                  "with": "apps/demos/vallum/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demos-vallum:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demos-vallum:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demos-vallum:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/demos/vallum/tsconfig.app.json", "apps/demos/vallum/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/demos/vallum/jest.config.js",
+            "tsConfig": "apps/demos/vallum/tsconfig.spec.json",
+            "setupFile": "apps/demos/vallum/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
-  "defaultProject": "demos-chat-app",
+  "defaultProject": "demos-vallum",
   "cli": {
     "warnings": {
       "typescriptMismatch": false

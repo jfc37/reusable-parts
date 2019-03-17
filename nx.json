@@ -48,6 +48,9 @@
     },
     "containers-pages-chat": {
       "tags": ["container"]
+    },
+    "demos-vallum": {
+      "tags": ["app"]
     }
   }
 }
