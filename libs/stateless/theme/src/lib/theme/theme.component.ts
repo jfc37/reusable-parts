@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  TemplateRef,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, TemplateRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'theme',
@@ -20,15 +12,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ThemeComponent implements OnChanges {
+export class ThemeComponent {
   @Input() public contentTemplate: TemplateRef<any>;
   @Input() public theme: Theme = Theme.BlueLight;
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (!this.theme) {
-      this.theme = Theme.BlueLight;
-    }
-  }
 }
 
 export enum Theme {

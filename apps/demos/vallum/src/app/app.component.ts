@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'vallum-root',
   template: `
-    <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
+    <theme [contentTemplate]="mainContentTemplate"></theme>
     <ng-template #mainContentTemplate>
       <router-outlet></router-outlet>
     </ng-template>
