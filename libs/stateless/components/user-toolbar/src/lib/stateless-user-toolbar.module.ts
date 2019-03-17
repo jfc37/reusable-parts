@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatIconModule,
@@ -16,7 +15,6 @@ import { StatelessUserToolbarComponent } from './user-toolbar/user-toolbar.compo
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
 
     MatButtonModule,
