@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Auth0Service } from '@reusable-parts/logic/integration/auth0';
 
 @Component({
   selector: 'vallum-root',
@@ -16,6 +17,11 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private auth: Auth0Service) {}
+
+  public ngOnInit(): void {
+    this.auth.handleAuthentication('/dashboard');
+  }
   title = 'demos-vallum';
 }

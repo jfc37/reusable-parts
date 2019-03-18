@@ -20,6 +20,10 @@ const routes: Route[] = [
     path: 'welcome',
     loadChildren: './pages/welcome/welcome.module#WelcomeModule',
   },
+  {
+    path: 'callback',
+    loadChildren: './pages/callback/callback.module#CallbackModule',
+  },
 ];
 
 @NgModule({
