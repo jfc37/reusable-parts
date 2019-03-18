@@ -24,7 +24,8 @@
       "@reusable-parts/stateless/pages/register": ["libs/stateless/pages/register/src/index.ts"],
       "@reusable-parts/stateless/pages/forgot-password": ["libs/stateless/pages/forgot-password/src/index.ts"],
       "@reusable-parts/containers/pages/chat": ["libs/containers/pages/chat/src/index.ts"],
-      "@reusable-parts/logic/integration/auth0": ["libs/logic/integration/auth0/src/index.ts"]
+      "@reusable-parts/logic/integration/auth0": ["libs/logic/integration/auth0/src/index.ts"],
+      "@reusable-parts/stateless/components/hero-text": ["libs/stateless/components/hero-text/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

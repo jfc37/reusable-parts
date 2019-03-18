@@ -834,6 +834,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "stateless-components-hero-text": {
+      "root": "libs/stateless/components/hero-text",
+      "sourceRoot": "libs/stateless/components/hero-text/src",
+      "projectType": "library",
+      "prefix": "stateless",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/stateless/components/hero-text/tsconfig.lib.json",
+            "project": "libs/stateless/components/hero-text/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stateless/components/hero-text/tsconfig.lib.json",
+              "libs/stateless/components/hero-text/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/stateless/components/hero-text/jest.config.js",
+            "tsConfig": "libs/stateless/components/hero-text/tsconfig.spec.json",
+            "setupFile": "libs/stateless/components/hero-text/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "demos-vallum",

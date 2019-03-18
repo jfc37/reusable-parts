@@ -1,0 +1,41 @@
+@import 'libs/fuse/src/lib/@fuse/scss/fuse';
+
+.header {
+  padding: 24px;
+  height: 100%;
+  background: #1a237e;
+  background: linear-gradient(to right, #0e2a3b 0%, #34306b 100%);
+
+  .hero-text {
+    margin: 128px 24px;
+
+    @include media-breakpoint('xs') {
+      margin: 64px 24px;
+    }
+
+    .h1 {
+      color: white;
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      text-align: center;
+
+      @include media-breakpoint('xs') {
+        font-size: 32px;
+      }
+    }
+
+    .h3 {
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 480px;
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+
+      @include media-breakpoint('xs') {
+        font-size: 14px;
+      }
+    }
+  }
+}

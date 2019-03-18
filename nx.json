@@ -54,6 +54,9 @@
     },
     "logic-integration-auth0": {
       "tags": ["logic"]
+    },
+    "stateless-components-hero-text": {
+      "tags": ["stateless"]
     }
   }
 }
