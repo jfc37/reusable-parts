@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth0Service } from '@reusable-parts/logic/integration/auth0';
+import { Theme } from '@reusable-parts/stateless/theme';
 
 @Component({
   selector: 'vallum-root',
   template: `
-    <theme [contentTemplate]="mainContentTemplate"></theme>
+    <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
     <ng-template #mainContentTemplate>
       <router-outlet></router-outlet>
     </ng-template>
@@ -24,4 +25,5 @@ export class AppComponent implements OnInit {
     this.auth.handleAuthentication('/dashboard');
   }
   title = 'demos-vallum';
+  theme = Theme.YellowLight;
 }
