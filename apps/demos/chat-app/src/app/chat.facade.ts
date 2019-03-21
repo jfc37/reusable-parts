@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IChatFacade, ChatContact, Chat, ChatUser, ChatSummary } from '@reusable-parts/chat-components';
+import { IChatFacade, ChatContact, Chat, ChatUser, ChatSummary } from '@reusable-parts/containers/pages/chat';
 import { Observable, combineLatest, ReplaySubject } from 'rxjs';
 import { mapTo, map, switchMap, withLatestFrom, take, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
