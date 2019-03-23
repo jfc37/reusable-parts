@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { action } from '@storybook/addon-actions';
 import {
@@ -11,12 +11,17 @@ import {
 import { getThemeKnob, getExampleMenuItems } from '../../../../../knobs';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FuseModule } from '@reusable-parts/fuse';
+import { HeaderType } from '@reusable-parts/stateless/layouts/page';
 
 storiesOf('Layouts/Page With Navigation', module)
   .addDecorator(
     moduleMetadata({
       imports: [
         RouterModule.forRoot([{ path: 'iframe.html', component: PageWithNavComponent }]),
+        BrowserAnimationsModule,
+        FuseModule.forRoot({ customScrollbars: true }),
         ThemeModule,
         PageWithNavModule,
       ],
@@ -26,6 +31,14 @@ storiesOf('Layouts/Page With Navigation', module)
   .addDecorator(withKnobs)
   .add('with user toolbar', () => {
     const theme = getThemeKnob();
+    const headerType = select(
+      'headerType',
+      {
+        [HeaderType.Standard]: HeaderType.Standard,
+        [HeaderType.Hero]: HeaderType.Hero,
+      },
+      HeaderType.Hero,
+    );
     const headerText = text('headerText', 'Good morning, sir');
     const contentText = text('contentText', 'Some content here...');
     const sidebarName = text('sidebarName', 'Full Swing');
@@ -54,6 +67,7 @@ storiesOf('Layouts/Page With Navigation', module)
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
         <stateless-page-with-nav
+        [headerType]="headerType"
           [userToolbar]="userToolbarModel"
           [sidebar]="sidebarModel"
           [headerTemplate]="headerTemplate"
@@ -70,6 +84,7 @@ storiesOf('Layouts/Page With Navigation', module)
       `,
       props: {
         theme,
+        headerType,
         headerText,
         contentText,
         sidebarName,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { PageWithNavModule } from '@reusable-parts/stateless/layouts/page-with-nav';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 const routes: Route[] = [
   {
@@ -13,6 +14,6 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), PageWithNavModule],
+  imports: [CommonModule, RouterModule.forChild(routes), PageWithNavModule, MatFormFieldModule, MatInputModule],
 })
 export class DashboardModule {}

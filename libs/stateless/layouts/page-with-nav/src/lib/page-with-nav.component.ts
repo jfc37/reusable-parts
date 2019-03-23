@@ -8,6 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
+import { HeaderType } from '@reusable-parts/stateless/layouts/page';
 
 @Component({
   selector: 'stateless-page-with-nav',
@@ -29,7 +30,11 @@ import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
           [avatarUrl]="userToolbar.avatarUrl"
           (logoutClicked)="logoutClicked.emit()"
         ></stateless-user-toolbar>
-        <stateless-page [headerTemplate]="headerTemplate" [contentTemplate]="contentTemplate"></stateless-page>
+        <stateless-page
+          [headerType]="headerType"
+          [headerTemplate]="headerTemplate"
+          [contentTemplate]="contentTemplate"
+        ></stateless-page>
       </div>
     </div>
   `,
@@ -47,6 +52,7 @@ import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
   ],
 })
 export class PageWithNavComponent {
+  @Input() public headerType = HeaderType.Standard;
   @Input() public headerTemplate: TemplateRef<any>;
   @Input() public contentTemplate: TemplateRef<any>;
   @Input() public sidebar: Partial<SidebarModel> = {};

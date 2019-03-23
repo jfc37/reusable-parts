@@ -7,12 +7,16 @@ import { action } from '@storybook/addon-actions';
 import { SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { getThemeKnob, getExampleMenuItems } from '../../../../../../knobs';
+import { FuseModule } from '@reusable-parts/fuse';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 storiesOf('Components/Sidebar', module)
   .addDecorator(
     moduleMetadata({
       imports: [
         RouterModule.forRoot([{ path: 'iframe.html', component: SidebarComponent }]),
+        BrowserAnimationsModule,
+        FuseModule.forRoot({ customScrollbars: true }),
         ThemeModule,
         SidebarModule,
       ],
