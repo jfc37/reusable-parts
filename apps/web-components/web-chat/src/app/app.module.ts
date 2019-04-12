@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 
-import { ChatComponentsModule, ChatComponent } from '@reusable-parts/chat-components';
+import { ChatModule, ChatComponent } from '@reusable-parts/containers/pages/chat';
 
 @NgModule({
-  imports: [BrowserModule, ChatComponentsModule],
+  imports: [BrowserModule, ChatModule],
   entryComponents: [ChatComponent],
 })
 export class AppModule {
