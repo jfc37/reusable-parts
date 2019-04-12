@@ -5,19 +5,16 @@ import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular
   template: `
     <div class="page-layout simple fullwidth">
       <stateless-header *ngIf="headerType === 'standard'" [contentTemplate]="headerTemplate"></stateless-header>
-      <stateless-hero-text *ngIf="headerType === 'hero'" [headerTemplate]="headerTemplate"></stateless-hero-text>
+      <stateless-hero-text
+        *ngIf="headerType === 'hero'"
+        [headerTemplate]="headerTemplate"
+        [contentTemplate]="headerSubtextTemplate"
+      ></stateless-hero-text>
 
       <div class="content p-24">
         <ng-container *ngTemplateOutlet="contentTemplate ? contentTemplate : defaultContent"> </ng-container>
       </div>
     </div>
-
-    <ng-template #standardHeaderContent>
-      <stateless-header [contentTemplate]="headerTemplate"></stateless-header>
-    </ng-template>
-    <ng-template #heroHeaderContent>
-      <stateless-hero-text [headerTemplate]="headerTemplate"></stateless-hero-text>
-    </ng-template>
 
     <ng-template #defaultContent></ng-template>
   `,
@@ -25,6 +22,7 @@ import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular
 })
 export class PageComponent {
   @Input() public headerTemplate: TemplateRef<any>;
+  @Input() public headerSubtextTemplate: TemplateRef<any>;
   @Input() public contentTemplate: TemplateRef<any>;
 
   @Input() public headerType = HeaderType.Standard;

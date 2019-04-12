@@ -18,6 +18,7 @@ import { MenuItemType } from '@reusable-parts/stateless/components/sidebar/src';
       <stateless-page
         headerType="hero"
         [headerTemplate]="headerTemplate"
+        [headerSubtextTemplate]="headerSubtextTemplate"
         [contentTemplate]="bodyTemplate"
       ></stateless-page>
     </ng-template>
@@ -25,6 +26,12 @@ import { MenuItemType } from '@reusable-parts/stateless/components/sidebar/src';
     <ng-template #headerTemplate>
       <div class="p-24">
         Welcome to Vallum
+      </div>
+    </ng-template>
+
+    <ng-template #headerSubtextTemplate>
+      <div class="p-24">
+        We can grab your details from the companies register
       </div>
     </ng-template>
 
