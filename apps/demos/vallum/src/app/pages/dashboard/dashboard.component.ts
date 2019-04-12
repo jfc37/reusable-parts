@@ -9,15 +9,26 @@ import { MenuItemType } from '@reusable-parts/stateless/components/sidebar/src';
   selector: 'vallum-dashboard',
   template: `
     <stateless-page-with-nav
-      headerType="hero"
-      [headerTemplate]="headerTemplate"
       [sidebar]="sidebar"
       [userToolbar]="userToolbar$ | async"
       [contentTemplate]="contentTemplate"
       (logoutClicked)="logout()"
     ></stateless-page-with-nav>
-    <ng-template #headerTemplate>Dashboard</ng-template>
     <ng-template #contentTemplate>
+      <stateless-page
+        headerType="hero"
+        [headerTemplate]="headerTemplate"
+        [contentTemplate]="bodyTemplate"
+      ></stateless-page>
+    </ng-template>
+
+    <ng-template #headerTemplate>
+      <div class="p-24">
+        Welcome to Vallum
+      </div>
+    </ng-template>
+
+    <ng-template #bodyTemplate>
       <form>
         <mat-form-field>
           <input matInput placeholder="Search for yourself" />
