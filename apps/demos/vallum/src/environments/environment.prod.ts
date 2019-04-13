@@ -9,4 +9,9 @@ export const environment: IEnvironment = {
     logoutRedirectUri: 'http://localhost:4200',
     unauthorisedRoute: 'welcome',
   },
+
+  nzBusinessApi: {
+    accessToken: '37f5e6f118ae84d804f198959b29e450',
+    host: 'https://sandbox.api.business.govt.nz',
+  },
 };

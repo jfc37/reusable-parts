@@ -9,6 +9,8 @@ import { ShellComponent } from '../../shared/components/shell/shell.component';
 import { UserTableComponent } from './components/user-table.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserSearchService } from './services/user-search.service';
+import { NzBusinessModule, NZ_BUSINESS_API_CONFIG } from '@reusable-parts/logic/integration/nz-business';
+import { environment } from '../../../environments/environment';
 
 const routes: Route[] = [
   {
@@ -19,7 +21,6 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [DashboardComponent, ShellComponent, UserTableComponent],
-  providers: [UserSearchService],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -33,6 +34,8 @@ const routes: Route[] = [
 
     PageWithNavModule,
     PageModule,
+    NzBusinessModule,
   ],
+  providers: [UserSearchService, { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi }],
 })
 export class DashboardModule {}

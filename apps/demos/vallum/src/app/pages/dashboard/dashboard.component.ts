@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
 import { FormControl } from '@angular/forms';
-import { tap, takeUntil, switchMap, map } from 'rxjs/operators';
-import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
+import { switchMap, map, debounceTime } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
 
 @Component({
@@ -45,16 +45,15 @@ import { UserSearchService, User } from './services/user-search.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   public searchControl = new FormControl('');
   public tableRows$: Observable<UserRow[]>;
   public users$: Observable<User[]>;
 
-  private _destroy$ = new ReplaySubject<void>();
   constructor(private userSearch: UserSearchService) {}
   public ngOnInit(): void {
     this.users$ = this.searchControl.valueChanges.pipe(
-      takeUntil(this._destroy$),
+      debounceTime(300),
       switchMap(search => this.userSearch.search(search)),
     );
 
@@ -74,10 +73,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ),
       ),
     );
-  }
-
-  public ngOnDestroy(): void {
-    this._destroy$.next(null);
-    this._destroy$.complete();
   }
 }

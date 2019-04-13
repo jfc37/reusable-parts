@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { CompaniesRepository } from '@reusable-parts/logic/integration/nz-business';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserSearchService {
+  constructor(private companiesRepository: CompaniesRepository) {}
+
   public search(name: string): Observable<User[]> {
-    return of([
-      {
-        firstName: name,
-        middleName: name,
-        lastName: name,
-        associatedCompany: { name: 'BNZ', nzbn: 65475 },
-        nzbn: 8763,
-        physicalAddress: {
-          addressLines: ['7C /', '10 Lorne Street', 'Te Aro'],
-          postCode: '6010',
-          countryCode: 'NZL',
-        },
-      },
-    ]);
+    return this.companiesRepository.CompaniesEntityRoleSearch({ name }).pipe(
+      map(response =>
+        response.roles.map(role => ({
+          firstName: role.firstName,
+          middleName: role.middleName,
+          lastName: role.lastName,
+          associatedCompany: { name: role.associatedCompanyName, nzbn: role.associatedCompanyNzbn },
+          nzbn: role.nzbn,
+          physicalAddress: {
+            addressLines: role.physicalAddress.addressLines,
+            postCode: role.physicalAddress.postCode,
+            countryCode: role.physicalAddress.countryCode,
+          },
+        })),
+      ),
+    );
   }
 
   public update(user: any): Observable<void> {
