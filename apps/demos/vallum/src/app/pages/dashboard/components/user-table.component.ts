@@ -87,6 +87,7 @@ export class UserTableComponent {
 }
 
 export interface UserRow {
+  id: number;
   name: string;
   company: string;
   address: string;

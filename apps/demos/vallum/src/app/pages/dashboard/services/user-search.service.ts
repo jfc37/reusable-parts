@@ -11,6 +11,7 @@ export class UserSearchService {
     return this.companiesRepository.CompaniesEntityRoleSearch({ name }).pipe(
       map(response =>
         response.roles.map(role => ({
+          id: uniqueId++,
           firstName: role.firstName,
           middleName: role.middleName,
           lastName: role.lastName,
@@ -31,7 +32,10 @@ export class UserSearchService {
   }
 }
 
+let uniqueId = 100;
+
 export interface User {
+  id: number;
   firstName: string;
   middleName: string;
   lastName: string;

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
 import { FormControl } from '@angular/forms';
-import { switchMap, map, debounceTime } from 'rxjs/operators';
+import { switchMap, map, debounceTime, take, tap, share, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
 
@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
     this.users$ = this.searchControl.valueChanges.pipe(
       debounceTime(600),
       switchMap(search => this.userSearch.search(search)),
+      shareReplay(1),
     );
 
     this.tableRows$ = this.users$.pipe(
@@ -62,6 +63,7 @@ export class DashboardComponent implements OnInit {
         users.map(
           user =>
             ({
+              id: user.id,
               name: [user.firstName, user.middleName, user.lastName].join(' '),
               company: user.associatedCompany.name,
               address: [
@@ -76,6 +78,12 @@ export class DashboardComponent implements OnInit {
   }
 
   public userSelected(row: UserRow): void {
-    console.error('userSelected', row);
+    this.users$
+      .pipe(
+        take(1),
+        map(users => users.find(user => user.id === row.id)),
+        tap(user => this.userSearch.update(user)),
+      )
+      .subscribe();
   }
 }
