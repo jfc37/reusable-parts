@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   constructor(private userSearch: UserSearchService) {}
   public ngOnInit(): void {
     this.users$ = this.searchControl.valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(600),
       switchMap(search => this.userSearch.search(search)),
     );
 
@@ -73,5 +73,9 @@ export class DashboardComponent implements OnInit {
         ),
       ),
     );
+  }
+
+  public userSelected(row: UserRow): void {
+    console.error('userSelected', row);
   }
 }

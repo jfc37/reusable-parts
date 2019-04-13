@@ -31,6 +31,7 @@ const routes: Route[] = [
     MatCardModule,
     MatInputModule,
     MatTableModule,
+    MatButtonModule,
 
     PageWithNavModule,
     PageModule,
