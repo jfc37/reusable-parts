@@ -27,7 +27,6 @@ export class Auth0Service {
 
   public getAppData<T>(namespace: string, prop: string): Observable<T> {
     return this.userProfile$.pipe(
-      tap(console.error.bind(null, 'xxx')),
       filter(Boolean),
       map(profile => profile[`${namespace}app_metadata`][prop]),
     );
@@ -81,7 +80,6 @@ export class Auth0Service {
         throw new Error('Failed getting user info');
       }
       if (profile) {
-        console.error('PROFILE', profile);
         self.userProfile$.next(profile);
       }
     });
