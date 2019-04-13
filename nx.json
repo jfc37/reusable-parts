@@ -57,6 +57,9 @@
     },
     "stateless-components-hero-text": {
       "tags": ["stateless"]
+    },
+    "logic-integration-nz-business": {
+      "tags": ["logic"]
     }
   }
 }

@@ -872,6 +872,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "logic-integration-nz-business": {
+      "root": "libs/logic/integration/nz-business",
+      "sourceRoot": "libs/logic/integration/nz-business/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/logic/integration/nz-business/tsconfig.lib.json",
+            "project": "libs/logic/integration/nz-business/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logic/integration/nz-business/tsconfig.lib.json",
+              "libs/logic/integration/nz-business/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/logic/integration/nz-business/jest.config.js",
+            "tsConfig": "libs/logic/integration/nz-business/tsconfig.spec.json",
+            "setupFile": "libs/logic/integration/nz-business/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "demos-vallum",
