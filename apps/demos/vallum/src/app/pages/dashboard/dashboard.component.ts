@@ -33,6 +33,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
             <input matInput placeholder="Search for yourself" />
           </mat-form-field>
         </form>
+
+        <vallum-user-table></vallum-user-table>
       </mat-card>
     </ng-template>
   `,
