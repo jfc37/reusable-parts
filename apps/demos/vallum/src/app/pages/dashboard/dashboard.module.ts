@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { PageWithNavModule } from '@reusable-parts/stateless/layouts/page-with-nav';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { PageModule } from '@reusable-parts/stateless/layouts/page/src';
+import { MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
 
 const routes: Route[] = [
@@ -22,6 +22,7 @@ const routes: Route[] = [
     PageWithNavModule,
     PageModule,
     MatFormFieldModule,
+    MatCardModule,
     MatInputModule,
   ],
 })

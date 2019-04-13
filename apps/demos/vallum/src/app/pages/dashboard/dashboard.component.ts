@@ -27,11 +27,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     </ng-template>
 
     <ng-template #bodyTemplate>
-      <form>
-        <mat-form-field>
-          <input matInput placeholder="Search for yourself" />
-        </mat-form-field>
-      </form>
+      <mat-card>
+        <form>
+          <mat-form-field>
+            <input matInput placeholder="Search for yourself" />
+          </mat-form-field>
+        </form>
+      </mat-card>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
