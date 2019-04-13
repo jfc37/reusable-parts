@@ -20,7 +20,7 @@ import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
         [folded]="hideSidebar"
         (toggleFolded)="toggleSidebar()"
       ></stateless-sidebar>
-      <div class="container">
+      <div class="container" fusePerfectScrollbar>
         <stateless-user-toolbar
           *ngIf="userToolbar"
           [showLoadingBar]="userToolbar.showLoadingBar"
