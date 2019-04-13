@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CompaniesRepository } from '@reusable-parts/logic/integration/nz-business';
-import { map } from 'rxjs/operators';
+import { map, mapTo, switchMap } from 'rxjs/operators';
+import { CopperPerson, CopperRepository } from '@reusable-parts/logic/integration/copper-crm';
+import { Auth0Service } from '@reusable-parts/logic/integration/auth0/src';
+import { environment } from 'apps/demos/vallum/src/environments/environment';
 
 @Injectable()
 export class UserSearchService {
-  constructor(private companiesRepository: CompaniesRepository) {}
+  constructor(
+    private companiesRepository: CompaniesRepository,
+    private copperRepository: CopperRepository,
+    private authService: Auth0Service,
+  ) {}
 
   public search(name: string): Observable<User[]> {
     return this.companiesRepository.CompaniesEntityRoleSearch({ name }).pipe(
@@ -27,8 +34,29 @@ export class UserSearchService {
     );
   }
 
-  public update(user: any): Observable<void> {
-    return of(null);
+  public update(user: User): Observable<void> {
+    const copperUser: Partial<CopperPerson> = {
+      first_name: user.firstName,
+      middle_name: user.middleName,
+      last_name: user.lastName,
+      company_name: user.associatedCompany.name,
+      address: {
+        country: user.physicalAddress.countryCode,
+        postal_code: user.physicalAddress.postCode,
+        street: user.physicalAddress.addressLines[0],
+        city: user.physicalAddress.addressLines[1],
+        state: user.physicalAddress.addressLines[2],
+      },
+    };
+
+    return this.authService.getAppData<number>(environment.domain, 'copperId').pipe(
+      map(copperId => ({
+        ...copperUser,
+        id: copperId,
+      })),
+      switchMap(copper => this.copperRepository.update(copper)),
+      mapTo(null),
+    );
   }
 }
 

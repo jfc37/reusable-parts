@@ -10,6 +10,7 @@ import { UserTableComponent } from './components/user-table.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserSearchService } from './services/user-search.service';
 import { NzBusinessModule, NZ_BUSINESS_API_CONFIG } from '@reusable-parts/logic/integration/nz-business';
+import { CopperCrmModule, COPPER_CRM_CONFIG } from '@reusable-parts/logic/integration/copper-crm';
 import { environment } from '../../../environments/environment';
 
 const routes: Route[] = [
@@ -36,7 +37,12 @@ const routes: Route[] = [
     PageWithNavModule,
     PageModule,
     NzBusinessModule,
+    CopperCrmModule,
   ],
-  providers: [UserSearchService, { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi }],
+  providers: [
+    UserSearchService,
+    { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
+    { provide: COPPER_CRM_CONFIG, useValue: environment.copperCrm },
+  ],
 })
 export class DashboardModule {}

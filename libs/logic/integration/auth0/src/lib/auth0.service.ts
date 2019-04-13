@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Auth0Config, AUTH0_CONFIG } from './auth0.config';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 (window as any).global = window;
 
