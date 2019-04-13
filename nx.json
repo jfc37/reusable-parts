@@ -60,6 +60,9 @@
     },
     "logic-integration-nz-business": {
       "tags": ["logic"]
+    },
+    "logic-integration-copper-crm": {
+      "tags": ["logic"]
     }
   }
 }
