@@ -7,6 +7,8 @@ import { MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule } fro
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
 import { UserTableComponent } from './components/user-table.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UserSearchService } from './services/user-search.service';
 
 const routes: Route[] = [
   {
@@ -17,9 +19,12 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [DashboardComponent, ShellComponent, UserTableComponent],
+  providers: [UserSearchService],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
 
     MatFormFieldModule,
     MatCardModule,
