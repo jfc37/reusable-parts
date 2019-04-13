@@ -39,7 +39,7 @@ import { UserSearchService, User } from './services/user-search.service';
           </mat-form-field>
         </form>
 
-        <vallum-user-table [rows]="tableRows$ | async"></vallum-user-table>
+        <vallum-user-table [rows]="tableRows$ | async" (rowSelected)="userSelected($event)"></vallum-user-table>
       </mat-card>
     </ng-template>
   `,

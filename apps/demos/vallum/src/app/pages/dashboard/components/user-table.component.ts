@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'vallum-user-table',
@@ -37,6 +37,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class UserTableComponent {
   @Input() rows: UserRow[];
+  @Output() rowSelected = new EventEmitter<UserRow>();
 
   displayedColumns: string[] = ['name', 'company', 'address'];
 }
