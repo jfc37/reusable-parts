@@ -13,9 +13,6 @@
     "stateless-user-toolbar": {
       "tags": ["stateless"]
     },
-    "stateless-welcome": {
-      "tags": ["stateless"]
-    },
     "stateless-alert": {
       "tags": ["stateless"]
     },
