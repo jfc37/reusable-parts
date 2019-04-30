@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
 import { FormControl } from '@angular/forms';
-import { switchMap, map, debounceTime, take, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { switchMap, map, debounceTime, take, shareReplay, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
 
 @Component({
@@ -39,7 +39,11 @@ import { UserSearchService, User } from './services/user-search.service';
           </mat-form-field>
         </form>
 
-        <vallum-user-table [rows]="tableRows$ | async" (rowSelected)="userSelected($event)"></vallum-user-table>
+        <vallum-user-table
+          [loading]="loading$ | async"
+          [rows]="tableRows$ | async"
+          (rowSelected)="userSelected($event)"
+        ></vallum-user-table>
       </mat-card>
     </ng-template>
   `,
@@ -49,12 +53,15 @@ export class DashboardComponent implements OnInit {
   public searchControl = new FormControl('');
   public tableRows$: Observable<UserRow[]>;
   public users$: Observable<User[]>;
+  public loading$ = new BehaviorSubject(false);
 
   constructor(private userSearch: UserSearchService) {}
   public ngOnInit(): void {
     this.users$ = this.searchControl.valueChanges.pipe(
       debounceTime(600),
+      tap(() => this.loading$.next(true)),
       switchMap(search => this.userSearch.search(search)),
+      tap(() => this.loading$.next(false)),
       shareReplay(1),
     );
 

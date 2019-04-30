@@ -4,6 +4,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 @Component({
   selector: 'vallum-user-table',
   template: `
+    <mat-progress-bar *ngIf="loading" mode="query" color="accent"></mat-progress-bar>
+    <mat-progress-bar *ngIf="loading" mode="query" color="accent"></mat-progress-bar>
     <table mat-table [dataSource]="rows" multiTemplateDataRows class="mat-elevation-z8">
       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
       <ng-container matColumnDef="expandedDetail">
@@ -80,6 +82,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 })
 export class UserTableComponent {
   @Input() rows: UserRow[];
+  @Input() loading: boolean;
+
   @Output() rowSelected = new EventEmitter<UserRow>();
 
   displayedColumns: string[] = ['name', 'company', 'address'];
