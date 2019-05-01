@@ -5,17 +5,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   selector: 'vallum-user-table',
   template: `
     <mat-progress-bar *ngIf="loading" mode="query" color="accent"></mat-progress-bar>
-    <mat-progress-bar *ngIf="loading" mode="query" color="accent"></mat-progress-bar>
-    <table mat-table [dataSource]="rows" multiTemplateDataRows class="mat-elevation-z8">
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let row" [attr.colspan]="3">
-          <div class="expanded-row" [@detailExpand]="row == expandedRow ? 'expanded' : 'collapsed'">
-            <button mat-raised-button (click)="rowSelected.emit(row)" color="accent">This is me</button>
-          </div>
-        </td>
-      </ng-container>
-
+    <table mat-table [dataSource]="rows" class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -39,10 +29,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
         mat-row
         *matRowDef="let row; columns: displayedColumns"
         class="summary-row"
-        [class.expanded-row]="expandedRow === row"
-        (click)="expandedRow = row"
+        (click)="rowSelected.emit(row)"
       ></tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
     </table>
   `,
   styles: [
@@ -50,23 +38,13 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
       table {
         width: 100%;
       }
-      tr.detail-row {
-        height: 0;
-      }
-      tr.summary-row:not(.detail-row):hover {
+      tr.summary-row:hover {
         background: #f5f5f5;
       }
-      tr.summary-row:not(.detail-row):active {
+      tr.summary-row:active {
         background: #efefef;
       }
-      tr.expanded-row,
-      tr.detail-row {
-        background-color: #f5f5f5;
-      }
-      tr.expanded-row td {
-        border-bottom-style: hidden;
-      }
-      tr.summary-row:not(.expanded-row):hover {
+      tr.summary-row:hover {
         cursor: pointer;
       }
     `,
@@ -83,7 +61,6 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 export class UserTableComponent {
   @Input() rows: UserRow[];
   @Input() loading: boolean;
-
   @Output() rowSelected = new EventEmitter<UserRow>();
 
   displayedColumns: string[] = ['name', 'company', 'address'];

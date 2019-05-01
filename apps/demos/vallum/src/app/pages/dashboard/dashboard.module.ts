@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent, UserConfirmationDialogComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { PageWithNavModule } from '@reusable-parts/stateless/layouts/page-with-nav';
 import {
@@ -10,6 +10,9 @@ import {
   MatTableModule,
   MatButtonModule,
   MatProgressBarModule,
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialogConfig,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
@@ -28,7 +31,8 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ShellComponent, UserTableComponent],
+  declarations: [DashboardComponent, ShellComponent, UserTableComponent, UserConfirmationDialogComponent],
+  entryComponents: [UserConfirmationDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -41,6 +45,7 @@ const routes: Route[] = [
     MatTableModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatDialogModule,
 
     PageWithNavModule,
     PageModule,
@@ -51,6 +56,7 @@ const routes: Route[] = [
     UserSearchService,
     { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
     { provide: COPPER_CRM_CONFIG, useValue: environment.copperCrm },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },
   ],
 })
 export class DashboardModule {}
