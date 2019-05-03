@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, ReplaySubject, concat } from 'rxjs';
 
 import { IChatFacade, ChatContact, ChatUser, Chat, ChatSummary, UserStatus, ChatDialog } from './chat.facade';
-import { tap, map, switchMap, filter, take, takeWhile, combineLatest } from 'rxjs/operators';
+import { tap, map, switchMap, filter, take, takeWhile, combineLatest, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class ChatService {
@@ -115,6 +115,10 @@ export class ChatService {
         dialog,
       })),
       take(1),
+      withLatestFrom(this.selectedContactId$, (updatedChat, contactId) => ({
+        ...updatedChat,
+        contactId,
+      })),
       switchMap(updatedChat => this.facade.updateChat(updatedChat)),
     );
   }
