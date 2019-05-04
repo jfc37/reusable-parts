@@ -26,6 +26,7 @@ import { NzBusinessModule, NZ_BUSINESS_API_CONFIG } from '@reusable-parts/logic/
 import { CopperCrmModule, COPPER_CRM_CONFIG } from '@reusable-parts/logic/integration/copper-crm';
 import { environment } from '../../../environments/environment';
 import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
+import { UserSearchComponent } from './components/user-search.component';
 
 const routes: Route[] = [
   {
@@ -35,7 +36,13 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ShellComponent, UserTableComponent, UserConfirmationDialogComponent],
+  declarations: [
+    DashboardComponent,
+    ShellComponent,
+    UserTableComponent,
+    UserSearchComponent,
+    UserConfirmationDialogComponent,
+  ],
   entryComponents: [UserConfirmationDialogComponent],
   imports: [
     CommonModule,

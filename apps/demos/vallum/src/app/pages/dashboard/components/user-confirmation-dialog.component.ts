@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { UserSearchService, User } from '../services/user-search.service';
 import { UserRow } from './user-table.component';
@@ -7,6 +7,7 @@ import { UserRow } from './user-table.component';
   selector: 'vallum-user-confirmation-dialog',
   template: `
     <stateless-loader *ngIf="loading; else contentTemplate"></stateless-loader>
+
     <ng-template #contentTemplate>
       <p>
         <b>{{ data.row.name }}</b>
@@ -17,6 +18,7 @@ import { UserRow } from './user-table.component';
       <button mat-raised-button (click)="confirm()" color="accent" style="float: right;">Confirm</button>
     </ng-template>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserConfirmationDialogComponent {
   public loading = false;
@@ -25,6 +27,7 @@ export class UserConfirmationDialogComponent {
     private userSearch: UserSearchService,
     private dialogRef: MatDialogRef<UserConfirmationDialogComponent>,
     private snackBar: MatSnackBar,
+    private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: { user: User; row: UserRow },
   ) {}
 
@@ -35,6 +38,7 @@ export class UserConfirmationDialogComponent {
       error: () => {
         this.snackBar.open('Problem updating details', 'Ok');
         this.loading = false;
+        this.cd.markForCheck();
       },
       complete: () => {
         this.dialogRef.close(true);

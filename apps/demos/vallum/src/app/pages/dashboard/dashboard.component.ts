@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
-import { FormControl } from '@angular/forms';
-import { switchMap, map, debounceTime, take, shareReplay, tap, catchError, filter } from 'rxjs/operators';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { switchMap, map, take, shareReplay, tap, catchError, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
@@ -35,11 +34,7 @@ import { UserConfirmationDialogComponent } from './components/user-confirmation-
 
     <ng-template #bodyTemplate>
       <mat-card>
-        <form>
-          <mat-form-field>
-            <input [formControl]="searchControl" matInput placeholder="Search for yourself" />
-          </mat-form-field>
-        </form>
+        <vallum-user-search [search]="searchSubject"></vallum-user-search>
 
         <vallum-user-table
           [loading]="loading$ | async"
@@ -52,15 +47,15 @@ import { UserConfirmationDialogComponent } from './components/user-confirmation-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  public searchControl = new FormControl('');
+  public searchSubject = new ReplaySubject<string>();
   public tableRows$: Observable<UserRow[]>;
   public users$: Observable<User[]>;
   public loading$ = new BehaviorSubject(false);
 
   constructor(private userSearch: UserSearchService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
+
   public ngOnInit(): void {
-    this.users$ = this.searchControl.valueChanges.pipe(
-      debounceTime(600),
+    this.users$ = this.searchSubject.pipe(
       tap(() => this.loading$.next(true)),
       switchMap(search =>
         this.userSearch.search(search).pipe(
