@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, OnInit, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
 import { FormControl } from '@angular/forms';
 import { switchMap, map, debounceTime, take, shareReplay, tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
 
 @Component({
   selector: 'vallum-dashboard',
@@ -86,38 +87,15 @@ export class DashboardComponent implements OnInit {
   }
 
   public userSelected(row: UserRow): void {
-    const dialogRef = this.dialog.open(UserConfirmationDialogComponent, {
-      data: row,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-      // this.users$
-      //   .pipe(
-      //     take(1),
-      //     map(users => users.find(user => user.id === row.id)),
-      //     switchMap(user => this.userSearch.update(user)),
-      //   )
-      //   .subscribe();
-    });
-  }
-}
-
-@Component({
-  selector: 'vallum-user-confirmation-dialog',
-  template: `
-    <h1>Hello</h1>
-    <pre>{{ data | json }}</pre>
-  `,
-})
-export class UserConfirmationDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<UserConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserRow,
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+    this.users$
+      .pipe(
+        take(1),
+        map(users => users.find(user => user.id === row.id)),
+      )
+      .subscribe(user => {
+        this.dialog.open(UserConfirmationDialogComponent, {
+          data: { user, row },
+        });
+      });
   }
 }
