@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
 import { FormControl } from '@angular/forms';
-import { switchMap, map, debounceTime, take, shareReplay, tap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, map, debounceTime, take, shareReplay, tap, catchError, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
 
 @Component({
@@ -57,13 +57,21 @@ export class DashboardComponent implements OnInit {
   public users$: Observable<User[]>;
   public loading$ = new BehaviorSubject(false);
 
-  constructor(private userSearch: UserSearchService, private dialog: MatDialog) {}
+  constructor(private userSearch: UserSearchService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
   public ngOnInit(): void {
     this.users$ = this.searchControl.valueChanges.pipe(
       debounceTime(600),
       tap(() => this.loading$.next(true)),
-      switchMap(search => this.userSearch.search(search)),
+      switchMap(search =>
+        this.userSearch.search(search).pipe(
+          catchError(() => {
+            this.snackBar.open('Problem searching the companies register', 'Ok');
+            return of(null);
+          }),
+        ),
+      ),
       tap(() => this.loading$.next(false)),
+      filter(Boolean),
       shareReplay(1),
     );
 

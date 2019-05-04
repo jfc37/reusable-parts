@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { PageWithNavModule } from '@reusable-parts/stateless/layouts/page-with-nav';
 import { LoaderModule } from '@reusable-parts/stateless/components/loader';
-import { StatelessAlertModule } from '@reusable-parts/stateless/components/alert';
 import {
   MatFormFieldModule,
   MatInputModule,
@@ -16,6 +15,7 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatDialogConfig,
   MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
@@ -57,10 +57,10 @@ const routes: Route[] = [
     NzBusinessModule,
     CopperCrmModule,
     LoaderModule,
-    StatelessAlertModule,
   ],
   providers: [
     UserSearchService,
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
     { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
     { provide: COPPER_CRM_CONFIG, useValue: environment.copperCrm },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },

@@ -8,7 +8,6 @@ import { UserRow } from './user-table.component';
   template: `
     <stateless-loader *ngIf="loading; else contentTemplate"></stateless-loader>
     <ng-template #contentTemplate>
-      <stateless-alert *ngIf="errorUpdating" type="error" [contentTemplate]="errorTemplate"> </stateless-alert>
       <p>
         <b>{{ data.row.name }}</b>
       </p>
@@ -17,13 +16,10 @@ import { UserRow } from './user-table.component';
       <button mat-raised-button (click)="cancel()">Cancel</button>
       <button mat-raised-button (click)="confirm()" color="accent" style="float: right;">Confirm</button>
     </ng-template>
-
-    <ng-template #errorTemplate>Error updating details</ng-template>
   `,
 })
 export class UserConfirmationDialogComponent {
   public loading = false;
-  public errorUpdating = false;
 
   constructor(
     private userSearch: UserSearchService,
@@ -37,7 +33,7 @@ export class UserConfirmationDialogComponent {
 
     this.userSearch.update(this.data.user).subscribe({
       error: () => {
-        this.errorUpdating = true;
+        this.snackBar.open('Problem updating details', 'Ok');
         this.loading = false;
       },
       complete: () => {
