@@ -25,7 +25,7 @@ import { map } from 'rxjs/operators';
         [folded]="hideSidebar"
         (toggleFolded)="toggleSidebar()"
       ></stateless-sidebar>
-      <div class="container" fusePerfectScrollbar>
+      <div class="container">
         <stateless-user-toolbar
           *ngIf="userToolbar"
           [showHamburger]="sidebarHidden$ | async"
@@ -49,6 +49,7 @@ import { map } from 'rxjs/operators';
 
       .container {
         width: 100%;
+        overflow-y: auto;
       }
     `,
   ],
