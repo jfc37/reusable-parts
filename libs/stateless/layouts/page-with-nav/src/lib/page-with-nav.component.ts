@@ -6,8 +6,13 @@ import {
   HostBinding,
   Output,
   EventEmitter,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
-import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
+import { MenuItem, SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'stateless-page-with-nav',
@@ -23,11 +28,13 @@ import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
       <div class="container" fusePerfectScrollbar>
         <stateless-user-toolbar
           *ngIf="userToolbar"
+          [showHamburger]="sidebarHidden$ | async"
           [showLoadingBar]="userToolbar.showLoadingBar"
           [loadingProfile]="userToolbar.loadingProfile"
           [displayName]="userToolbar.displayName"
           [avatarUrl]="userToolbar.avatarUrl"
           (logoutClicked)="logoutClicked.emit()"
+          (hamburgerClicked)="temporaryOpenSidebar()"
         ></stateless-user-toolbar>
         <ng-container *ngTemplateOutlet="contentTemplate"> </ng-container>
       </div>
@@ -46,7 +53,7 @@ import { MenuItem } from '@reusable-parts/stateless/components/sidebar';
     `,
   ],
 })
-export class PageWithNavComponent {
+export class PageWithNavComponent implements OnInit {
   @Input() public contentTemplate: TemplateRef<any>;
   @Input() public sidebar: Partial<SidebarModel> = {};
   @Input() public userToolbar: UserToolbarModel;
@@ -54,9 +61,23 @@ export class PageWithNavComponent {
   @Output() public logoutClicked = new EventEmitter<void>();
 
   @HostBinding('class.folded-sidebar') public hideSidebar = false;
+  @ViewChild(SidebarComponent) sidebarComponent: SidebarComponent;
+  public sidebarHidden$: Observable<boolean>;
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
+  public ngOnInit(): void {
+    this.sidebarHidden$ = this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium])
+      .pipe(map(result => result.matches));
+  }
 
   public toggleSidebar(): void {
     this.hideSidebar = !this.hideSidebar;
+  }
+
+  public temporaryOpenSidebar(): void {
+    this.sidebarComponent.toggleOpen();
   }
 }
 
