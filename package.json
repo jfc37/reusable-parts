@@ -33,6 +33,7 @@
     "serve:storybook": "start-storybook -p 9001 -c .storybook",
     "build:storybook": "build-storybook -c .storybook -o ./dist/storybook",
     "deploy:storybook": "npm run build:storybook && netlify deploy --dir=./dist/storybook --prod",
+    "deploy:vallum": "ng build demos-vallum --prod && netlify deploy --dir=./dist/apps/demos/vallum --prod --site=408cb039-de4f-41f8-a4f2-45dd47e225fd",
     "affected:test": "./node_modules/.bin/nx affected:test"
   },
   "private": true,

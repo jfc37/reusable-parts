@@ -17,6 +17,10 @@ export interface MenuItem {
   children?: MenuItem[];
   url?: string;
   badge?: MenuItemBadge;
+  hidden?: boolean;
+  openInNewTab?: boolean;
+  externalUrl?: string;
+  classes?: { [key: string]: string };
 }
 
 export enum MenuItemType {

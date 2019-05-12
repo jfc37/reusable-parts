@@ -731,7 +731,11 @@
             "main": "apps/demos/vallum/src/main.ts",
             "polyfills": "apps/demos/vallum/src/polyfills.ts",
             "tsConfig": "apps/demos/vallum/tsconfig.app.json",
-            "assets": ["apps/demos/vallum/src/favicon.ico", "apps/demos/vallum/src/assets"],
+            "assets": [
+              "apps/demos/vallum/src/favicon.ico",
+              "apps/demos/vallum/src/assets",
+              "apps/demos/vallum/src/_redirects"
+            ],
             "styles": ["apps/demos/vallum/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
