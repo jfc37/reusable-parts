@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'vallum-user-table',
@@ -26,6 +25,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
+        data-test-id="user-search-row"
         mat-row
         *matRowDef="let row; columns: displayedColumns"
         class="summary-row"
@@ -50,13 +50,6 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
 export class UserTableComponent {
   @Input() rows: UserRow[];

@@ -11,7 +11,13 @@ import { Auth0Service } from '@reusable-parts/logic/integration/auth0';
         Sign up with us to get your insurance needs sorted
       </p>
       <div class="p-24">
-        <button mat-raised-button color="accent" aria-label="Login / Sign Up" (click)="login()">
+        <button
+          data-test-id="login-button"
+          mat-raised-button
+          color="accent"
+          aria-label="Login / Sign Up"
+          (click)="login()"
+        >
           Log in / Sign up
         </button>
       </div>

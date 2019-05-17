@@ -952,6 +952,33 @@
           "styleext": "scss"
         }
       }
+    },
+    "demos-vallum-e2e": {
+      "root": "apps/demos/vallum-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/demos/vallum-e2e/cypress.json",
+            "tsConfig": "apps/demos/vallum-e2e/tsconfig.e2e.json",
+            "devServerTarget": "demos-vallum:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demos-vallum:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/demos/vallum-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "demos-vallum",

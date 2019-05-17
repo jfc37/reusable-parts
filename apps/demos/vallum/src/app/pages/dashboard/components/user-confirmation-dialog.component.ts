@@ -14,8 +14,10 @@ import { UserRow } from './user-table.component';
       </p>
       <p>{{ data.row.company }}</p>
       <p>{{ data.row.address }}</p>
-      <button mat-raised-button (click)="cancel()">Cancel</button>
-      <button mat-raised-button (click)="confirm()" color="accent" style="float: right;">Confirm</button>
+      <button mat-raised-button data-test-id="cancel-button" (click)="cancel()">Cancel</button>
+      <button mat-raised-button data-test-id="confirm-button" (click)="confirm()" color="accent" style="float: right;">
+        Confirm
+      </button>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

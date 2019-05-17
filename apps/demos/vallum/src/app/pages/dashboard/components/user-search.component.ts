@@ -8,7 +8,12 @@ import { ReplaySubject } from 'rxjs';
   template: `
     <form>
       <mat-form-field>
-        <input [formControl]="searchControl" matInput placeholder="Search for yourself" />
+        <input
+          data-test-id="user-search-input"
+          [formControl]="searchControl"
+          matInput
+          placeholder="Search for yourself"
+        />
       </mat-form-field>
     </form>
   `,
