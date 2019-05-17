@@ -16,6 +16,7 @@ import {
   MatDialogConfig,
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatIconModule,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
@@ -58,6 +59,7 @@ const routes: Route[] = [
     MatProgressBarModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatIconModule,
 
     PageWithNavModule,
     PageModule,

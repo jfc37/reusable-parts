@@ -20,10 +20,10 @@ import { Theme } from '@reusable-parts/stateless/theme';
 })
 export class AppComponent implements OnInit {
   constructor(private auth: Auth0Service) {}
+  title = 'demos-vallum';
+  theme = Theme.BlueLight;
 
   public ngOnInit(): void {
     this.auth.handleAuthentication('/dashboard');
   }
-  title = 'demos-vallum';
-  theme = Theme.YellowLight;
 }

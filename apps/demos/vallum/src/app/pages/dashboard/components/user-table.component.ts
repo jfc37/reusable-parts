@@ -8,19 +8,24 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let user">
+          <button mat-icon-button color="accent">
+            <mat-icon aria-label="Link user">insert_link</mat-icon>
+          </button>
+          {{ user.name }}
+        </td>
       </ng-container>
 
       <!-- Company Column -->
       <ng-container matColumnDef="company">
         <th mat-header-cell *matHeaderCellDef>Company</th>
-        <td mat-cell *matCellDef="let element">{{ element.company }}</td>
+        <td mat-cell *matCellDef="let user">{{ user.company }}</td>
       </ng-container>
 
       <!-- Address Column -->
       <ng-container matColumnDef="address">
         <th mat-header-cell *matHeaderCellDef>Address</th>
-        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+        <td mat-cell *matCellDef="let user">{{ user.address }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
