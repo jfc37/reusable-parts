@@ -731,7 +731,11 @@
             "main": "apps/demos/vallum/src/main.ts",
             "polyfills": "apps/demos/vallum/src/polyfills.ts",
             "tsConfig": "apps/demos/vallum/tsconfig.app.json",
-            "assets": ["apps/demos/vallum/src/favicon.ico", "apps/demos/vallum/src/assets"],
+            "assets": [
+              "apps/demos/vallum/src/favicon.ico",
+              "apps/demos/vallum/src/assets",
+              "apps/demos/vallum/src/_redirects"
+            ],
             "styles": ["apps/demos/vallum/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
@@ -946,6 +950,33 @@
       "schematics": {
         "@nrwl/schematics:component": {
           "styleext": "scss"
+        }
+      }
+    },
+    "demos-vallum-e2e": {
+      "root": "apps/demos/vallum-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/demos/vallum-e2e/cypress.json",
+            "tsConfig": "apps/demos/vallum-e2e/tsconfig.e2e.json",
+            "devServerTarget": "demos-vallum:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demos-vallum:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/demos/vallum-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
         }
       }
     }

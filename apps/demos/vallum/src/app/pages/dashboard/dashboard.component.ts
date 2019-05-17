@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { UserRow } from './components/user-table.component';
-import { FormControl } from '@angular/forms';
-import { switchMap, map, debounceTime, take, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { switchMap, map, take, shareReplay, tap, catchError, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
 
 @Component({
   selector: 'vallum-dashboard',
@@ -33,28 +34,39 @@ import { UserSearchService, User } from './services/user-search.service';
 
     <ng-template #bodyTemplate>
       <mat-card>
-        <form>
-          <mat-form-field>
-            <input [formControl]="searchControl" matInput placeholder="Search for yourself" />
-          </mat-form-field>
-        </form>
+        <vallum-user-search [search]="searchSubject"></vallum-user-search>
 
-        <vallum-user-table [rows]="tableRows$ | async" (rowSelected)="userSelected($event)"></vallum-user-table>
+        <vallum-user-table
+          [loading]="loading$ | async"
+          [rows]="tableRows$ | async"
+          (rowSelected)="userSelected($event)"
+        ></vallum-user-table>
       </mat-card>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  public searchControl = new FormControl('');
+  public searchSubject = new ReplaySubject<string>();
   public tableRows$: Observable<UserRow[]>;
   public users$: Observable<User[]>;
+  public loading$ = new BehaviorSubject(false);
 
-  constructor(private userSearch: UserSearchService) {}
+  constructor(private userSearch: UserSearchService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
+
   public ngOnInit(): void {
-    this.users$ = this.searchControl.valueChanges.pipe(
-      debounceTime(600),
-      switchMap(search => this.userSearch.search(search)),
+    this.users$ = this.searchSubject.pipe(
+      tap(() => this.loading$.next(true)),
+      switchMap(search =>
+        this.userSearch.search(search).pipe(
+          catchError(() => {
+            this.snackBar.open('Problem searching the companies register', 'Ok');
+            return of(null);
+          }),
+        ),
+      ),
+      tap(() => this.loading$.next(false)),
+      filter(Boolean),
       shareReplay(1),
     );
 
@@ -82,8 +94,11 @@ export class DashboardComponent implements OnInit {
       .pipe(
         take(1),
         map(users => users.find(user => user.id === row.id)),
-        switchMap(user => this.userSearch.update(user)),
       )
-      .subscribe();
+      .subscribe(user => {
+        this.dialog.open(UserConfirmationDialogComponent, {
+          data: { user, row },
+        });
+      });
   }
 }

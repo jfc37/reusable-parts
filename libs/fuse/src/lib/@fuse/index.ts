@@ -7,3 +7,4 @@ export { FuseMatSidenavHelperService } from './directives/fuse-mat-sidenav/fuse-
 export * from './animations';
 export * from './components/navigation/navigation.module';
 export * from './components/sidebar/sidebar.module';
+export * from './components/sidebar/sidebar.component';

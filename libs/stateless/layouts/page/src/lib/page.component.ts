@@ -11,7 +11,7 @@ import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular
         [contentTemplate]="headerSubtextTemplate"
       ></stateless-hero-text>
 
-      <div class="content p-24">
+      <div class="content" ngClass.gt-sm="p-24">
         <ng-container *ngTemplateOutlet="contentTemplate ? contentTemplate : defaultContent"> </ng-container>
       </div>
     </div>

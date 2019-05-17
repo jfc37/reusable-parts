@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@reusable-parts/fuse';
 import { MenuItem } from './sidebar.component.model';
+import { FuseSidebarComponent } from '@reusable-parts/fuse/src/lib/@fuse';
 
 @Component({
   selector: 'stateless-sidebar',
@@ -24,6 +25,7 @@ export class SidebarComponent implements OnDestroy {
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;
   private onDestroy$ = new ReplaySubject();
 
+  @ViewChild(FuseSidebarComponent) fuseSidebar: FuseSidebarComponent;
   @ViewChild(FusePerfectScrollbarDirective)
   set directive(theDirective: FusePerfectScrollbarDirective) {
     if (!theDirective) {
@@ -49,5 +51,9 @@ export class SidebarComponent implements OnDestroy {
 
     this.onDestroy$.next(null);
     this.onDestroy$.complete();
+  }
+
+  toggleOpen() {
+    this.fuseSidebar.toggleOpen();
   }
 }

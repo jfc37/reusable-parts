@@ -60,6 +60,9 @@
     },
     "logic-integration-copper-crm": {
       "tags": ["logic"]
+    },
+    "demos-vallum-e2e": {
+      "tags": ["e2e"]
     }
   }
 }

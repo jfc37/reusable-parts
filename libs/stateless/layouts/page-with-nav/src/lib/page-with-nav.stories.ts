@@ -31,15 +31,6 @@ storiesOf('Layouts/Page With Navigation', module)
   .addDecorator(withKnobs)
   .add('with user toolbar', () => {
     const theme = getThemeKnob();
-    const headerType = select(
-      'headerType',
-      {
-        [HeaderType.Standard]: HeaderType.Standard,
-        [HeaderType.Hero]: HeaderType.Hero,
-      },
-      HeaderType.Hero,
-    );
-    const headerText = text('headerText', 'Good morning, sir');
     const contentText = text('contentText', 'Some content here...');
     const sidebarName = text('sidebarName', 'Full Swing');
     const sidebarLogoUrl = text('sidebarLogoUrl', 'http://angular-material.fusetheme.com/assets/images/logos/fuse.svg');
@@ -67,16 +58,11 @@ storiesOf('Layouts/Page With Navigation', module)
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
         <stateless-page-with-nav
-        [headerType]="headerType"
           [userToolbar]="userToolbarModel"
           [sidebar]="sidebarModel"
-          [headerTemplate]="headerTemplate"
           [contentTemplate]="contentTemplate"
           (logoutClicked)="logoutClicked($event)"
           ></stateless-page-with-nav>
-      </ng-template>
-      <ng-template #headerTemplate>
-        {{headerText}}
       </ng-template>
       <ng-template #contentTemplate>
         {{contentText}}
@@ -84,8 +70,6 @@ storiesOf('Layouts/Page With Navigation', module)
       `,
       props: {
         theme,
-        headerType,
-        headerText,
         contentText,
         sidebarName,
         sidebarLogoUrl,
@@ -97,7 +81,6 @@ storiesOf('Layouts/Page With Navigation', module)
   })
   .add('without user toolbar', () => {
     const theme = getThemeKnob();
-    const headerText = text('headerText', 'Good morning, sir');
     const contentText = text('contentText', 'Some content here...');
     const sidebarName = text('sidebarName', 'Full Swing');
     const sidebarLogoUrl = text('sidebarLogoUrl', 'http://angular-material.fusetheme.com/assets/images/logos/fuse.svg');
@@ -112,10 +95,7 @@ storiesOf('Layouts/Page With Navigation', module)
       template: `
       <theme [theme]="theme" [contentTemplate]="mainContentTemplate"></theme>
       <ng-template #mainContentTemplate>
-        <stateless-page-with-nav [sidebar]="sidebarModel" [headerTemplate]="headerTemplate" [contentTemplate]="contentTemplate"></stateless-page-with-nav>
-      </ng-template>
-      <ng-template #headerTemplate>
-        {{headerText}}
+        <stateless-page-with-nav [sidebar]="sidebarModel" [contentTemplate]="contentTemplate"></stateless-page-with-nav>
       </ng-template>
       <ng-template #contentTemplate>
         {{contentText}}
@@ -123,7 +103,6 @@ storiesOf('Layouts/Page With Navigation', module)
       `,
       props: {
         theme,
-        headerText,
         contentText,
         sidebarName,
         sidebarLogoUrl,

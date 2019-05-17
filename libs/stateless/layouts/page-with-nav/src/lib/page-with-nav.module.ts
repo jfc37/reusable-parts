@@ -5,9 +5,17 @@ import { StatelessUserToolbarModule } from '@reusable-parts/stateless/components
 import { PageWithNavComponent } from './page-with-nav.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FuseDirectivesModule } from '@reusable-parts/fuse';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
-  imports: [CommonModule, FlexLayoutModule, FuseDirectivesModule, SidebarModule, StatelessUserToolbarModule],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    LayoutModule,
+    FuseDirectivesModule,
+    SidebarModule,
+    StatelessUserToolbarModule,
+  ],
   declarations: [PageWithNavComponent],
   exports: [PageWithNavComponent],
 })

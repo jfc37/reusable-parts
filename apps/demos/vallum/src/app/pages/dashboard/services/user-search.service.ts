@@ -4,7 +4,7 @@ import { CompaniesRepository } from '@reusable-parts/logic/integration/nz-busine
 import { map, mapTo, switchMap } from 'rxjs/operators';
 import { CopperPerson, CopperRepository } from '@reusable-parts/logic/integration/copper-crm';
 import { Auth0Service } from '@reusable-parts/logic/integration/auth0/src';
-import { environment } from 'apps/demos/vallum/src/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class UserSearchService {

@@ -12,11 +12,11 @@
         <span class="logo-text">{{ name }}</span>
       </div>
 
-      <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleFolded.emit()" fxHide.lt-lg>
+      <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleFolded.emit()" fxHide.lt-md>
         <mat-icon>menu</mat-icon>
       </button>
 
-      <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleFolded.emit()" fxHide.gt-md>
+      <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleOpen()" fxHide.gt-md>
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
