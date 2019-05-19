@@ -1,5 +1,5 @@
-<ng-container *ngIf="(contacts$ | async) as contacts">
-  <div *ngIf="(user$ | async) as user" id="chat" class="page-layout carded fullwidth inner-scroll">
+<ng-container *ngIf="contacts$ | async as contacts">
+  <div *ngIf="user$ | async as user" id="chat" class="page-layout carded fullwidth inner-scroll">
     <!-- TOP BACKGROUND -->
     <div class="top-bg accent"></div>
     <!-- / TOP BACKGROUND -->
@@ -31,20 +31,6 @@
           <chat-view *ngIf="selectedChat" [user]="user"></chat-view>
 
           <!-- / CONTENT -->
-
-          <!-- RIGHT SIDENAV -->
-
-          <mat-sidenav
-            class="sidenav"
-            position="end"
-            opened="false"
-            mode="over"
-            fuseMatSidenavHelper="chat-right-sidenav"
-          >
-            <chat-right-sidenav></chat-right-sidenav>
-          </mat-sidenav>
-
-          <!-- / RIGHT SIDENAV -->
         </mat-sidenav-container>
       </div>
       <!-- / CONTENT CARD -->
