@@ -17,15 +17,9 @@
         <!-- / RESPONSIVE CHATS BUTTON -->
 
         <!-- CHAT CONTACT -->
-        <div
-          class="chat-contact"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fuseMatSidenavToggler="chat-right-sidenav"
-          (click)="selectContact()"
-        >
+        <div class="chat-contact" fxLayout="row" fxLayoutAlign="start center" (click)="selectContact()">
           <div class="avatar-wrapper">
-            <img [src]="contact.avatar" class="avatar" alt="{{contact.name}}" />
+            <img [src]="contact.avatar" class="avatar" alt="{{ contact.name }}" />
 
             <mat-icon class="s-16 status" [ngClass]="contact.status"> </mat-icon>
           </div>
@@ -33,18 +27,6 @@
           <div class="chat-contact-name">{{ contact.name }}</div>
         </div>
         <!-- / CHAT CONTACT -->
-      </div>
-
-      <div>
-        <button mat-icon-button [matMenuTriggerFor]="contactMenu" aria-label="more">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-
-        <mat-menu #contactMenu="matMenu">
-          <button mat-menu-item fuseMatSidenavToggler="chat-right-sidenav" (click)="selectContact()">
-            Contact Info
-          </button>
-        </mat-menu>
       </div>
     </div>
   </mat-toolbar>
@@ -65,7 +47,7 @@
           'last-of-group': isLastMessageOfGroup(message, i)
         }"
       >
-        <img *ngIf="shouldShowContactAvatar(message, i)" src="{{contact.avatar}}" class="avatar" />
+        <img *ngIf="shouldShowContactAvatar(message, i)" src="{{ contact.avatar }}" class="avatar" />
 
         <div class="bubble">
           <div class="message">{{ message.message }}</div>

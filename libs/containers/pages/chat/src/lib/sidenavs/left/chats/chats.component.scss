@@ -9,13 +9,6 @@ chat-chats-sidenav {
     mat-toolbar {
       border-bottom: 1px solid;
 
-      .avatar-wrapper {
-        .avatar,
-        .status {
-          cursor: pointer;
-        }
-      }
-
       .search {
         height: 36px;
         line-height: 36px;

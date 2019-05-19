@@ -7,12 +7,7 @@
       <!-- USER AVATAR WRAPPER -->
       <div class="avatar-wrapper">
         <!-- USER AVATAR -->
-        <img
-          (click)="changeLeftSidenavView('user')"
-          src="{{user.avatar}}"
-          class="mat-avatar avatar"
-          alt="{{user.name}}"
-        />
+        <img src="{{ user.avatar }}" class="mat-avatar avatar" alt="{{ user.name }}" />
         <!-- / USER AVATAR -->
 
         <mat-icon class="s-16 status" [ngClass]="user.status" [matMenuTriggerFor]="userStatusMenu"></mat-icon>
@@ -50,13 +45,6 @@
         <!-- / USER STATUS -->
       </div>
       <!-- / USER AVATAR -->
-
-      <div>
-        <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="more"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item (click)="changeLeftSidenavView('user')">Profile</button>
-        </mat-menu>
-      </div>
     </mat-toolbar-row>
     <!-- / TOOLBAR TOP -->
 
@@ -88,7 +76,7 @@
       <button
         mat-button
         class="contact"
-        *ngFor="let chat of (user.chatList | filter: searchText)"
+        *ngFor="let chat of user.chatList | filter: searchText"
         (click)="getChat(chat.contactId)"
         ngClass="{'unread':contact.unread}"
         [@animate]="{ value: '*', params: { y: '100%' } }"
@@ -98,7 +86,7 @@
             <img
               class="avatar"
               [src]="contacts | getById: chat.contactId:'avatar'"
-              alt="{{contacts | getById:chat.contactId:'name'}}"
+              alt="{{ contacts | getById: chat.contactId:'name' }}"
             />
             <mat-icon class="s-16 status" [ngClass]="contacts | getById: chat.contactId:'status'"></mat-icon>
           </div>
@@ -126,13 +114,13 @@
       <button
         mat-button
         class="contact"
-        *ngFor="let contact of (contacts | filter: searchText)"
+        *ngFor="let contact of contacts | filter: searchText"
         (click)="getChat(contact.id)"
         [@animate]="{ value: '*', params: { y: '100%' } }"
       >
         <div fxLayout="row" fxLayoutAlign="start center">
           <div class="avatar-wrapper" fxFlex="0 1 auto">
-            <img src="{{contact.avatar}}" class="mat-avatar avatar" alt="{{contact.name}}" />
+            <img src="{{ contact.avatar }}" class="mat-avatar avatar" alt="{{ contact.name }}" />
             <mat-icon class="s-16 status" [ngClass]="contact.status"></mat-icon>
           </div>
 
