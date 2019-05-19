@@ -4,6 +4,7 @@ import { CompaniesEntityRoleRequest, CompaniesEntityRoleResponse } from './model
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+@Injectable()
 export class CompaniesRepository {
   constructor(@Inject(NZ_BUSINESS_API_CONFIG) private config: NzBusinessApiConfig, private http: HttpClient) {}
 
