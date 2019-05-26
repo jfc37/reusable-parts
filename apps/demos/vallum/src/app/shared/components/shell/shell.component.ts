@@ -48,6 +48,13 @@ export class ShellComponent implements OnInit {
           icon: 'dashboard',
           type: MenuItemType.Item,
         },
+        {
+          id: 'policy-documents',
+          title: 'Policy documents',
+          url: '/policy-documents',
+          icon: 'library_books',
+          type: MenuItemType.Item,
+        },
       ],
     };
   }

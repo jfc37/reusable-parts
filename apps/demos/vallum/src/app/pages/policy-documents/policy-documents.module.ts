@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { LoaderModule } from '@reusable-parts/stateless/components/loader';
 import {
@@ -18,26 +17,22 @@ import {
   MatIconModule,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
-import { UserTableComponent } from './components/user-table.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { UserSearchService } from './services/user-search.service';
-import { NzBusinessModule, NZ_BUSINESS_API_CONFIG } from '@reusable-parts/logic/integration/nz-business';
-import { CopperCrmModule, COPPER_CRM_CONFIG } from '@reusable-parts/logic/integration/copper-crm';
-import { environment } from '../../../environments/environment';
-import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
-import { UserSearchComponent } from './components/user-search.component';
+import { PolicyDocumentsComponent } from './policy-documents.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ExistingPoliciesComponent } from './components/existing-policies.component';
+import { DocumentHandler } from './services/document-handler';
+import { UploadPolicyComponent } from './components/upload-policy.component';
 
 const routes: Route[] = [
   {
-    component: DashboardComponent,
+    component: PolicyDocumentsComponent,
     path: '',
   },
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, UserTableComponent, UserSearchComponent, UserConfirmationDialogComponent],
-  entryComponents: [UserConfirmationDialogComponent],
+  declarations: [PolicyDocumentsComponent, ExistingPoliciesComponent, UploadPolicyComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -57,16 +52,12 @@ const routes: Route[] = [
     SharedModule,
 
     PageModule,
-    NzBusinessModule,
-    CopperCrmModule,
     LoaderModule,
   ],
   providers: [
-    UserSearchService,
+    DocumentHandler,
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
-    { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
-    { provide: COPPER_CRM_CONFIG, useValue: environment.copperCrm },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },
   ],
 })
-export class DashboardModule {}
+export class PolicyDocumentsModule {}

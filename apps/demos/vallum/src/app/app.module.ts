@@ -17,6 +17,11 @@ const routes: Route[] = [
     canActivate: [Auth0Guard],
   },
   {
+    path: 'policy-documents',
+    loadChildren: './pages/policy-documents/policy-documents.module#PolicyDocumentsModule',
+    canActivate: [Auth0Guard],
+  },
+  {
     path: 'welcome',
     loadChildren: './pages/welcome/welcome.module#WelcomeModule',
   },
