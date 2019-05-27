@@ -56,6 +56,6 @@ export class PolicyDocumentsComponent implements OnInit {
   }
 
   public upload(file: File): void {
-    this.documentHandler.upload(file);
+    this.documentHandler.upload(file).subscribe();
   }
 }

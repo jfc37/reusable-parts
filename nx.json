@@ -63,6 +63,9 @@
     },
     "demos-vallum-e2e": {
       "tags": ["e2e"]
+    },
+    "logic-integration-aws-file-upload": {
+      "tags": ["logic"]
     }
   }
 }

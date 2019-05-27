@@ -17,6 +17,7 @@ import {
   MatIconModule,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
+import { AwsFileUploadModule } from '@reusable-parts/logic/integration/aws-file-upload';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PolicyDocumentsComponent } from './policy-documents.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -53,6 +54,7 @@ const routes: Route[] = [
 
     PageModule,
     LoaderModule,
+    AwsFileUploadModule,
   ],
   providers: [
     DocumentHandler,

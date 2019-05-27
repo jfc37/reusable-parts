@@ -979,6 +979,37 @@
           }
         }
       }
+    },
+    "logic-integration-aws-file-upload": {
+      "root": "libs/logic/integration/aws-file-upload",
+      "sourceRoot": "libs/logic/integration/aws-file-upload/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logic/integration/aws-file-upload/tsconfig.lib.json",
+              "libs/logic/integration/aws-file-upload/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/logic/integration/aws-file-upload/jest.config.js",
+            "tsConfig": "libs/logic/integration/aws-file-upload/tsconfig.spec.json",
+            "setupFile": "libs/logic/integration/aws-file-upload/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "defaultProject": "demos-vallum",
