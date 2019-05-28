@@ -10,10 +10,7 @@ import {
   MatButtonModule,
   MatProgressBarModule,
   MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDialogConfig,
   MatSnackBarModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatIconModule,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
@@ -24,6 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ExistingPoliciesComponent } from './components/existing-policies.component';
 import { DocumentHandler } from './services/document-handler';
 import { UploadPolicyComponent } from './components/upload-policy.component';
+import { LoaderComponent } from '@reusable-parts/stateless/components/loader';
 
 const routes: Route[] = [
   {
@@ -34,6 +32,7 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [PolicyDocumentsComponent, ExistingPoliciesComponent, UploadPolicyComponent],
+  entryComponents: [LoaderComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -56,10 +55,6 @@ const routes: Route[] = [
     LoaderModule,
     AwsFileUploadModule,
   ],
-  providers: [
-    DocumentHandler,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },
-  ],
+  providers: [DocumentHandler],
 })
 export class PolicyDocumentsModule {}

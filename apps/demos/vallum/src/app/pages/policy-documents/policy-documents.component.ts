@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DocumentHandler } from './services/document-handler';
 import { Observable } from 'rxjs';
 import { PolicyRow } from './components/existing-policies.component';
-import { map } from 'rxjs/operators';
+import { map, finalize, catchError } from 'rxjs/operators';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src/lib/loader/loader.component';
 
 @Component({
   selector: 'vallum-policy-documents',
@@ -42,7 +44,7 @@ import { map } from 'rxjs/operators';
 export class PolicyDocumentsComponent implements OnInit {
   public rows$: Observable<PolicyRow[]>;
 
-  constructor(private documentHandler: DocumentHandler) {}
+  constructor(private documentHandler: DocumentHandler, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit() {
     this.rows$ = this.documentHandler.getDocuments().pipe(
@@ -56,6 +58,13 @@ export class PolicyDocumentsComponent implements OnInit {
   }
 
   public upload(file: File): void {
-    this.documentHandler.upload(file).subscribe();
+    const loader = this.dialog.open(LoaderComponent, { disableClose: true });
+    this.documentHandler
+      .upload(file)
+      .pipe(finalize(() => loader.close()))
+      .subscribe({
+        complete: () => this.snackBar.open('Successfully uploaded policy', 'Ok'),
+        error: () => this.snackBar.open('Problem uploading policy', 'Ok'),
+      });
   }
 }

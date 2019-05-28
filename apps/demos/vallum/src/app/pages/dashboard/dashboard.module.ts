@@ -11,10 +11,7 @@ import {
   MatButtonModule,
   MatProgressBarModule,
   MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDialogConfig,
   MatSnackBarModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatIconModule,
 } from '@angular/material';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
@@ -63,10 +60,8 @@ const routes: Route[] = [
   ],
   providers: [
     UserSearchService,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
     { provide: NZ_BUSINESS_API_CONFIG, useValue: environment.nzBusinessApi },
     { provide: COPPER_CRM_CONFIG, useValue: environment.copperCrm },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },
   ],
 })
 export class DashboardModule {}

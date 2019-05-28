@@ -24,7 +24,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 export class UploadPolicyComponent {
   @Output() upload = new EventEmitter<File>();
   public onFileChange(event): void {
-    if (event.target.files) {
+    if (event.target.files[0]) {
       this.upload.emit(event.target.files[0]);
     }
   }
