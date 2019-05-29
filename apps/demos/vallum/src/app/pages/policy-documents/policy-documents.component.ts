@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DocumentHandler } from './services/document-handler';
 import { Observable } from 'rxjs';
 import { PolicyRow } from './components/existing-policies.component';
-import { map, finalize, catchError } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src/lib/loader/loader.component';
 
@@ -35,7 +35,7 @@ import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src
 
     <ng-template #bodyTemplate>
       <mat-card>
-        <vallum-existing-policies [rows]="[]"></vallum-existing-policies>
+        <vallum-existing-policies [rows]="rows$ | async"></vallum-existing-policies>
       </mat-card>
     </ng-template>
   `,
@@ -47,14 +47,7 @@ export class PolicyDocumentsComponent implements OnInit {
   constructor(private documentHandler: DocumentHandler, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit() {
-    this.rows$ = this.documentHandler.getDocuments().pipe(
-      map(documents =>
-        documents.map(doc => ({
-          name: doc.name,
-          id: doc.id,
-        })),
-      ),
-    );
+    this.rows$ = this.documentHandler.getDocuments();
   }
 
   public upload(file: File): void {

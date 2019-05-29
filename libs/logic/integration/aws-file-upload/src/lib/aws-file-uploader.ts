@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap, mapTo, map, switchMap } from 'rxjs/operators';
+import { mapTo } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+
+const S3_URL = 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com';
 
 @Injectable()
 export class AwsFileUploader {
   constructor(private httpClient: HttpClient) {}
-  public upload(file: File, url: string): Observable<void> {
+  public upload(file: File): Observable<void> {
     const formData = new FormData();
     formData.append('upload', file);
 
@@ -17,11 +19,8 @@ export class AwsFileUploader {
       reportProgress: true,
     };
 
-    const request = new HttpRequest('PUT', [url, file.name].join('/'), formData, options);
+    const request = new HttpRequest('PUT', [S3_URL, file.name].join('/'), formData, options);
 
-    return this.httpClient.request(request).pipe(
-      tap(console.error.bind(null, 'xxxxx UPLOADED')),
-      mapTo(null),
-    );
+    return this.httpClient.request(request).pipe(mapTo(null));
   }
 }
