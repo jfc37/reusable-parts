@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { AwsFileUploader, AwsFileRetriever } from '@reusable-parts/logic/integration/aws-file-upload';
-import { map } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class DocumentHandler {
+  public documents$ = new ReplaySubject<Document[]>();
+
   constructor(private awsFileUploader: AwsFileUploader, private awsFileRetriever: AwsFileRetriever) {}
 
-  public getDocuments(): Observable<Document[]> {
-    return this.awsFileRetriever.getAllMetadata().pipe(
-      map(files =>
-        files.map(f => ({
-          name: f.key,
-          url: f.url,
-          lastModified: f.lastModified,
-          size: f.size,
-        })),
-      ),
-    );
+  public loadDocuments(): void {
+    this.awsFileRetriever
+      .getAllMetadata()
+      .pipe(
+        take(1),
+        map(files =>
+          files.map(f => ({
+            name: f.key,
+            url: f.url,
+            lastModified: f.lastModified,
+            size: f.size,
+          })),
+        ),
+      )
+      .subscribe(files => this.documents$.next(files));
   }
 
   public upload(file: File): Observable<void> {
-    return this.awsFileUploader.upload(file);
+    return this.awsFileUploader.upload(file).pipe(tap(() => this.loadDocuments()));
   }
 }
 

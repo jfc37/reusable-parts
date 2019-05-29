@@ -18,7 +18,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
         <!-- Uploaded Column -->
         <ng-container matColumnDef="uploaded">
           <th mat-header-cell *matHeaderCellDef>Uploaded</th>
-          <td mat-cell *matCellDef="let policy">{{ policy.lastModified }}</td>
+          <td mat-cell *matCellDef="let policy">{{ policy.lastModified | date: 'medium' }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

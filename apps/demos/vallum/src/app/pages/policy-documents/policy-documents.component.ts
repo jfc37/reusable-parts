@@ -47,7 +47,8 @@ export class PolicyDocumentsComponent implements OnInit {
   constructor(private documentHandler: DocumentHandler, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit() {
-    this.rows$ = this.documentHandler.getDocuments();
+    this.rows$ = this.documentHandler.documents$;
+    this.documentHandler.loadDocuments();
   }
 
   public upload(file: File): void {
