@@ -11,7 +11,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let policy">
-            <a [href]="policy.url">{{ policy.name }}</a>
+            <a [href]="policy.url" target="_blank">{{ policy.name }}</a>
           </td>
         </ng-container>
 

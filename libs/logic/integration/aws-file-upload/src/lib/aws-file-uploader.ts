@@ -14,11 +14,11 @@ export class AwsFileUploader {
       reportProgress: true,
       headers: new HttpHeaders({
         ['x-amz-acl']: 'public-read',
-        ['Content-Type']: 'image/jpeg',
       }),
     };
 
-    return this.httpClient.get<{ uploadURL: string; filename: string }>(GET_UPLOAD_URL).pipe(
+    const queryUrl = `${GET_UPLOAD_URL}?filename=${file.name}`;
+    return this.httpClient.get<{ uploadURL: string }>(queryUrl).pipe(
       switchMap(x => this.httpClient.put(x.uploadURL, file, options)),
       mapTo(null),
     );
