@@ -6,10 +6,12 @@ import { map, take, tap } from 'rxjs/operators';
 @Injectable()
 export class DocumentHandler {
   public documents$ = new ReplaySubject<Document[]>();
+  public loading$ = new ReplaySubject<boolean>();
 
   constructor(private awsFileUploader: AwsFileUploader, private awsFileRetriever: AwsFileRetriever) {}
 
   public loadDocuments(): void {
+    this.loading$.next(true);
     this.awsFileRetriever
       .getAllMetadata()
       .pipe(
@@ -23,7 +25,10 @@ export class DocumentHandler {
           })),
         ),
       )
-      .subscribe(files => this.documents$.next(files));
+      .subscribe(files => {
+        this.documents$.next(files);
+        this.loading$.next(false);
+      });
   }
 
   public upload(file: File): Observable<void> {

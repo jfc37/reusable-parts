@@ -35,7 +35,10 @@ import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src
 
     <ng-template #bodyTemplate>
       <mat-card>
-        <vallum-existing-policies [rows]="rows$ | async"></vallum-existing-policies>
+        <vallum-existing-policies
+          [loading]="loadingDocuments$ | async"
+          [rows]="rows$ | async"
+        ></vallum-existing-policies>
       </mat-card>
     </ng-template>
   `,
@@ -43,10 +46,12 @@ import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src
 })
 export class PolicyDocumentsComponent implements OnInit {
   public rows$: Observable<PolicyRow[]>;
+  public loadingDocuments$: Observable<boolean>;
 
   constructor(private documentHandler: DocumentHandler, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit() {
+    this.loadingDocuments$ = this.documentHandler.loading$;
     this.rows$ = this.documentHandler.documents$;
     this.documentHandler.loadDocuments();
   }
