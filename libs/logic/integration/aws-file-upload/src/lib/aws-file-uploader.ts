@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { mapTo, switchMap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const S3_URL = 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com';
+const GET_UPLOAD_URL = 'https://rikn5i59e8.execute-api.ap-southeast-2.amazonaws.com/default/getUploadUrl';
 
 @Injectable()
 export class AwsFileUploader {
   constructor(private httpClient: HttpClient) {}
+
   public upload(file: File): Observable<void> {
-    const formData = new FormData();
-    formData.append('upload', file);
-
-    const params = new HttpParams();
-
     const options = {
-      params: params,
       reportProgress: true,
+      headers: new HttpHeaders({
+        ['x-amz-acl']: 'public-read',
+        ['Content-Type']: 'image/jpeg',
+      }),
     };
 
-    const request = new HttpRequest('PUT', [S3_URL, file.name].join('/'), formData, options);
-
-    return this.httpClient.request(request).pipe(mapTo(null));
+    return this.httpClient.get<{ uploadURL: string; filename: string }>(GET_UPLOAD_URL).pipe(
+      switchMap(x => this.httpClient.put(x.uploadURL, file, options)),
+      mapTo(null),
+    );
   }
 }
