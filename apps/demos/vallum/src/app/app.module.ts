@@ -9,6 +9,7 @@ import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { Auth0Module, Auth0Guard, AUTH0_CONFIG } from '@reusable-parts/logic/integration/auth0';
 import { environment } from '../environments/environment';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material';
+import { AWS_FILE_UPLOAD_CONFIG } from '@reusable-parts/logic/integration/aws-file-upload';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -45,6 +46,7 @@ const routes: Route[] = [
   ],
   providers: [
     { provide: AUTH0_CONFIG, useValue: environment.auth0 },
+    { provide: AWS_FILE_UPLOAD_CONFIG, useValue: environment.awsFileUploadConfig },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig },
   ],

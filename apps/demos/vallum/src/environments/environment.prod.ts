@@ -20,4 +20,10 @@ export const environment: IEnvironment = {
   copperCrm: {
     host: 'https://us-central1-vallum-truepic.cloudfunctions.net',
   },
+
+  awsFileUploadConfig: {
+    baseS3Url: 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com',
+    getFileMetadataUrl: 'https://7a0hnav7hc.execute-api.ap-southeast-2.amazonaws.com/default/get-file-metadata',
+    getFileUploadUrl: 'https://rikn5i59e8.execute-api.ap-southeast-2.amazonaws.com/default/getUploadUrl',
+  },
 };

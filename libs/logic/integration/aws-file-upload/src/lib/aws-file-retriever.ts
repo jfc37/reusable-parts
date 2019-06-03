@@ -1,21 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-
-const S3_URL = 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com';
-const S3_METADATA_URL = 'https://7a0hnav7hc.execute-api.ap-southeast-2.amazonaws.com/default/get-file-metadata';
+import { AWS_FILE_UPLOAD_CONFIG, AwsFileUploadConfig } from './aws-file-upload.config';
 
 @Injectable()
 export class AwsFileRetriever {
-  constructor(private httpClient: HttpClient) {}
+  constructor(@Inject(AWS_FILE_UPLOAD_CONFIG) private config: AwsFileUploadConfig, private httpClient: HttpClient) {}
 
   public getAllMetadata(): Observable<FileMetadata[]> {
-    return this.httpClient.get<AwsObjectMetadata[]>(S3_METADATA_URL).pipe(
+    return this.httpClient.get<AwsObjectMetadata[]>(this.config.getFileMetadataUrl).pipe(
       map(awsObjects =>
         awsObjects.map(o => ({
           key: o.Key,
-          url: [S3_URL, o.Key].join('/'),
+          url: [this.config.baseS3Url, o.Key].join('/'),
           lastModified: o.LastModified,
           size: o.Size,
         })),

@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { mapTo, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const GET_UPLOAD_URL = 'https://rikn5i59e8.execute-api.ap-southeast-2.amazonaws.com/default/getUploadUrl';
+import { AwsFileUploadConfig, AWS_FILE_UPLOAD_CONFIG } from './aws-file-upload.config';
 
 @Injectable()
 export class AwsFileUploader {
-  constructor(private httpClient: HttpClient) {}
+  constructor(@Inject(AWS_FILE_UPLOAD_CONFIG) private config: AwsFileUploadConfig, private httpClient: HttpClient) {}
 
   public upload(file: File): Observable<void> {
     const options = {
@@ -17,7 +16,7 @@ export class AwsFileUploader {
       }),
     };
 
-    const queryUrl = `${GET_UPLOAD_URL}?filename=${file.name}`;
+    const queryUrl = `${this.config.getFileUploadUrl}?filename=${file.name}`;
     return this.httpClient.get<{ uploadURL: string }>(queryUrl).pipe(
       switchMap(x => this.httpClient.put(x.uploadURL, file, options)),
       mapTo(null),
