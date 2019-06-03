@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, of } from 'rxjs';
 import { AwsFileUploader, AwsFileRetriever } from '@reusable-parts/logic/integration/aws-file-upload';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take, tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class DocumentHandler {
   public documents$ = new ReplaySubject<Document[]>();
   public loading$ = new ReplaySubject<boolean>();
+  public errorLoading$ = new ReplaySubject<boolean>();
 
   constructor(private awsFileUploader: AwsFileUploader, private awsFileRetriever: AwsFileRetriever) {}
 
@@ -24,6 +25,10 @@ export class DocumentHandler {
             size: f.size,
           })),
         ),
+        catchError(() => {
+          this.errorLoading$.next(true);
+          return of([]);
+        }),
       )
       .subscribe(files => {
         this.documents$.next(files);

@@ -6,6 +6,10 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     <h1>Existing policies</h1>
     <stateless-loader *ngIf="loading; else content"></stateless-loader>
     <ng-template #content>
+      <p *ngIf="errorLoading; else viewPolicies">Oops, there was a problem loading your policies.</p>
+    </ng-template>
+
+    <ng-template #viewPolicies>
       <table *ngIf="hasPolicies(); else noPolicies" mat-table [dataSource]="rows" class="mat-elevation-z8">
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -34,8 +38,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     <ng-template #noPolicies>
       <p>
         You haven't uploaded any policies yet.
-      </p></ng-template
-    >
+      </p>
+    </ng-template>
   `,
   styles: [
     `
@@ -55,6 +59,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class ExistingPoliciesComponent {
   @Input() rows: PolicyRow[] = [];
   @Input() loading: boolean;
+  @Input() errorLoading: boolean;
 
   public displayedColumns: string[] = ['name', 'uploaded'];
 
