@@ -26,7 +26,7 @@ export const environment: IEnvironment = {
 
   awsFileUploadConfig: {
     baseS3Url: 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com',
-    getFileMetadataUrl: 'https://7a0hnav7hc.execute-api.ap-southeast-2.amazonaws.com/default/get-file-metadata',
+    getFileMetadataUrl: 'https://7a0hnav7hc.execute-api.ap-southeast-2.amazonaws.com/dev/get-file-metadata',
     getFileUploadUrl: 'https://rikn5i59e8.execute-api.ap-southeast-2.amazonaws.com/default/getUploadUrl',
   },
 };
@@ -38,4 +38,4 @@ export const environment: IEnvironment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error'; // Included with Angular CLI.
