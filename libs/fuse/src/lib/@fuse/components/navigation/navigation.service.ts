@@ -19,7 +19,7 @@ export class FuseNavigationService {
   private _onNavigationItemRemoved: BehaviorSubject<any>;
 
   private _currentNavigationKey: string;
-  private _registry: {} = {};
+  private _registry: { [key: string]: any } = {};
 
   /**
    * Constructor
@@ -46,7 +46,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationChanged
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationChanged(): Observable<any> {
     return this._onNavigationChanged.asObservable();
@@ -55,7 +55,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationRegistered
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationRegistered(): Observable<any> {
     return this._onNavigationRegistered.asObservable();
@@ -64,7 +64,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationUnregistered
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationUnregistered(): Observable<any> {
     return this._onNavigationUnregistered.asObservable();
@@ -73,7 +73,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationItemAdded
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationItemAdded(): Observable<any> {
     return this._onNavigationItemAdded.asObservable();
@@ -82,7 +82,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationItemUpdated
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationItemUpdated(): Observable<any> {
     return this._onNavigationItemUpdated.asObservable();
@@ -91,7 +91,7 @@ export class FuseNavigationService {
   /**
    * Get onNavigationItemRemoved
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   get onNavigationItemRemoved(): Observable<any> {
     return this._onNavigationItemRemoved.asObservable();
@@ -105,8 +105,8 @@ export class FuseNavigationService {
    * Register the given navigation
    * with the given key
    *
-   *  key
-   *  navigation
+   * @param key
+   * @param navigation
    */
   register(key, navigation): void {
     // Check if the key already being used
@@ -127,7 +127,7 @@ export class FuseNavigationService {
 
   /**
    * Unregister the navigation from the registry
-   *  key
+   * @param key
    */
   unregister(key): void {
     // Check if the navigation exists
@@ -145,8 +145,8 @@ export class FuseNavigationService {
   /**
    * Get navigation from registry by key
    *
-   *  key
-   *  {any}
+   * @param key
+   * @returns {any}
    */
   getNavigation(key): any {
     // Check if the navigation exists
@@ -163,9 +163,9 @@ export class FuseNavigationService {
   /**
    * Get flattened navigation array
    *
-   *  navigation
-   *  flatNavigation
-   *  {any[]}
+   * @param navigation
+   * @param flatNavigation
+   * @returns {any[]}
    */
   getFlatNavigation(navigation, flatNavigation: FuseNavigationItem[] = []): any {
     for (const item of navigation) {
@@ -188,7 +188,7 @@ export class FuseNavigationService {
   /**
    * Get the current navigation
    *
-   *  {any}
+   * @returns {any}
    */
   getCurrentNavigation(): any {
     if (!this._currentNavigationKey) {
@@ -204,7 +204,7 @@ export class FuseNavigationService {
    * Set the navigation with the key
    * as the current navigation
    *
-   *  key
+   * @param key
    */
   setCurrentNavigation(key): void {
     // Check if the sidebar exists
@@ -225,9 +225,9 @@ export class FuseNavigationService {
    * Get navigation item by id from the
    * current navigation
    *
-   *  id
-   *  {any} navigation
-   *  {any | boolean}
+   * @param id
+   * @param {any} navigation
+   * @returns {any | boolean}
    */
   getNavigationItem(id, navigation = null): any | boolean {
     if (!navigation) {
@@ -255,9 +255,9 @@ export class FuseNavigationService {
    * Get the parent of the navigation item
    * with the id
    *
-   *  id
-   *  {any} navigation
-   *  parent
+   * @param id
+   * @param {any} navigation
+   * @param parent
    */
   getNavigationItemParent(id, navigation = null, parent = null): any {
     if (!navigation) {
@@ -285,8 +285,8 @@ export class FuseNavigationService {
   /**
    * Add a navigation item to the specified location
    *
-   *  item
-   *  id
+   * @param item
+   * @param id
    */
   addNavigationItem(item, id): void {
     // Get the current navigation
@@ -333,8 +333,8 @@ export class FuseNavigationService {
   /**
    * Update navigation item with the given id
    *
-   *  id
-   *  properties
+   * @param id
+   * @param properties
    */
   updateNavigationItem(id, properties): void {
     // Get the navigation item
@@ -355,7 +355,7 @@ export class FuseNavigationService {
   /**
    * Remove navigation item with the given id
    *
-   *  id
+   * @param id
    */
   removeNavigationItem(id): void {
     const item = this.getNavigationItem(id);

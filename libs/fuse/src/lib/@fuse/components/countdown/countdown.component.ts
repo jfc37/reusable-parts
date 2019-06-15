@@ -84,9 +84,6 @@ export class FuseCountdownComponent implements OnInit, OnDestroy {
 
   /**
    * Converts given seconds to a remaining time
-   *
-   *  seconds
-   *
    */
   private _secondsToRemaining(seconds): any {
     const timeLeft = moment.duration(seconds, 'seconds');

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { fuseAnimations } from '../../animations';
 import { FuseConfigService } from '../../services/config.service';
 import { FuseNavigationService } from '../navigation/navigation.service';
@@ -28,12 +29,12 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {DOCUMENT} document
-   *  {FormBuilder} _formBuilder
-   *  {FuseConfigService} _fuseConfigService
-   *  {FuseNavigationService} _fuseNavigationService
-   *  {FuseSidebarService} _fuseSidebarService
-   *  {Renderer2} _renderer
+   * @param {DOCUMENT} document
+   * @param {FormBuilder} _formBuilder
+   * @param {FuseConfigService} _fuseConfigService
+   * @param {FuseNavigationService} _fuseNavigationService
+   * @param {FuseSidebarService} _fuseSidebarService
+   * @param {Renderer2} _renderer
    */
   constructor(
     @Inject(DOCUMENT) private document: any,
@@ -161,8 +162,8 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy {
    * Reset the form values based on the
    * selected layout style
    *
-   *  value
-   *
+   * @param value
+   * @private
    */
   private _resetFormValues(value): void {
     switch (value) {
@@ -315,7 +316,7 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy {
   /**
    * Toggle sidebar open
    *
-   *  key
+   * @param key
    */
   toggleSidebarOpen(key): void {
     this._fuseSidebarService.getSidebar(key).toggleOpen();

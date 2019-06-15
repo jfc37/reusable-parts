@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { FuseNavigationItem } from '../../../../types/fuse-navigation';
 import { FuseNavigationService } from '../../navigation.service';
 
@@ -25,8 +26,8 @@ export class FuseNavVerticalGroupComponent implements OnInit, OnDestroy {
 
   /**
    *
-   *  {ChangeDetectorRef} _changeDetectorRef
-   *  {FuseNavigationService} _fuseNavigationService
+   * @param {ChangeDetectorRef} _changeDetectorRef
+   * @param {FuseNavigationService} _fuseNavigationService
    */
   constructor(private _changeDetectorRef: ChangeDetectorRef, private _fuseNavigationService: FuseNavigationService) {
     // Set the private defaults
