@@ -4,20 +4,15 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Route } from '@angular/router';
 import { PageWithNavModule } from '@reusable-parts/stateless/layouts/page-with-nav';
 import { LoaderModule } from '@reusable-parts/stateless/components/loader';
-import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatCardModule,
-  MatTableModule,
-  MatButtonModule,
-  MatProgressBarModule,
-  MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDialogConfig,
-  MatSnackBarModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatIconModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { ShellComponent } from '../../shared/components/shell/shell.component';
 import { UserTableComponent } from './components/user-table.component';

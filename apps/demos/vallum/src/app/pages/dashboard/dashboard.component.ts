@@ -3,7 +3,8 @@ import { UserRow } from './components/user-table.component';
 import { switchMap, map, take, shareReplay, tap, catchError, filter } from 'rxjs/operators';
 import { Observable, BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { UserSearchService, User } from './services/user-search.service';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfirmationDialogComponent } from './components/user-confirmation-dialog.component';
 
 @Component({

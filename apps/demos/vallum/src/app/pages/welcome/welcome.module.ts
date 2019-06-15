@@ -4,7 +4,7 @@ import { RouterModule, Route } from '@angular/router';
 import { WelcomeComponent } from './welcome.component';
 import { PageModule } from '@reusable-parts/stateless/layouts/page';
 import { HeroTextModule } from '@reusable-parts/stateless/components/hero-text';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Route[] = [
   {
