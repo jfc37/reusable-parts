@@ -1,6 +1,7 @@
 import { Directive, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { FuseMatchMediaService } from '../../services/match-media.service';
 
 @Directive({
@@ -15,9 +16,9 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {ElementRef} _elementRef
-   *  {FuseMatchMediaService} _fuseMediaMatchService
-   *  {Renderer2} _renderer
+   * @param {ElementRef} _elementRef
+   * @param {FuseMatchMediaService} _fuseMediaMatchService
+   * @param {Renderer2} _renderer
    */
   constructor(
     private _elementRef: ElementRef,
@@ -81,7 +82,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy {
   /**
    * Add the class name
    *
-   *
+   * @private
    */
   private _addClass(): void {
     // Add the inner-scroll class
@@ -90,7 +91,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy {
 
   /**
    * Remove the class name
-   *
+   * @private
    */
   private _removeClass(): void {
     // Remove the inner-scroll class

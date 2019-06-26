@@ -1,8 +1,9 @@
 import { Directive, Input, OnInit, HostListener, OnDestroy, HostBinding } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MediaObserver } from '@angular/flex-layout';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { FuseMatchMediaService } from '../../services/match-media.service';
 import { FuseMatSidenavHelperService } from './fuse-mat-sidenav.service';
 
@@ -25,10 +26,10 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {FuseMatchMediaService} _fuseMatchMediaService
-   *  {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
-   *  {MatSidenav} _matSidenav
-   *  {MediaObserver} _mediaObserver
+   * @param {FuseMatchMediaService} _fuseMatchMediaService
+   * @param {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
+   * @param {MatSidenav} _matSidenav
+   * @param {MediaObserver} _mediaObserver
    */
   constructor(
     private _fuseMatchMediaService: FuseMatchMediaService,
@@ -54,7 +55,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
     // Register the sidenav to the service
     this._fuseMatSidenavHelperService.setSidenav(this.fuseMatSidenavHelper, this._matSidenav);
 
-    if (this._mediaObserver.isActive(this.matIsLockedOpen)) {
+    if (this.matIsLockedOpen && this._mediaObserver.isActive(this.matIsLockedOpen)) {
       this.isLockedOpen = true;
       this._matSidenav.mode = 'side';
       this._matSidenav.toggle(true);
@@ -65,7 +66,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
     }
 
     this._fuseMatchMediaService.onMediaChange.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
-      if (this._mediaObserver.isActive(this.matIsLockedOpen)) {
+      if (this.matIsLockedOpen && this._mediaObserver.isActive(this.matIsLockedOpen)) {
         this.isLockedOpen = true;
         this._matSidenav.mode = 'side';
         this._matSidenav.toggle(true);
@@ -97,7 +98,7 @@ export class FuseMatSidenavTogglerDirective {
   /**
    * Constructor
    *
-   *  {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
+   * @param {FuseMatSidenavHelperService} _fuseMatSidenavHelperService
    */
   constructor(private _fuseMatSidenavHelperService: FuseMatSidenavHelperService) {}
 

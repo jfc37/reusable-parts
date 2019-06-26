@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { FuseProgressBarService } from './progress-bar.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class FuseProgressBarComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {FuseProgressBarService} _fuseProgressBarService
+   * @param {FuseProgressBarService} _fuseProgressBarService
    */
   constructor(private _fuseProgressBarService: FuseProgressBarService) {
     // Set the defaults

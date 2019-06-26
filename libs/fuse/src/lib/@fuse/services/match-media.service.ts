@@ -13,7 +13,7 @@ export class FuseMatchMediaService {
   /**
    * Constructor
    *
-   *  {MediaObserver} _mediaObserver
+   * @param {MediaObserver} _mediaObserver
    */
   constructor(private _mediaObserver: MediaObserver) {
     // Set the defaults
@@ -30,7 +30,7 @@ export class FuseMatchMediaService {
   /**
    * Initialize
    *
-   *
+   * @private
    */
   private _init(): void {
     this._mediaObserver.media$

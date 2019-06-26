@@ -25,8 +25,8 @@ export class SidebarComponent implements OnDestroy {
   private fusePerfectScrollbar: FusePerfectScrollbarDirective;
   private onDestroy$ = new ReplaySubject();
 
-  @ViewChild(FuseSidebarComponent) fuseSidebar: FuseSidebarComponent;
-  @ViewChild(FusePerfectScrollbarDirective)
+  @ViewChild(FuseSidebarComponent, { static: false }) fuseSidebar: FuseSidebarComponent;
+  @ViewChild(FusePerfectScrollbarDirective, { static: false })
   set directive(theDirective: FusePerfectScrollbarDirective) {
     if (!theDirective) {
       return;

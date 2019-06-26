@@ -4,7 +4,6 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '../../../../animations';
 import { FuseConfigService } from '../../../../services/config.service';
 
-
 @Component({
   selector: 'fuse-nav-horizontal-collapsable',
   templateUrl: './collapsable.component.html',

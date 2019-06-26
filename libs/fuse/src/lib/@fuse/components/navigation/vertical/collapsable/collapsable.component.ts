@@ -2,10 +2,10 @@ import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } f
 import { NavigationEnd, Router } from '@angular/router';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+
 import { FuseNavigationService } from '../../navigation.service';
 import { fuseAnimations } from '../../../../animations';
 import { FuseNavigationItem } from '../../../../types/fuse-navigation';
-
 @Component({
   selector: 'fuse-nav-vertical-collapsable',
   templateUrl: './collapsable.component.html',
@@ -28,9 +28,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {ChangeDetectorRef} _changeDetectorRef
-   *  {FuseNavigationService} _fuseNavigationService
-   *  {Router} _router
+   * @param {ChangeDetectorRef} _changeDetectorRef
+   * @param {FuseNavigationService} _fuseNavigationService
+   * @param {Router} _router
    */
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
@@ -124,7 +124,7 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy {
   /**
    * Toggle collapse
    *
-   *  ev
+   * @param ev
    */
   toggleOpen(ev): void {
     ev.preventDefault();
@@ -172,9 +172,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy {
    * Check if the given parent has the
    * given item in one of its children
    *
-   *  parent
-   *  item
-   *  {boolean}
+   * @param parent
+   * @param item
+   * @returns {boolean}
    */
   isChildrenOf(parent, item): boolean {
     if (!parent.children) {
@@ -196,9 +196,9 @@ export class FuseNavVerticalCollapsableComponent implements OnInit, OnDestroy {
    * Check if the given url can be found
    * in one of the given parent's children
    *
-   *  parent
-   *  url
-   *  {boolean}
+   * @param parent
+   * @param url
+   * @returns {boolean}
    */
   isUrlInChildren(parent, url): boolean {
     if (!parent.children) {

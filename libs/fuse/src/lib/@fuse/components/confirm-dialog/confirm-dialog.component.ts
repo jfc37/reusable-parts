@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'fuse-confirm-dialog',
@@ -12,7 +12,7 @@ export class FuseConfirmDialogComponent {
   /**
    * Constructor
    *
-   *  {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
+   * @param {MatDialogRef<FuseConfirmDialogComponent>} dialogRef
    */
   constructor(public dialogRef: MatDialogRef<FuseConfirmDialogComponent>) {}
 }

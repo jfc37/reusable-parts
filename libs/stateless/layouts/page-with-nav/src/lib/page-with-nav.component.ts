@@ -9,10 +9,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { MenuItem, SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
+import { SidebarComponent } from '@reusable-parts/stateless/components/sidebar';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SidebarModel, UserToolbarModel } from './page-with-nav.model';
 
 @Component({
   selector: 'stateless-page-with-nav',
@@ -62,7 +63,7 @@ export class PageWithNavComponent implements OnInit {
   @Output() public logoutClicked = new EventEmitter<void>();
 
   @HostBinding('class.folded-sidebar') public hideSidebar = false;
-  @ViewChild(SidebarComponent) sidebarComponent: SidebarComponent;
+  @ViewChild(SidebarComponent, { static: false }) sidebarComponent: SidebarComponent;
   public sidebarHidden$: Observable<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
@@ -80,17 +81,4 @@ export class PageWithNavComponent implements OnInit {
   public temporaryOpenSidebar(): void {
     this.sidebarComponent.toggleOpen();
   }
-}
-
-export class SidebarModel {
-  name: string;
-  logoUrl: string;
-  menuItems: MenuItem[];
-}
-
-export class UserToolbarModel {
-  showLoadingBar: boolean;
-  loadingProfile: boolean;
-  displayName: string;
-  avatarUrl: string;
 }

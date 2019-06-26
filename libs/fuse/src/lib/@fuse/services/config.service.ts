@@ -19,9 +19,9 @@ export class FuseConfigService {
   /**
    * Constructor
    *
-   *  {Platform} _platform
-   *  {Router} _router
-   *  _config
+   * @param {Platform} _platform
+   * @param {Router} _router
+   * @param _config
    */
   constructor(private _platform: Platform, private _router: Router, @Inject(FUSE_CONFIG) private _config) {
     // Set the default config from the user provided config (from forRoot)
@@ -56,7 +56,7 @@ export class FuseConfigService {
   /**
    * Get default config
    *
-   *  {any}
+   * @returns {any}
    */
   get defaultConfig(): any {
     return this._defaultConfig;
@@ -69,7 +69,7 @@ export class FuseConfigService {
   /**
    * Initialize
    *
-   *
+   * @private
    */
   private _init(): void {
     /**
@@ -105,8 +105,8 @@ export class FuseConfigService {
   /**
    * Set config
    *
-   *  value
-   *  {{emitEvent: boolean}} opts
+   * @param value
+   * @param {{emitEvent: boolean}} opts
    */
   setConfig(value, opts = { emitEvent: true }): void {
     // Get the value from the behavior subject
@@ -125,7 +125,7 @@ export class FuseConfigService {
   /**
    * Get config
    *
-   *  {Observable<any>}
+   * @returns {Observable<any>}
    */
   getConfig(): Observable<any> {
     return this._configSubject.asObservable();

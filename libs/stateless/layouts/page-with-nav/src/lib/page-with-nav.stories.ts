@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { ThemeModule } from '@reusable-parts/stateless/theme';
 import { action } from '@storybook/addon-actions';
 import {
@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FuseModule } from '@reusable-parts/fuse';
-import { HeaderType } from '@reusable-parts/stateless/layouts/page';
 
 storiesOf('Layouts/Page With Navigation', module)
   .addDecorator(

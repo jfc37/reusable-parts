@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +21,8 @@ export class FuseMatSidenavHelperService {
   /**
    * Set sidenav
    *
-   *  id
-   *  instance
+   * @param id
+   * @param instance
    */
   setSidenav(id, instance): void {
     this.sidenavInstances[id] = instance;
@@ -31,8 +31,8 @@ export class FuseMatSidenavHelperService {
   /**
    * Get sidenav
    *
-   *  id
-   *  {any}
+   * @param id
+   * @returns {any}
    */
   getSidenav(id): any {
     return this.sidenavInstances[id];

@@ -1,5 +1,6 @@
 import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserSearchService, User } from '../services/user-search.service';
 import { UserRow } from './user-table.component';
 

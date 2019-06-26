@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../../dist/out-tsc/libs/logic/integration/nz-business",
+    "outDir": "../../../../dist/out-tsc",
     "module": "commonjs",
     "types": ["jest", "node"]
   },

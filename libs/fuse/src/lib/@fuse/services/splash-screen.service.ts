@@ -15,9 +15,9 @@ export class FuseSplashScreenService {
   /**
    * Constructor
    *
-   *  {AnimationBuilder} _animationBuilder
-   *  _document
-   *  {Router} _router
+   * @param {AnimationBuilder} _animationBuilder
+   * @param _document
+   * @param {Router} _router
    */
   constructor(
     private _animationBuilder: AnimationBuilder,
@@ -35,7 +35,7 @@ export class FuseSplashScreenService {
   /**
    * Initialize
    *
-   *
+   * @private
    */
   private _init(): void {
     // Get the splash screen element

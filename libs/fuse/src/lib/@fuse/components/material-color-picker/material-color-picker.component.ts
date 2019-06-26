@@ -1,8 +1,8 @@
 import { Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation } from '@angular/core';
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatColors } from '../../mat-colors';
 import { fuseAnimations } from '../../animations';
+import { MatColors } from '../../mat-colors';
 
 export const FUSE_MATERIAL_COLOR_PICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -59,7 +59,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Selected class
    *
-   *  value
+   * @param value
    */
   @Input()
   set color(value) {
@@ -94,7 +94,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Register on change function
    *
-   *  fn
+   * @param fn
    */
   registerOnChange(fn: any): void {
     this._modelChange = fn;
@@ -103,7 +103,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Register on touched function
    *
-   *  fn
+   * @param fn
    */
   registerOnTouched(fn: any): void {
     this._modelTouched = fn;
@@ -112,7 +112,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Write value to the view from model
    *
-   *  color
+   * @param color
    */
   writeValue(color: any): void {
     // Return if null
@@ -134,8 +134,8 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Select palette
    *
-   *  event
-   *  palette
+   * @param event
+   * @param palette
    */
   selectPalette(event, palette): void {
     // Stop propagation
@@ -154,8 +154,8 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Select hue
    *
-   *  event
-   *  hue
+   * @param event
+   * @param hue
    */
   selectHue(event, hue): void {
     // Stop propagation
@@ -171,7 +171,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Remove color
    *
-   *  event
+   * @param event
    */
   removeColor(event): void {
     // Stop propagation
@@ -222,7 +222,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
   /**
    * Go to palettes view
    *
-   *  event
+   * event
    */
   goToPalettesView(event): void {
     // Stop propagation

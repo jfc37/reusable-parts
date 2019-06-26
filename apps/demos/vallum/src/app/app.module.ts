@@ -16,7 +16,7 @@ const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   {
     path: 'dashboard',
-    loadChildren: './pages/dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [Auth0Guard],
   },
   {
@@ -26,11 +26,11 @@ const routes: Route[] = [
   },
   {
     path: 'welcome',
-    loadChildren: './pages/welcome/welcome.module#WelcomeModule',
+    loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule),
   },
   {
     path: 'callback',
-    loadChildren: './pages/callback/callback.module#CallbackModule',
+    loadChildren: () => import('./pages/callback/callback.module').then(m => m.CallbackModule),
   },
 ];
 

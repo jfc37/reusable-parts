@@ -17,8 +17,8 @@ export class FuseSidebarService {
   /**
    * Add the sidebar to the registry
    *
-   *  key
-   *  sidebar
+   * @param key
+   * @param sidebar
    */
   register(key, sidebar): void {
     // Check if the key already being used
@@ -37,7 +37,7 @@ export class FuseSidebarService {
   /**
    * Remove the sidebar from the registry
    *
-   *  key
+   * @param key
    */
   unregister(key): void {
     // Check if the sidebar exists
@@ -52,8 +52,8 @@ export class FuseSidebarService {
   /**
    * Return the sidebar with the given key
    *
-   *  key
-   *  {FuseSidebarComponent}
+   * @param key
+   * @returns {FuseSidebarComponent}
    */
   getSidebar(key): FuseSidebarComponent {
     // Check if the sidebar exists

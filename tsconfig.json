@@ -1,12 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "downlevelIteration": true,
+    "module": "esnext",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "types": [],
     "lib": ["es2017", "dom"],
@@ -29,7 +31,8 @@
       "@reusable-parts/logic/integration/nz-business": ["libs/logic/integration/nz-business/src/index.ts"],
       "@reusable-parts/logic/integration/copper-crm": ["libs/logic/integration/copper-crm/src/index.ts"],
       "@reusable-parts/logic/integration/aws-file-upload": ["libs/logic/integration/aws-file-upload/src/index.ts"]
-    }
+    },
+    "rootDir": "."
   },
   "exclude": ["node_modules", "tmp"]
 }

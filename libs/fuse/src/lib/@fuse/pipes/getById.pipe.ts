@@ -8,10 +8,10 @@ export class GetByIdPipe implements PipeTransform {
   /**
    * Transform
    *
-   *  {any[]} value
-   *  {number} id
-   *  {string} property
-   *  {any}
+   * @param {any[]} value
+   * @param {number} id
+   * @param {string} property
+   * @returns {any}
    */
   transform(value: any[], id: number, property: string): any {
     const foundItem = value.find(item => {

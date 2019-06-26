@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as Prism from 'prismjs/prism';
-import './prism-languages';
 
 @Component({
   selector: 'fuse-highlight',
@@ -12,7 +11,7 @@ import './prism-languages';
 })
 export class FuseHighlightComponent implements OnInit, OnDestroy {
   // Source
-  @ContentChild('source')
+  @ContentChild('source', { static: true })
   source: ElementRef;
 
   // Lang
@@ -29,8 +28,8 @@ export class FuseHighlightComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {ElementRef} _elementRef
-   *  {HttpClient} _httpClient
+   * @param {ElementRef} _elementRef
+   * @param {HttpClient} _httpClient
    */
   constructor(private _elementRef: ElementRef, private _httpClient: HttpClient) {
     // Set the private defaults

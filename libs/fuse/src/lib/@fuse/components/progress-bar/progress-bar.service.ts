@@ -16,7 +16,7 @@ export class FuseProgressBarService {
   /**
    * Constructor
    *
-   *  {Router} _router
+   * @param {Router} _router
    */
   constructor(private _router: Router) {
     // Initialize the service
@@ -74,7 +74,7 @@ export class FuseProgressBarService {
   /**
    * Initialize
    *
-   *
+   * @private
    */
   private _init(): void {
     // Initialize the behavior subjects

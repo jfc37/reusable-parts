@@ -21,7 +21,7 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {FuseConfigService} _fuseConfigService
+   * @param {FuseConfigService} _fuseConfigService
    */
   constructor(private _fuseConfigService: FuseConfigService) {
     // Set the defaults
@@ -76,7 +76,7 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
   /**
    * Search
    *
-   *  event
+   * @param event
    */
   search(event): void {
     this.input.emit(event.target.value);

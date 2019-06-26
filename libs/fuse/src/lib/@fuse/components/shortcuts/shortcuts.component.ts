@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { FuseMatchMediaService } from '../../services/match-media.service';
 import { FuseNavigationService } from '../navigation/navigation.service';
 
@@ -11,7 +12,7 @@ import { FuseNavigationService } from '../navigation/navigation.service';
   templateUrl: './shortcuts.component.html',
   styleUrls: ['./shortcuts.component.scss'],
 })
-export class FuseShortcutsComponent implements OnInit, OnDestroy {
+export class FuseShortcutsComponent implements OnInit, AfterViewInit, OnDestroy {
   shortcutItems: any[];
   navigationItems: any[];
   filteredNavigationItems: any[];
@@ -21,10 +22,10 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
   @Input()
   navigation: any;
 
-  @ViewChild('searchInput')
+  @ViewChild('searchInput', { static: false })
   searchInputField;
 
-  @ViewChild('shortcuts')
+  @ViewChild('shortcuts', { static: false })
   shortcutsEl: ElementRef;
 
   // Private
@@ -33,11 +34,11 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    *
-   *  {CookieService} _cookieService
-   *  {FuseMatchMediaService} _fuseMatchMediaService
-   *  {FuseNavigationService} _fuseNavigationService
-   *  {MediaObserver} _mediaObserver
-   *  {Renderer2} _renderer
+   * @param {CookieService} _cookieService
+   * @param {FuseMatchMediaService} _fuseMatchMediaService
+   * @param {FuseNavigationService} _fuseNavigationService
+   * @param {MediaObserver} _mediaObserver
+   * @param {Renderer2} _renderer
    */
   constructor(
     private _cookieService: CookieService,
@@ -99,7 +100,9 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
         },
       ];
     }
+  }
 
+  ngAfterViewInit(): void {
     // Subscribe to media changes
     this._fuseMatchMediaService.onMediaChange.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
       if (this._mediaObserver.isActive('gt-sm')) {
@@ -124,7 +127,7 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
   /**
    * Search
    *
-   *  event
+   * @param event
    */
   search(event): void {
     const value = event.target.value.toLowerCase();
@@ -146,8 +149,8 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
   /**
    * Toggle shortcut
    *
-   *  event
-   *  itemToToggle
+   * @param event
+   * @param itemToToggle
    */
   toggleShortcut(event, itemToToggle): void {
     event.stopPropagation();
@@ -172,8 +175,8 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy {
   /**
    * Is in shortcuts?
    *
-   *  navigationItem
-   *  {any}
+   * @param navigationItem
+   * @returns {any}
    */
   isInShortcuts(navigationItem): any {
     return this.shortcutItems.find(item => {
