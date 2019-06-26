@@ -1,0 +1,12 @@
+{
+  "name": "functions",
+  "scripts": {
+    "package": "zip -r function.zip ."
+  },
+  "main": "index.js",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {},
+  "private": true
+}
