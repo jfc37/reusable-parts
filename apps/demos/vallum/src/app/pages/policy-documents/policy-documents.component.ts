@@ -39,6 +39,7 @@ import { LoaderComponent } from '@reusable-parts/stateless/components/loader/src
           [loading]="loadingDocuments$ | async"
           [errorLoading]="errorLoadingDocuments$ | async"
           [rows]="rows$ | async"
+          (download)="downloadFile($event)"
         ></vallum-existing-policies>
       </mat-card>
     </ng-template>
@@ -68,5 +69,9 @@ export class PolicyDocumentsComponent implements OnInit {
         complete: () => this.snackBar.open('Successfully uploaded policy', 'Ok'),
         error: () => this.snackBar.open('Problem uploading policy', 'Ok'),
       });
+  }
+
+  public downloadFile(key: string): void {
+    this.documentHandler.viewDocument(key);
   }
 }

@@ -19,8 +19,7 @@ export class DocumentHandler {
         take(1),
         map(files =>
           files.map(f => ({
-            name: f.key,
-            url: f.url,
+            name: f.key.split('/').reverse()[0],
             lastModified: f.lastModified,
             size: f.size,
           })),
@@ -39,11 +38,14 @@ export class DocumentHandler {
   public upload(file: File): Observable<void> {
     return this.awsFileUploader.upload(file).pipe(tap(() => this.loadDocuments()));
   }
+
+  public viewDocument(key: string): void {
+    this.awsFileRetriever.getFileLink(key).subscribe(link => window.open(link));
+  }
 }
 
 export interface Document {
   name: string;
-  url: string;
   lastModified: string;
   size: number;
 }

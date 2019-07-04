@@ -10,7 +10,7 @@ import { Auth0Interceptor } from '@reusable-parts/logic/integration/auth0';
   providers: [
     AwsFileUploader,
     AwsFileRetriever,
-    { provide: HTTP_INTERCEPTORS, useClass: Auth0Interceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: Auth0Interceptor, multi: true },
   ],
 })
 export class AwsFileUploadModule {}

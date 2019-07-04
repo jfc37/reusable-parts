@@ -22,8 +22,8 @@ export const environment: IEnvironment = {
   },
 
   awsFileUploadConfig: {
-    baseS3Url: 'https://vallum-dev.s3.ap-southeast-2.amazonaws.com',
     getFileMetadataUrl: 'https://7a0hnav7hc.execute-api.ap-southeast-2.amazonaws.com/default/get-file-metadata',
+    getFileLinkUrl: 'https://9k9pc9wnw2.execute-api.ap-southeast-2.amazonaws.com/dev/get-file-url',
     getFileUploadUrl: 'https://rikn5i59e8.execute-api.ap-southeast-2.amazonaws.com/default/getUploadUrl',
   },
 };

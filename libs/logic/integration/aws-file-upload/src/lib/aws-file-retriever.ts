@@ -9,22 +9,33 @@ export class AwsFileRetriever {
   constructor(@Inject(AWS_FILE_UPLOAD_CONFIG) private config: AwsFileUploadConfig, private httpClient: HttpClient) {}
 
   public getAllMetadata(): Observable<FileMetadata[]> {
-    return this.httpClient.get<AwsObjectMetadata[]>(this.config.getFileMetadataUrl).pipe(
+    return this.httpClient.get<AwsObjectMetadata[]>(this.config.getFileMetadataUrl, this.getAuthHeader()).pipe(
       map(awsObjects =>
         awsObjects.map(o => ({
           key: o.Key,
-          url: [this.config.baseS3Url, o.Key].join('/'),
           lastModified: o.LastModified,
           size: o.Size,
         })),
       ),
     );
   }
+
+  public getFileLink(key: string): Observable<string> {
+    const url = `${this.config.getFileLinkUrl}?filename=${key}`;
+    return this.httpClient.get<AwsFileLink>(url, this.getAuthHeader()).pipe(map(link => link.downloadURL));
+  }
+
+  private getAuthHeader() {
+    const authToken = localStorage.getItem('id_token');
+
+    return {
+      headers: { ['Authorization']: `Bearer ${authToken}` },
+    };
+  }
 }
 
 export interface FileMetadata {
   key: string;
-  url: string;
   lastModified: string;
   size: number;
 }
@@ -35,4 +46,8 @@ interface AwsObjectMetadata {
   ETag: string;
   Size: number;
   StorageClass: string;
+}
+
+interface AwsFileLink {
+  downloadURL: string;
 }

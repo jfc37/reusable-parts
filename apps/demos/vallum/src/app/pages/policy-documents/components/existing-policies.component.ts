@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'vallum-existing-policies',
@@ -15,7 +15,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let policy">
-            <a [href]="policy.url" target="_blank">{{ policy.name }}</a>
+            <a href="javascript:void(0)" (click)="download.emit(policy.name)">{{ policy.name }}</a>
           </td>
         </ng-container>
 
@@ -60,6 +60,7 @@ export class ExistingPoliciesComponent {
   @Input() rows: PolicyRow[] = [];
   @Input() loading: boolean;
   @Input() errorLoading: boolean;
+  @Output() download = new EventEmitter<string>();
 
   public displayedColumns: string[] = ['name', 'uploaded'];
 
@@ -70,7 +71,6 @@ export class ExistingPoliciesComponent {
 
 export interface PolicyRow {
   name: string;
-  url: string;
   lastModified: string;
   size: number;
 }
